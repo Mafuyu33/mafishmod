@@ -18,6 +18,9 @@
 		"main": [
 			"net.jiang.tutorialmod.TutorialMod"
 		],
+		"client": [
+			"net.jiang.tutorialmod.TutorialModClient"
+		],
 		"fabric-datagen": [
 			"net.jiang.tutorialmod.TutorialModDataGenerator"
 		]
