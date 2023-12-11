@@ -2,6 +2,7 @@ package net.jiang.tutorialmod.Item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.block.ModBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -21,6 +22,8 @@ public class ModItemGroups {
                         entries.add(ModItems.COOL_GLASS);
 
                         entries.add(Items.DIAMOND);
+
+                        entries.add(ModBlocks.RUBY_BLOCK);
 
                     }).build());
 
