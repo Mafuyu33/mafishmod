@@ -18,6 +18,7 @@ public class ModItemGroups {
                         //在这里添加新的东西
                         entries.add(ModItems.RUBY);
                         entries.add(ModItems.RAW_RUBY);
+                        entries.add(ModItems.COOL_GLASS);
 
                         entries.add(Items.DIAMOND);
 

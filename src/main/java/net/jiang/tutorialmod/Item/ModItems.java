@@ -14,9 +14,11 @@ public class ModItems {
 
     public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings()));
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
+    public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         entries.add(RUBY);
         entries.add(RAW_RUBY);
+        entries.add(COOL_GLASS);
     }
 
     public static Item registerItem(String name,Item item){
@@ -24,7 +26,7 @@ public class ModItems {
     }
 
     public static void registerModItems(){
-        TutorialMod.LOGGER.info("注册一个MOD物品"+TutorialMod.MOD_ID);
+        TutorialMod.LOGGER.info("注册MOD物品"+TutorialMod.MOD_ID);
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsToIngredientItemGroup);
     }
 }

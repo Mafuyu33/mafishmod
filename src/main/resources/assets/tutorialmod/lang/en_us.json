@@ -1,6 +1,7 @@
 {
   "item.tutorialmod.ruby": "RUBY",
   "item.tutorialmod.raw_ruby": "RAW_RUBY",
+  "item.tutorialmod.cool_glass": "COOL_GLASS",
 
   "itemgroup.ruby": "Ruby Tutorial Group"
 }
