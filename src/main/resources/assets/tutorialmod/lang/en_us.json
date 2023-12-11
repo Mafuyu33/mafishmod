@@ -3,5 +3,7 @@
   "item.tutorialmod.raw_ruby": "RAW_RUBY",
   "item.tutorialmod.cool_glass": "COOL_GLASS",
 
+  "block.tutorialmod.ruby_block": "RUBY_BLOCK",
+
   "itemgroup.ruby": "Ruby Tutorial Group"
 }
