@@ -16,6 +16,7 @@ public class ModItems {
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
     public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
+        //在这里注册
         entries.add(RUBY);
         entries.add(RAW_RUBY);
         entries.add(COOL_GLASS);

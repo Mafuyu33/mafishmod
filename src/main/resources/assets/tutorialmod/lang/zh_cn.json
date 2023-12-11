@@ -4,6 +4,8 @@
   "item.tutorialmod.cool_glass": "很酷的眼镜",
 
   "block.tutorialmod.ruby_block": "卢比方块",
+  "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",
+  "block.tutorialmod.white_cat_block": "白猫方块",
 
   "itemgroup.ruby": "卢比物品列表（教程）"
 }
