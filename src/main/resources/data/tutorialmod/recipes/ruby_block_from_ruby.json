@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "#$#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item":"tutorialmod:ruby"
+    },
+    "$": {
+      "item":"tutorialmod:white_cat_block"
+    }
+  },
+  "result": {
+    "item": "tutorialmod:ruby_block"
+  }
+}
