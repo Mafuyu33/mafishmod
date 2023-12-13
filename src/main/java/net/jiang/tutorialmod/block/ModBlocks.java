@@ -22,8 +22,7 @@ public class ModBlocks {
     public static final Block RAW_RUBY_BLOCK=registerBlock("raw_ruby_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
 
-    public static final Block RUBY_ORE = registerBlock("ruby_ore",
-            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2f), UniformIntProvider.create(2,5)));
+
 
 
 
