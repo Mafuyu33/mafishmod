@@ -5,12 +5,14 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.jiang.tutorialmod.TutorialMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
     //这里添加新的block
@@ -19,8 +21,18 @@ public class ModBlocks {
 
     public static final Block RAW_RUBY_BLOCK=registerBlock("raw_ruby_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
+
+    public static final Block RUBY_ORE = registerBlock("ruby_ore",
+            new ExperienceDroppingBlock(FabricBlockSettings.copyOf(Blocks.STONE).strength(2f), UniformIntProvider.create(2,5)));
+
+
+
     public static final Block WHATE_CAT_BLOCK=registerBlock("white_cat_block",
             new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
+
+
+
+
 
 
 
