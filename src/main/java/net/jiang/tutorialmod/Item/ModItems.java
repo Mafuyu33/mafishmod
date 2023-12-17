@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.Item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.jiang.tutorialmod.Item.custom.MetalDetectoritem;
 import net.jiang.tutorialmod.TutorialMod;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -15,6 +16,10 @@ public class ModItems {
     public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings()));
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
     public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
+    public static final Item METAL_DETECTOR=registerItem("metal_detector",
+            new MetalDetectoritem(new FabricItemSettings().maxDamage(64)));
+
+
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //在这里注册
         entries.add(RUBY);
