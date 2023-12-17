@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.block.custom.SoundBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ExperienceDroppingBlock;
@@ -27,7 +28,7 @@ public class ModBlocks {
 
 
     public static final Block WHATE_CAT_BLOCK=registerBlock("white_cat_block",
-            new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
+            new SoundBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(BlockSoundGroup.AMETHYST_BLOCK)));
 
 
 
