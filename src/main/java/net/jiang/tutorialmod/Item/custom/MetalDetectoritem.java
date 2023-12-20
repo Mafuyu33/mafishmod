@@ -1,5 +1,6 @@
 package net.jiang.tutorialmod.Item.custom;
 
+import net.jiang.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -57,7 +58,7 @@ public class MetalDetectoritem extends Item {
     }
 
     private boolean isValuableBlock(BlockState state){
-        return state.isOf(Blocks.IRON_ORE) || state.isOf(Blocks.DIAMOND_ORE);
+        return state.isIn(ModTags.Blocks.METAL_DETECTOR_DETECTABLE_BLOCKS);
     }
 
     @Override

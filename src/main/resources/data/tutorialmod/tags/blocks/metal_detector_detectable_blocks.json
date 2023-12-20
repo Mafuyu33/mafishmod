@@ -7,6 +7,7 @@
     "#minecraft:redstone_ores",
     "#minecraft:lapis_ores",
     "#minecraft:diamond_ores",
+    "#minecraft:iron_ores",
     "#minecraft:copper_ores",
     "#minecraft:coal_ores"
   ]
