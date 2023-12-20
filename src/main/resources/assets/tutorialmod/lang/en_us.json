@@ -10,5 +10,7 @@
   "block.tutorialmod.raw_ruby_block": "RAW_RUBY_BLOCK",
   "block.tutorialmod.white_cat_block": "WHITE_CAT_BLOCK",
 
+  "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
+
   "itemgroup.ruby": "Ruby Tutorial Group"
 }
