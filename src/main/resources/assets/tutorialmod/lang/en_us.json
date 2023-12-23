@@ -6,7 +6,9 @@
   "item.tutorialmod.tomato": "Tomato",
   "item.tutorialmod.coal_briquette": "Coal Briquette",
 
-  "item.tutorialmod.ruby_staff": "RUBY STUFF",
+  "item.tutorialmod.ruby_staff": "RUBY 3D STUFF",
+
+  "item.tutorialmod.ruby_pickaxe": "RUBY PICKAXE",
 
   "block.tutorialmod.ruby_block": "RUBY_BLOCK",
   "block.tutorialmod.raw_ruby_block": "RAW RUBY BLOCK",

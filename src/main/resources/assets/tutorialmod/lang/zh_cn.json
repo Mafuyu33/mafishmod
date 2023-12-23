@@ -6,7 +6,9 @@
   "item.tutorialmod.tomato": "番茄",
   "item.tutorialmod.coal_briquette": "煤球",
 
-  "item.tutorialmod.ruby_staff": "RUBY STUFF",
+  "item.tutorialmod.ruby_staff": "卢比3D法杖",
+
+  "item.tutorialmod.ruby_pickaxe": "卢比镐子",
 
   "block.tutorialmod.ruby_block": "卢比方块",
   "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",

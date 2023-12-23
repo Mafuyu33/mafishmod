@@ -24,10 +24,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        addDrop(ModBlocks.RUBY_BLOCK);
-        addDrop(ModBlocks.WHATE_CAT_BLOCK);
-
-        addDrop(ModBlocks.RAW_RUBY_BLOCK,copperLikeDrops(ModBlocks.RAW_RUBY_BLOCK, ModItems.RAW_RUBY));
+//        addDrop(ModBlocks.RUBY_BLOCK);
+//        addDrop(ModBlocks.WHATE_CAT_BLOCK);
+//
+//        addDrop(ModBlocks.RAW_RUBY_BLOCK,copperLikeDrops(ModBlocks.RAW_RUBY_BLOCK, ModItems.RAW_RUBY));
     }
     public LootTable.Builder copperLikeDrops(Block drop, Item item) {
         return BlockLootTableGenerator.dropsWithSilkTouch(drop, (LootPoolEntry.Builder)this.applyExplosionDecay(drop, ((LeafEntry.Builder)ItemEntry.builder(Items.RAW_COPPER).apply(SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 5.0f)))).apply(ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE))));

@@ -15,18 +15,19 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RUBY_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_RUBY_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WHATE_CAT_BLOCK);
+//        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RUBY_BLOCK);
+//        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RAW_RUBY_BLOCK);
+//        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.WHATE_CAT_BLOCK);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
-        itemModelGenerator.register(ModItems.RAW_RUBY, Models.GENERATED);
-
-        itemModelGenerator.register(ModItems.COAL_BRIQUEITE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.TOMATO, Models.GENERATED);
-        itemModelGenerator.register(ModItems.METAL_DETECTOR, Models.GENERATED);
+//        itemModelGenerator.register(ModItems.RUBY, Models.GENERATED);
+//        itemModelGenerator.register(ModItems.RAW_RUBY, Models.GENERATED);
+//
+//        itemModelGenerator.register(ModItems.COAL_BRIQUEITE, Models.GENERATED);
+//        itemModelGenerator.register(ModItems.TOMATO, Models.GENERATED);
+//        itemModelGenerator.register(ModItems.METAL_DETECTOR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RUBY_PICKAXE, Models.HANDHELD);
     }
 }
