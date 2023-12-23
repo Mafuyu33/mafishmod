@@ -1,9 +1,9 @@
-package net.jiang.tutorialmod.Item;
+package net.jiang.tutorialmod.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.jiang.tutorialmod.Item.custom.MetalDetectoritem;
+import net.jiang.tutorialmod.item.custom.MetalDetectoritem;
 import net.jiang.tutorialmod.TutorialMod;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -18,6 +18,9 @@ public class ModItems {
     public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
     public static final Item METAL_DETECTOR=registerItem("metal_detector",
             new MetalDetectoritem(new FabricItemSettings().maxDamage(64)));
+
+    public static final Item RUBY_STAFF=registerItem("ruby_staff",
+            new Item(new FabricItemSettings().maxCount(1)));
     public static final Item TOMATO = registerItem("tomato",new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));
     public static final Item COAL_BRIQUEITE = registerItem("coal_briquette",
             new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));

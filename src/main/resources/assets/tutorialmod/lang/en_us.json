@@ -1,14 +1,16 @@
 {
   "item.tutorialmod.ruby": "RUBY",
-  "item.tutorialmod.raw_ruby": "RAW_RUBY",
-  "item.tutorialmod.cool_glass": "COOL_GLASS",
+  "item.tutorialmod.raw_ruby": "RAW RUBY",
+  "item.tutorialmod.cool_glass": "COOL GLASS",
   "item.tutorialmod.metal_detector": "Metal Detector",
   "item.tutorialmod.tomato": "Tomato",
-  "item.tutorialmod.coal_briquette": "Coal_Briquette",
+  "item.tutorialmod.coal_briquette": "Coal Briquette",
+
+  "item.tutorialmod.ruby_staff": "RUBY STUFF",
 
   "block.tutorialmod.ruby_block": "RUBY_BLOCK",
-  "block.tutorialmod.raw_ruby_block": "RAW_RUBY_BLOCK",
-  "block.tutorialmod.white_cat_block": "WHITE_CAT_BLOCK",
+  "block.tutorialmod.raw_ruby_block": "RAW RUBY BLOCK",
+  "block.tutorialmod.white_cat_block": "WHITE CAT BLOCK",
 
   "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
 

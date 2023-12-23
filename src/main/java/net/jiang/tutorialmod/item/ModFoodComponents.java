@@ -1,6 +1,5 @@
-package net.jiang.tutorialmod.Item;
+package net.jiang.tutorialmod.item;
 
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;

@@ -1,4 +1,4 @@
-package net.jiang.tutorialmod.Item;
+package net.jiang.tutorialmod.item;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.jiang.tutorialmod.TutorialMod;
@@ -23,6 +23,8 @@ public class ModItemGroups {
                         entries.add(ModItems.METAL_DETECTOR);
                         entries.add(ModItems.TOMATO);
                         entries.add(ModItems.COAL_BRIQUEITE);
+
+                        entries.add(ModItems.RUBY_STAFF);
 
                         entries.add(Items.DIAMOND);
 

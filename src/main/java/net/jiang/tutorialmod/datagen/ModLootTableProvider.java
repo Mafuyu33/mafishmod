@@ -2,8 +2,7 @@ package net.jiang.tutorialmod.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.jiang.tutorialmod.Item.ModItems;
+import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;

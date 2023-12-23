@@ -1,9 +1,8 @@
-package net.jiang.tutorialmod.Item.custom;
+package net.jiang.tutorialmod.item.custom;
 
 import net.jiang.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
