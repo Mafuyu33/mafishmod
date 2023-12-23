@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "tutorialmod:ruby_block",
-    "tutorialmod:raw_ruby_block",
     "tutorialmod:white_cat_block"
   ]
 }
