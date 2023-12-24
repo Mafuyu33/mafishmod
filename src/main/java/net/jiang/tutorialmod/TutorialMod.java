@@ -6,6 +6,10 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.jiang.tutorialmod.item.ModItemGroups;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
+import net.jiang.tutorialmod.item.custom.ModStatusEffects;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +22,9 @@ public class TutorialMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 		ModBlocks.registerModBlocks();
+		ModStatusEffects.registerModEffect();
 
 		FuelRegistry.INSTANCE.add(ModItems.COAL_BRIQUEITE,200);
+
 	}
 }

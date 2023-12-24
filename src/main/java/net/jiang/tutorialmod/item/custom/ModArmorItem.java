@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import net.jiang.tutorialmod.item.ModArmorMaterials;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -16,8 +15,8 @@ import java.util.Map;
 public class ModArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
-                    .put(ModArmorMaterials.RUBY, new StatusEffectInstance(StatusEffects.HASTE, 20, 1,
-                            true, true, true)).build();
+                    .put(ModArmorMaterials.RUBY, new StatusEffectInstance(ModStatusEffects.IRONMAN, 0, 0,
+                            false, false, true)).build();
     public ModArmorItem(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
     }

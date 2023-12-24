@@ -21,5 +21,7 @@
 
   "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
 
-  "itemgroup.ruby": "Ruby Tutorial Group"
+  "itemgroup.ruby": "Ruby Tutorial Group",
+
+  "effect.tutorialmod.ironman": "IRONMAN"
 }
