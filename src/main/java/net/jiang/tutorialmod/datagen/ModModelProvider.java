@@ -7,6 +7,7 @@ import net.jiang.tutorialmod.block.ModBlocks;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.ArmorItem;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -29,5 +30,10 @@ public class ModModelProvider extends FabricModelProvider {
 //        itemModelGenerator.register(ModItems.TOMATO, Models.GENERATED);
 //        itemModelGenerator.register(ModItems.METAL_DETECTOR, Models.GENERATED);
         itemModelGenerator.register(ModItems.RUBY_PICKAXE, Models.HANDHELD);
+
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.RUBY_HELMET));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.RUBY_CHESTPLATE));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.RUBY_LEGGINGS));
+        itemModelGenerator.registerArmor(((ArmorItem)ModItems.RUBY_BOOTS));
     }
 }

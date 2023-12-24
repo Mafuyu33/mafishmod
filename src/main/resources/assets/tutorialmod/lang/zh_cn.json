@@ -10,6 +10,11 @@
 
   "item.tutorialmod.ruby_pickaxe": "卢比镐子",
 
+  "item.tutorialmod.ruby_helmet": "卢比帽子",
+  "item.tutorialmod.ruby_chestplate": "卢比胸甲",
+  "item.tutorialmod.ruby_leggings": "卢比腿甲",
+  "item.tutorialmod.ruby_boots": "卢比鞋子",
+
   "block.tutorialmod.ruby_block": "卢比方块",
   "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",
   "block.tutorialmod.white_cat_block": "白猫方块",

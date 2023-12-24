@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jiang.tutorialmod.item.custom.MetalDetectoritem;
 import net.jiang.tutorialmod.TutorialMod;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.PickaxeItem;
@@ -24,6 +25,16 @@ public class ModItems {
             new Item(new FabricItemSettings().maxCount(1)));
     public static final Item RUBY_PICKAXE =registerItem("ruby_pickaxe",
             new PickaxeItem(ModToolMaterial.RUBY,2,2f, new FabricItemSettings()));
+
+    public static final Item RUBY_HELMET =registerItem("ruby_helmet",
+            new ArmorItem(ModArmorMaterials.RUBY,ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item RUBY_CHESTPLATE = registerItem("ruby_chestplate",
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item RUBY_LEGGINGS = registerItem("ruby_leggings",
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item RUBY_BOOTS = registerItem("ruby_boots",
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
     public static final Item TOMATO = registerItem("tomato",new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));
     public static final Item COAL_BRIQUEITE = registerItem("coal_briquette",
             new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));

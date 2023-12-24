@@ -10,6 +10,11 @@
 
   "item.tutorialmod.ruby_pickaxe": "RUBY PICKAXE",
 
+  "item.tutorialmod.ruby_helmet": "Ruby Helmet",
+  "item.tutorialmod.ruby_chestplate": "Ruby Chestplate",
+  "item.tutorialmod.ruby_leggings": "Ruby Leggings",
+  "item.tutorialmod.ruby_boots": "Ruby Boots",
+
   "block.tutorialmod.ruby_block": "RUBY_BLOCK",
   "block.tutorialmod.raw_ruby_block": "RAW RUBY BLOCK",
   "block.tutorialmod.white_cat_block": "WHITE CAT BLOCK",
