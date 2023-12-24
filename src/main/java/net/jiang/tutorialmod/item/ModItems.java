@@ -3,8 +3,9 @@ package net.jiang.tutorialmod.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.jiang.tutorialmod.item.custom.MetalDetectoritem;
+import net.jiang.tutorialmod.item.custom.MetalDetectorItem;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.item.custom.ModArmorItem;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -19,7 +20,7 @@ public class ModItems {
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
     public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
     public static final Item METAL_DETECTOR=registerItem("metal_detector",
-            new MetalDetectoritem(new FabricItemSettings().maxDamage(64)));
+            new MetalDetectorItem(new FabricItemSettings().maxDamage(64)));
 
     public static final Item RUBY_STAFF=registerItem("ruby_staff",
             new Item(new FabricItemSettings().maxCount(1)));
@@ -27,7 +28,7 @@ public class ModItems {
             new PickaxeItem(ModToolMaterial.RUBY,2,2f, new FabricItemSettings()));
 
     public static final Item RUBY_HELMET =registerItem("ruby_helmet",
-            new ArmorItem(ModArmorMaterials.RUBY,ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ModArmorItem(ModArmorMaterials.RUBY,ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item RUBY_CHESTPLATE = registerItem("ruby_chestplate",
             new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item RUBY_LEGGINGS = registerItem("ruby_leggings",

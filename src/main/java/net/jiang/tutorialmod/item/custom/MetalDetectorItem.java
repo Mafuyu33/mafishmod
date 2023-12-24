@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MetalDetectoritem extends Item {
-    public MetalDetectoritem(Settings settings) {
+public class MetalDetectorItem extends Item {
+    public MetalDetectorItem(Settings settings) {
         super(settings);
     }
 
