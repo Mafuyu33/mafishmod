@@ -8,6 +8,7 @@ import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.jiang.tutorialmod.item.custom.ModStatusEffects;
 import net.jiang.tutorialmod.util.ModLootTableModifiers;
+import net.jiang.tutorialmod.villager.ModVillagers;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -29,5 +30,7 @@ public class TutorialMod implements ModInitializer {
 		ModStatusEffects.registerModEffect();
 
 		ModLootTableModifiers.modifyLootTables();
+
+		ModVillagers.registerVillagers();
 	}
 }

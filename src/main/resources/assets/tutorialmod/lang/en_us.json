@@ -21,7 +21,13 @@
 
   "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
 
+  "effect.tutorialmod.ironman": "IRONMAN",
+
+  "entity.minecraft.villager.sound_master": "Soundmaster",
+
   "itemgroup.ruby": "Ruby Tutorial Group",
 
-  "effect.tutorialmod.ironman": "IRONMAN"
+
+
+
 }

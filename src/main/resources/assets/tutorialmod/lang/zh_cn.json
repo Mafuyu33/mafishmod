@@ -19,7 +19,11 @@
   "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",
   "block.tutorialmod.white_cat_block": "白猫方块",
 
+  "effect.tutorialmod.ironman": "钢铁侠",
+
+  "entity.minecraft.villager.sound_master": "音乐大师",
+
   "itemgroup.ruby": "卢比物品列表（教程）",
 
-  "effect.tutorialmod.ironman": "钢铁侠"
+
 }
