@@ -7,6 +7,7 @@ import net.jiang.tutorialmod.item.ModItemGroups;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.jiang.tutorialmod.item.custom.ModStatusEffects;
+import net.jiang.tutorialmod.util.ModLootTableModifiers;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -22,9 +23,11 @@ public class TutorialMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 		ModBlocks.registerModBlocks();
-		ModStatusEffects.registerModEffect();
 
 		FuelRegistry.INSTANCE.add(ModItems.COAL_BRIQUEITE,200);
 
+		ModStatusEffects.registerModEffect();
+
+		ModLootTableModifiers.modifyLootTables();
 	}
 }
