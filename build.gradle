@@ -40,6 +40,7 @@ dependencies {
 
 	modImplementation "curse.maven:vivecraft-667903:4859782"
 	modImplementation "curse.maven:mc-vr-api-591092:4648733"
+	modImplementation "curse.maven:architectury-api-419699:4663009"
 }
 
 processResources {
