@@ -30,5 +30,7 @@
 
   "item.tutorialmod.bread_sword": "bread_sword",
   "item.tutorialmod.bread_sword_hot": "bread_sword_hot",
-  "item.tutorialmod.bread_sword_very_hot": "bread_sword_very_hot"
+  "item.tutorialmod.bread_sword_very_hot": "bread_sword_very_hot",
+
+  "item.tutorialmod.tnt_ball": "TNT Ball"
 }
