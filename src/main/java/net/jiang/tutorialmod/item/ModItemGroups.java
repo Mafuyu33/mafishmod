@@ -43,6 +43,8 @@ public class ModItemGroups {
                         entries.add(ModItems.BREAD_SWORD_HOT);
                         entries.add(ModItems.BREAD_SWORD_VERY_HOT);
 
+                        entries.add(ModItems.TNT_BALL);
+
                     }).build());
 
 

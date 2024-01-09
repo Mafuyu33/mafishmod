@@ -36,7 +36,7 @@ public class ModItems {
             new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));
 
     public static final Item TNT_BALL = registerItem("tnt_ball", new TNTBallItem(new FabricItemSettings()));
-
+    public static final Item STONE_BALL = registerItem("stone_ball", new StoneBallItem(new FabricItemSettings()));
 
 
 

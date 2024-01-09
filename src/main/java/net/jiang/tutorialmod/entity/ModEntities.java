@@ -16,4 +16,8 @@ public class ModEntities {
             FabricEntityTypeBuilder.<TNTProjectileEntity>create(SpawnGroup.MISC, TNTProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
+    public static final EntityType<TNTProjectileEntity> STONE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(TutorialMod.MOD_ID, "stone_projectile"),
+            FabricEntityTypeBuilder.<TNTProjectileEntity>create(SpawnGroup.MISC, TNTProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 }
