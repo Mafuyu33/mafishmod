@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "tutorialmod:bread_sword"
+  },
+  "result": "tutorialmod:bread_sword_hot"
+}

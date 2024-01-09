@@ -3,19 +3,14 @@ package net.jiang.tutorialmod.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.jiang.tutorialmod.item.custom.MetalDetectorItem;
+import net.jiang.tutorialmod.item.custom.*;
 import net.jiang.tutorialmod.TutorialMod;
-import net.jiang.tutorialmod.item.custom.ModArmorItem;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-
     public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings()));
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
     public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
@@ -39,6 +34,27 @@ public class ModItems {
     public static final Item TOMATO = registerItem("tomato",new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));
     public static final Item COAL_BRIQUEITE = registerItem("coal_briquette",
             new Item(new FabricItemSettings().food(ModFoodComponents.TOMATO)));
+
+    public static final Item TNT_BALL = registerItem("tnt_ball", new TNTBallItem(new FabricItemSettings()));
+
+
+
+
+
+
+    public static final Item BREAD_SWORD = registerItem("bread_sword",
+            new BreadSwordItem(ToolMaterials.STONE, 3, -2.4f,
+                    new FabricItemSettings().food(ModFoodComponents.BREAD_SWORD)));
+
+    public static final Item BREAD_SWORD_HOT = registerItem("bread_sword_hot",
+            new BreadSwordHotItem(ToolMaterials.IRON, 3, -2.4f,
+                    new FabricItemSettings().food(ModFoodComponents.BREAD_SWORD_HOT)));
+
+    public static final Item BREAD_SWORD_VERY_HOT = registerItem("bread_sword_very_hot",
+            new BreadSwordVeryHotItem(ToolMaterials.DIAMOND, 3, -2.4f,
+                    new FabricItemSettings().food(ModFoodComponents.BREAD_SWORD_VERY_HOT)));
+
+
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //在这里注册

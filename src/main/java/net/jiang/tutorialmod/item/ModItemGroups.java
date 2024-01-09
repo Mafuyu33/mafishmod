@@ -37,6 +37,12 @@ public class ModItemGroups {
                         entries.add(ModBlocks.RAW_RUBY_BLOCK);
                         entries.add(ModBlocks.WHATE_CAT_BLOCK);
 
+
+
+                        entries.add(ModItems.BREAD_SWORD);
+                        entries.add(ModItems.BREAD_SWORD_HOT);
+                        entries.add(ModItems.BREAD_SWORD_VERY_HOT);
+
                     }).build());
 
 

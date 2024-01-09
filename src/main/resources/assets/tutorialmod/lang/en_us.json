@@ -20,14 +20,15 @@
   "block.tutorialmod.white_cat_block": "WHITE CAT BLOCK",
 
   "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
+  "tooltip.tutorialmod.fire_happy": "Fire Happy",
 
   "effect.tutorialmod.ironman": "IRONMAN",
 
   "entity.minecraft.villager.sound_master": "Soundmaster",
 
-  "itemgroup.ruby": "Ruby Tutorial Group"
+  "itemgroup.ruby": "Ruby Tutorial Group",
 
-
-
-
+  "item.tutorialmod.bread_sword": "bread_sword",
+  "item.tutorialmod.bread_sword_hot": "bread_sword_hot",
+  "item.tutorialmod.bread_sword_very_hot": "bread_sword_very_hot"
 }
