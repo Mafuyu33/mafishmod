@@ -55,6 +55,6 @@ public class TNTProjectileEntity extends ThrownItemEntity {
 
     private void explode() {
         float f = 4.0F;
-        this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), 4.0F, World.ExplosionSourceType.TNT);
+        this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), f, World.ExplosionSourceType.TNT);
     }
 }

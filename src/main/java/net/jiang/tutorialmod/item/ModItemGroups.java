@@ -48,6 +48,9 @@ public class ModItemGroups {
 
                         entries.add(ModItems.APPLE_VISION_PRO);
 
+                        entries.add(ModItems.FU);
+                        entries.add(ModItems.IRON_FAKE);
+
                     }).build());
 
 

@@ -61,7 +61,7 @@ public class StoneBallProjectileEntity extends ThrownItemEntity {
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
             Entity entity2 = this.getOwner();
-            entity.damage(this.getDamageSources().explosion(this, entity2), 6.0F);
+            entity.damage(this.getDamageSources().thrown(this, entity2), 6.0F);
             if (entity2 instanceof LivingEntity) {
                 this.applyDamageEffects((LivingEntity) entity2, entity);
             }

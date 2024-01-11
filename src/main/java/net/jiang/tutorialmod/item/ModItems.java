@@ -55,7 +55,9 @@ public class ModItems {
             new BreadSwordVeryHotItem(ToolMaterials.DIAMOND, 3, -2.4f,
                     new FabricItemSettings().food(ModFoodComponents.BREAD_SWORD_VERY_HOT)));
 
-
+    public static final Item FU = registerItem("fu",
+            new FuItem(ToolMaterials.IRON, 6.0F, -3.1F, new FabricItemSettings()));
+    public static final Item IRON_FAKE = registerItem("iron_fake",new Item(new FabricItemSettings()));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //在这里注册
