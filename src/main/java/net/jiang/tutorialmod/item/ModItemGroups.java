@@ -36,7 +36,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.RUBY_BLOCK);
                         entries.add(ModBlocks.RAW_RUBY_BLOCK);
                         entries.add(ModBlocks.WHATE_CAT_BLOCK);
-
+                        entries.add(ModBlocks.GOLD_MELON);
 
 
                         entries.add(ModItems.BREAD_SWORD);
@@ -44,6 +44,9 @@ public class ModItemGroups {
                         entries.add(ModItems.BREAD_SWORD_VERY_HOT);
 
                         entries.add(ModItems.TNT_BALL);
+                        entries.add(ModItems.STONE_BALL);
+
+                        entries.add(ModItems.APPLE_VISION_PRO);
 
                     }).build());
 

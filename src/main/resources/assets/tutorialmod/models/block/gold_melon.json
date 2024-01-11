@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "tutorialmod:block/gold_melon_top",
+    "side": "tutorialmod:block/gold_melon_side"
+  }
+}

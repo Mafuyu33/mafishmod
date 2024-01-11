@@ -28,7 +28,8 @@ public class ModBlocks {
     public static final Block WHATE_CAT_BLOCK=registerBlock("white_cat_block",
             new SoundBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).sounds(ModSounds.SOUND_BLOCK_SOUNDS)));
 
-
+    public static final Block GOLD_MELON=registerBlock("gold_melon",
+            new Block(FabricBlockSettings.copyOf(Blocks.GOLD_BLOCK)));
 
 
 
