@@ -18,6 +18,7 @@
   "block.tutorialmod.ruby_block": "卢比方块",
   "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",
   "block.tutorialmod.white_cat_block": "白猫方块",
+  "block.tutorialmod.gold_melon": "§e金瓜蛋子",
 
   "effect.tutorialmod.ironman": "Link Start!",
 
@@ -35,7 +36,6 @@
   "item.tutorialmod.tnt_ball": "雪球（岁岁平安版）",
   "item.tutorialmod.stone_ball": "沉甸甸的雪球",
 
-  "item.tutorialmod.apple_vision_pro": "Apple Vision Pro",
+  "item.tutorialmod.apple_vision_pro": "Apple Vision Pro"
 
-  "item.tutorialmod.gold_melon": "金瓜蛋子"
 }
