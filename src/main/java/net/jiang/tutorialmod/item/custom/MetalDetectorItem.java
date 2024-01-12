@@ -1,8 +1,6 @@
 package net.jiang.tutorialmod.item.custom;
 
-import net.blf02.vrapi.api.IVRAPI;
-import net.blf02.vrapi.api.data.IVRData;
-import net.blf02.vrapi.api.data.IVRPlayer;
+
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.ModTags;
 import net.minecraft.block.Block;
@@ -16,11 +14,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.vivecraft.api_beta.VivecraftAPI;
-import org.vivecraft.client_vr.VRData;
 
 import java.util.List;
 

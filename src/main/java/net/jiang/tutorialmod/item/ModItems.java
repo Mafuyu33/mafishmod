@@ -59,6 +59,8 @@ public class ModItems {
             new FuItem(ToolMaterials.IRON, 6.0F, -3.1F, new FabricItemSettings()));
     public static final Item IRON_FAKE = registerItem("iron_fake",new Item(new FabricItemSettings()));
 
+    public static final Item ZHUGE = registerItem("zhuge",new ZhuGeItem(new FabricItemSettings().maxCount(1).maxDamage(465)));
+
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //在这里注册
         entries.add(RUBY);

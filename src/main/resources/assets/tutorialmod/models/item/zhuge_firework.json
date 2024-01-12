@@ -1,0 +1,6 @@
+{
+    "parent": "tutorialmod:item/zhuge",
+    "textures": {
+        "layer0": "tutorialmod:item/zhuge_firework"
+    }
+}

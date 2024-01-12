@@ -50,6 +50,7 @@ public class ModItemGroups {
 
                         entries.add(ModItems.FU);
                         entries.add(ModItems.IRON_FAKE);
+                        entries.add(ModItems.ZHUGE);
 
                     }).build());
 

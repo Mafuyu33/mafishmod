@@ -37,17 +37,17 @@ dependencies {
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
-
-	modImplementation "curse.maven:mc-vr-api-591092:4648733"
+//
+//	modImplementation "curse.maven:mc-vr-api-591092:4648733"
 	modImplementation "curse.maven:architectury-api-419699:4663009"
-	modImplementation "curse.maven:vivecraft-667903:4859782"
-
-	// The below are all needed for Vivecraft to run in a dev environment
-	implementation 'com.electronwill.night-config:toml:3.6.0'
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1")
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-linux")
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-macos")
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-windows")
+//	modImplementation "curse.maven:vivecraft-667903:4859782"
+//
+//	// The below are all needed for Vivecraft to run in a dev environment
+//	implementation 'com.electronwill.night-config:toml:3.6.0'
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1")
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-linux")
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-macos")
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-windows")
 }
 
 processResources {
