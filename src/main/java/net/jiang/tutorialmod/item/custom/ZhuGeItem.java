@@ -36,6 +36,8 @@ public class ZhuGeItem extends CrossbowItem implements Vanishable {
     public ZhuGeItem(Settings settings) {
         super(settings);
     }
+
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);

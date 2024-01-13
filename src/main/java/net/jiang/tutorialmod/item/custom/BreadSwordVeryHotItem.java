@@ -10,6 +10,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,8 @@ public class BreadSwordVeryHotItem extends SwordItem {
         if (!stack.hasEnchantments()){
             stack.addEnchantment(Enchantments.FIRE_ASPECT,2);
         }
+//        if(stack.getEnchantments()==)
+
     }
 
     @Override
