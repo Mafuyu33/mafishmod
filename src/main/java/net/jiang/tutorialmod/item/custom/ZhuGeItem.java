@@ -72,9 +72,15 @@ public class ZhuGeItem extends CrossbowItem implements Vanishable {
                 if (i == 0) {
                     shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F);
                 } else if (i == 1) {
-                    shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, -10.0F);
+                    for (float j=1F;j<=100F;j++){
+                        shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, -j);
+                    }
+
                 } else if (i == 2) {
-                    shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 10.0F);
+                    for (float j=1F;j<=100F;j++){
+                        shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, j);
+                    }
+
                 }
             }
         }
@@ -115,7 +121,6 @@ public class ZhuGeItem extends CrossbowItem implements Vanishable {
             nbtList.clear();
             nbtCompound.put("ChargedProjectiles", nbtList);
         }
-
     }
     public Predicate<ItemStack> getProjectiles() {
         return BOW_PROJECTILES;
@@ -153,7 +158,7 @@ public class ZhuGeItem extends CrossbowItem implements Vanishable {
 
     private static boolean loadProjectiles(LivingEntity shooter, ItemStack crossbow) {
         int i = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, crossbow);
-        int j = i == 0 ? 1 : 3;
+        int j = i == 0 ? 1 : 10;
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;
         ItemStack itemStack = shooter.getProjectileType(crossbow);
         ItemStack itemStack2 = itemStack.copy();
