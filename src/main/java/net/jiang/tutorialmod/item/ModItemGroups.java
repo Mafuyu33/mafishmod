@@ -52,6 +52,8 @@ public class ModItemGroups {
                         entries.add(ModItems.IRON_FAKE);
                         entries.add(ModItems.ZHUGE);
 
+                        entries.add(ModItems.POISON_SWORD);
+
                     }).build());
 
 

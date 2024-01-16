@@ -17,4 +17,7 @@ public class ModFoodComponents {
 
     public static final FoodComponent BREAD_SWORD_VERY_HOT=
             new FoodComponent.Builder().hunger(3).saturationModifier(0.25f).alwaysEdible().build();
+
+    public static final FoodComponent POISON_SWORD=
+            new FoodComponent.Builder().hunger(3).saturationModifier(0.25f).alwaysEdible().build();
 }

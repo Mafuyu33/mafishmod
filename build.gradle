@@ -15,17 +15,7 @@ repositories {
 		url = "https://cursemaven.com"
 	}
 
-	exclusiveContent {
-		forRepository {
-			maven {
-				name = "Modrinth"
-				url = "https://api.modrinth.com/maven"
-			}
-		}
-		filter {
-			includeGroup "maven.modrinth"
-		}
-	}
+
 
 	// Add repositories to retrieve artifacts from in here.
 	// You should only use this when depending on other mods because
@@ -39,9 +29,7 @@ fabricApi {
 }
 
 dependencies {
-	//iris and sodium
-	modLocalRuntime"maven.modrinth:sodium:4OZL6q9h"
-	modLocalRuntime"maven.modrinth:iris:ogjxrwGQ"
+
 
 
 	// To change the versions see the gradle.properties file

@@ -61,6 +61,10 @@ public class ModItems {
 
     public static final Item ZHUGE = registerItem("zhuge",new ZhuGeItem(new FabricItemSettings().maxCount(1).maxDamage(465)));
 
+    public static final Item POISON_SWORD = registerItem("poison_sword",
+            new PoisonSwordItem(ToolMaterials.DIAMOND, 3, -2.4f,
+                    new FabricItemSettings().food(ModFoodComponents.POISON_SWORD)));
+
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //在这里注册
         entries.add(RUBY);
