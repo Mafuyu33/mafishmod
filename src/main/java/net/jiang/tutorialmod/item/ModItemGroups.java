@@ -53,6 +53,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ZHUGE);
 
                         entries.add(ModItems.POISON_SWORD);
+                        entries.add(ModItems.FIREWORK_ARROW);
 
                     }).build());
 

@@ -2,6 +2,7 @@ package net.jiang.tutorialmod.mixin;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
@@ -10,12 +11,12 @@ import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 
 @Mixin(LivingEntity.class)
 public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
+    @Unique
+    float Times = 0F;
     public InfiniteUndyingMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -38,7 +39,7 @@ public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
     public abstract boolean addStatusEffect(StatusEffectInstance effect, @Nullable Entity source);
 
 
-
+    @Shadow @Final private static TrackedData<Float> HEALTH;
 
     /**
      * @author
@@ -66,12 +67,14 @@ public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
             }
 
             if (itemStack != null) {
-                this.setHealth(1.0F);
                 this.clearStatusEffects();
-                this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 900, 1));
-                this.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 100, 1));
-                this.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 800, 0));
+                this.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST,900,(int) (Times-1F)));
+                this.setHealth(1);
+//                this.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 900, 1));
+//                this.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 100, 1));
+//                this.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 800, 0));
                 this.getWorld().sendEntityStatus(this, (byte)35);
+                Times++;
             }
 
             return itemStack != null;
