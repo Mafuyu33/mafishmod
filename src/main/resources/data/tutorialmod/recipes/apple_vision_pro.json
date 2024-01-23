@@ -3,10 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "minecraft:golden_apple"
+      "item": "minecraft:apple"
     },
     {
       "item": "minecraft:spyglass"
+    },
+    {
+      "item": "tutorialmod:cool_glass"
     }
   ],
   "result": {

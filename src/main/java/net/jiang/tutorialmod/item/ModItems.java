@@ -15,7 +15,10 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings()));
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
-    public static final Item COOL_GLASS=registerItem("cool_glass",new Item(new FabricItemSettings()));
+    public static final Item COOL_GLASS=registerItem("cool_glass",
+            new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item COOL_GLASS2=registerItem("cool_glass2",
+            new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item METAL_DETECTOR=registerItem("metal_detector",
             new MetalDetectorItem(new FabricItemSettings().maxDamage(64)));
 
