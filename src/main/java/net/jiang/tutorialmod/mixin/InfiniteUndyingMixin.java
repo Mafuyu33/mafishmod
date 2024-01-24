@@ -118,17 +118,17 @@ public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
                 int k = EnchantmentHelper.getLevel(Enchantments.CHANNELING, itemStack);
                 if (k > 0) {
                     if (this.getWorld() instanceof ServerWorld) {
-                        assert user != null;
-                        assert attacker != null;
+                    if (attacker != null && user != null) {
                         BlockPos blockPos = attacker.getBlockPos();
                         LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(this.getWorld());
                         if (lightningEntity != null) {
                             lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
-                            lightningEntity.setChanneler(user instanceof ServerPlayerEntity ? (ServerPlayerEntity)user : null);
+                            lightningEntity.setChanneler(user instanceof ServerPlayerEntity ? (ServerPlayerEntity) user : null);
                             this.getWorld().spawnEntity(lightningEntity);
                             SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
                             this.playSound(soundEvent, 5, 1.0F);
                         }
+                    }
                     }
                 }
 //                        if (entry != null) {
