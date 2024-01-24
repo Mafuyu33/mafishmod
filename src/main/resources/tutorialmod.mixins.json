@@ -3,6 +3,7 @@
   "package": "net.jiang.tutorialmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AlwaysEnchantableMixin",
     "ExampleMixin",
     "FireworkRocketItemMixin",
     "InfiniteBucketMixin$InFiniteBucketMixin",
