@@ -5,6 +5,7 @@
   "mixins": [
     "ExampleMixin",
     "FireworkRocketItemMixin",
+    "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin"
   ],
