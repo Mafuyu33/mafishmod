@@ -32,7 +32,6 @@ public class InfiniteBucketMixin {
         @Overwrite
         public static ItemStack getEmptiedStack(ItemStack stack, PlayerEntity player) {
             int a = EnchantmentHelper.getLevel(Enchantments.INFINITY, stack);//无限
-            player.sendMessage(Text.of("a: " + a));
             if (!player.getAbilities().creativeMode & a != 1) {
                 return new ItemStack(Items.BUCKET);
             } else {
