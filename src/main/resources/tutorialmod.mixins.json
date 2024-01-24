@@ -5,6 +5,7 @@
   "mixins": [
     "ExampleMixin",
     "FireworkRocketItemMixin",
+    "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin"
   ],
   "client": [
