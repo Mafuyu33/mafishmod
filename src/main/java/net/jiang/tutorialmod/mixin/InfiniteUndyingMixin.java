@@ -59,6 +59,12 @@ public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
 
     @Shadow @Nullable protected PlayerEntity attackingPlayer;
 
+    @Unique
+    private void explode() {
+        float f = 4.0F;
+        this.getWorld().createExplosion(this, this.getX(), this.getBodyY(0.0625), this.getZ(), f, World.ExplosionSourceType.TNT);
+    }
+
     /**
      * @author
      * Mafuyu33
@@ -101,34 +107,37 @@ public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 100, 1));
                 this.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 800, 0));
 
-                int i = EnchantmentHelper.getLevel(Enchantments.PROTECTION, itemStack);
+
+
+                int i = EnchantmentHelper.getLevel(Enchantments.PROTECTION, itemStack);//保护
                 if (i > 0) {
                     this.clearStatusEffects();
                     this.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST,900,(int) (Times-1F)));
                     this.setHealth(1);
                 }
 
-//                int j = EnchantmentHelper.getLevel(Enchantments.THORNS, itemStack);
-//                if (j > 0) {
-//                    if (attacker != null && user != null) {
-//                        attacker.damage(user.getDamageSources().thorns(user), 25F);
-//                    }
-//                }
+                int j = EnchantmentHelper.getLevel(Enchantments.BLAST_PROTECTION, itemStack);//爆炸保护
+                if (j > 0) {
+                    if (attacker != null && user != null) {
+//                      BlockPos blockPos = user.getBlockPos();
+                        explode();
+                    }
+                }
 
-                int k = EnchantmentHelper.getLevel(Enchantments.CHANNELING, itemStack);
+                int k = EnchantmentHelper.getLevel(Enchantments.CHANNELING, itemStack);//引雷
                 if (k > 0) {
                     if (this.getWorld() instanceof ServerWorld) {
-                    if (attacker != null && user != null) {
-                        BlockPos blockPos = attacker.getBlockPos();
-                        LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(this.getWorld());
-                        if (lightningEntity != null) {
-                            lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
-                            lightningEntity.setChanneler(user instanceof ServerPlayerEntity ? (ServerPlayerEntity) user : null);
-                            this.getWorld().spawnEntity(lightningEntity);
-                            SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
-                            this.playSound(soundEvent, 5, 1.0F);
+                        if (attacker != null && user != null) {
+                            BlockPos blockPos = attacker.getBlockPos();
+                            LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(this.getWorld());
+                            if (lightningEntity != null) {
+                                lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
+                                lightningEntity.setChanneler(user instanceof ServerPlayerEntity ? (ServerPlayerEntity) user : null);
+                                this.getWorld().spawnEntity(lightningEntity);
+                                SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
+                                this.playSound(soundEvent, 5, 1.0F);
+                            }
                         }
-                    }
                     }
                 }
 //                        if (entry != null) {
