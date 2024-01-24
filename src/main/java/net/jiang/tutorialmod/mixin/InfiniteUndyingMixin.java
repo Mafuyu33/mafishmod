@@ -90,7 +90,7 @@ public abstract class InfiniteUndyingMixin extends Entity implements Attackable{
                 ItemStack itemStack2 = this.getStackInHand(hand);
                 if (itemStack2.isOf(Items.TOTEM_OF_UNDYING)) {
                     itemStack = itemStack2.copy();
-                    int k = EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack);
+                    int k = EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack);//无限
                     if (k == 0) {
                         itemStack2.decrement(1);
                     }
