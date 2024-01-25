@@ -10,21 +10,50 @@ import net.minecraft.client.network.SequencedPacketCreator;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ClientPlayerInteractionManager.class)
-public abstract class BlockBreakMixin {
 
+@Mixin(PickaxeItem.class)
+public abstract class BlockBreakMixin extends Item {
+    public BlockBreakMixin(Settings settings) {
+        super(settings);
+    }
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        World world = context.getWorld();
+        BlockPos blockPos = context.getBlockPos();
+        BlockState blockState = world.getBlockState(blockPos);
+        ItemStack itemStack = context.getStack();
+        PlayerEntity playerEntity = context.getPlayer();
+        LivingEntity user = ((LivingEntity) context.getPlayer());
+
+        int k = EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack);
+        if (k > 0) {
+            world.breakBlock(blockPos,true);
+            world.setBlockState(blockPos, (blockState.getBlock()).getDefaultState(), 3);
+            EquipmentSlot equipmentSlot = itemStack.equals(playerEntity.getEquippedStack(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
+            itemStack.damage(1, user, (userx) -> {
+                userx.sendEquipmentBreakStatus(equipmentSlot);
+            });
+        }
+        return super.useOnBlock(context);
+    }
 //    @Shadow @Final private MinecraftClient client;
 //
 //    @Inject(method = "attackBlock", at = @At(value = "TAIL"))

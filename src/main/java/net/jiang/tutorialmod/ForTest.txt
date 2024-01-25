@@ -1,4 +1,8 @@
 发送信息给玩家
 player.sendMessage(Text.literal((String.valueOf(???))),false);
 
+附魔查看
+int k = EnchantmentHelper.getLevel(Enchantments, itemStack);
+if (k > 0) {
 
+}

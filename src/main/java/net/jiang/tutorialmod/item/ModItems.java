@@ -46,8 +46,6 @@ public class ModItems {
     public static final Item APPLE_VISION_PRO = registerItem("apple_vision_pro",
             new AppleVisionProItem(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET,new FabricItemSettings()));
 
-
-
     public static final Item BREAD_SWORD = registerItem("bread_sword",
             new BreadSwordItem(ToolMaterials.STONE, 3, -2.4f,
                     new FabricItemSettings().food(ModFoodComponents.BREAD_SWORD)));
@@ -71,6 +69,7 @@ public class ModItems {
                     new FabricItemSettings().food(ModFoodComponents.POISON_SWORD)));
 
     public static final Item FIREWORK_ARROW = registerItem("firework_arrow",new Item(new FabricItemSettings()));
+
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //在这里注册
