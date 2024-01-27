@@ -4,11 +4,12 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AlwaysEnchantableMixin",
+    "BadOfSeaMixin",
     "BlockBreakMixin",
     "ExampleMixin",
     "FireworkRocketItemMixin",
-    "FishingBobberMixin",
-    "FishingRogMixin",
+    "FishingBobberEntityMixin",
+    "FishingRodItemMixin",
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin"
