@@ -6,6 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -21,6 +23,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -34,7 +37,8 @@ public abstract class FishingBobberMixin extends ProjectileEntity {
 	public FishingBobberMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
 		super(entityType, world);
 	}
-
+	@Unique
+	private int delayTimer = 0;
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void init(CallbackInfo info) {
 		PlayerEntity playerEntity = getPlayerOwner();
@@ -47,7 +51,13 @@ public abstract class FishingBobberMixin extends ProjectileEntity {
 					BlockPos blockPos = this.getBlockPos();
 					FluidState fluidState = world.getFluidState(blockPos);
 					if (fluidState.isIn(FluidTags.WATER)) {
-						world.setBlockState(blockPos, Blocks.FROSTED_ICE.getDefaultState(), 3);
+						this.addVelocity(0,0.3,0);
+						if (delayTimer < 1) {
+							delayTimer++;
+						} else {
+							world.setBlockState(blockPos, Blocks.FROSTED_ICE.getDefaultState(), 3);
+							delayTimer = 0;
+						}
 					}
 				}
 			}
