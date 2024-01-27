@@ -7,6 +7,8 @@
     "BlockBreakMixin",
     "ExampleMixin",
     "FireworkRocketItemMixin",
+    "FishingBobberMixin",
+    "FishingRogMixin",
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin"

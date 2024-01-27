@@ -46,6 +46,8 @@
 
   "item.tutorialmod.poison_sword": "钻石剑（带剧毒）",
 
-  "item.tutorialmod.firework_arrow": "烟花火矢"
+  "item.tutorialmod.firework_arrow": "烟花火矢",
+
+  "enchantment.tutorialmod.bad_luck_of_sea": "§c海之厌恶"
 
 }

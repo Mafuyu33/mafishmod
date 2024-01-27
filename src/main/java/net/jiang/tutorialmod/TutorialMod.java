@@ -3,6 +3,7 @@ package net.jiang.tutorialmod;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.jiang.tutorialmod.enchantment.ModEnchantments;
 import net.jiang.tutorialmod.item.ModItemGroups;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
@@ -28,15 +29,11 @@ public class TutorialMod implements ModInitializer {
 		ModBlocks.registerModBlocks();
 
 		FuelRegistry.INSTANCE.add(ModItems.COAL_BRIQUEITE,200);
-
 		ModStatusEffects.registerModEffect();
-
 		ModLootTableModifiers.modifyLootTables();
-
 		ModVillagers.registerVillagers();
-
 		ModSounds.registerSounds();
-
 		ModCustomTrades.registerCustomTrades();
+		ModEnchantments.registerModEnchantments();
 	}
 }

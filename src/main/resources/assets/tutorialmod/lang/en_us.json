@@ -46,6 +46,8 @@
 
   "item.tutorialmod.poison_sword": "poison_sword",
 
-  "item.tutorialmod.firework_arrow": "firework_arrow"
+  "item.tutorialmod.firework_arrow": "firework_arrow",
+
+  "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea"
 
 }
