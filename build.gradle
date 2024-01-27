@@ -10,6 +10,10 @@ base {
 	archivesName = project.archives_base_name
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/tutorialmod.accesswidener")
+}
+
 repositories {
 	maven {
 		url = "https://cursemaven.com"
@@ -27,6 +31,12 @@ repositories {
 fabricApi {
 	configureDataGeneration()
 }
+
+loom {
+	accessWidenerPath = file("src/main/resources/name.accesswidener")
+}
+
+
 
 dependencies {
 
