@@ -14,6 +14,8 @@
 11.钓鱼竿的海之厌恶附魔、冰霜行者、火焰附加（可以在岩浆里钓鱼）、力量  
 12.钻石镐的无限附魔  
 ......  
+欢迎关注我的b站账号“马夫鱼33”，视频展示过详细用法。  
+  
 This is some strange stuff that Ma Fu Yu built while learning Minecraft mod development, based on the example mod by kuapenjoe. The current contents include:  
   
 1.An edible bread sword.  
@@ -29,3 +31,4 @@ This is some strange stuff that Ma Fu Yu built while learning Minecraft mod deve
 11.Fishing rods enchanted with Sea's Disgust, Frost Walker, Flame Addition (allowing fishing in lava), and Strength.  
 12.Diamond pickaxes with the Infinity enchantment.  
 ...  
+Welcome to follow my Bilibili account '马夫鱼33', where videos showcasing detailed usage are available.  
