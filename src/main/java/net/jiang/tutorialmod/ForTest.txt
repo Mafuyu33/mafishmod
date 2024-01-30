@@ -1,4 +1,4 @@
-发送信息给玩家
+//发送信息给玩家
 player.sendMessage(Text.literal((String.valueOf(123))),false);
 
 附魔查看
