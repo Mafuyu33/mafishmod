@@ -20,3 +20,13 @@ if (playerEntity != null) {
         }
     }
 }
+
+引雷
+LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(this.getWorld());
+if (lightningEntity != null) {
+    lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
+    lightningEntity.setChanneler(user instanceof ServerPlayerEntity ? (ServerPlayerEntity) user : null);
+    this.getWorld().spawnEntity(lightningEntity);
+    SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
+    this.playSound(soundEvent, 5, 1.0F);
+}

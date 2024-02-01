@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AlwaysEnchantableMixin",
+    "ArmorEnchantmentMixin",
     "BadOfSeaMixin",
     "BlockBreakMixin",
     "EnderPearlEntityMixin",
