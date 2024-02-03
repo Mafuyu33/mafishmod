@@ -48,6 +48,9 @@
 
   "item.tutorialmod.firework_arrow": "firework_arrow",
 
-  "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea"
+  "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea",
+
+  "key.category.tutorialmod.tutorial": "Mafish Mod",
+  "key.tutorialmod.throw_item": "throw_item"
 
 }

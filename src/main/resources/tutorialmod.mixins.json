@@ -15,7 +15,8 @@
     "FishingRodItemMixin",
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
-    "InfiniteUndyingMixin"
+    "InfiniteUndyingMixin",
+    "ThrowItemMixin"
   ],
   "client": [
     "ItemRendererAccessor",
