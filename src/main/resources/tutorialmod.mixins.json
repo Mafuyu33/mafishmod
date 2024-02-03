@@ -16,6 +16,7 @@
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin",
+    "ThrowableDiamondMixin",
     "ThrowItemMixin"
   ],
   "client": [
