@@ -37,8 +37,8 @@ public abstract class BadOfSeaMixin extends Entity implements Ownable {
 			BlockPos closestNonLiquidBlockPos = null;
 			double closestDistanceSq = Double.MAX_VALUE; // 初始设置为最大值
 
-			for (int xOffset = -6; xOffset <= 5; xOffset++) {
-				for (int zOffset = -6; zOffset <= 5; zOffset++) {
+			for (int xOffset = -20; xOffset <= 19; xOffset++) {
+				for (int zOffset = -20; zOffset <= 19; zOffset++) {
 					BlockPos currentPos = blockPos.add(xOffset, 0, zOffset);
 					FluidState fluidState1 = world.getFluidState(currentPos);
 
