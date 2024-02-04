@@ -2,6 +2,7 @@ package net.jiang.tutorialmod.event;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.block.SkullBlock;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
@@ -17,14 +18,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ThrowablePotionItem;
+import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+import net.minecraft.world.timer.Timer;
 import org.lwjgl.glfw.GLFW;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class KeyInputHandler {
@@ -55,7 +59,7 @@ public class KeyInputHandler {
                     throwPower = Math.min((float) (chargeDuration / 1000.0), maxThrowPower);
 
                     // Display charge power to player (you can use a game overlay or chat message)
-                    client.player.sendMessage(Text.literal("蓄力ing: " + throwPower), true);
+                    client.player.sendMessage(Text.literal("蓄力: " + throwPower), true);
                 }
             } else if (isCharging) {
                 // Key was released, throw the item with the charged power

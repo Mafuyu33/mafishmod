@@ -77,7 +77,7 @@ public class DiamondProjectileEntity extends ThrownItemEntity {
         Vec3d velocity = this.getVelocity(); //获取速度向量
         double horizontalSpeed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z); // 计算水平速度
         // 当速度足够小，或者y轴速度太大，并且在水里掉落钻石
-        if (horizontalSpeed < 0.095 || this.getVelocity().y > 0.5) {
+        if (bounceCount!=0 & (horizontalSpeed < 0.095 || this.getVelocity().y > 0.5)) {
             dropItem(Items.DIAMOND);
             this.discard();
             bounceCount = 0;
@@ -128,7 +128,7 @@ public class DiamondProjectileEntity extends ThrownItemEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
             entityHitResult.getEntity().damage(getDamageSources().
-                    thrown(entityHitResult.getEntity(),getOwner()),5);
+                    thrown(entityHitResult.getEntity(),getOwner()),10);
             dropItem(Items.DIAMOND);
             this.discard();
         }
