@@ -5,9 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ArmorItem;
@@ -25,8 +23,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerEntity.class)
-public abstract class ArmorEnchantmentMixin extends LivingEntity{
+@Mixin(LivingEntity.class)
+public abstract class ArmorEnchantmentMixin extends Entity implements Attackable {
 	@Shadow public abstract Iterable<ItemStack> getArmorItems();
 
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
