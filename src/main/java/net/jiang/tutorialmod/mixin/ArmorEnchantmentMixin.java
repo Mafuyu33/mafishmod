@@ -19,9 +19,13 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(LivingEntity.class)
 public abstract class ArmorEnchantmentMixin extends Entity implements Attackable {
@@ -29,6 +33,50 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
+	}
+	@Unique
+	private List<BlockPos> replacedWaterBlocks = new ArrayList<>();
+
+	@Unique
+	public void restoreReplacedWaterBlocks(World world) {
+		for (BlockPos pos : replacedWaterBlocks) {
+			world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
+		}
+		// 清空替换过的水方块列表
+		replacedWaterBlocks.clear();
+	}
+
+	@Unique
+	public void checkAndReplaceWaterBlocks(World world, BlockPos playerPos) {
+		int radius = 4; // 3×3范围检索
+
+		for (int yOffset = -3; yOffset <= 30; yOffset++) {
+			for (int xOffset = -radius; xOffset <= radius; xOffset++) {
+				for (int zOffset = -radius; zOffset <= radius; zOffset++) {
+					BlockPos targetPos = playerPos.add(xOffset, yOffset, zOffset);
+
+					if (isWithin3x3(playerPos, targetPos) && world.getBlockState(targetPos).getBlock() == Blocks.WATER) {
+						// 如果方块在2x2范围内且是水方块，替换为空气方块
+						replacedWaterBlocks.add(targetPos);
+						world.setBlockState(targetPos, Blocks.STRUCTURE_VOID.getDefaultState(), 3);
+					}
+
+					if (!isWithin3x3(playerPos, targetPos) & replacedWaterBlocks.contains(targetPos)) {
+						restoreReplacedWaterBlocks(world);
+					}
+				}
+			}
+		}
+	}
+
+
+	@Unique
+	private boolean isWithin3x3(BlockPos playerPos, BlockPos targetPos) {
+		int deltaX = Math.abs(playerPos.getX() - targetPos.getX());
+		int deltaY = Math.abs(playerPos.getY() - targetPos.getY());
+		int deltaZ = Math.abs(playerPos.getZ() - targetPos.getZ());
+
+		return deltaX <= 3 && deltaY <= 30 && deltaZ <= 3;
 	}
 
 	@Inject(at = @At("HEAD"), method = "tick")
@@ -43,37 +91,6 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					BlockPos blockPos = this.getBlockPos();
 					FluidState fluidState = world.getFluidState(blockPos);
 					if (fluidState.isIn(FluidTags.WATER)) {
-
-//						boolean isAnyNonLiquidBlock = false; // 用于记录是否存在非液体方块
-//						BlockPos backPos = blockPos;
-//
-//						for (int xOffset = -4; xOffset <= 3; xOffset++) {
-//							for (int zOffset = -4; zOffset <= 3; zOffset++) {
-//								BlockPos currentPos = blockPos.add(xOffset, 0, zOffset);
-//								FluidState fluidState1 = world.getFluidState(currentPos);
-//
-//								// 检查当前方块是否不是液体方块
-//								if (!fluidState1.isIn(FluidTags.WATER)) {
-//									isAnyNonLiquidBlock = true; // 存在非液体方块
-//									backPos = currentPos;
-//									break; // 停止循环
-//								}
-//							}
-//
-//							if (isAnyNonLiquidBlock) {
-//								//发送信息给玩家
-//								this.sendMessage(Text.literal(String.valueOf("检测到固体方块可弹射")));
-//								break; // 如果已经存在非液体方块，停止外层循环
-//							}
-//						}
-//						if (isAnyNonLiquidBlock) {
-//							//把玩家弹到这个方向（backPos to blockPos）
-//							Vec3d direction = backPos.subtract(blockPos).toCenterPos().normalize();// 计算方向向量
-//							double speed = 0.5;// 设定速度大小（可以根据需要调整）
-//							Vec3d velocity = direction.multiply(speed);// 计算最终的速度向量
-//							this.addVelocity(0, 1, 0);
-//							this.addVelocity(velocity);// 应用速度
-//						}
 
 						BlockPos closestNonLiquidBlockPos = null;
 						double closestDistanceSq = Double.MAX_VALUE; // 初始设置为最大值
@@ -138,6 +155,13 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 						SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
 						this.playSound(soundEvent, 5, 1.0F);
 					}
+				}
+
+				int m = EnchantmentHelper.getLevel(ModEnchantments.EIGHT_GODS_PASS_SEA, armorItem);//八仙过海
+				if (m > 0) {
+					World world = this.getWorld();
+					BlockPos blockPos = this.getBlockPos();
+					checkAndReplaceWaterBlocks(world, blockPos);
 				}
 			}
 //			if (armorItem.getItem() instanceof ArmorItem) {//所有装备

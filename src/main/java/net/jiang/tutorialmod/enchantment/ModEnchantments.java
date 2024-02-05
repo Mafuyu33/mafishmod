@@ -14,6 +14,10 @@ public class ModEnchantments {
             new BadLuckofSeaEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.FISHING_ROD, EquipmentSlot.MAINHAND));
 
+    public static Enchantment EIGHT_GODS_PASS_SEA = register("eight_gods_pass_sea",
+            new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.ARMOR_FEET, EquipmentSlot.FEET));
+
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);
     }
