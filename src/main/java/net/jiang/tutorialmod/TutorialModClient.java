@@ -4,10 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.jiang.tutorialmod.entity.ModEntities;
 //import net.jiang.tutorialmod.util.ModModelPredicateProvider;
 import net.jiang.tutorialmod.event.KeyInputHandler;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.model.CrossbowPosing;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
