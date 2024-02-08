@@ -56,6 +56,8 @@ public class ModItemGroups {
                         entries.add(ModItems.POISON_SWORD);
                         entries.add(ModItems.FIREWORK_ARROW);
 
+                        entries.add(ModBlocks.POTATO_TNT_PREPARE);
+
                     }).build());
 
 

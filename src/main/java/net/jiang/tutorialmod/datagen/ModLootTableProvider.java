@@ -1,5 +1,6 @@
 package net.jiang.tutorialmod.datagen;
 
+import dev.architectury.platform.Mod;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.jiang.tutorialmod.item.ModItems;

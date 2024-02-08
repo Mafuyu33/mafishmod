@@ -1,4 +1,7 @@
 {
+  "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
+  "tooltip.tutorialmod.ruby_stuff.tooltip": "§e",
+
   "item.tutorialmod.ruby": "RUBY",
   "item.tutorialmod.raw_ruby": "RAW RUBY",
   "item.tutorialmod.cool_glass": "COOL GLASS",
@@ -7,7 +10,7 @@
   "item.tutorialmod.tomato": "Tomato",
   "item.tutorialmod.coal_briquette": "Coal Briquette",
 
-  "item.tutorialmod.ruby_staff": "RUBY 3D STUFF",
+  "item.tutorialmod.ruby_staff": "§eMagic stuff",
 
   "item.tutorialmod.ruby_pickaxe": "RUBY PICKAXE",
 
@@ -20,8 +23,9 @@
   "block.tutorialmod.raw_ruby_block": "RAW RUBY BLOCK",
   "block.tutorialmod.white_cat_block": "WHITE CAT BLOCK",
   "block.tutorialmod.gold_melon": "gold_melon",
+  "block.tutorialmod.potato_tnt_prepare": "potato_tnt_prepare",
+  "block.tutorialmod.potato_tnt": "potato_tnt",
 
-  "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
   "tooltip.tutorialmod.fire_happy": "Fire Happy",
 
   "effect.tutorialmod.ironman": "Link Start",
@@ -47,6 +51,12 @@
   "item.tutorialmod.poison_sword": "poison_sword",
 
   "item.tutorialmod.firework_arrow": "firework_arrow",
+
+
+
+
+
+
 
   "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea",
   "enchantment.tutorialmod.eight_gods_pass_sea": "eight_gods_pass_sea",

@@ -2,6 +2,7 @@ package net.jiang.tutorialmod.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
+import net.jiang.tutorialmod.block.custom.PotatoTNTBlock;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.minecraft.data.client.BlockStateModelGenerator;

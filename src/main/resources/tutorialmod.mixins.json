@@ -6,7 +6,7 @@
     "AlwaysEnchantableMixin",
     "ArmorEnchantmentMixin",
     "BadOfSeaMixin",
-    "BlockBreakMixin",
+    "PickaxeInfiniteMixin",
     "EnderPearlEntityMixin",
     "EnderPearlItemMixin",
     "ExampleMixin",

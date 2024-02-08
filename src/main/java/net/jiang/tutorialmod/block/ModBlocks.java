@@ -3,11 +3,13 @@ package net.jiang.tutorialmod.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.block.custom.PotatoTNTBlock;
+import net.jiang.tutorialmod.block.custom.PotatoTNTPrepareBlock;
 import net.jiang.tutorialmod.block.custom.SoundBlock;
 import net.jiang.tutorialmod.sound.ModSounds;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.block.*;
+import net.minecraft.block.enums.Instrument;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -31,9 +33,13 @@ public class ModBlocks {
     public static final Block GOLD_MELON=registerBlock("gold_melon",
             new Block(FabricBlockSettings.copyOf(Blocks.GOLD_BLOCK)));
 
+    public static final Block POTATO_TNT = registerBlock("potato_tnt",
+            new PotatoTNTBlock(AbstractBlock.Settings.create().mapColor(MapColor.BROWN).
+                    instrument(Instrument.BASS).strength(5.0F, 1.0F).sounds(BlockSoundGroup.STONE)));
 
-
-
+    public static final Block POTATO_TNT_PREPARE = registerBlock("potato_tnt_prepare",
+            new PotatoTNTPrepareBlock(StatusEffects.FIRE_RESISTANCE, 10,
+                FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
 
 
     private static Block registerBlock(String name,Block block){

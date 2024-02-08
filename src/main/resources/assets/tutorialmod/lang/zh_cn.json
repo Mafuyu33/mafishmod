@@ -1,4 +1,6 @@
 {
+  "tooltip.tutorialmod.ruby_stuff.tooltip": "§m试试就逝世",
+
   "item.tutorialmod.ruby": "卢比",
   "item.tutorialmod.raw_ruby": "RAW_卢比",
   "item.tutorialmod.cool_glass": "肾",
@@ -7,7 +9,7 @@
   "item.tutorialmod.tomato": "番茄",
   "item.tutorialmod.coal_briquette": "煤球",
 
-  "item.tutorialmod.ruby_staff": "卢比3D法杖",
+  "item.tutorialmod.ruby_staff": "红宝石法杖",
 
   "item.tutorialmod.ruby_pickaxe": "卢比镐子",
 
@@ -20,6 +22,8 @@
   "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",
   "block.tutorialmod.white_cat_block": "白猫方块",
   "block.tutorialmod.gold_melon": "§e金瓜蛋子",
+  "block.tutorialmod.potato_tnt_prepare": "土豆雷（幼体）",
+  "block.tutorialmod.potato_tnt": "土豆雷",
 
   "effect.tutorialmod.ironman": "Link Start!",
 
@@ -48,10 +52,14 @@
 
   "item.tutorialmod.firework_arrow": "烟花火矢",
 
+
+
+
   "enchantment.tutorialmod.bad_luck_of_sea": "§c海之嫌弃",
   "enchantment.tutorialmod.eight_gods_pass_sea": "§e八仙过海",
 
   "key.category.tutorialmod.tutorial": "马夫鱼模组",
   "key.tutorialmod.throw_item": "丢出东西"
+
 
 }

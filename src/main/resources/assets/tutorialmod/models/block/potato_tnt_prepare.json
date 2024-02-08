@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "tutorialmod:block/potato_tnt_prepare"
+  }
+}

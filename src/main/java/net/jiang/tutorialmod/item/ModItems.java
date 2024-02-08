@@ -23,7 +23,7 @@ public class ModItems {
             new MetalDetectorItem(new FabricItemSettings().maxDamage(64)));
 
     public static final Item RUBY_STAFF=registerItem("ruby_staff",
-            new Item(new FabricItemSettings().maxCount(1)));
+            new RubyStuffItem(new FabricItemSettings().maxCount(1)));
     public static final Item RUBY_PICKAXE =registerItem("ruby_pickaxe",
             new PickaxeItem(ModToolMaterial.RUBY,2,2f, new FabricItemSettings()));
 
@@ -69,6 +69,8 @@ public class ModItems {
                     new FabricItemSettings().food(ModFoodComponents.POISON_SWORD)));
 
     public static final Item FIREWORK_ARROW = registerItem("firework_arrow",new Item(new FabricItemSettings()));
+
+
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
