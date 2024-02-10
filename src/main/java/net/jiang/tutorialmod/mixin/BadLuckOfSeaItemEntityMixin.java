@@ -16,12 +16,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemEntity.class)
-public abstract class BadOfSeaMixin extends Entity implements Ownable {
+public abstract class BadLuckOfSeaItemEntityMixin extends Entity implements Ownable {
 
 	@Shadow
 	public abstract ItemStack getStack();
 
-	public BadOfSeaMixin(EntityType<?> type, World world) {
+	public BadLuckOfSeaItemEntityMixin(EntityType<?> type, World world) {
 		super(type, world);
 	}
 

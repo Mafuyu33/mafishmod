@@ -11,6 +11,9 @@ if (k > 0) {
 }
 
 检测双手物品的附魔
+Hand hand = this.getActiveHand();
+ItemStack itemStack = this.getStackInHand(hand);
+
 PlayerEntity playerEntity = getPlayerOwner();
 if (playerEntity != null) {
     Hand hand = playerEntity.getActiveHand();

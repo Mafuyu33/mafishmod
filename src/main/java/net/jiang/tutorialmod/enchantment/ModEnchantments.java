@@ -11,12 +11,16 @@ import net.minecraft.util.Identifier;
 public class ModEnchantments {
 
     public static Enchantment BAD_LUCK_OF_SEA = register("bad_luck_of_sea",
-            new BadLuckofSeaEnchantment(Enchantment.Rarity.UNCOMMON,
+            new BadLuckOfSeaEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.FISHING_ROD, EquipmentSlot.MAINHAND));
 
     public static Enchantment EIGHT_GODS_PASS_SEA = register("eight_gods_pass_sea",
             new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.ARMOR_FEET, EquipmentSlot.FEET));
+
+    public static Enchantment KILL_CHICKEN_GET_EGG = register("kill_chicken_get_egg",
+            new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
 
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);

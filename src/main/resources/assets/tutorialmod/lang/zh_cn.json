@@ -24,6 +24,7 @@
   "block.tutorialmod.gold_melon": "§e金瓜蛋子",
   "block.tutorialmod.potato_tnt_prepare": "土豆雷（幼体）",
   "block.tutorialmod.potato_tnt": "土豆雷",
+  "block.tutorialmod.gem_polishing_station": "宝石抛光站",
 
   "effect.tutorialmod.ironman": "Link Start!",
 
@@ -57,6 +58,8 @@
 
   "enchantment.tutorialmod.bad_luck_of_sea": "§c海之嫌弃",
   "enchantment.tutorialmod.eight_gods_pass_sea": "§e八仙过海",
+  "enchantment.tutorialmod.kill_chicken_get_egg": "杀鸡取卵",
+
 
   "key.category.tutorialmod.tutorial": "马夫鱼模组",
   "key.tutorialmod.throw_item": "丢出东西"

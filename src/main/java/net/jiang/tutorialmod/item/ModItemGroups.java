@@ -57,7 +57,7 @@ public class ModItemGroups {
                         entries.add(ModItems.FIREWORK_ARROW);
 
                         entries.add(ModBlocks.POTATO_TNT_PREPARE);
-
+                        entries.add(ModBlocks.GEM_POLISHING_STATION);
                     }).build());
 
 

@@ -5,21 +5,23 @@
   "mixins": [
     "AlwaysEnchantableMixin",
     "ArmorEnchantmentMixin",
-    "BadOfSeaMixin",
-    "PickaxeInfiniteMixin",
+    "BadLuckOfSeaItemEntityMixin",
     "EnderPearlEntityMixin",
     "EnderPearlItemMixin",
     "ExampleMixin",
     "FireworkRocketEntityMixin",
+    "FireworkRocketHitOnEntityMixin",
     "FireworkRocketItemMixin",
     "FishingBobberEntityMixin",
     "FishingRodItemMixin",
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin",
-    "LivingEntityMixin",
+    "LightningRodMixin",
+    "PickaxeInfiniteMixin",
     "ThrowableDiamondMixin",
-    "ThrowItemMixin"
+    "ThrowItemMixin",
+    "WeaponEnchantmentMixin"
   ],
   "client": [
     "ItemRendererAccessor",

@@ -6,6 +6,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.jiang.tutorialmod.block.entity.ModBlockEntities;
 import net.jiang.tutorialmod.enchantment.ModEnchantments;
 import net.jiang.tutorialmod.event.AttackEntityHandler;
 import net.jiang.tutorialmod.item.ModItemGroups;
@@ -35,6 +36,7 @@ public class TutorialMod implements ModInitializer {
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 		ModBlocks.registerModBlocks();
+		ModBlockEntities.registerBlockEntities();
 
 		FuelRegistry.INSTANCE.add(ModItems.COAL_BRIQUEITE,200);
 		ModStatusEffects.registerModEffect();

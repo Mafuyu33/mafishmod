@@ -25,6 +25,7 @@
   "block.tutorialmod.gold_melon": "gold_melon",
   "block.tutorialmod.potato_tnt_prepare": "potato_tnt_prepare",
   "block.tutorialmod.potato_tnt": "potato_tnt",
+  "block.tutorialmod.gem_polishing_station": "Gem Polishing Station",
 
   "tooltip.tutorialmod.fire_happy": "Fire Happy",
 
@@ -56,10 +57,11 @@
 
 
 
-
-
   "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea",
   "enchantment.tutorialmod.eight_gods_pass_sea": "eight_gods_pass_sea",
+  "enchantment.tutorialmod.kill_chicken_get_egg": "kill_chicken_get_egg",
+
+
 
   "key.category.tutorialmod.tutorial": "Mafish Mod",
   "key.tutorialmod.throw_item": "throw_item"

@@ -1,14 +1,19 @@
 package net.jiang.tutorialmod.mixin;
 
 import net.jiang.tutorialmod.mixinhelper.FireworkRocketEntityMixinHelper;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.*;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -16,11 +21,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity implements Attackable {
+public abstract class FireworkRocketHitOnEntityMixin extends Entity implements Attackable {
 
 	@Shadow @Nullable public abstract LivingEntity getAttacker();
 
@@ -28,7 +30,9 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
 	@Shadow public abstract void kill();
 
-	public LivingEntityMixin(EntityType<?> type, World world) {
+	@Shadow public abstract void wakeUp();
+
+	public FireworkRocketHitOnEntityMixin(EntityType<?> type, World world) {
 		super(type, world);
 	}
 	@Unique
@@ -68,12 +72,36 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 	}
 	@Unique
 	private void explode() {
-			this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), (float)5, World.ExplosionSourceType.MOB);
+		this.getWorld().createExplosion( null, this.getX(), this.getY(), this.getZ(),  2.5F, World.ExplosionSourceType.TNT);
 	}
 	@Unique
 	private void addParticles() {
+
+
 		Vec3d Pos = this.getPos();
-		getWorld().addParticle(ParticleTypes.EXPLOSION,Pos.x,Pos.y,Pos.z,0,0,0);
+		World world =getWorld();
+		world.addParticle(ParticleTypes.EXPLOSION,Pos.x,Pos.y,Pos.z,0,0,0);
+//			((ServerWorld) world).spawnParticles(new DustParticleEffect
+//					(new Vector3f(random.nextFloat(),random.nextFloat(),random.nextFloat()),4.0F),
+//					Pos.x,Pos.y,Pos.z,10,2,2,2,0.5);
+//			System.out.println(123);
+//		System.out.println(123);
+//		if (this.getWorld() instanceof ServerWorld world) {
+//
+//
+//				LightningEntity lightning = EntityType.LIGHTNING_BOLT.create(world);
+//				if (lightning != null) {
+//					lightning.refreshPositionAfterTeleport(this.getPos());
+//					world.spawnEntity(lightning);
+//				}
+//
+//
+//			world.spawnParticles(new DustParticleEffect(new Vector3f(random.nextFloat(), random.nextFloat(), random.nextFloat()),  4.0F)
+//					, this.getX(), this.getY(), this.getZ(),  1,  2,  2,  2,  0.5);
+//
+//		}
+
+
 	}
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void init(CallbackInfo ci) {

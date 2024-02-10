@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.block.custom.GemPolishingStationBlock;
 import net.jiang.tutorialmod.block.custom.PotatoTNTBlock;
 import net.jiang.tutorialmod.block.custom.PotatoTNTPrepareBlock;
 import net.jiang.tutorialmod.block.custom.SoundBlock;
@@ -40,6 +41,9 @@ public class ModBlocks {
     public static final Block POTATO_TNT_PREPARE = registerBlock("potato_tnt_prepare",
             new PotatoTNTPrepareBlock(StatusEffects.FIRE_RESISTANCE, 10,
                 FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
+
+    public static final Block GEM_POLISHING_STATION=registerBlock("gem_polishing_station",
+            new GemPolishingStationBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
 
 
     private static Block registerBlock(String name,Block block){
