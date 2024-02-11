@@ -27,6 +27,10 @@
   "block.tutorialmod.gem_polishing_station": "宝石抛光站",
 
   "effect.tutorialmod.ironman": "Link Start!",
+  "effect.tutorialmod.flower_effect": "变出花田的魔法",
+
+
+
 
   "entity.minecraft.villager.sound_master": "音乐大师",
 
@@ -62,7 +66,9 @@
 
 
   "key.category.tutorialmod.tutorial": "马夫鱼模组",
-  "key.tutorialmod.throw_item": "丢出东西"
+  "key.tutorialmod.throw_item": "蓄力按钮(长按，然后右键丢出钻石)",
 
-
+  "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
+  "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
+  "item.minecraft.lingering_potion.effect.flower_potion": "变出花田的魔法（滞留）"
 }

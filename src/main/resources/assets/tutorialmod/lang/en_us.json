@@ -30,6 +30,11 @@
   "tooltip.tutorialmod.fire_happy": "Fire Happy",
 
   "effect.tutorialmod.ironman": "Link Start",
+  "effect.tutorialmod.flower_effect": "flower_effect",
+
+
+
+
 
   "entity.minecraft.villager.sound_master": "Soundmaster",
 
@@ -57,6 +62,7 @@
 
 
 
+
   "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea",
   "enchantment.tutorialmod.eight_gods_pass_sea": "eight_gods_pass_sea",
   "enchantment.tutorialmod.kill_chicken_get_egg": "kill_chicken_get_egg",
@@ -64,6 +70,9 @@
 
 
   "key.category.tutorialmod.tutorial": "Mafish Mod",
-  "key.tutorialmod.throw_item": "throw_item"
+  "key.tutorialmod.throw_item": "throw_item",
 
+  "item.minecraft.potion.effect.flower_potion": "flower_potion",
+  "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
+  "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion"
 }

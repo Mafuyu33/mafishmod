@@ -7,13 +7,14 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.jiang.tutorialmod.block.entity.ModBlockEntities;
+import net.jiang.tutorialmod.effect.ModStatusEffects;
 import net.jiang.tutorialmod.enchantment.ModEnchantments;
 import net.jiang.tutorialmod.event.AttackEntityHandler;
 import net.jiang.tutorialmod.item.ModItemGroups;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.jiang.tutorialmod.item.custom.FireworkArrowItem;
-import net.jiang.tutorialmod.item.custom.ModStatusEffects;
+import net.jiang.tutorialmod.potion.ModPotions;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.ModCustomTrades;
 import net.jiang.tutorialmod.util.ModLootTableModifiers;
@@ -45,6 +46,7 @@ public class TutorialMod implements ModInitializer {
 		ModSounds.registerSounds();
 		ModCustomTrades.registerCustomTrades();
 		ModEnchantments.registerModEnchantments();
+		ModPotions.registerPotions();
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
 	}
 
