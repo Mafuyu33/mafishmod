@@ -36,3 +36,15 @@ if (lightningEntity != null) {
     SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
     this.playSound(soundEvent, 5, 1.0F);
 }
+
+
+计时器
+private void startDelayedOperation(World world) {
+    java.util.Timer timer = new Timer(); // 创建一个新的计时器
+    timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+
+        }
+    }, 5000); // 延迟5秒执行，单位为毫秒
+}

@@ -17,10 +17,10 @@
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin",
+    "KaoFishMixin",
     "LightningRodMixin",
     "PickaxeInfiniteMixin",
     "ThrowableDiamondMixin",
-    "ThrowItemMixin",
     "WeaponEnchantmentMixin"
   ],
   "client": [

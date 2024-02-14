@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:stick"
+      "item": "minecraft:pumpkin_pie"
     },
     "X": {
-      "item": "tutorialmod:iron_fake"
+      "item": "minecraft:pufferfish"
     }
   },
   "pattern": [
-    "XX",
-    "X#",
-    " #"
+    "XXX",
+    "X#X",
+    "XXX"
   ],
   "result": {
-    "item": "tutorialmod:fu"
+    "item": "tutorialmod:stargazy_pie"
   },
   "show_notification": true
 }

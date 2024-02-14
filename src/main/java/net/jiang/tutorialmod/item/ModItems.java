@@ -13,8 +13,8 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings()));
-    public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings()));
+    public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings().fireproof()));
+    public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings().fireproof()));
     public static final Item COOL_GLASS=registerItem("cool_glass",
             new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item COOL_GLASS2=registerItem("cool_glass2",
@@ -69,6 +69,8 @@ public class ModItems {
                     new FabricItemSettings().food(ModFoodComponents.POISON_SWORD)));
 
     public static final Item FIREWORK_ARROW = registerItem("firework_arrow",new Item(new FabricItemSettings()));
+    public static final Item STARGAZY_PIE = registerItem("stargazy_pie",
+            new StargazyPieItem(new FabricItemSettings().food(ModFoodComponents.STARGAZY_PIE)));
 
 
 

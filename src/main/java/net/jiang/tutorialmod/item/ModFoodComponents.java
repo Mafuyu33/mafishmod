@@ -20,4 +20,8 @@ public class ModFoodComponents {
 
     public static final FoodComponent POISON_SWORD=
             new FoodComponent.Builder().hunger(3).saturationModifier(0.25f).alwaysEdible().build();
+
+    public static final FoodComponent STARGAZY_PIE=new FoodComponent.Builder().hunger(3).saturationModifier(0.25f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.POISON,200),1f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA,400),1f).alwaysEdible().build();
 }

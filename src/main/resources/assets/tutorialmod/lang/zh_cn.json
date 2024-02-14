@@ -1,8 +1,8 @@
 {
   "tooltip.tutorialmod.ruby_stuff.tooltip": "§m试试就逝世",
 
-  "item.tutorialmod.ruby": "卢比",
-  "item.tutorialmod.raw_ruby": "RAW_卢比",
+  "item.tutorialmod.ruby": "鱼",
+  "item.tutorialmod.raw_ruby": "炸鱼",
   "item.tutorialmod.cool_glass": "肾",
   "item.tutorialmod.cool_glass2": "肾",
   "item.tutorialmod.metal_detector": "金属探测器",
@@ -56,6 +56,8 @@
   "item.tutorialmod.poison_sword": "钻石剑（带剧毒）",
 
   "item.tutorialmod.firework_arrow": "烟花火矢",
+
+  "item.tutorialmod.stargazy_pie": "仰望星空派",
 
 
 
