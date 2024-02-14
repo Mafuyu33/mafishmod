@@ -19,8 +19,6 @@ public class ModItemGroups {
                         //在这里添加新的东西
                         entries.add(ModItems.RUBY);
                         entries.add(ModItems.RAW_RUBY);
-                        entries.add(ModItems.COOL_GLASS);
-                        entries.add(ModItems.COOL_GLASS2);
                         entries.add(ModItems.METAL_DETECTOR);
                         entries.add(ModItems.TOMATO);
                         entries.add(ModItems.COAL_BRIQUEITE);
@@ -46,8 +44,6 @@ public class ModItemGroups {
 
                         entries.add(ModItems.TNT_BALL);
                         entries.add(ModItems.STONE_BALL);
-
-                        entries.add(ModItems.APPLE_VISION_PRO);
 
                         entries.add(ModItems.FU);
                         entries.add(ModItems.IRON_FAKE);

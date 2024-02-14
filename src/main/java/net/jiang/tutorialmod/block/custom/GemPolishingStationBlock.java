@@ -1,6 +1,7 @@
 package net.jiang.tutorialmod.block.custom;
 
 
+import com.mojang.serialization.MapCodec;
 import net.jiang.tutorialmod.block.entity.GemPolishingStationBlockEntity;
 import net.jiang.tutorialmod.block.entity.ModBlockEntities;
 import net.minecraft.block.*;
@@ -24,6 +25,11 @@ public class GemPolishingStationBlock extends BlockWithEntity implements BlockEn
 
     public GemPolishingStationBlock(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return null;
     }
 
     @Override

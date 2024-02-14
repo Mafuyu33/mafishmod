@@ -15,10 +15,10 @@ import net.minecraft.util.Identifier;
 public class ModItems {
     public static final Item RUBY = registerItem("ruby",new Item(new FabricItemSettings().fireproof()));
     public static final Item RAW_RUBY=registerItem("raw_ruby",new Item(new FabricItemSettings().fireproof()));
-    public static final Item COOL_GLASS=registerItem("cool_glass",
-            new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
-    public static final Item COOL_GLASS2=registerItem("cool_glass2",
-            new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+//    public static final Item COOL_GLASS=registerItem("cool_glass",
+//            new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+//    public static final Item COOL_GLASS2=registerItem("cool_glass2",
+//            new AppleVisionProItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item METAL_DETECTOR=registerItem("metal_detector",
             new MetalDetectorItem(new FabricItemSettings().maxDamage(64)));
 
@@ -43,8 +43,8 @@ public class ModItems {
     public static final Item TNT_BALL = registerItem("tnt_ball", new TNTBallItem(new FabricItemSettings()));
     public static final Item STONE_BALL = registerItem("stone_ball", new StoneBallItem(new FabricItemSettings()));
 
-    public static final Item APPLE_VISION_PRO = registerItem("apple_vision_pro",
-            new AppleVisionProItem(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET,new FabricItemSettings()));
+//    public static final Item APPLE_VISION_PRO = registerItem("apple_vision_pro",
+//            new AppleVisionProItem(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET,new FabricItemSettings()));
 
     public static final Item BREAD_SWORD = registerItem("bread_sword",
             new BreadSwordItem(ToolMaterials.STONE, 3, -2.4f,
@@ -76,10 +76,9 @@ public class ModItems {
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
-        //在这里注册
+        //放到材料表里
         entries.add(RUBY);
         entries.add(RAW_RUBY);
-        entries.add(COOL_GLASS);
     }
 
     public static Item registerItem(String name,Item item){

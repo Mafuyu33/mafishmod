@@ -1,6 +1,10 @@
 package net.jiang.tutorialmod.item.custom;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jiang.tutorialmod.effect.ModStatusEffects;
+import net.jiang.tutorialmod.enchantment.ModEnchantments;
+import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,6 +14,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -17,8 +22,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.server.command.GameModeCommand;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -30,6 +37,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
@@ -78,6 +86,41 @@ public class RubyStuffItem extends Item {
 //            System.out.println("发射啦！");
 //        }
 //    }
+
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack mainHandStack = user.getMainHandStack();
+        ItemStack offHandStack = user.getOffHandStack();
+        ItemStack itemStack;
+
+        int k = mainHandStack.getItem() == this ?
+                EnchantmentHelper.getLevel(ModEnchantments.EIGHT_GODS_PASS_SEA, offHandStack) :
+                offHandStack.getItem() == this ?
+                        EnchantmentHelper.getLevel(ModEnchantments.EIGHT_GODS_PASS_SEA, mainHandStack) :
+                        0;//检测除了法杖的那只手的附魔
+            System.out.println(k);//一直是0
+            if (k > 0) {
+                if (user instanceof ServerPlayerEntity) {
+                    System.out.println("成功检测到玩家");
+                    ClientPlayNetworking.send(ModMessages.EXAMPLE_ID, PacketByteBufs.create());
+//                    EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnReason.TRIGGERED);
+                    NbtCompound nbt = new NbtCompound();
+                    nbt.putInt("playerGameType", GameMode.SPECTATOR.getId()); // 观察者模式的整数值为 3
+                    ((ServerPlayerEntity) user).setGameMode(nbt);
+                }
+            }
+
+
+
+        if(mainHandStack.getItem()==this){
+            itemStack = mainHandStack;
+        }else {
+            itemStack = offHandStack;
+        }
+
+        return TypedActionResult.success(itemStack, world.isClient());
+    }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {

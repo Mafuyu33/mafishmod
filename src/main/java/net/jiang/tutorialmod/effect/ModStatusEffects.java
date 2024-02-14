@@ -1,6 +1,7 @@
 package net.jiang.tutorialmod.effect;
 
 import net.jiang.tutorialmod.effect.custom.FlowerEffect;
+import net.jiang.tutorialmod.effect.custom.IronStatusEffect;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -13,13 +14,8 @@ import static net.jiang.tutorialmod.TutorialMod.MOD_ID;
 
 public class ModStatusEffects {
 
-    private static class IronStatusEffect extends StatusEffect {
-        public IronStatusEffect() {
-            super(StatusEffectCategory.BENEFICIAL, 0xFF0000); // 设置类别和颜色（红色）
-        }
-    }
     // 构造函数为空的私有类，用于表示IRON效果
-    public static final StatusEffect IRONMAN = new IronStatusEffect();
+    public static final StatusEffect IRONMAN = new IronStatusEffect(StatusEffectCategory.BENEFICIAL, 0xFF0000);
     public static final StatusEffect FLOWER_EFFECT = new FlowerEffect(StatusEffectCategory.BENEFICIAL, 0xFF0000);
 
 

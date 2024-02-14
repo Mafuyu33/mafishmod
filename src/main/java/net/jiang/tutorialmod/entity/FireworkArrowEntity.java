@@ -16,16 +16,10 @@ import net.minecraft.world.World;
 public class FireworkArrowEntity extends PersistentProjectileEntity {
     int duration=200;
 
+    protected FireworkArrowEntity(EntityType<? extends PersistentProjectileEntity> type, World world, ItemStack stack) {
+        super(type, world, stack);
+    }
 
-    public FireworkArrowEntity(World world, LivingEntity owner) {
-        super(EntityType.SPECTRAL_ARROW, owner, world);
-    }
-    public FireworkArrowEntity(World world, double x, double y, double z) {
-        super(EntityType.SPECTRAL_ARROW, x, y, z, world);
-    }
-    public FireworkArrowEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
-        super(entityType, world);
-    }
 
     @Override
     protected void onHit(LivingEntity target) {

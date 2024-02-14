@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.4-SNAPSHOT'
+	id 'fabric-loom' version '1.5-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -54,16 +54,16 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
-	modImplementation "curse.maven:mc-vr-api-591092:4648733"
-	modImplementation "curse.maven:architectury-api-419699:4663009"
-	modImplementation "curse.maven:vivecraft-667903:4859782"
-
-	// The below are all needed for Vivecraft to run in a dev environment
-	implementation 'com.electronwill.night-config:toml:3.6.0'
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1")
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-linux")
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-macos")
-	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-windows")
+	modImplementation "curse.maven:architectury-api-419699:5084475"
+//	modImplementation "curse.maven:mc-vr-api-591092:5032473"
+//	modImplementation "curse.maven:vivecraft-667903:4941634"
+//
+//	// The below are all needed for Vivecraft to run in a dev environment
+//	implementation 'com.electronwill.night-config:toml:3.6.0'
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1")
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-linux")
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-macos")
+//	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-windows")
 }
 
 processResources {

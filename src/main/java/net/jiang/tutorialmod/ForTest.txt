@@ -1,3 +1,7 @@
+//重置gradle
+./gradlew clean
+./gradlew --refresh-dependencies
+
 //发送信息给玩家
 player.sendMessage(Text.literal((String.valueOf(123))),false);
 

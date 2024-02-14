@@ -14,6 +14,7 @@ import net.jiang.tutorialmod.item.ModItemGroups;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.jiang.tutorialmod.item.custom.FireworkArrowItem;
+import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.potion.ModPotions;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.ModCustomTrades;
@@ -41,13 +42,15 @@ public class TutorialMod implements ModInitializer {
 
 		FuelRegistry.INSTANCE.add(ModItems.COAL_BRIQUEITE,200);
 		ModStatusEffects.registerModEffect();
+		ModPotions.registerPotions();
 		ModLootTableModifiers.modifyLootTables();
 		ModVillagers.registerVillagers();
 		ModSounds.registerSounds();
 		ModCustomTrades.registerCustomTrades();
 		ModEnchantments.registerModEnchantments();
-		ModPotions.registerPotions();
+
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
+		ModMessages.registerC2SPackets();
 	}
 
 
