@@ -1,18 +1,19 @@
-//重置gradle
+重置gradle
 ./gradlew clean
 ./gradlew --refresh-dependencies
 
-//发送信息给玩家
-player.sendMessage(Text.literal((String.valueOf(123))),false);
-
-//调试
+调试
 System.out.println(123);
+
+发送信息给玩家
+player.sendMessage(Text.literal((String.valueOf(123))),false);
 
 附魔查看
 int k = EnchantmentHelper.getLevel(Enchantments, itemStack);
 if (k > 0) {
 
 }
+
 
 检测双手物品的附魔
 Hand hand = this.getActiveHand();
@@ -41,6 +42,26 @@ if (lightningEntity != null) {
     this.playSound(soundEvent, 5, 1.0F);
 }
 
+使用某个指令
+if (user instanceof ServerPlayerEntity) {
+    System.out.println("成功检测到玩家");
+
+    MinecraftServer server = user.getServer();
+    // 获取服务器命令调度程序
+    CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
+    try {
+        // 解析指令并获取命令源
+        ParseResults<ServerCommandSource> parseResults = dispatcher.parse("gamemode spectator @p", server.getCommandSource());
+        // 执行指令
+        dispatcher.execute(parseResults);
+
+        // 在控制台输出提示信息
+    } catch (CommandSyntaxException e) {
+        // 指令语法异常处理
+        e.printStackTrace();
+    }
+}
+
 
 计时器
 private void startDelayedOperation(World world) {
@@ -52,3 +73,6 @@ private void startDelayedOperation(World world) {
         }
     }, 5000); // 延迟5秒执行，单位为毫秒
 }
+
+生成动物
+EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnReason.TRIGGERED);

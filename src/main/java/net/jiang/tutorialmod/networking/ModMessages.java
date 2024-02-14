@@ -15,5 +15,6 @@ public class ModMessages {
     }
 
     public static void registerS2CPackets() {
+        ServerPlayNetworking.registerGlobalReceiver(EXAMPLE_ID, ExampleS2CPacket::receive);
     }
 }
