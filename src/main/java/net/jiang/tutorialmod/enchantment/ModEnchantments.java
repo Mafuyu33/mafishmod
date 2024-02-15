@@ -21,6 +21,9 @@ public class ModEnchantments {
     public static Enchantment KILL_CHICKEN_GET_EGG = register("kill_chicken_get_egg",
             new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+    public static Enchantment GO_TO_SKY = register("go_to_sky",
+            new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, EquipmentSlot.OFFHAND));
 
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);

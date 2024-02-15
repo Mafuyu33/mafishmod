@@ -72,7 +72,8 @@ public class ModItems {
     public static final Item STARGAZY_PIE = registerItem("stargazy_pie",
             new StargazyPieItem(new FabricItemSettings().food(ModFoodComponents.STARGAZY_PIE)));
 
-
+    public static final Item MAGIC_BOOK = registerItem("magic_book",
+            new MagicBookItem(new FabricItemSettings().maxCount(1)));
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){

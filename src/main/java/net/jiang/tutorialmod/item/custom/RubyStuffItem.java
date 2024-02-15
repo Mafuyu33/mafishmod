@@ -3,14 +3,10 @@ package net.jiang.tutorialmod.item.custom;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.jiang.tutorialmod.effect.ModStatusEffects;
 import net.jiang.tutorialmod.enchantment.ModEnchantments;
-import net.jiang.tutorialmod.networking.ModMessages;
-import net.jiang.tutorialmod.sound.ModSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockTypes;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -18,40 +14,31 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtString;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.GameModeCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
-import java.net.Proxy;
 import java.util.List;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class RubyStuffItem extends Item {
     public RubyStuffItem(Settings settings) {
@@ -107,55 +94,56 @@ public class RubyStuffItem extends Item {
         ItemStack itemStack;
 
         int k = mainHandStack.getItem() == this ?
-                EnchantmentHelper.getLevel(ModEnchantments.EIGHT_GODS_PASS_SEA, offHandStack) :
+                EnchantmentHelper.getLevel(ModEnchantments.GO_TO_SKY, offHandStack) :
                 offHandStack.getItem() == this ?
-                        EnchantmentHelper.getLevel(ModEnchantments.EIGHT_GODS_PASS_SEA, mainHandStack) :
+                        EnchantmentHelper.getLevel(ModEnchantments.GO_TO_SKY, mainHandStack) :
                         0;//检测除了法杖的那只手的附魔
             System.out.println(k);//一直是0
-            if (k > 0 && checkForSkywardPortal(user).found) {
-                if (user instanceof ServerPlayerEntity) {
-                    firstPos=user.getBlockPos();
-                    System.out.println("成功检测到玩家");
-                    gameMode = getPlayerGameMode(((ServerPlayerEntity) user));
-                    MinecraftServer server = user.getServer();
-                    // 获取服务器命令调度程序
-                    CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-                    try {
-                        // 解析指令并获取命令源
-                        ParseResults<ServerCommandSource> parseResults
-                                = dispatcher.parse("gamemode spectator @p", server.getCommandSource());
-                        // 执行指令
-                        dispatcher.execute(parseResults);
+            if ((offHandStack.getItem() == Items.WRITTEN_BOOK || mainHandStack.getItem()==Items.WRITTEN_BOOK)) {
 
-                        // 在控制台输出提示信息
-                    } catch (CommandSyntaxException e) {
-                        // 指令语法异常处理
-                        e.printStackTrace();
+                if (k > 0 && checkForSkywardPortal(user).found) {//通天术附魔
+                    if (user instanceof ServerPlayerEntity) {
+                        firstPos = user.getBlockPos();
+                        gameMode = getPlayerGameMode(((ServerPlayerEntity) user));
+                        MinecraftServer server = user.getServer();
+                        // 获取服务器命令调度程序
+                        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
+                        try {
+                            // 解析指令并获取命令源
+                            ParseResults<ServerCommandSource> parseResults
+                                    = dispatcher.parse("gamemode spectator @p", server.getCommandSource());
+                            // 执行指令
+                            dispatcher.execute(parseResults);
+
+                            // 在控制台输出提示信息
+                        } catch (CommandSyntaxException e) {
+                            // 指令语法异常处理
+                            e.printStackTrace();
+                        }
+
+                        // 获取落脚方块的位置
+                        finalPos = checkForSkywardPortal(user).landingPos;
+
+                        // 计算玩家到落脚方块的距离
+                        double distance = user.getPos().distanceTo(Vec3d.ofCenter(finalPos));
+
+                        startGoing = true;
+
+
                     }
-
-
-
-                    // 获取玩家当前位置
-                    BlockPos playerPos = user.getBlockPos();
-
-                    // 保存玩家最初的位置（X、Z 轴）
-                    double initialX = playerPos.getX() + 0.5; // 加 0.5 以使玩家保持在方块中间
-                    double initialZ = playerPos.getZ() + 0.5;
-
-                    // 获取落脚方块的位置
-                    finalPos = checkForSkywardPortal(user).landingPos;
-
-                    // 计算玩家到落脚方块的距离
-                    double distance = user.getPos().distanceTo(Vec3d.ofCenter(finalPos));
-                    
-                    startGoing=true;
-
-
-
-
+                } else if (k > 0 && !checkForSkywardPortal(user).found) {
+                    user.sendMessage(Text.literal((String.valueOf("没有合适的落脚方块释放通天术"))), true);
                 }
-            }else if(k > 0 && !checkForSkywardPortal(user).found){
-                user.sendMessage(Text.literal((String.valueOf("没有合适的落脚方块释放通天术"))),true);
+
+
+
+
+
+                //更多的附魔。。。
+
+
+
+
             }
 
 
@@ -169,6 +157,45 @@ public class RubyStuffItem extends Item {
         return TypedActionResult.success(itemStack, world.isClient());
     }
 
+
+    @Override
+    public void onCraftByPlayer(ItemStack stack, World world, PlayerEntity player) {
+        super.onCraftByPlayer(stack, world, player);
+        if(!world.isClient()) {
+            ItemStack bookStack = new ItemStack(Items.WRITABLE_BOOK);
+
+            // 添加书籍的内容
+            addPageContent(bookStack, "§n你好陌生人，愿意和我签订契约，成为魔法少女吗？\n " +
+                    "§r§kMafuyu33Mafuyu33\n" +
+                    "§r§l使用方法：就是这样喵\n" +
+                    "§c在第一页签下你的名字。\n" +
+                    "§r§0给此书添加对应附魔，一手法杖一手魔法书心中默念咒语即可释放对应魔法\n" +
+                    "\n" +
+                    "现已收录的魔法：\n" +
+                    "1-通天术");
+            addPageContent(bookStack, "通天术：\n" +
+                    "似乎是海拉鲁大陆的失传魔法,如果玩家正上方的一定距离内有可穿透物体，就可以施展通天术。\n" +
+                    "注意事项：施展通天术的时候请不要左右移动，否则后果自负。");
+
+            player.getInventory().insertStack(bookStack);
+        }
+    }
+
+    // 添加内容到书的页面中
+    public static void addPageContent(ItemStack stack, String content) {
+        // 获取书的NBT数据
+        NbtCompound nbt = stack.getOrCreateNbt();
+
+        // 获取书的页面列表
+        NbtList pagesList = nbt.getList("pages", NbtType.STRING);
+
+        // 将内容添加到页面列表中
+        pagesList.add(NbtString.of(content));
+
+        // 更新书的NBT数据中的页面列表
+        nbt.put("pages", pagesList);
+    }
+
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
@@ -178,16 +205,6 @@ public class RubyStuffItem extends Item {
                 //每个tick向上移动一段距离
                 System.out.println("开始移动");
                 player.sendMessage(Text.literal((String.valueOf("正在释放通天术"))),true);
-
-//                // 获取玩家当前位置
-//                Vec3d playerPos = player.getPos();
-//
-//                double x = playerPos.getX();
-//                double y = playerPos.getY();
-//                double z = playerPos.getZ();
-//
-//                player.teleport(x, y+0.01, z);
-//                player.setVelocity(0, 0, 0);
 
                 //检查是否到达落脚方块上方
                 if (finalPos.getY()<player.getBlockPos().getY()) {// 如果到了落脚方块，则停止
@@ -331,7 +348,7 @@ public class RubyStuffItem extends Item {
         BlockPos playerPos = player.getBlockPos();
 
         // 检查头顶 30 格内的方块
-        for (int offsetY = 1; offsetY <= 30; offsetY++) {
+        for (int offsetY = 3; offsetY <= 50; offsetY++) {
             BlockPos checkPos = playerPos.up(offsetY);
             BlockPos checkPosAbove = checkPos.up();
 
