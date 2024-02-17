@@ -19,6 +19,7 @@
     "InfiniteUndyingMixin",
     "KaoFishMixin",
     "LightningRodMixin",
+    "LivingEntityMixin",
     "PickaxeInfiniteMixin",
     "ThrowableDiamondMixin",
     "WeaponEnchantmentMixin"

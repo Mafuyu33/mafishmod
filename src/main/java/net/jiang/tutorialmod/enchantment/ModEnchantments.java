@@ -25,6 +25,10 @@ public class ModEnchantments {
             new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.OFFHAND));
 
+    public static Enchantment GONG_XI_FA_CAI = register("gong_xi_fa_cai",
+            new GongXiFaCaiEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);
     }
