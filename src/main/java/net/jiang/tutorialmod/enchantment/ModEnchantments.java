@@ -19,14 +19,18 @@ public class ModEnchantments {
                     EnchantmentTarget.ARMOR_FEET, EquipmentSlot.FEET));
 
     public static Enchantment KILL_CHICKEN_GET_EGG = register("kill_chicken_get_egg",
-            new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
+            new KillChickenGetEggEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
     public static Enchantment GO_TO_SKY = register("go_to_sky",
-            new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
+            new GoToSkyEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.OFFHAND));
 
     public static Enchantment GONG_XI_FA_CAI = register("gong_xi_fa_cai",
             new GongXiFaCaiEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+
+    public static Enchantment MERCY = register("mercy",
+            new MercyEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
 
     private static Enchantment register(String name, Enchantment enchantment) {
