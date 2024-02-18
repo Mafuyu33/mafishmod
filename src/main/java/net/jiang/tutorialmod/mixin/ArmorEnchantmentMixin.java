@@ -3,19 +3,24 @@ package net.jiang.tutorialmod.mixin;
 import net.jiang.tutorialmod.enchantment.ModEnchantments;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FrostedIceBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,6 +30,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Mixin(LivingEntity.class)
@@ -33,6 +39,36 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
+	}
+
+	@Unique
+	private Random getRandom() {
+		return this.random;
+	}
+
+	@Unique
+	private static void freezeWater(ArmorEnchantmentMixin entity, World world, BlockPos blockPos, int level) {
+		if (entity.isOnGround()) {
+			BlockState blockState = Blocks.FROSTED_ICE.getDefaultState();
+			int i = Math.min(16, 2 + level);
+			BlockPos.Mutable mutable = new BlockPos.Mutable();
+			Iterator var7 = BlockPos.iterate(blockPos.add(-i, -1, -i), blockPos.add(i, -1, i)).iterator();
+
+			while(var7.hasNext()) {
+				BlockPos blockPos2 = (BlockPos)var7.next();
+				if (blockPos2.isWithinDistance(entity.getPos(), (double)i)) {
+					mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
+					BlockState blockState2 = world.getBlockState(mutable);
+					if (blockState2.isAir()) {
+						BlockState blockState3 = world.getBlockState(blockPos2);
+						if (blockState3 == FrostedIceBlock.getMeltedState() && blockState.canPlaceAt(world, blockPos2) && world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
+							world.setBlockState(blockPos2, blockState);
+							world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, MathHelper.nextInt(entity.getRandom(), 60, 120));
+						}
+					}
+				}
+			}
+		}
 	}
 	@Unique
 	private List<BlockPos> replacedWaterBlocks = new ArrayList<>();
@@ -82,6 +118,17 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void init(CallbackInfo info) {
 		Iterable<ItemStack> armorItems = this.getArmorItems();
+
+
+		if (this.getType() == EntityType.HORSE){//马的冰霜行者
+			for (ItemStack armorItem : armorItems) {
+				int k = EnchantmentHelper.getLevel(Enchantments.FROST_WALKER, armorItem);
+				if (k>0) {
+					freezeWater(this, getWorld(), this.getBlockPos(), k+1);
+				}
+			}
+		}
+
 
 		for (ItemStack armorItem : armorItems) {
 			if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.BOOTS) {//鞋子
@@ -163,17 +210,14 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					BlockPos blockPos = this.getBlockPos();
 					checkAndReplaceWaterBlocks(world, blockPos);
 				}
+
+
+
+
 			}
-//			if (armorItem.getItem() instanceof ArmorItem) {//所有装备
-//				int k = EnchantmentHelper.getLevel(Enchantments., armorItem);//多重射击
-//				if (k > 0) {
-//					World world = this.getWorld();
-//					BlockPos blockPos = this.getBlockPos();
-//					if (this.) {
-//						this.addVelocity(0, 1, 0);
-//					}
-//				}
-//			}
+
+
+
 
 		}
 	}
