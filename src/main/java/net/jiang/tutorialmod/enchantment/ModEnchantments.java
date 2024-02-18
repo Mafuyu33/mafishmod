@@ -33,6 +33,10 @@ public class ModEnchantments {
             new MercyEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
 
+    public static Enchantment KILL_MY_HORSE = register("kill_my_horse",
+            new MercyEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.ARMOR));
+
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);
     }

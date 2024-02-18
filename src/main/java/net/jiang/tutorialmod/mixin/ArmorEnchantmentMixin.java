@@ -14,6 +14,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -22,6 +23,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -36,6 +38,8 @@ import java.util.List;
 @Mixin(LivingEntity.class)
 public abstract class ArmorEnchantmentMixin extends Entity implements Attackable {
 	@Shadow public abstract Iterable<ItemStack> getArmorItems();
+
+	@Shadow @Nullable protected PlayerEntity attackingPlayer;
 
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
@@ -115,17 +119,35 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 		return deltaX <= 3 && deltaY <= 30 && deltaZ <= 3;
 	}
 
+	@Inject(at = @At("HEAD"), method = "onKilledBy")
+	private void init(LivingEntity adversary, CallbackInfo info) {
+		if (adversary != null) {
+			if (this.getType() == EntityType.HORSE){
+				Iterable<ItemStack> armorItems = this.getArmorItems();
+				for (ItemStack armorItem : armorItems) {
+					int j = EnchantmentHelper.getLevel(ModEnchantments.KILL_MY_HORSE, armorItem);//敢杀我的马！
+					if (j>0) {
+						EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()),this.getBlockPos(), SpawnReason.TRIGGERED);
+					}
+				}
+			}
+		}
+	}
+
 	@Inject(at = @At("HEAD"), method = "tick")
-	private void init(CallbackInfo info) {
+	private void init1(CallbackInfo info) {
 		Iterable<ItemStack> armorItems = this.getArmorItems();
 
 
-		if (this.getType() == EntityType.HORSE){//马的冰霜行者
+		if (this.getType() == EntityType.HORSE){
 			for (ItemStack armorItem : armorItems) {
-				int k = EnchantmentHelper.getLevel(Enchantments.FROST_WALKER, armorItem);
+				int k = EnchantmentHelper.getLevel(Enchantments.FROST_WALKER, armorItem);//马的冰霜行者
+				int j = EnchantmentHelper.getLevel(Enchantments.PUNCH, armorItem);
 				if (k>0) {
 					freezeWater(this, getWorld(), this.getBlockPos(), k+1);
 				}
+//				if (j>0) {
+//				}
 			}
 		}
 
