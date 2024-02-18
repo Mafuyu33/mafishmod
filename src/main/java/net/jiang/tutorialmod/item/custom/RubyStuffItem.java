@@ -162,7 +162,10 @@ public class RubyStuffItem extends Item {
     public void onCraftByPlayer(ItemStack stack, World world, PlayerEntity player) {
         super.onCraftByPlayer(stack, world, player);
         if(!world.isClient()) {
+
+
             ItemStack bookStack = new ItemStack(Items.WRITABLE_BOOK);
+            NbtCompound nbt = stack.getOrCreateNbt();
 
             // 添加书籍的内容
             addPageContent(bookStack, "§n你好陌生人，愿意和我签订契约，成为魔法少女吗？\n " +
@@ -172,7 +175,8 @@ public class RubyStuffItem extends Item {
                     "§r§0给此书添加对应附魔，一手法杖一手魔法书心中默念咒语即可释放对应魔法\n" +
                     "\n" +
                     "现已收录的魔法：\n" +
-                    "1-通天术");
+                    "1-通天术"+
+                    "2-时间停止（伪）");
             addPageContent(bookStack, "通天术：\n" +
                     "似乎是海拉鲁大陆的失传魔法,如果玩家正上方的一定距离内有可穿透物体，就可以施展通天术。\n" +
                     "注意事项：施展通天术的时候请不要左右移动，否则后果自负。");

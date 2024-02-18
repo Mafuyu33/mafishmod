@@ -55,7 +55,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.POTATO_TNT_PREPARE);
                         entries.add(ModBlocks.GEM_POLISHING_STATION);
                         entries.add(ModItems.STARGAZY_PIE);
-//                        entries.add(ModItems.MAGIC_BOOK);
+                        entries.add(ModItems.TIME_STOP);
                     }).build());
 
 

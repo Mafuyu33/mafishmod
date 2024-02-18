@@ -127,7 +127,9 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 				for (ItemStack armorItem : armorItems) {
 					int j = EnchantmentHelper.getLevel(ModEnchantments.KILL_MY_HORSE, armorItem);//敢杀我的马！
 					if (j>0) {
-						EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()),this.getBlockPos(), SpawnReason.TRIGGERED);
+						for(int i=1;i<10;i++) {
+							EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+						}
 					}
 				}
 			}

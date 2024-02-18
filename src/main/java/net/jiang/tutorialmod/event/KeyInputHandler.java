@@ -90,12 +90,28 @@ public class KeyInputHandler {
                 KEY_CATEGORY_TUTORIAL
         ));
 
+
+
+
         registerKeyInputs();
     }
 
     public static float getThrowPower() {
         return throwPower;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

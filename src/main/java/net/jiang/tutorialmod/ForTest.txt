@@ -42,16 +42,17 @@ if (lightningEntity != null) {
     this.playSound(soundEvent, 5, 1.0F);
 }
 
+不显示指令
+dispatcher.parse("gamerule sendCommandFeedback false", server.getCommandSource());
 使用某个指令
 if (user instanceof ServerPlayerEntity) {
-    System.out.println("成功检测到玩家");
-
     MinecraftServer server = user.getServer();
     // 获取服务器命令调度程序
     CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
     try {
         // 解析指令并获取命令源
-        ParseResults<ServerCommandSource> parseResults = dispatcher.parse("gamemode spectator @p", server.getCommandSource());
+        ParseResults<ServerCommandSource> parseResults
+                = dispatcher.parse("tick freeze", server.getCommandSource());
         // 执行指令
         dispatcher.execute(parseResults);
 
@@ -76,3 +77,6 @@ private void startDelayedOperation(World world) {
 
 生成动物
 EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnReason.TRIGGERED);
+
+Mixin中强制转换this为原类
+PlayerEntity user = (PlayerEntity) (Object) this;

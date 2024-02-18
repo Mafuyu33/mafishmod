@@ -21,6 +21,7 @@
     "LightningRodMixin",
     "LivingEntityMixin",
     "PickaxeInfiniteMixin",
+    "PlayerEntityMixin",
     "ThrowableDiamondMixin",
     "WeaponEnchantmentMixin"
   ],
