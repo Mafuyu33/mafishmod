@@ -50,74 +50,6 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 		return this.random;
 	}
 
-	@Unique
-	private static void freezeWater(ArmorEnchantmentMixin entity, World world, BlockPos blockPos, int level) {
-		if (entity.isOnGround()) {
-			BlockState blockState = Blocks.FROSTED_ICE.getDefaultState();
-			int i = Math.min(16, 2 + level);
-			BlockPos.Mutable mutable = new BlockPos.Mutable();
-			Iterator var7 = BlockPos.iterate(blockPos.add(-i, -1, -i), blockPos.add(i, -1, i)).iterator();
-
-			while(var7.hasNext()) {
-				BlockPos blockPos2 = (BlockPos)var7.next();
-				if (blockPos2.isWithinDistance(entity.getPos(), (double)i)) {
-					mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
-					BlockState blockState2 = world.getBlockState(mutable);
-					if (blockState2.isAir()) {
-						BlockState blockState3 = world.getBlockState(blockPos2);
-						if (blockState3 == FrostedIceBlock.getMeltedState() && blockState.canPlaceAt(world, blockPos2) && world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
-							world.setBlockState(blockPos2, blockState);
-							world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, MathHelper.nextInt(entity.getRandom(), 60, 120));
-						}
-					}
-				}
-			}
-		}
-	}
-	@Unique
-	private List<BlockPos> replacedWaterBlocks = new ArrayList<>();
-
-	@Unique
-	public void restoreReplacedWaterBlocks(World world) {
-		for (BlockPos pos : replacedWaterBlocks) {
-			world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
-		}
-		// 清空替换过的水方块列表
-		replacedWaterBlocks.clear();
-	}
-
-	@Unique
-	public void checkAndReplaceWaterBlocks(World world, BlockPos playerPos) {
-		int radius = 4; // 3×3范围检索
-
-		for (int yOffset = -3; yOffset <= 30; yOffset++) {
-			for (int xOffset = -radius; xOffset <= radius; xOffset++) {
-				for (int zOffset = -radius; zOffset <= radius; zOffset++) {
-					BlockPos targetPos = playerPos.add(xOffset, yOffset, zOffset);
-
-					if (isWithin3x3(playerPos, targetPos) && world.getBlockState(targetPos).getBlock() == Blocks.WATER) {
-						// 如果方块在2x2范围内且是水方块，替换为空气方块
-						replacedWaterBlocks.add(targetPos);
-						world.setBlockState(targetPos, Blocks.STRUCTURE_VOID.getDefaultState(), 3);
-					}
-
-					if (!isWithin3x3(playerPos, targetPos) & replacedWaterBlocks.contains(targetPos)) {
-						restoreReplacedWaterBlocks(world);
-					}
-				}
-			}
-		}
-	}
-
-
-	@Unique
-	private boolean isWithin3x3(BlockPos playerPos, BlockPos targetPos) {
-		int deltaX = Math.abs(playerPos.getX() - targetPos.getX());
-		int deltaY = Math.abs(playerPos.getY() - targetPos.getY());
-		int deltaZ = Math.abs(playerPos.getZ() - targetPos.getZ());
-
-		return deltaX <= 3 && deltaY <= 30 && deltaZ <= 3;
-	}
 
 	@Inject(at = @At("HEAD"), method = "onKilledBy")
 	private void init(LivingEntity adversary, CallbackInfo info) {
@@ -126,10 +58,12 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 				Iterable<ItemStack> armorItems = this.getArmorItems();
 				for (ItemStack armorItem : armorItems) {
 					int j = EnchantmentHelper.getLevel(ModEnchantments.KILL_MY_HORSE, armorItem);//敢杀我的马！
+					int k = EnchantmentHelper.getLevel(ModEnchantments.KILL_MY_HORSE_PLUS, armorItem);//敢杀我的马！plus
 					if (j>0) {
-						for(int i=1;i<10;i++) {
-							EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						}
+						EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+					}
+					if(k>0){
+						spawnEntities();
 					}
 				}
 			}
@@ -244,5 +178,102 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 
 
 		}
+	}
+
+	@Unique
+	private void spawnEntities(){
+		EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.BLAZE.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.CREEPER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.EVOKER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.GHAST.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.HOGLIN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.HUSK.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.MAGMA_CUBE.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.PHANTOM.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.PIGLIN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.RAVAGER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.SHULKER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.SILVERFISH.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.SKELETON.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.SLIME.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.STRAY.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.VEX.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.VINDICATOR.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.WITCH.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.WITHER_SKELETON.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.ZOGLIN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.ZOMBIE.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.ZOMBIE_VILLAGER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.ENDER_DRAGON.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+		EntityType.WITHER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+	}
+	@Unique
+	private static void freezeWater(ArmorEnchantmentMixin entity, World world, BlockPos blockPos, int level) {
+		if (entity.isOnGround()) {
+			BlockState blockState = Blocks.FROSTED_ICE.getDefaultState();
+			int i = Math.min(16, 2 + level);
+			BlockPos.Mutable mutable = new BlockPos.Mutable();
+			Iterator var7 = BlockPos.iterate(blockPos.add(-i, -1, -i), blockPos.add(i, -1, i)).iterator();
+
+			while(var7.hasNext()) {
+				BlockPos blockPos2 = (BlockPos)var7.next();
+				if (blockPos2.isWithinDistance(entity.getPos(), (double)i)) {
+					mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
+					BlockState blockState2 = world.getBlockState(mutable);
+					if (blockState2.isAir()) {
+						BlockState blockState3 = world.getBlockState(blockPos2);
+						if (blockState3 == FrostedIceBlock.getMeltedState() && blockState.canPlaceAt(world, blockPos2) && world.canPlace(blockState, blockPos2, ShapeContext.absent())) {
+							world.setBlockState(blockPos2, blockState);
+							world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, MathHelper.nextInt(entity.getRandom(), 60, 120));
+						}
+					}
+				}
+			}
+		}
+	}
+	@Unique
+	private List<BlockPos> replacedWaterBlocks = new ArrayList<>();
+
+	@Unique
+	public void restoreReplacedWaterBlocks(World world) {
+		for (BlockPos pos : replacedWaterBlocks) {
+			world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
+		}
+		// 清空替换过的水方块列表
+		replacedWaterBlocks.clear();
+	}
+
+	@Unique
+	public void checkAndReplaceWaterBlocks(World world, BlockPos playerPos) {
+		int radius = 4; // 3×3范围检索
+
+		for (int yOffset = -3; yOffset <= 30; yOffset++) {
+			for (int xOffset = -radius; xOffset <= radius; xOffset++) {
+				for (int zOffset = -radius; zOffset <= radius; zOffset++) {
+					BlockPos targetPos = playerPos.add(xOffset, yOffset, zOffset);
+
+					if (isWithin3x3(playerPos, targetPos) && world.getBlockState(targetPos).getBlock() == Blocks.WATER) {
+						// 如果方块在2x2范围内且是水方块，替换为空气方块
+						replacedWaterBlocks.add(targetPos);
+						world.setBlockState(targetPos, Blocks.STRUCTURE_VOID.getDefaultState(), 3);
+					}
+
+					if (!isWithin3x3(playerPos, targetPos) & replacedWaterBlocks.contains(targetPos)) {
+						restoreReplacedWaterBlocks(world);
+					}
+				}
+			}
+		}
+	}
+
+
+	@Unique
+	private boolean isWithin3x3(BlockPos playerPos, BlockPos targetPos) {
+		int deltaX = Math.abs(playerPos.getX() - targetPos.getX());
+		int deltaY = Math.abs(playerPos.getY() - targetPos.getY());
+		int deltaZ = Math.abs(playerPos.getZ() - targetPos.getZ());
+
+		return deltaX <= 3 && deltaY <= 30 && deltaZ <= 3;
 	}
 }
