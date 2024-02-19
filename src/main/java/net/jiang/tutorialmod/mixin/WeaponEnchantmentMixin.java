@@ -11,6 +11,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
@@ -22,8 +23,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -41,10 +44,18 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
 
     @Shadow @Final protected static TrackedData<Byte> LIVING_FLAGS;
 
+    @Shadow public abstract void setStackInHand(Hand hand, ItemStack stack);
+
+    @Shadow protected abstract void dropInventory();
+
+    @Shadow public abstract boolean isDead();
+
+    @Shadow public abstract boolean tryAttack(Entity target);
+
     public WeaponEnchantmentMixin(EntityType<?> type, World world) {
         super(type, world);
     }
-    @Inject(at = @At("HEAD"), method = "onAttacking")
+    @Inject(at = @At("RETURN"), method = "onAttacking")
     private void init(Entity target, CallbackInfo info) {
 
         Hand hand = this.getActiveHand();
@@ -53,6 +64,18 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
         int j = EnchantmentHelper.getLevel(Enchantments.LOOTING, itemStack);
         int m = EnchantmentHelper.getLevel(ModEnchantments.GONG_XI_FA_CAI,itemStack);
         int n = EnchantmentHelper.getLevel(ModEnchantments.MERCY,itemStack);
+        int o = EnchantmentHelper.getLevel(ModEnchantments.HOT_POTATO,itemStack);
+
+        if (o>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive()){
+//            ItemStack targetItemStack = ((LivingEntity) target).getStackInHand(targetHand);
+//            itemStack.damage(1,random, Objects.requireNonNull(getServer()).getCommandSource().getPlayer());
+            Hand targetHand = ((LivingEntity) target).getActiveHand();
+            if (!livingEntity.getMainHandStack().isEmpty()) {
+                dropStack(livingEntity.getMainHandStack());
+            }
+            livingEntity.setStackInHand(targetHand, itemStack.copy());
+            this.setStackInHand(hand, ItemStack.EMPTY);
+        }
         
         if (k > 0 && target instanceof ChickenEntity) {//杀鸡取卵
             target.dropItem(Items.EGG);
@@ -77,6 +100,18 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
                     new StatusEffectInstance(StatusEffects.HEALTH_BOOST,900,(int) (Times-1F)));
             ((LivingEntity) target).addStatusEffect(
                     new StatusEffectInstance(StatusEffects.INSTANT_HEALTH,900,(int) (Times-1F)));
+        }
+    }
+    @Unique
+    boolean isDrop=false;
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void init1(CallbackInfo ci) {
+        Hand hand = this.getActiveHand();
+        ItemStack itemStack = this.getStackInHand(hand);
+        int o = EnchantmentHelper.getLevel(ModEnchantments.HOT_POTATO,itemStack);
+        if(o>0 && this.isDead() && !isDrop){
+            dropStack(itemStack);
+            isDrop=true;
         }
     }
 }

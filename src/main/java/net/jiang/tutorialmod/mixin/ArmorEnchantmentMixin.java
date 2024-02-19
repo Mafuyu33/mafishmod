@@ -41,6 +41,8 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 
 	@Shadow @Nullable protected PlayerEntity attackingPlayer;
 
+	@Shadow protected abstract float turnHead(float bodyRotation, float headRotation);
+
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
 	}
@@ -53,6 +55,8 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 
 	@Inject(at = @At("HEAD"), method = "onKilledBy")
 	private void init(LivingEntity adversary, CallbackInfo info) {
+		BlockPos blockPos =this.getBlockPos();
+		World world =this.getWorld();
 		if (adversary != null) {
 			if (this.getType() == EntityType.HORSE){
 				Iterable<ItemStack> armorItems = this.getArmorItems();
@@ -60,33 +64,32 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					int j = EnchantmentHelper.getLevel(ModEnchantments.KILL_MY_HORSE, armorItem);//敢杀我的马！
 					int k = EnchantmentHelper.getLevel(ModEnchantments.KILL_MY_HORSE_PLUS, armorItem);//敢杀我的马！plus
 					if (j>0) {
-						EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+						EntityType.WARDEN.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
 					}
 					if (k>0) {
-						EntityType.WARDEN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.BLAZE.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.CREEPER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.EVOKER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.GHAST.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.HOGLIN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.HUSK.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.MAGMA_CUBE.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.PHANTOM.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.PIGLIN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.RAVAGER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.SHULKER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.SILVERFISH.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.SKELETON.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.SLIME.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.STRAY.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.VEX.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.VINDICATOR.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.WITCH.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.WITHER_SKELETON.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.ZOGLIN.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.ZOMBIE.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.ZOMBIE_VILLAGER.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
-						EntityType.ENDER_DRAGON.spawn(((ServerWorld) this.getWorld()), this.getBlockPos(), SpawnReason.TRIGGERED);
+						EntityType.WARDEN.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.BLAZE.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.CREEPER.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.EVOKER.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.GHAST.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.HOGLIN.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.HUSK.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.MAGMA_CUBE.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.PHANTOM.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.PIGLIN.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.RAVAGER.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.SHULKER.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.SILVERFISH.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.SKELETON.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.SLIME.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.STRAY.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.VEX.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.VINDICATOR.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.WITCH.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.WITHER_SKELETON.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.ZOGLIN.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.ZOMBIE.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
+						EntityType.ZOMBIE_VILLAGER.spawn(((ServerWorld) world), blockPos, SpawnReason.TRIGGERED);
 					}
 				}
 			}
