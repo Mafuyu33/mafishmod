@@ -87,8 +87,9 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
                     closestPlayer.swingHand(getActiveHand());
                     getWorld().playSound(closestPlayer,closestPlayer.getBlockPos(),
                             SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, SoundCategory.PLAYERS,1f,1f);
-                    this.damage(getDamageSources().playerAttack(closestPlayer), 10f+10f*level);
+                    this.damage(getDamageSources().playerAttack(closestPlayer), 10f+level*2);
                     this.setCustomName(null);
+                    this.setCustomNameVisible(false);
                 }
             }
         }else if(MathQuestionMixinHelper.getEntityValue(this.getId()) != 0) {
