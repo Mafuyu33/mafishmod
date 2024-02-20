@@ -46,11 +46,8 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
 
     @Shadow public abstract void setStackInHand(Hand hand, ItemStack stack);
 
-    @Shadow protected abstract void dropInventory();
-
     @Shadow public abstract boolean isDead();
 
-    @Shadow public abstract boolean tryAttack(Entity target);
 
     public WeaponEnchantmentMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -66,7 +63,7 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
         int n = EnchantmentHelper.getLevel(ModEnchantments.MERCY,itemStack);
         int o = EnchantmentHelper.getLevel(ModEnchantments.HOT_POTATO,itemStack);
 
-        if (o>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive()){
+        if (o>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive()){//烫手山芋
 //            ItemStack targetItemStack = ((LivingEntity) target).getStackInHand(targetHand);
 //            itemStack.damage(1,random, Objects.requireNonNull(getServer()).getCommandSource().getPlayer());
             Hand targetHand = ((LivingEntity) target).getActiveHand();

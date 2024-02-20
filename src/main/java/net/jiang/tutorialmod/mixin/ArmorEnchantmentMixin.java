@@ -39,10 +39,6 @@ import java.util.List;
 public abstract class ArmorEnchantmentMixin extends Entity implements Attackable {
 	@Shadow public abstract Iterable<ItemStack> getArmorItems();
 
-	@Shadow @Nullable protected PlayerEntity attackingPlayer;
-
-	@Shadow protected abstract float turnHead(float bodyRotation, float headRotation);
-
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
 	}
@@ -100,16 +96,29 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 	private void init1(CallbackInfo info) {
 		Iterable<ItemStack> armorItems = this.getArmorItems();
 
-
 		if (this.getType() == EntityType.HORSE){
-			for (ItemStack armorItem : armorItems) {
-				int k = EnchantmentHelper.getLevel(Enchantments.FROST_WALKER, armorItem);//马的冰霜行者
-				int j = EnchantmentHelper.getLevel(Enchantments.PUNCH, armorItem);
-				if (k>0) {
+			for (ItemStack armorItem : armorItems) {//检测马铠
+				int k = EnchantmentHelper.getLevel(Enchantments.FROST_WALKER, armorItem);
+				int j = EnchantmentHelper.getLevel(Enchantments.FIRE_ASPECT, armorItem);
+				int i = EnchantmentHelper.getLevel(Enchantments.CHANNELING, armorItem);
+				if (k>0) {//冰霜行者
 					freezeWater(this, getWorld(), this.getBlockPos(), k+1);
 				}
-//				if (j>0) {
-//				}
+				if (j>0) {//火焰附加
+					World world = this.getWorld();
+					BlockPos blockPos = this.getBlockPos();
+					world.setBlockState(blockPos, Blocks.FIRE.getDefaultState(), 3);
+				}
+				if (i>0) {//引雷
+					BlockPos blockPos = this.getBlockPos();
+					LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(this.getWorld());
+					if (lightningEntity != null) {
+						lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
+						this.getWorld().spawnEntity(lightningEntity);
+						SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_THUNDER;
+						this.playSound(soundEvent, 5, 1.0F);
+					}
+				}
 			}
 		}
 

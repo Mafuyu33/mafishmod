@@ -80,5 +80,6 @@
 
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
-  "item.minecraft.lingering_potion.effect.flower_potion": "变出花田的魔法（滞留）"
+  "item.minecraft.lingering_potion.effect.flower_potion": "变出花田的魔法（滞留）",
+  "item.minecraft.tipped_arrow.effect.flower_potion": "变出花田的魔法箭"
 }

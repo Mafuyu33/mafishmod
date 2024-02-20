@@ -82,5 +82,6 @@
 
   "item.minecraft.potion.effect.flower_potion": "flower_potion",
   "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
-  "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion"
+  "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion",
+  "item.minecraft.tipped_arrow.effect.flower_potion": "flower_potion"
 }
