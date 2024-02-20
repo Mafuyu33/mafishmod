@@ -3,6 +3,8 @@ package net.jiang.tutorialmod.item.custom;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.jiang.tutorialmod.enchantment.ModEnchantments;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -23,9 +25,13 @@ public class MathSwordItem extends SwordItem {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
     private static boolean mathMode = false;
+    private static int level=0;
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+
+        level = EnchantmentHelper.getLevel(ModEnchantments.VERY_EASY, itemStack);
+
         if (!world.isClient) {
             mathMode = !mathMode;
         }
@@ -44,4 +50,7 @@ public class MathSwordItem extends SwordItem {
         return mathMode;
     }
 
+    public static int getLevel() {
+        return level;
+    }
 }

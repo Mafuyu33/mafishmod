@@ -7,7 +7,7 @@ import dev.architectury.event.events.client.ClientChatEvent;
 import java.util.List;
 
 public class ChatMessageHandler {
-    private static int number = -1;
+    private static int number = 999999999;
 
     public ChatMessageHandler(int number) {
         ChatMessageHandler.number = number;

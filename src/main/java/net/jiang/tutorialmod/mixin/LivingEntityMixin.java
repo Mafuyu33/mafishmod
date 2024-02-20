@@ -4,6 +4,7 @@ import net.jiang.tutorialmod.event.ChatMessageHandler;
 import net.jiang.tutorialmod.item.custom.MathSwordItem;
 import net.jiang.tutorialmod.mixinhelper.MathQuestionMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.WeaponEnchantmentMixinHelper;
+import net.jiang.tutorialmod.sound.ModSounds;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Attackable;
 import net.minecraft.entity.Entity;
@@ -16,6 +17,9 @@ import net.minecraft.entity.mob.Angerable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -59,17 +63,19 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
 
 
-        if(MathSwordItem.isMathMode()) {
+        if(MathSwordItem.isMathMode()) {//数学领域
             PlayerEntity closestPlayer = getEntityWorld().getClosestPlayer(this, 100);
+            int level = MathSwordItem.getLevel();
             if (closestPlayer != null && !getWorld().isClient && !this.isDead()) {//出题
                 if (!this.isPlayer() && isPlayerStaring(closestPlayer) && !this.hasCustomName()) {//算数
-                    String[] questionAndAnswer = generateArithmeticQuestionAndAnswer();
+                    String[] questionAndAnswer = generateArithmeticQuestionAndAnswer(level);
 
                     String question = questionAndAnswer[0];
+                    String questionColored ="§c§l"+question;
                     int answer = Integer.parseInt(questionAndAnswer[1]);
                     MathQuestionMixinHelper.storeEntityValue(this.getId(), answer);
 
-                    this.setCustomName(Text.of(question));
+                    this.setCustomName(Text.of(questionColored));
                     this.setCustomNameVisible(true);
                 }
             }
@@ -79,45 +85,52 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
                 if (MathQuestionMixinHelper.getEntityValue(this.getId()) == ChatMessageHandler.getNumber()) {
                     closestPlayer.swingHand(getActiveHand());
-                    this.damage(getDamageSources().playerAttack(closestPlayer), 10f);
+                    getWorld().playSound(closestPlayer,closestPlayer.getBlockPos(),
+                            SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, SoundCategory.PLAYERS,1f,1f);
+                    this.damage(getDamageSources().playerAttack(closestPlayer), 10f+10f*level);
                     this.setCustomName(null);
                 }
             }
+        }else if(MathQuestionMixinHelper.getEntityValue(this.getId()) != 0) {
+            this.setCustomName(null);
+            this.setCustomNameVisible(false);
         }
     }
 
     @Unique
-    private static String[] generateArithmeticQuestionAndAnswer() {
+    private static String[] generateArithmeticQuestionAndAnswer(int level) {
         Random random = new Random();
-        int num1 = random.nextInt(20) + 1; // 生成1到10之间的随机数
-        int num2 = random.nextInt(20) + 1; // 生成1到10之间的随机数
-        int operator = random.nextInt(4); // 生成0到3之间的随机数，用于选择运算符
-
         String question;
         int answer = 0;
 
-        switch (operator) {
-            case 0:
-                question = num1 + " + " + num2 + " = ";
-                answer = num1 + num2;
-                break;
-            case 1:
-                question = num1 + " - " + num2 + " = ";
-                answer = num1 - num2;
-                break;
-            case 2:
-                question = num1 + " * " + num2 + " = ";
-                answer = num1 * num2;
-                break;
-            case 3:
-                // 避免除法时出现除不尽的情况，确保答案是整数
-                num2 = random.nextInt(num1) + 1; // 重新生成一个小于num1的随机数，避免除数过大
-                question = num1 * num2 + " / " + num2 + " = ";
-                answer = num1;
-                break;
-            default:
-                question = ""; // 不会发生
-        }
+        do {
+            int num1 = random.nextInt(10 * (level + 1)) + 1; // 生成1到10之间的随机数
+            int num2 = random.nextInt(10 * (level + 1)) + 1; // 生成1到10之间的随机数
+            int operator = random.nextInt(4); // 生成0到3之间的随机数，用于选择运算符
+
+            switch (operator) {
+                case 0:
+                    question = num1 + " + " + num2 + " = ";
+                    answer = num1 + num2;
+                    break;
+                case 1:
+                    question = num1 + " - " + num2 + " = ";
+                    answer = num1 - num2;
+                    break;
+                case 2:
+                    question = num1 + " × " + num2 + " = ";
+                    answer = num1 * num2;
+                    break;
+                case 3:
+                    // 避免除法时出现除不尽的情况，确保答案是整数
+                    num2 = random.nextInt(num1) + 1; // 重新生成一个小于num1的随机数，避免除数过大
+                    question = num1 * num2 + " ÷ " + num2 + " = ";
+                    answer = num1;
+                    break;
+                default:
+                    question = ""; // 不会发生
+            }
+        } while (answer == 0);
 
         return new String[]{question, String.valueOf(answer)};
     }

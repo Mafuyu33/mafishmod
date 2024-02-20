@@ -43,6 +43,19 @@ public class ModEnchantments {
             new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
+    public static Enchantment VERY_EASY = register("very_easy",
+            new VeryEasyEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+
+
+
+
+
+
+
+
+
+
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);
     }
