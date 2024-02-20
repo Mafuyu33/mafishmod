@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.jiang.tutorialmod.entity.ModEntities;
 //import net.jiang.tutorialmod.util.ModModelPredicateProvider;
+import net.jiang.tutorialmod.event.ChatMessageHandler;
 import net.jiang.tutorialmod.event.KeyInputHandler;
 import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.screen.GemPolishingScreen;
@@ -28,6 +29,7 @@ public class TutorialModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTATO_TNT_PREPARE, RenderLayer.getCutout());
 
         KeyInputHandler.register();
+        ChatMessageHandler.register();
 
         HandledScreens.register(ModScreenHandlers.GEM_POLISHING_SCREEN_HANDLER, GemPolishingScreen::new);
         ModMessages.registerS2CPackets();

@@ -56,6 +56,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.GEM_POLISHING_STATION);
                         entries.add(ModItems.STARGAZY_PIE);
                         entries.add(ModItems.TIME_STOP);
+                        entries.add(ModItems.MATH_SWORD);
                     }).build());
 
 
