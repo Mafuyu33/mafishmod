@@ -2,10 +2,10 @@
 	"schemaVersion": 1,
 	"id": "tutorialmod",
 	"version": "${version}",
-	"name": "Tutorial Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "马夫鱼の奇怪模组",
+	"description": "这是马夫鱼学习我的世界模组开发的时候构建的一些奇怪玩意，模组基于kuapenjoe的实例模组。",
 	"authors": [
-		"Me!"
+		"马夫鱼33"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
