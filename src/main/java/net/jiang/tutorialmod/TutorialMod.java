@@ -20,6 +20,7 @@ import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.ModCustomTrades;
 import net.jiang.tutorialmod.util.ModLootTableModifiers;
 import net.jiang.tutorialmod.villager.ModVillagers;
+import net.jiang.tutorialmod.vr.VRPlugin;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.timer.TimerCallback;
 import org.slf4j.Logger;
@@ -51,6 +52,13 @@ public class TutorialMod implements ModInitializer {
 
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
 		ModMessages.registerC2SPackets();
+
+		try {
+			Class.forName("net.blf02.vrapi.api.IVRAPI");
+			VRPlugin.initVR();
+		} catch (ClassNotFoundException e) {
+			TutorialMod.LOGGER.info("Not loading with mc-vr-api; it wasn't found!");
+		}
 	}
 
 

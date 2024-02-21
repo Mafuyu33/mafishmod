@@ -4,8 +4,6 @@ import dev.architectury.event.CompoundEventResult;
 import dev.architectury.event.events.client.ClientChatEvent;
 
 
-import java.util.List;
-
 public class ChatMessageHandler {
     private static int number = 999999999;
 

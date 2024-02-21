@@ -55,7 +55,7 @@ dependencies {
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 
 	modImplementation "curse.maven:architectury-api-419699:5084475"
-//	modImplementation "curse.maven:mc-vr-api-591092:5032473"
+	modImplementation "curse.maven:mc-vr-api-591092:5032473"
 //	modImplementation "curse.maven:vivecraft-667903:4941634"
 //
 //	// The below are all needed for Vivecraft to run in a dev environment

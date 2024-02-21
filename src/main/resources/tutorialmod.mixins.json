@@ -6,8 +6,6 @@
     "AlwaysEnchantableMixin",
     "ArmorEnchantmentMixin",
     "BadLuckOfSeaItemEntityMixin",
-    "EnderPearlEntityMixin",
-    "EnderPearlItemMixin",
     "ExampleMixin",
     "FireworkRocketEntityMixin",
     "FireworkRocketHitOnEntityMixin",
