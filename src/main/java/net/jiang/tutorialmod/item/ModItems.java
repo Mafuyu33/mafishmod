@@ -76,6 +76,8 @@ public class ModItems {
             new TimeStopItem(new FabricItemSettings().maxCount(1)));
     public static final Item MATH_SWORD = registerItem("math_sword",
             new MathSwordItem(ToolMaterials.NETHERITE, 7, -2.4f, new FabricItemSettings()));
+    public static final Item COLLIABLE = registerItem("colliable",
+            new ColliableItem(new FabricItemSettings().maxCount(1)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //放到材料表里

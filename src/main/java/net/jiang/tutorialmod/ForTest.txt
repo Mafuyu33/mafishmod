@@ -26,6 +26,24 @@ if (world.isClient && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) { 
 or
  if (world.isClient && VRPluginVerify.clientInVR() && VRPlugin.API.apiActive(Minecraft.getInstance().player)
 
+对某个实体造成伤害
+this.damage(getDamageSources().playerAttack(closestPlayer), 10f+level*2);
+
+
+Mixin Helper
+// 创建一个静态Map来存储实体ID和值
+private static final Map<Integer, Integer> entityValueMap = new HashMap<>();
+
+// 在适当的时候将实体ID和值添加到Map中
+public static void storeEntityValue(int entityID, int value) {
+    entityValueMap.put(entityID, value);
+}
+// 在需要时从Map中检索值
+public static int getEntityValue(int entityID) {
+    return entityValueMap.getOrDefault(entityID, 0); // 默认值为0，如果未找到实体ID
+}
+
+
 
 
 检测双手物品的附魔
@@ -93,3 +111,7 @@ EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnRe
 
 Mixin中强制转换this为原类
 PlayerEntity user = (PlayerEntity) (Object) this;
+
+播放声音
+getWorld().playSound(closestPlayer,closestPlayer.getBlockPos(),
+        SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, SoundCategory.PLAYERS,1f,1f);

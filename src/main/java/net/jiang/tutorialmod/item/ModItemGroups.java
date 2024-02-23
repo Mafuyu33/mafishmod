@@ -57,6 +57,7 @@ public class ModItemGroups {
                         entries.add(ModItems.STARGAZY_PIE);
                         entries.add(ModItems.TIME_STOP);
                         entries.add(ModItems.MATH_SWORD);
+                        entries.add(ModItems.COLLIABLE);
                     }).build());
 
 
