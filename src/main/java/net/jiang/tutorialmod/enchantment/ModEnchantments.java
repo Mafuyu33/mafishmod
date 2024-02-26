@@ -42,12 +42,15 @@ public class ModEnchantments {
     public static Enchantment HOT_POTATO = register("hot_potato",
             new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
-
     public static Enchantment VERY_EASY = register("very_easy",
             new VeryEasyEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
-
-
+    public static Enchantment REVERSE = register("reverse",
+            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+//    public static Enchantment EXCHANGE = register("exchange",
+//            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
+//                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
 
 

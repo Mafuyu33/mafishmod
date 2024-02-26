@@ -29,9 +29,6 @@
 
   "tooltip.tutorialmod.fire_happy": "Fire Happy",
 
-  "effect.tutorialmod.ironman": "Link Start",
-  "effect.tutorialmod.flower_effect": "flower_effect",
-
 
 
 
@@ -75,13 +72,25 @@
   "enchantment.tutorialmod.kill_my_horse_plus": "kill_my_horse_plus",
   "enchantment.tutorialmod.hot_potato": "hot_potato",
   "enchantment.tutorialmod.very_easy": "very_easy",
+  "enchantment.tutorialmod.reverse": "reverse",
+
 
 
   "key.category.tutorialmod.tutorial": "Mafish Mod",
   "key.tutorialmod.throw_item": "throw_item",
 
+  "effect.tutorialmod.ironman": "Link Start",
+  "effect.tutorialmod.flower_effect": "flower_effect",
+  "effect.tutorialmod.teleport_effect": "teleport_effect",
+
   "item.minecraft.potion.effect.flower_potion": "flower_potion",
   "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
   "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion",
-  "item.minecraft.tipped_arrow.effect.flower_potion": "flower_potion"
+  "item.minecraft.tipped_arrow.effect.flower_potion": "flower_potion",
+
+
+  "item.minecraft.potion.effect.teleport_potion": "teleport_potion",
+  "item.minecraft.splash_potion.effect.teleport_potion": "Splash teleport_potion",
+  "item.minecraft.lingering_potion.effect.teleport_potion": "Lingering teleport_potion",
+  "item.minecraft.tipped_arrow.effect.teleport_potion": "teleport_potion"
 }

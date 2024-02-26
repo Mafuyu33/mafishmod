@@ -25,7 +25,7 @@ public class MathSwordItem extends SwordItem {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
     private static boolean mathMode = false;
-    private static int level=0;
+    private static int level = 0;
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);

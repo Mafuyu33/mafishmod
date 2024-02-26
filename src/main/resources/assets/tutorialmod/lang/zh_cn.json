@@ -26,12 +26,6 @@
   "block.tutorialmod.potato_tnt": "土豆雷",
   "block.tutorialmod.gem_polishing_station": "宝石抛光站",
 
-  "effect.tutorialmod.ironman": "Link Start!",
-  "effect.tutorialmod.flower_effect": "变出花田的魔法",
-
-
-
-
   "entity.minecraft.villager.sound_master": "音乐大师",
 
   "itemgroup.ruby": "马夫鱼の奇怪mod",
@@ -67,22 +61,32 @@
 
   "enchantment.tutorialmod.bad_luck_of_sea": "§c海之嫌弃",
   "enchantment.tutorialmod.eight_gods_pass_sea": "§e八仙过海",
-  "enchantment.tutorialmod.kill_chicken_get_egg": "杀鸡取卵",
-  "enchantment.tutorialmod.go_to_sky": "§2通天术",
+  "enchantment.tutorialmod.kill_chicken_get_egg": "§e杀鸡取卵",
+  "enchantment.tutorialmod.go_to_sky": "§e通天术",
   "enchantment.tutorialmod.gong_xi_fa_cai": "§e恭喜发财",
-  "enchantment.tutorialmod.mercy": "仁慈",
+  "enchantment.tutorialmod.mercy": "§e仁慈",
   "enchantment.tutorialmod.kill_my_horse": "§e敢杀我的马!",
   "enchantment.tutorialmod.kill_my_horse_plus": "§e敢杀我的马!!!!!!!!!!!!!!!!!!!!!!!!!",
   "enchantment.tutorialmod.hot_potato": "烫手山芋",
   "enchantment.tutorialmod.very_easy": "非常简单(给奥数圣剑增加难度)",
+  "enchantment.tutorialmod.reverse": "§e反转了",
 
 
 
   "key.category.tutorialmod.tutorial": "马夫鱼模组",
   "key.tutorialmod.throw_item": "蓄力按钮(长按，然后右键丢出钻石)",
 
+  "effect.tutorialmod.ironman": "Link Start!",
+  "effect.tutorialmod.flower_effect": "变出花田的魔法",
+  "effect.tutorialmod.teleport_effect": "传送",
+
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
   "item.minecraft.lingering_potion.effect.flower_potion": "变出花田的魔法（滞留）",
-  "item.minecraft.tipped_arrow.effect.flower_potion": "变出花田的魔法箭"
+  "item.minecraft.tipped_arrow.effect.flower_potion": "变出花田的魔法箭",
+
+  "item.minecraft.potion.effect.teleport_potion": "传送基质",
+  "item.minecraft.splash_potion.effect.teleport_potion": "传送基质（喷溅）",
+  "item.minecraft.lingering_potion.effect.teleport_potion": "传送基质（滞留）",
+  "item.minecraft.tipped_arrow.effect.teleport_potion": "传送箭"
 }

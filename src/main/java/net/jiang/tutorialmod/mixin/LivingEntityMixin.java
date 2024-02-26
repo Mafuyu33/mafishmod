@@ -2,6 +2,7 @@ package net.jiang.tutorialmod.mixin;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.jiang.tutorialmod.effect.ModStatusEffects;
 import net.jiang.tutorialmod.event.ChatMessageHandler;
 import net.jiang.tutorialmod.item.custom.ColliableItem;
 import net.jiang.tutorialmod.item.custom.MathSwordItem;
@@ -14,17 +15,24 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,6 +41,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Collection;
 import java.util.Random;
 
 @Mixin(LivingEntity.class)
@@ -54,10 +63,18 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
     @Shadow public abstract float getMovementSpeed();
 
+    @Shadow @Nullable public abstract StatusEffectInstance getStatusEffect(StatusEffect effect);
+
+    @Shadow public abstract Collection<StatusEffectInstance> getStatusEffects();
+
+    @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
+
+    @Shadow public abstract boolean isAlive();
+
     @Unique
     int shieldDashCoolDown = 0;
     @Unique
-    int dashHitCoolDown = 0;
+    int time = 0;
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -78,8 +95,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
                 this.dropItem(Items.EMERALD);
             }
         }
-
-
 
         if(MathSwordItem.isMathMode()) {//数学领域
             PlayerEntity closestPlayer = getEntityWorld().getClosestPlayer(this, 100);
@@ -162,8 +177,54 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
                 }
             }
         }
+
+        if(WeaponEnchantmentMixinHelper.getReverse(this.getUuid())==1){//反转了，提供向上速度
+            addVelocity(0,0.1,0);
+        }
+
+
+        if(this.isPlayer() && this.hasStatusEffect(ModStatusEffects.TELEPORT_EFFECT)) {//传送药水
+            time++;
+            if (time > 1) {
+                randomTeleport(this.getWorld(), (LivingEntity) (Object) this);
+                time=0;
+            }
+        }
+
     }
 
+
+    @Unique
+    private void randomTeleport(World world, LivingEntity user) {
+        if (!world.isClient) {
+            for(int i = 0; i < 16; ++i) {
+                double d = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
+                double e = MathHelper.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)world.getBottomY(), (double)(world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
+                double f = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
+                if (user.hasVehicle()) {
+                    user.stopRiding();
+                }
+
+                Vec3d vec3d = user.getPos();
+                if (user.teleport(d, e, f, true)) {
+                    world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(user));
+                    SoundCategory soundCategory;
+                    SoundEvent soundEvent;
+                    if (user instanceof FoxEntity) {
+                        soundEvent = SoundEvents.ENTITY_FOX_TELEPORT;
+                        soundCategory = SoundCategory.NEUTRAL;
+                    } else {
+                        soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+                        soundCategory = SoundCategory.PLAYERS;
+                    }
+
+                    world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), soundEvent, soundCategory);
+                    user.onLanding();
+                    break;
+                }
+            }
+        }
+    }
     @Unique
     private Entity checkPlayerCollisions(PlayerEntity player) {
 

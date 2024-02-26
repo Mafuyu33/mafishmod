@@ -1,9 +1,12 @@
 package net.jiang.tutorialmod.mixin;
 
 import dev.architectury.hooks.level.biome.EffectsProperties;
+import dev.architectury.platform.Mod;
+import net.jiang.tutorialmod.effect.ModStatusEffects;
 import net.jiang.tutorialmod.enchantment.ModEnchantments;
 import net.jiang.tutorialmod.mixinhelper.FireworkRocketEntityMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.WeaponEnchantmentMixinHelper;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
@@ -11,11 +14,17 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -52,7 +61,20 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
     public WeaponEnchantmentMixin(EntityType<?> type, World world) {
         super(type, world);
     }
-    @Inject(at = @At("RETURN"), method = "onAttacking")
+
+    @Inject(at = @At("RETURN"), method = "onStatusEffectApplied")
+    private void init1(StatusEffectInstance effect, Entity source, CallbackInfo ci) {
+        if(source != null && effect.getEffectType() == ModStatusEffects.TELEPORT_EFFECT && this != source){
+            // 获取攻击者（当前实体）和目标实体的位置
+            Vec3d attackerPos = source.getPos();
+            Vec3d targetPos = this.getPos();
+
+            // 交换两个实体的位置
+            source.teleport(targetPos.x, targetPos.y, targetPos.z);
+            this.teleport(attackerPos.x, attackerPos.y, attackerPos.z);
+        }
+    }
+        @Inject(at = @At("RETURN"), method = "onAttacking")
     private void init(Entity target, CallbackInfo info) {
 
         Hand hand = this.getActiveHand();
@@ -62,6 +84,18 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
         int m = EnchantmentHelper.getLevel(ModEnchantments.GONG_XI_FA_CAI,itemStack);
         int n = EnchantmentHelper.getLevel(ModEnchantments.MERCY,itemStack);
         int o = EnchantmentHelper.getLevel(ModEnchantments.HOT_POTATO,itemStack);
+        int p = EnchantmentHelper.getLevel(ModEnchantments.REVERSE,itemStack);
+
+        if(p>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive() && !getWorld().isClient){//反转了
+            if(!target.hasCustomName()) {
+                target.setCustomName(Text.of("Grumm"));
+                target.setCustomNameVisible(false);
+                WeaponEnchantmentMixinHelper.storeReverse(target.getUuid(),1);
+            }else {
+                target.setCustomName(null);
+                WeaponEnchantmentMixinHelper.storeReverse(target.getUuid(),0);
+            }
+        }
 
         if (o>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive()){//烫手山芋
 //            ItemStack targetItemStack = ((LivingEntity) target).getStackInHand(targetHand);

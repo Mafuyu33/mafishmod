@@ -2,9 +2,22 @@ package net.jiang.tutorialmod.mixinhelper;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class WeaponEnchantmentMixinHelper {
 
+    // 创建一个静态 Map 来存储实体 UUID 和值
+    private static final Map<UUID, Integer> reverseMap = new HashMap<>();
+
+    // 在适当的时候将实体 UUID 和值添加到 Map 中
+    public static void storeReverse(UUID entityUUID, int value) {
+        reverseMap.put(entityUUID, value);
+    }
+
+    // 在需要时从 Map 中检索值
+    public static int getReverse(UUID entityUUID) {
+        return reverseMap.getOrDefault(entityUUID, 0); // 默认值为0，如果未找到实体 UUID
+    }
 
     // 创建一个静态Map来存储实体UUID和值
     private static final Map<Integer, Integer> entityValueMap = new HashMap<>();
