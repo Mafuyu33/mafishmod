@@ -49,6 +49,7 @@ public class TutorialMod implements ModInitializer {
 		ModSounds.registerSounds();
 		ModCustomTrades.registerCustomTrades();
 		ModEnchantments.registerModEnchantments();
+		ModPotions.registerBrewingRecipes();
 
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
 		ModMessages.registerC2SPackets();
