@@ -48,10 +48,12 @@ public class ModEnchantments {
     public static Enchantment REVERSE = register("reverse",
             new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
-//    public static Enchantment EXCHANGE = register("exchange",
-//            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
-//                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
-
+    public static Enchantment PAY_TO_PLAY = register("pay_to_play",
+            new LEVEL5Enchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+    public static Enchantment FEAR = register("fear",
+            new LEVEL5Enchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
 
 

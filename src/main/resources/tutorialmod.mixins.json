@@ -19,6 +19,7 @@
     "KaoFishMixin",
     "LightningRodMixin",
     "LivingEntityMixin",
+    "MobEntityMixin",
     "PickaxeInfiniteMixin",
     "PlayerEntityMixin",
     "ThrowableDiamondMixin",

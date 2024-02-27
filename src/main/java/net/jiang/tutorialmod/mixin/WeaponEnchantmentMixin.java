@@ -4,15 +4,20 @@ import dev.architectury.hooks.level.biome.EffectsProperties;
 import dev.architectury.platform.Mod;
 import net.jiang.tutorialmod.effect.ModStatusEffects;
 import net.jiang.tutorialmod.enchantment.ModEnchantments;
+import net.jiang.tutorialmod.mixinhelper.FearMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.FireworkRocketEntityMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.WeaponEnchantmentMixinHelper;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.FleeEntityGoal;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -20,6 +25,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
@@ -41,7 +48,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 @Mixin(LivingEntity.class)
-public abstract class WeaponEnchantmentMixin extends Entity implements Attackable{
+public abstract class WeaponEnchantmentMixin extends Entity implements Attackable,Targeter{
     @Unique
     float Times = 0F;
 
@@ -85,6 +92,40 @@ public abstract class WeaponEnchantmentMixin extends Entity implements Attackabl
         int n = EnchantmentHelper.getLevel(ModEnchantments.MERCY,itemStack);
         int o = EnchantmentHelper.getLevel(ModEnchantments.HOT_POTATO,itemStack);
         int p = EnchantmentHelper.getLevel(ModEnchantments.REVERSE,itemStack);
+        int q = EnchantmentHelper.getLevel(ModEnchantments.PAY_TO_PLAY,itemStack);
+        int r = EnchantmentHelper.getLevel(ModEnchantments.FEAR,itemStack);
+
+        if(r>0 && this.isPlayer() &&
+                target instanceof LivingEntity livingEntity && livingEntity.isAlive() && !getWorld().isClient){//恐惧
+            FearMixinHelper.storeEntityValue(target.getUuid(),20*r);
+            FearMixinHelper.storeIsAttacked(target.getUuid(),true);
+            FearMixinHelper.setIsFirstTime(target.getUuid(),true);
+        }
+
+        if(q > 0 && this.isPlayer() &&
+                target instanceof LivingEntity livingEntity && livingEntity.isAlive() && !getWorld().isClient){//镀金
+            Iterable<ItemStack> inventory = ((PlayerEntity) (Object) this).getInventory().main;
+
+            // 遍历背包中的物品栏
+            boolean foundGoldenIngot = false;
+            int count=0;
+            for (ItemStack stack : inventory) {
+                if (stack.getItem() == Items.GOLD_INGOT) {
+                    // 如果找到金锭，标记为已找到，并从物品栏中减少一个金锭
+                    foundGoldenIngot = true;
+                    count = stack.getCount();
+                    stack.decrement(q); // 减少q个金锭
+                    break;
+                }
+            }
+            // 如果找到金锭，则对目标造成额外的伤害
+            if (foundGoldenIngot) {
+                getWorld().playSound(this,this.getBlockPos(),
+                        SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS,1f,1f);//播放声音
+                float extraDamage = count*3.125F; // 设置额外伤害值
+                target.damage(getDamageSources().playerAttack(((PlayerEntity) (Object) this)),extraDamage); // 对目标生物实体造成额外伤害
+            }
+        }
 
         if(p>0 && target instanceof LivingEntity livingEntity && livingEntity.isAlive() && !getWorld().isClient){//反转了
             if(!target.hasCustomName()) {
