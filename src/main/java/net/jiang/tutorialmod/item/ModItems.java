@@ -79,6 +79,8 @@ public class ModItems {
     public static final Item COLLIABLE = registerItem("colliable",
             new ColliableItem(new FabricItemSettings().maxCount(1)));
 
+    public static final Item LIGHTNING_BALL = registerItem("lightning_ball", new LightningBallItem(new FabricItemSettings()));
+
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //放到材料表里
         entries.add(RUBY);

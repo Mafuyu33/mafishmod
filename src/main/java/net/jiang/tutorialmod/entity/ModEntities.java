@@ -37,5 +37,9 @@ public class ModEntities {
             new Identifier(TutorialMod.MOD_ID, "diamond_projectile"),
             FabricEntityTypeBuilder.<TNTProjectileEntity>create(SpawnGroup.MISC, TNTProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
+    public static final EntityType<LightningProjectileEntity> LIGHTNING_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(TutorialMod.MOD_ID, "lightning_projectile"),
+            FabricEntityTypeBuilder.<LightningProjectileEntity>create(SpawnGroup.MISC, LightningProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f)).build());
 
 }

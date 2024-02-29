@@ -58,6 +58,7 @@ public class ModItemGroups {
                         entries.add(ModItems.TIME_STOP);
                         entries.add(ModItems.MATH_SWORD);
                         entries.add(ModItems.COLLIABLE);
+                        entries.add(ModItems.LIGHTNING_BALL);
                     }).build());
 
 
