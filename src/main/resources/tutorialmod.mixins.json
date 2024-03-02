@@ -17,6 +17,8 @@
     "InfiniteFoodMixin$InFiniteFoodMixin",
     "InfiniteUndyingMixin",
     "KaoFishMixin",
+    "LeadItemMixin",
+    "LeadItemMovementMixin",
     "LightningRodMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
