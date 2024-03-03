@@ -40,7 +40,7 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 	private static Vec3d lastPos= new Vec3d(0, 0, 0);
 	/**
 	 * @author Mafish
-	 * @reason Make lead stronger
+	 * @reason Make lead stronger && VR lead
 	 */
 	@Overwrite
 	public void updateLeash() {
@@ -71,47 +71,49 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 
 		}
 
+
+		//VR lead modification section. VR拴绳改造部分
 		if(entity != null && entity.getWorld() == this.getWorld()
-				&& entity instanceof PlayerEntity user && !getWorld().isClient) { // VR状态下的拴绳拉扯效果
+				&& entity instanceof PlayerEntity user && !getWorld().isClient) { //The pulling effect of leading in VR state.VR状态下的拴绳拉扯效果，
 			if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {
 				Vec3d currentPosMainController = getControllerPosition(user);
 				Vec3d currentPos = getHMDPosition(user);
 				if (currentPosMainController != null) {
-					double leashHandDistance = currentPosMainController.distanceTo(lastPosMainController); // 计算拴绳手的当前位置和上一个位置之间的距离
+					double leashHandDistance = currentPosMainController.distanceTo(lastPosMainController); // Calculate the distance between the current position and the previous position of the leaded hand,计算拴绳手的当前位置和上一个位置之间的距离
 					double pullThreshold = 0.11; // 可以调整这个值来设置敏感度
-					System.out.println("Power"+ leashHandDistance);
 					if (!Objects.equals(lastPosMainController, new Vec3d(0, 0, 0))
 							&& !Objects.equals(lastPos, new Vec3d(0, 0, 0))) {
-						double distanceA = currentPosMainController.distanceTo(this.getPos()); // A距离
-						double distanceB = lastPosMainController.distanceTo(this.getPos()); // B距离
+						double distanceA = currentPosMainController.distanceTo(this.getPos()); // Distance A. A距离
+						double distanceB = lastPosMainController.distanceTo(this.getPos()); // Distance A. B距离
 
 
-						double currentControllerToPlayerDistance = currentPosMainController.distanceTo(currentPos); // 手柄到玩家的距离
-						double lastControllerToPlayerDistance = lastPosMainController.distanceTo(lastPos); // 手柄到玩家的距离
-						double differenceOfControllerToPlayerDistance=currentControllerToPlayerDistance-lastControllerToPlayerDistance;//差值
+						double currentControllerToPlayerDistance = currentPosMainController.distanceTo(currentPos); //The distance from the controller to the player. 手柄到玩家的距离
+						double lastControllerToPlayerDistance = lastPosMainController.distanceTo(lastPos); //The distance from the controller to the player. 手柄到玩家的距离
+						double differenceOfControllerToPlayerDistance=currentControllerToPlayerDistance-lastControllerToPlayerDistance;// Difference.差值
 
-						double stationaryThreshold = 0.05; // 设定手柄和玩家位置相对静止的阈值，可以根据实际情况调整
-						System.out.println("currentPos"+ currentPos);
-						System.out.println("lastPos"+ lastPos);
-						System.out.println("A"+ distanceA);
-						System.out.println("B"+ distanceB);
-						System.out.println("A-B"+ (distanceA - distanceB));
-						System.out.println("C"+ currentControllerToPlayerDistance);
-						System.out.println("D"+ lastControllerToPlayerDistance);
-						System.out.println("C-D"+ (currentControllerToPlayerDistance-lastControllerToPlayerDistance));
+						double stationaryThreshold = 0.05; //Set a threshold for relative stillness between the controller and the player positions, which can be adjusted according to actual circumstances. 设定手柄和玩家位置相对静止的阈值，可以根据实际情况调整
+//						System.out.println("Power"+ leashHandDistance);
+//						System.out.println("currentPos"+ currentPos);
+//						System.out.println("lastPos"+ lastPos);
+//						System.out.println("A"+ distanceA);
+//						System.out.println("B"+ distanceB);
+//						System.out.println("A-B"+ (distanceA - distanceB));
+//						System.out.println("C"+ currentControllerToPlayerDistance);
+//						System.out.println("D"+ lastControllerToPlayerDistance);
+//						System.out.println("C-D"+ (currentControllerToPlayerDistance-lastControllerToPlayerDistance));
 
 						if (leashHandDistance > pullThreshold && (distanceA-distanceB>0)
-								&& (differenceOfControllerToPlayerDistance > stationaryThreshold)) { // 如果 A-B>0 && 手柄和玩家的距离大于静止阈值
-							Vec3d entityToPlayerVector = currentPosMainController.subtract(this.getPos()).normalize(); // 实体到玩家的方向向量
-							double forceMagnitude = (distanceA - distanceB) * 5.0; // 力的大小与A-B正相关
+								&& (differenceOfControllerToPlayerDistance > stationaryThreshold)) { // If A-B > 0 && the distance between the controller and the player is greater than the stillness threshold. 如果 A-B>0 && 手柄和玩家的距离大于静止阈值
+							Vec3d entityToPlayerVector = currentPosMainController.subtract(this.getPos()).normalize(); // The direction vector from the entity to the player. 实体到玩家的方向向量
+							double forceMagnitude = (distanceA - distanceB) * 5.0; // The magnitude of force is directly proportional to A-B. 力的大小与A-B正相关
 							Vec3d force = entityToPlayerVector.multiply(forceMagnitude);
 
-							// 给实体施加力
+							// Apply force to the entity. 给实体施加力
 							this.addVelocity(force.x, force.y, force.z);
 						}
 					}
 
-					// 更新上一次的手柄位置
+					// Update the previous controller position. 更新上一次的手柄位置
 					lastPosMainController = currentPosMainController;
 					lastPos = currentPos;
 				}
@@ -139,7 +141,7 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 	}
 	@Unique
 	private static Vec3d getHMDPosition(PlayerEntity player) {
-		IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+		IVRAPI vrApi = VRPlugin.API;
 		if (vrApi != null && vrApi.apiActive(player)) {
 			return vrApi.getVRPlayer(player).getHMD().position();
 		}
@@ -147,7 +149,7 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 	}
 	@Unique
 	private static Vec3d getControllerPosition(PlayerEntity player) {
-		IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+		IVRAPI vrApi = VRPlugin.API;
 		if (vrApi != null && vrApi.apiActive(player)) {
 			return vrApi.getVRPlayer(player).getController(0).position();
 		}
