@@ -34,5 +34,11 @@
     "sounds": [
       "tutorialmod:sound_block_fall"
     ]
+  },
+  "dash_sound": {
+    "subtitle": "sounds.tutorialmod.dash_sound",
+    "sounds": [
+      "tutorialmod:dash_sound"
+    ]
   }
 }

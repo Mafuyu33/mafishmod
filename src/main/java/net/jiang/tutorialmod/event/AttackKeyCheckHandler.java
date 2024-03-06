@@ -1,6 +1,7 @@
 package net.jiang.tutorialmod.event;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.jiang.tutorialmod.mixinhelper.BowDashMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.ShieldDashMixinHelper;
 
 public class AttackKeyCheckHandler {
@@ -21,6 +22,7 @@ public class AttackKeyCheckHandler {
                 // 当攻击键被松开时执行操作
 //                System.out.println("Attack key released!");
                 ShieldDashMixinHelper.setIsAttackKeyPressed(false);
+                BowDashMixinHelper.setIsAttackKeyPressed(false);
 
                 // 在这里执行您的操作
             }
@@ -33,7 +35,7 @@ public class AttackKeyCheckHandler {
                 // 当攻击键被按下时执行操作
 //                System.out.println("Attack key pressed!");
                 ShieldDashMixinHelper.setIsAttackKeyPressed(true);
-
+                BowDashMixinHelper.setIsAttackKeyPressed(true);
                 // 在这里执行您的操作
             }
         });
