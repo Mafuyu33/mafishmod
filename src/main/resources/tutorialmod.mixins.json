@@ -25,6 +25,7 @@
     "PickaxeInfiniteMixin",
     "PlayerEntityMixin",
     "ThrowableDiamondMixin",
+    "TripwireBlockMixin",
     "WeaponEnchantmentMixin"
   ],
   "client": [

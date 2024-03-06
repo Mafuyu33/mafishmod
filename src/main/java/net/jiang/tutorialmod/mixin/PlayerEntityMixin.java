@@ -8,9 +8,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jiang.tutorialmod.mixinhelper.BowDashMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.ShieldDashMixinHelper;
+import net.jiang.tutorialmod.mixinhelper.TripwireBlockMixinHelper;
 import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,9 +46,18 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
 
     }
-    @Inject(at = @At("HEAD"), method = "tick")
+    @Inject(at = @At("RETURN"), method = "updatePose")
     private void init(CallbackInfo ci) {
+        if(TripwireBlockMixinHelper.getEntityValue(this.getId())>0){
+            EntityPose entityPose3 = EntityPose.SWIMMING;
+            this.setPose(entityPose3);
+            TripwireBlockMixinHelper.storeEntityValue(this.getId(),TripwireBlockMixinHelper.getEntityValue(this.getId())-1);
+        }
+    }
 
+
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void init1(CallbackInfo ci) {
 
         if(getWorld().isClient && this.isHolding(Items.BOW) && this.isUsingItem()
                 && BowDashMixinHelper.isAttackKeyPressed() && BowDashCoolDown<=0){//弓箭手突击
