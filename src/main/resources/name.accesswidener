@@ -1,3 +1,4 @@
 accessWidener   v1  named
 accessible class net/minecraft/entity/projectile/FishingBobberEntity$State
 accessible field net/minecraft/entity/LivingEntity dead Z
+accessible method net/minecraft/block/entity/BlockEntity writeNbt (Lnet/minecraft/nbt/NbtCompound;)V

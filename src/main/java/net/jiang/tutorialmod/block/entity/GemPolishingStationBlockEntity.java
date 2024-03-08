@@ -75,7 +75,7 @@ public class GemPolishingStationBlockEntity extends BlockEntity implements Exten
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, inventory);
         nbt.putInt("gem_polishing_station.progress", progress);
