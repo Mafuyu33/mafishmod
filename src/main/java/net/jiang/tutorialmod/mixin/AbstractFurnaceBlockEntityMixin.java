@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
@@ -42,4 +43,26 @@ public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerB
 			cir.setReturnValue(-1);
 		}
 	}
+
+
+
+	@Inject(method = "craftRecipe",at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;increment(I)V"))//时运烧矿
+	private static void init2(DynamicRegistryManager registryManager, RecipeEntry<?> recipe, DefaultedList<ItemStack> slots, int count, CallbackInfoReturnable<Boolean> cir) {
+		ItemStack itemStack = (ItemStack)slots.get(0);
+		int k = EnchantmentHelper.getLevel(Enchantments.FORTUNE, itemStack);
+		if (k > 0) {
+			ItemStack itemStack3 = (ItemStack)slots.get(2);
+			itemStack3.increment(k);
+		}
+	}
+	@Inject(method = "craftRecipe",at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/util/collection/DefaultedList;set(ILjava/lang/Object;)Ljava/lang/Object;",ordinal = 0))
+	private static void init3(DynamicRegistryManager registryManager, RecipeEntry<?> recipe, DefaultedList<ItemStack> slots, int count, CallbackInfoReturnable<Boolean> cir) {
+		ItemStack itemStack = (ItemStack)slots.get(0);
+		int k = EnchantmentHelper.getLevel(Enchantments.FORTUNE, itemStack);
+		if (k > 0) {
+			ItemStack itemStack3 = (ItemStack)slots.get(2);
+			itemStack3.increment(k);
+		}
+	}
+
 }
