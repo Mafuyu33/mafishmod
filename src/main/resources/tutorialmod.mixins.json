@@ -3,6 +3,8 @@
   "package": "net.jiang.tutorialmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractFurnaceBlockEntityMixin",
+    "AbstractFurnaceBlockMixin",
     "AlwaysEnchantableMixin",
     "ArmorEnchantmentMixin",
     "BadLuckOfSeaItemEntityMixin",
