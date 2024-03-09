@@ -10,6 +10,7 @@ import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.SidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.recipe.RecipeInputProvider;
@@ -24,6 +25,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
+import static net.minecraft.block.entity.AbstractFurnaceBlockEntity.createFuelTimeMap;
+
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerBlockEntity implements SidedInventory, RecipeUnlocker, RecipeInputProvider {
 	protected AbstractFurnaceBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
@@ -37,10 +40,11 @@ public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerB
 		if(k>0){
 			BlockPos firePos =pos;
 			firePos = firePos.add(0,1,0);
+			Item item = fuel.getItem();
 			if(world!=null && !world.isClient) {
 				world.setBlockState(firePos, Blocks.FIRE.getDefaultState(), 3);
 			}
-			cir.setReturnValue(-1);
+			cir.setReturnValue((Integer)createFuelTimeMap().getOrDefault(item, 0)+800*k);
 		}
 	}
 }
