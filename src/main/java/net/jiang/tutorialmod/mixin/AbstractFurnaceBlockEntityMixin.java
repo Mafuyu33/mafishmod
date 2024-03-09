@@ -40,11 +40,10 @@ public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerB
 		if(k>0){
 			BlockPos firePos =pos;
 			firePos = firePos.add(0,1,0);
-			Item item = fuel.getItem();
 			if(world!=null && !world.isClient) {
 				world.setBlockState(firePos, Blocks.FIRE.getDefaultState(), 3);
 			}
-			cir.setReturnValue((Integer)createFuelTimeMap().getOrDefault(item, 0)+800*k);
+			cir.setReturnValue(-1);
 		}
 	}
 }
