@@ -34,6 +34,7 @@ public abstract class BlockMixin extends AbstractBlock implements ItemConvertibl
 	@Inject(at = @At("HEAD"), method = "onPlaced")//存储方块的附魔
 	private void init1(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack, CallbackInfo info) {
 		if (!world.isClient) {
+			System.out.println(itemStack.getEnchantments());
 			if (!Objects.equals(itemStack.getEnchantments(), new NbtList())) {
 //				System.out.println("添加");
 				NbtList enchantments = itemStack.getEnchantments(); // 获取物品栈上的附魔信息列表

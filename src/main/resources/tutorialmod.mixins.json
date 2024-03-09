@@ -13,6 +13,8 @@
     "FireworkRocketItemMixin",
     "FishingBobberEntityMixin",
     "FishingRodItemMixin",
+    "HopperBlockEntityMixin",
+    "HopperBlockMixin",
     "HorseSaddleEnchantmentMixin",
     "InfiniteBucketMixin$InFiniteBucketMixin",
     "InfiniteFoodMixin$InFiniteFoodMixin",

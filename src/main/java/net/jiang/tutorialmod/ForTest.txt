@@ -11,13 +11,23 @@ System.out.println(123);
 player.sendMessage(Text.literal((String.valueOf(123))),false);
 
 
-
 附魔查看
 int k = EnchantmentHelper.getLevel(Enchantments, itemStack);
 if (k > 0) {
-
+}
+方块附魔查看
+int k = BlockEnchantmentHelper.getLevel(Enchantments.INFINITY,pos);
+if(k>0){
 }
 
+给奇怪的方块实体添加onPlace
+if (!world.isClient) {
+    System.out.println(itemStack.getEnchantments());
+    if (!Objects.equals(itemStack.getEnchantments(), new NbtList())) {
+        NbtList enchantments = itemStack.getEnchantments(); // 获取物品栈上的附魔信息列表
+        BlockEnchantmentHelper.storeEnchantment(pos,enchantments);// 将附魔信息列表存储
+    }
+}
 
 检测是不是在VR中
 if (world.isClient && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {   //有MC-VR-API并且在VR中的时候
