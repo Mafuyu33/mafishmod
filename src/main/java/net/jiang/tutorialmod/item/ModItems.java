@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jiang.tutorialmod.item.custom.*;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.item.vrcustom.VrPenItem;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -78,8 +79,9 @@ public class ModItems {
             new MathSwordItem(ToolMaterials.NETHERITE, 7, -2.4f, new FabricItemSettings()));
     public static final Item COLLIABLE = registerItem("colliable",
             new ColliableItem(new FabricItemSettings().maxCount(1)));
-
     public static final Item LIGHTNING_BALL = registerItem("lightning_ball", new LightningBallItem(new FabricItemSettings()));
+    public static final Item VR_PEN = registerItem("vr_pen",
+            new VrPenItem(new FabricItemSettings().maxCount(1)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //放到材料表里
