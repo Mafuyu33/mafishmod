@@ -54,7 +54,9 @@ public class ModEnchantments {
     public static Enchantment FEAR = register("fear",
             new LEVEL5Enchantment(Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
-
+    public static Enchantment MUTE = register("mute",
+            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD}));
 
 
 

@@ -125,3 +125,10 @@ PlayerEntity user = (PlayerEntity) (Object) this;
 播放声音
 getWorld().playSound(closestPlayer,closestPlayer.getBlockPos(),
         SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, SoundCategory.PLAYERS,1f,1f);
+
+网络传输
+PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
+buf.writeInt(shieldDashCoolDown);
+ClientPlayNetworking.send(ModMessages.Shield_Dash_ID, buf);
+
+*玩家添加速度在客户端，其他生物添加速度在服务端*

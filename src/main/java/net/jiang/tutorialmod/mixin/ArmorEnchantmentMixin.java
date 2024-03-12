@@ -5,6 +5,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FrostedIceBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
@@ -15,6 +17,7 @@ import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -203,14 +206,14 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					BlockPos blockPos = this.getBlockPos();
 					checkAndReplaceWaterBlocks(world, blockPos);
 				}
-
-
-
-
 			}
-
-
-
+			if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.HELMET) {//帽子
+				int n = EnchantmentHelper.getLevel(ModEnchantments.MUTE, armorItem);//静音
+				if (n > 0 && this.isPlayer()) {
+					GameOptions gameOptions = MinecraftClient.getInstance().options;
+					gameOptions.getSoundVolumeOption(SoundCategory.MASTER).setValue((double) 0);
+				}
+			}
 
 		}
 	}
