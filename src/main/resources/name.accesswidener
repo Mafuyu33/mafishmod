@@ -2,3 +2,4 @@ accessWidener   v1  named
 accessible class net/minecraft/entity/projectile/FishingBobberEntity$State
 accessible field net/minecraft/entity/LivingEntity dead Z
 accessible method net/minecraft/block/entity/HopperBlockEntity setTransferCooldown (I)V
+accessible method net/minecraft/client/gui/screen/ingame/HandledScreen getSlotAt (DD)Lnet/minecraft/screen/slot/Slot;
