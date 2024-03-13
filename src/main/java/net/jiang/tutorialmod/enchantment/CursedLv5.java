@@ -4,12 +4,17 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class NormalEnchantment extends Enchantment {
-    protected NormalEnchantment(Rarity rarity, EnchantmentTarget target, EquipmentSlot[] slotTypes) {
+public class CursedLv5 extends Enchantment {
+
+    protected CursedLv5(Rarity rarity, EnchantmentTarget target, EquipmentSlot[] slotTypes) {
         super(rarity, target, slotTypes);
     }
-    @Override
+
     public int getMaxLevel() {
-        return 1;
+        return 5;
+    }
+
+    public boolean isCursed() {
+        return true;
     }
 }

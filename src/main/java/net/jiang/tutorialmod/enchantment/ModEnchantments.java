@@ -11,52 +11,40 @@ import net.minecraft.util.Identifier;
 public class ModEnchantments {
 
     public static Enchantment BAD_LUCK_OF_SEA = register("bad_luck_of_sea",
-            new BadLuckOfSeaEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.ARMOR_FEET, EquipmentSlot.FEET));
+            new CursedLv3(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET}));
 
     public static Enchantment EIGHT_GODS_PASS_SEA = register("eight_gods_pass_sea",
-            new EightGodsPassSeaEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.ARMOR_FEET, EquipmentSlot.FEET));
+            new NormalLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET}));
 
     public static Enchantment KILL_CHICKEN_GET_EGG = register("kill_chicken_get_egg",
-            new KillChickenGetEggEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+            new NormalLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     public static Enchantment GO_TO_SKY = register("go_to_sky",
-            new GoToSkyEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+            new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
     public static Enchantment GONG_XI_FA_CAI = register("gong_xi_fa_cai",
-            new GongXiFaCaiEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+            new NormalLv5(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
     public static Enchantment MERCY = register("mercy",
-            new MercyEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, EquipmentSlot.MAINHAND));
+            new NormalLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
     public static Enchantment KILL_MY_HORSE = register("kill_my_horse",
-            new MercyEnchantment(Enchantment.Rarity.VERY_RARE,
-                    EnchantmentTarget.VANISHABLE));
+            new TreasureLv1(Enchantment.Rarity.RARE , EnchantmentTarget.ARMOR,new EquipmentSlot[]{}));
     public static Enchantment KILL_MY_HORSE_PLUS = register("kill_my_horse_plus",
-            new NormalEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.ARMOR, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR, new EquipmentSlot[]{}));
     public static Enchantment HOT_POTATO = register("hot_potato",
-            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     public static Enchantment VERY_EASY = register("very_easy",
-            new VeryEasyEnchantment(Enchantment.Rarity.VERY_RARE,
-                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            new CursedLv5(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     public static Enchantment REVERSE = register("reverse",
-            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            new CursedLv1(Enchantment.Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     public static Enchantment PAY_TO_PLAY = register("pay_to_play",
-            new LEVEL5Enchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            new NormalLv5(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     public static Enchantment FEAR = register("fear",
-            new LEVEL5Enchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+            new NormalLv5(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
     public static Enchantment MUTE = register("mute",
-            new NormalCursedEnchantment(Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD}));
+            new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD}));
+    public static Enchantment SLIPPERY = register("slippery",
+            new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
 
 
 

@@ -4,13 +4,18 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class GoToSkyEnchantment extends Enchantment {
-    protected GoToSkyEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot... slotTypes) {
-        super(weight, target, slotTypes);
+public class CursedLv1 extends Enchantment {
+
+
+    protected CursedLv1(Rarity rarity, EnchantmentTarget target, EquipmentSlot[] slotTypes) {
+        super(rarity, target, slotTypes);
     }
 
-    @Override
     public int getMaxLevel() {
         return 1;
+    }
+
+    public boolean isCursed() {
+        return true;
     }
 }

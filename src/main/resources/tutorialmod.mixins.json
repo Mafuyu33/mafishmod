@@ -36,6 +36,7 @@
     "WeaponEnchantmentMixin"
   ],
   "client": [
+    "HandledScreenMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin"
