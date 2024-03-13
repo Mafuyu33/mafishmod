@@ -206,15 +206,18 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					BlockPos blockPos = this.getBlockPos();
 					checkAndReplaceWaterBlocks(world, blockPos);
 				}
+				int n = EnchantmentHelper.getLevel(ModEnchantments.SLIPPERY, armorItem);//肥皂
+				if (n > 0) {
+
+				}
 			}
 			if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.HELMET) {//帽子
-				int n = EnchantmentHelper.getLevel(ModEnchantments.MUTE, armorItem);//静音
-				if (n > 0 && this.isPlayer()) {
+				int o = EnchantmentHelper.getLevel(ModEnchantments.MUTE, armorItem);//静音
+				if (o > 0 && this.isPlayer()) {
 					GameOptions gameOptions = MinecraftClient.getInstance().options;
 					gameOptions.getSoundVolumeOption(SoundCategory.MASTER).setValue((double) 0);
 				}
 			}
-
 		}
 	}
 
