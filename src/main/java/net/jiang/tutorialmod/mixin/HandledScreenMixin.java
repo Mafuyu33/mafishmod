@@ -76,8 +76,8 @@ public abstract class HandledScreenMixin extends Screen {
 			// 检查该槽位是否为空
 			if (slotStack.isEmpty()) {
 				// 如果槽位为空，则将物品放置到该槽位
-				slots.set(slotIndex, itemStack.copy());
 				itemStack.decrement(count);
+				slots.set(slotIndex, itemStack.copy());
 				// 可选：通知玩家物品已经放置到背包中
 				System.out.println("已将物品放置到背包中");
 				return;
