@@ -1,6 +1,7 @@
 package net.jiang.tutorialmod.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import net.jiang.tutorialmod.enchantment.ModEnchantments;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
@@ -42,7 +43,7 @@ public abstract class HandledScreenMixin extends Screen {
 			ItemStack itemStack = slot.getStack();
 			System.out.println(itemStack);
 			System.out.println(itemStack.getEnchantments());
-			if (EnchantmentHelper.getLevel(Enchantments.POWER, itemStack) > 0) {
+			if (EnchantmentHelper.getLevel(ModEnchantments.SLIPPERY, itemStack) > 0) {
 				placeItemInPlayerInventory(this.client.player, itemStack);
 			}
 		}
