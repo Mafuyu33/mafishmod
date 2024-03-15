@@ -1,0 +1,27 @@
+检测是不是在VR中
+if (world.isClient && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {   //有MC-VR-API并且在VR中的时候
+    user.sendMessage(Text.literal("在VR里"),false);
+}
+or
+ if (world.isClient && VRPluginVerify.clientInVR() && VRPlugin.API.apiActive(Minecraft.getInstance().player)
+
+
+获取VR玩家信息
+Vec3d currentPosMainController = getControllerPosition(user,0);
+Vec3d currentPosOffController = getControllerPosition(user,1);
+Vec3d currentPosHMD = getHMDPosition(user);
+
+private static Vec3d getHMDPosition(PlayerEntity player) {
+    IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+    if (vrApi != null && vrApi.apiActive(player)) {
+        return vrApi.getVRPlayer(player).getHMD().position();
+    }
+    return null;
+}
+private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
+    IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+    if (vrApi != null && vrApi.apiActive(player)) {
+        return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+    }
+    return null;
+}

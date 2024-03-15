@@ -15,6 +15,7 @@ import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.block.ModBlocks;
 import net.jiang.tutorialmod.item.custom.FireworkArrowItem;
 import net.jiang.tutorialmod.networking.ModMessages;
+import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.potion.ModPotions;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.ModCustomTrades;
@@ -40,7 +41,6 @@ public class TutorialMod implements ModInitializer {
 		ModItemGroups.registerItemGroups();
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
-
 		FuelRegistry.INSTANCE.add(ModItems.COAL_BRIQUEITE,200);
 		ModStatusEffects.registerModEffect();
 		ModPotions.registerPotions();
@@ -50,9 +50,9 @@ public class TutorialMod implements ModInitializer {
 		ModCustomTrades.registerCustomTrades();
 		ModEnchantments.registerModEnchantments();
 		ModPotions.registerBrewingRecipes();
-
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
 		ModMessages.registerC2SPackets();
+		ModParticles.registerParticles();
 
 		try {
 			Class.forName("net.blf02.vrapi.api.IVRAPI");

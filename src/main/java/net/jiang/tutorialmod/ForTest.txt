@@ -29,12 +29,6 @@ if (!world.isClient) {
     }
 }
 
-检测是不是在VR中
-if (world.isClient && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {   //有MC-VR-API并且在VR中的时候
-    user.sendMessage(Text.literal("在VR里"),false);
-}
-or
- if (world.isClient && VRPluginVerify.clientInVR() && VRPlugin.API.apiActive(Minecraft.getInstance().player)
 
 对某个实体造成伤害
 this.damage(getDamageSources().playerAttack(closestPlayer), 10f+level*2);
