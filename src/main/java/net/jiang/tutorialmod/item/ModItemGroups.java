@@ -60,6 +60,7 @@ public class ModItemGroups {
                         entries.add(ModItems.COLLIABLE);
                         entries.add(ModItems.LIGHTNING_BALL);
                         entries.add(ModItems.VR_PEN);
+                        entries.add(ModItems.MILK_FLESH);
                     }).build());
 
 
