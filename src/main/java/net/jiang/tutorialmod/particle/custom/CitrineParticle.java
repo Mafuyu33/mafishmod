@@ -12,20 +12,26 @@ public class CitrineParticle extends SpriteBillboardParticle {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
 
         this.velocityMultiplier = 0F;
-        this.x = xd;
-        this.y = yd;
-        this.z = zd;
+        this.red = (float) xd;
+        this.green = (float) yd;
+        this.blue = (float) zd;
         this.scale *= 0.1F;
         this.maxAge = 2000000000;
         this.setSpriteForAge(spriteSet);
 
-        this.red = 1f;
-        this.green = 1f;
-        this.blue = 1f;
+        this.setColor(red, green, blue); // 设置颜色
+    }
+
+    @Override
+    public void setColor(float red, float green, float blue) {
+        super.setColor(red, green, blue);
     }
 
     @Override
     public void tick() {
+//        if(){
+//           this.age=this.maxAge-1;
+//        }
         this.prevPosX = this.x;
         this.prevPosY = this.y;
         this.prevPosZ = this.z;

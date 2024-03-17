@@ -81,6 +81,7 @@ public class ModItems {
             new ColliableItem(new FabricItemSettings().maxCount(1)));
     public static final Item LIGHTNING_BALL = registerItem("lightning_ball", new LightningBallItem(new FabricItemSettings()));
     public static final Item VR_PEN = registerItem("vr_pen", new VrPenItem(new FabricItemSettings().maxCount(1)));
+    public static final Item VR_RUBBER = registerItem("vr_rubber", new VrPenItem(new FabricItemSettings().maxCount(1)));
     public static final Item MILK_FLESH = registerItem("milk_flesh",new MilkFleshItem(new FabricItemSettings().food(ModFoodComponents.MILK_FLESH)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
