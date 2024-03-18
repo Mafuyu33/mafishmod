@@ -2,33 +2,31 @@ package net.jiang.tutorialmod.item.vrcustom;
 
 import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
-import net.jiang.tutorialmod.particle.custom.CitrineParticle;
+import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.vr.VRPlugin;
 import net.jiang.tutorialmod.vr.VRPluginVerify;
-import net.minecraft.client.particle.SpriteBillboardParticle;
-import net.minecraft.client.texture.atlas.Sprite;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class VrPenItem extends Item {
+public class VrPenItem extends Item{
     public VrPenItem(Settings settings) {
         super(settings);
     }
-
     public boolean isDrawing = false;
     private double red = 1.0;
     private double green = 1.0;
     private double blue = 1.0;
-
+    ParticleStorage particleStorage = new ParticleStorage();
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if(!world.isClient) {
@@ -115,17 +113,10 @@ public class VrPenItem extends Item {
                 }
                 if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive(((PlayerEntity) entity))) {
                     Vec3d currentPosMainController = getControllerPosition((PlayerEntity) entity, 0);
-                    Vec3d currentPosOffController = getControllerPosition((PlayerEntity) entity, 1);
+                    Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
+                    world.addParticle(ModParticles.CITRINE_PARTICLE,true, particlePosition.x,particlePosition.y,particlePosition.z, red, green, blue);
+                    particleStorage.addParticle(particlePosition, red, green, blue);
 
-                    if (((PlayerEntity) entity).getActiveHand() == Hand.MAIN_HAND) {//主手用main
-                        world.addParticle(ModParticles.CITRINE_PARTICLE,
-                                currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ(),
-                                red, green, blue);
-                    } else {//副手用off
-                        world.addParticle(ModParticles.CITRINE_PARTICLE,
-                                currentPosOffController.getX(), currentPosOffController.getY(), currentPosOffController.getZ(),
-                                red, green, blue);
-                    }
                 }
                 if(!VRPluginVerify.clientInVR()||(VRPluginVerify.clientInVR() && !VRPlugin.API.apiActive(((PlayerEntity) entity)))){
                     System.out.println("生成粒子");
@@ -136,9 +127,9 @@ public class VrPenItem extends Item {
                     double offsetX = lookVec.x * distance;
                     double offsetY = lookVec.y * distance;
                     double offsetZ = lookVec.z * distance;
-                    world.addParticle(ModParticles.CITRINE_PARTICLE,
-                            entity.getX()+offsetX, entity.getY() + offsetY + 1.625, entity.getZ()+offsetZ,
-                            red, green, blue);
+                    Vec3d particlePosition = new Vec3d(entity.getX()+offsetX, entity.getY() + offsetY + 1.625, entity.getZ()+offsetZ);
+                    world.addParticle(ModParticles.CITRINE_PARTICLE,true, particlePosition.x,particlePosition.y,particlePosition.z, red, green, blue);
+                    particleStorage.addParticle(particlePosition, red, green, blue);
                 }
             }
         }
