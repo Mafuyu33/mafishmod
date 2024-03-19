@@ -6,7 +6,10 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jiang.tutorialmod.item.custom.*;
 import net.jiang.tutorialmod.TutorialMod;
+import net.jiang.tutorialmod.item.vrcustom.VrCompassesItem;
 import net.jiang.tutorialmod.item.vrcustom.VrPenItem;
+import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
+import net.jiang.tutorialmod.item.vrcustom.VrRulerItem;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -80,9 +83,14 @@ public class ModItems {
     public static final Item COLLIABLE = registerItem("colliable",
             new ColliableItem(new FabricItemSettings().maxCount(1)));
     public static final Item LIGHTNING_BALL = registerItem("lightning_ball", new LightningBallItem(new FabricItemSettings()));
-    public static final Item VR_PEN = registerItem("vr_pen", new VrPenItem(new FabricItemSettings().maxCount(1)));
-    public static final Item VR_RUBBER = registerItem("vr_rubber", new VrPenItem(new FabricItemSettings().maxCount(1)));
     public static final Item MILK_FLESH = registerItem("milk_flesh",new MilkFleshItem(new FabricItemSettings().food(ModFoodComponents.MILK_FLESH)));
+
+
+    public static final Item VR_PEN = registerItem("vr_pen", new VrPenItem(new FabricItemSettings().maxCount(1)));
+    public static final Item VR_RUBBER = registerItem("vr_rubber", new VrRubberItem(new FabricItemSettings().maxCount(1)));
+    public static final Item VR_RULER = registerItem("vr_ruler", new VrRulerItem(new FabricItemSettings().maxCount(1)));
+    public static final Item VR_COMPASSES = registerItem("vr_compasses", new VrCompassesItem(new FabricItemSettings().maxCount(1)));
+
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //放到材料表里

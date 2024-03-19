@@ -53,9 +53,12 @@
   "item.tutorialmod.math_sword": "math_sword",
   "item.tutorialmod.colliable": "colliable",
   "item.tutorialmod.lightning_ball": "lightning_ball",
+  "item.tutorialmod.milk_flesh": "milk_flesh",
+
   "item.tutorialmod.vr_pen": "vr_pen",
   "item.tutorialmod.vr_rubber": "vr_rubber",
-  "item.tutorialmod.milk_flesh": "milk_flesh",
+  "item.tutorialmod.vr_ruler": "vr_ruler",
+  "item.tutorialmod.vr_compasses": "vr_compasses",
 
 
   "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea",

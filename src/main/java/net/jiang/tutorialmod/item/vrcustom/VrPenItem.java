@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -26,7 +27,7 @@ public class VrPenItem extends Item{
     private double red = 1.0;
     private double green = 1.0;
     private double blue = 1.0;
-    ParticleStorage particleStorage = new ParticleStorage();
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if(!world.isClient) {
@@ -115,7 +116,7 @@ public class VrPenItem extends Item{
                     Vec3d currentPosMainController = getControllerPosition((PlayerEntity) entity, 0);
                     Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
                     world.addParticle(ModParticles.CITRINE_PARTICLE,true, particlePosition.x,particlePosition.y,particlePosition.z, red, green, blue);
-                    particleStorage.addParticle(particlePosition, red, green, blue);
+                    ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, red, green, blue);
 
                 }
                 if(!VRPluginVerify.clientInVR()||(VRPluginVerify.clientInVR() && !VRPlugin.API.apiActive(((PlayerEntity) entity)))){
@@ -129,7 +130,7 @@ public class VrPenItem extends Item{
                     double offsetZ = lookVec.z * distance;
                     Vec3d particlePosition = new Vec3d(entity.getX()+offsetX, entity.getY() + offsetY + 1.625, entity.getZ()+offsetZ);
                     world.addParticle(ModParticles.CITRINE_PARTICLE,true, particlePosition.x,particlePosition.y,particlePosition.z, red, green, blue);
-                    particleStorage.addParticle(particlePosition, red, green, blue);
+                    ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, red, green, blue);
                 }
             }
         }

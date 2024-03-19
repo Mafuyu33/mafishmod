@@ -59,9 +59,12 @@ public class ModItemGroups {
                         entries.add(ModItems.MATH_SWORD);
                         entries.add(ModItems.COLLIABLE);
                         entries.add(ModItems.LIGHTNING_BALL);
+                        entries.add(ModItems.MILK_FLESH);
+
                         entries.add(ModItems.VR_PEN);
                         entries.add(ModItems.VR_RUBBER);
-                        entries.add(ModItems.MILK_FLESH);
+                        entries.add(ModItems.VR_RULER);
+                        entries.add(ModItems.VR_COMPASSES);
                     }).build());
 
 

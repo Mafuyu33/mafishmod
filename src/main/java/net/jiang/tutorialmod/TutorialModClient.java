@@ -1,8 +1,6 @@
 package net.jiang.tutorialmod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -22,7 +20,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.world.ClientWorld;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -48,7 +45,7 @@ public class TutorialModClient implements ClientModInitializer {
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {//客户端已经成功连接到服务器
                 // 调用您的方法
-                ParticleStorage.spawnAllParticles(MinecraftClient.getInstance().world);
+                ParticleStorage.getOrCreateForWorld().spawnAllParticles(MinecraftClient.getInstance().world);
                 System.out.println("哈哈哈哈哈");
 
         });
