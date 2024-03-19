@@ -20,7 +20,6 @@ public class VrCompassesItem extends Item{
         super(settings);
     }
     private Vec3d firstPosition;
-    public boolean switchMode = false;
     private double red = 1.0;
     private double green = 1.0;
     private double blue = 1.0;
@@ -28,8 +27,7 @@ public class VrCompassesItem extends Item{
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
-        if(!world.isClient) {
+        if(world.isClient) {
             if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {//VR
                 if (firstPosition == null) {
                     // 第一次使用直尺，记录第一个位置
@@ -38,16 +36,15 @@ public class VrCompassesItem extends Item{
                     // 第二次使用直尺，记录第二个位置
                     Vec3d secondPosition = getControllerPosition(player, 0);
                     //获取颜色
-                    getColor(player);
+                    setColor(player);
                     // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
-                    generateParticlesBetweenTwoPositions(world, firstPosition, secondPosition,red,green,blue);
+                    generateParticlesInSphere(world, firstPosition, secondPosition,red,green,blue);
 
                     // 清除第一个位置
                     firstPosition = null;
                 }
             }
             if(!VRPluginVerify.clientInVR()||(VRPluginVerify.clientInVR() && !VRPlugin.API.apiActive((player)))){//NOT VR
-                System.out.println("生成粒子");
                 // 获取玩家的朝向
                 Vec3d lookVec = player.getRotationVector();
                 double distance = 1d;
@@ -58,13 +55,15 @@ public class VrCompassesItem extends Item{
                 if (firstPosition == null) {
                     // 第一次使用直尺，记录第一个位置
                     firstPosition = new Vec3d(player.getX()+offsetX, player.getY() + offsetY + 1.625, player.getZ()+offsetZ);
+                    System.out.println(firstPosition);
                 } else {
                     // 第二次使用直尺，记录第二个位置
                     Vec3d secondPosition = new Vec3d(player.getX()+offsetX, player.getY() + offsetY + 1.625, player.getZ()+offsetZ);
+                    System.out.println(secondPosition);
                     //获取颜色
-                    getColor(player);
+                    setColor(player);
                     // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
-                    generateParticlesBetweenTwoPositions(world, firstPosition, secondPosition,red,green,blue);
+                    generateParticlesInSphere(world, firstPosition, secondPosition,red,green,blue);
 
                     // 清除第一个位置
                     firstPosition = null;
@@ -73,29 +72,8 @@ public class VrCompassesItem extends Item{
         }
         return super.use(world,player,hand);
     }
-//    @Override
-//    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        if(!world.isClient) {
-//            if(!switchMode){
-//                if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player)) {
-//                    Vec3d currentPosMainController = getControllerPosition((PlayerEntity) entity, 0);
-//                    Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
-//                    world.addParticle(ModParticles.CITRINE_PARTICLE,true, particlePosition.x,particlePosition.y,particlePosition.z, red, green, blue);
-//                    ParticleStorage.getOrCreateForWorld(((ClientWorld) world)).addParticle(particlePosition, red, green, blue);
-//
-//                }
-//            }
-//
-//
-//
-//            switchMode = !switchMode;
-//
-//            user.sendMessage(Text.literal((String.valueOf(""))), true);
-//        }
-//        return super.use(world,user,hand);
-//    }
 
-    private void getColor(Entity entity) {
+    private void setColor(Entity entity) {
         if(entity.getHandItems()!=null && entity instanceof PlayerEntity) {
             Item item = ((PlayerEntity) entity).getOffHandStack().getItem();
             System.out.println(item);
@@ -175,35 +153,72 @@ public class VrCompassesItem extends Item{
         return null;
     }
 
-    private void generateParticlesBetweenTwoPositions(World world, Vec3d pos1, Vec3d pos2,double red,double green,double blue) {
-        // 计算两个位置之间的距离
-        double distanceX = pos2.x - pos1.x;
-        double distanceY = pos2.y - pos1.y;
-        double distanceZ = pos2.z - pos1.z;
+    private void generateParticlesBetweenTwoPositions(World world, Vec3d pos1, Vec3d pos2, double red, double green, double blue) {
+        // 计算圆心到半径的距离
+        double radius = pos1.distanceTo(pos2);
 
-        // 计算在两个位置之间生成的粒子数量，这里可以根据需要调整粒子数量
-        int numParticles = (int) (Math.max(Math.abs(distanceX), Math.max(Math.abs(distanceY), Math.abs(distanceZ))) * 2);
+        // 设置粒子数量与半径相关联
+        int numParticles = (int) (Math.PI * radius)*70; // 一个单位长度对应π个粒子
+        System.out.println(numParticles);
 
-        // 计算粒子的步长，以便在两个位置之间均匀生成粒子
-        double stepX = distanceX / numParticles;
-        double stepY = distanceY / numParticles;
-        double stepZ = distanceZ / numParticles;
+        // 设置角度步长
+        double angleStep = Math.PI * 2 / numParticles;
 
-        // 从起始位置开始生成粒子
-        double posX = pos1.x;
-        double posY = pos1.y;
-        double posZ = pos1.z;
-
-        for (int i = 0; i < numParticles; i++) {
-            // 根据步长更新粒子位置
-            posX += stepX;
-            posY += stepY;
-            posZ += stepZ;
+        // 从0到2PI遍历角度
+        for (double angle = 0; angle < Math.PI * 2; angle += angleStep) {
+            // 计算圆上点的坐标
+            double posX = pos1.x + Math.cos(angle) * radius;
+            double posY = pos1.y + (pos2.y - pos1.y) / 2; // 使y坐标在两点之间
+            double posZ = pos1.z + Math.sin(angle) * radius;
 
             // 在当前位置生成粒子
-            // 这里仅作为示例，你需要根据你的粒子效果来调整生成粒子的方法
             world.addParticle(ModParticles.CITRINE_PARTICLE, posX, posY, posZ, red, green, blue);
             ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(posX, posY, posZ), red, green, blue);
         }
     }
+
+    private void generateParticlesInSphere(World world, Vec3d pos1, Vec3d pos2, double red, double green, double blue) {
+        // 计算球体的半径
+        double radius = pos1.distanceTo(pos2) / 2;
+
+        // 计算球体的中心点
+        Vec3d center = new Vec3d(
+                (pos1.x + pos2.x) / 2,
+                (pos1.y + pos2.y) / 2,
+                (pos1.z + pos2.z) / 2
+        );
+
+        // 设置粒子密度，可以根据需要调整
+        int density = 8; // 每个单位长度的粒子数
+
+        // 计算立方体的边长
+        double sideLength = Math.ceil(radius) * 2;
+
+        // 计算立方体的起始位置
+        double startX = center.x - sideLength / 2;
+        double startY = center.y - sideLength / 2;
+        double startZ = center.z - sideLength / 2;
+
+        // 计算每个粒子的间距
+        double spacing = 1.0 / density;
+
+        // 遍历立方体中的每个位置
+        for (double x = startX; x < startX + sideLength; x += spacing) {
+            for (double y = startY; y < startY + sideLength; y += spacing) {
+                for (double z = startZ; z < startZ + sideLength; z += spacing) {
+                    // 如果当前位置到球心的距离接近于半径，则生成粒子
+                    Vec3d pos = new Vec3d(x, y, z);
+                    if (Math.abs(pos.distanceTo(center) - radius) < 0.5) { // 在此可以调整粒子生成的阈值
+                        // 在当前位置生成粒子
+                        world.addParticle(ModParticles.CITRINE_PARTICLE, x, y, z, red, green, blue);
+                        ParticleStorage.getOrCreateForWorld().addParticle(pos, red, green, blue);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 }

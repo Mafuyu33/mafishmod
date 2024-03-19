@@ -24,7 +24,6 @@ public class VrRulerItem extends Item{
         super(settings);
     }
     private Vec3d firstPosition;
-    public boolean switchMode = false;
     private double red = 1.0;
     private double green = 1.0;
     private double blue = 1.0;
@@ -32,7 +31,6 @@ public class VrRulerItem extends Item{
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
         if(world.isClient) {
             if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {//VR
                 if (firstPosition == null) {

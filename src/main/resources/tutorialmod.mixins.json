@@ -16,6 +16,7 @@
     "FireworkRocketItemMixin",
     "FishingBobberEntityMixin",
     "FishingRodItemMixin",
+    "HandledScreenMixin",
     "HopperBlockEntityMixin",
     "HopperBlockMixin",
     "HorseSaddleEnchantmentMixin",
@@ -30,7 +31,6 @@
     "MobEntityMixin",
     "PickaxeInfiniteMixin",
     "PlayerEntityMixin",
-    "HandledScreenMixin",
     "ThrowableDiamondMixin",
     "TntBlockMixin",
     "TripwireBlockMixin",
@@ -40,7 +40,8 @@
     "InventoryScreenMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
-    "ModelLoaderMixin"
+    "ModelLoaderMixin",
+    "ParticleManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -14,6 +14,7 @@ import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.particle.custom.CitrineParticle;
+import net.jiang.tutorialmod.particle.custom.RubberParticle;
 import net.jiang.tutorialmod.screen.GemPolishingScreen;
 import net.jiang.tutorialmod.screen.ModScreenHandlers;
 import net.minecraft.client.MinecraftClient;
@@ -41,6 +42,8 @@ public class TutorialModClient implements ClientModInitializer {
         ModMessages.registerS2CPackets();
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.CITRINE_PARTICLE, CitrineParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.RUBBER_PARTICLE, RubberParticle.Factory::new);
+
 //        ModModelPredicateProvider.registerModModels();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {//客户端已经成功连接到服务器
