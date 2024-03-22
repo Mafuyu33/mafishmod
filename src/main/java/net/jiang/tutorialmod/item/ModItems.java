@@ -6,10 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.jiang.tutorialmod.item.custom.*;
 import net.jiang.tutorialmod.TutorialMod;
-import net.jiang.tutorialmod.item.vrcustom.VrCompassesItem;
-import net.jiang.tutorialmod.item.vrcustom.VrPenItem;
-import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
-import net.jiang.tutorialmod.item.vrcustom.VrRulerItem;
+import net.jiang.tutorialmod.item.vrcustom.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -90,6 +87,7 @@ public class ModItems {
     public static final Item VR_RUBBER = registerItem("vr_rubber", new VrRubberItem(new FabricItemSettings().maxCount(1)));
     public static final Item VR_RULER = registerItem("vr_ruler", new VrRulerItem(new FabricItemSettings().maxCount(1)));
     public static final Item VR_COMPASSES = registerItem("vr_compasses", new VrCompassesItem(new FabricItemSettings().maxCount(1)));
+    public static final Item VR_MAGIC = registerItem("vr_magic", new VrMagicItem(new FabricItemSettings().maxCount(1)));
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){

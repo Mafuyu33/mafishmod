@@ -65,6 +65,7 @@ public class ModItemGroups {
                         entries.add(ModItems.VR_RUBBER);
                         entries.add(ModItems.VR_RULER);
                         entries.add(ModItems.VR_COMPASSES);
+                        entries.add(ModItems.VR_MAGIC);
                     }).build());
 
 

@@ -1,5 +1,9 @@
 {
   "tooltip.tutorialmod.ruby_stuff.tooltip": "§m试试就逝世",
+  "tooltip.tutorialmod.vr_pen.tooltip": "副手拿染料改变颜色，副手的物品数量是正方形笔刷的大小",
+  "tooltip.tutorialmod.vr_rubber.tooltip": "副手的物品数量是橡皮擦大小，副手拿马夫鱼是大范围清空",
+  "tooltip.tutorialmod.vr_compasses.tooltip": "选择三个点画一个圆，第一个点是圆心，第二个确定半径，第三个确定平面",
+
 
   "item.tutorialmod.ruby": "鱼",
   "item.tutorialmod.raw_ruby": "炸鱼",
@@ -8,16 +12,12 @@
   "item.tutorialmod.metal_detector": "金属探测器",
   "item.tutorialmod.tomato": "番茄",
   "item.tutorialmod.coal_briquette": "煤球",
-
   "item.tutorialmod.ruby_staff": "红宝石法杖",
-
   "item.tutorialmod.ruby_pickaxe": "卢比镐子",
-
   "item.tutorialmod.ruby_helmet": "卢比帽子",
   "item.tutorialmod.ruby_chestplate": "卢比胸甲",
   "item.tutorialmod.ruby_leggings": "卢比腿甲",
   "item.tutorialmod.ruby_boots": "卢比鞋子",
-
   "block.tutorialmod.ruby_block": "卢比方块",
   "block.tutorialmod.raw_ruby_block": "RAW_卢比方块",
   "block.tutorialmod.white_cat_block": "白猫方块",
@@ -53,7 +53,7 @@
   "item.tutorialmod.vr_rubber": "VR橡皮",
   "item.tutorialmod.vr_ruler": "VR直尺",
   "item.tutorialmod.vr_compasses": "VR圆规",
-
+  "item.tutorialmod.vr_magic": "VR魔法阵",
 
 
 

@@ -62,11 +62,14 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 			}
 
 			this.updateForLeashLength(f);
-			if(!(entity instanceof PlayerEntity user)
-					|| (VRPluginVerify.hasAPI && !VRPlugin.API.playerInVR(user)) || !VRPluginVerify.hasAPI) {//非VR状态下的拴绳
-				forceSimulate(f, entity,6.0F);
+			if(entity instanceof PlayerEntity user) {
+				if(VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {//VR状态下的拴绳
+					forceSimulate(f, entity, 15.0F);
+				} else {//非vr
+					forceSimulate(f, entity, 6.0F);
+				}
 			}else {
-				forceSimulate(f, entity,15.0F);
+				forceSimulate(f, entity, 6.0F);
 			}
 
 		}

@@ -1,6 +1,10 @@
 {
   "tooltip.tutorialmod.metal_detector.tooltip": "Find valuables underground",
   "tooltip.tutorialmod.ruby_stuff.tooltip": "§e",
+  "tooltip.tutorialmod.vr_pen.tooltip": "Holding dye in the off-hand changes the color, and the quantity of the item in the off-hand determines the size of the square brush",
+  "tooltip.tutorialmod.vr_rubber.tooltip": "The quantity of the item in the off-hand determines the size of the eraser, and holding a ruby in the off-hand clears a large area.",
+  "tooltip.tutorialmod.vr_compasses.tooltip": "Draw a circle by selecting three points: the first point is the center of the circle, the second determines the radius, and the third establishes the plane.",
+
 
   "item.tutorialmod.ruby": "RUBY",
   "item.tutorialmod.raw_ruby": "RAW RUBY",
@@ -59,6 +63,7 @@
   "item.tutorialmod.vr_rubber": "vr_rubber",
   "item.tutorialmod.vr_ruler": "vr_ruler",
   "item.tutorialmod.vr_compasses": "vr_compasses",
+  "item.tutorialmod.vr_magic": "vr_magic",
 
 
   "enchantment.tutorialmod.bad_luck_of_sea": "bad_luck_of_sea",

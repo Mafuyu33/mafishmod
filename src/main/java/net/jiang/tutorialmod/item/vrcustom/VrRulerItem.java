@@ -32,7 +32,7 @@ public class VrRulerItem extends Item{
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if(world.isClient) {
-            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {//VR
+            if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(player)) {//VR
                 if (firstPosition == null) {
                     // 第一次使用直尺，记录第一个位置
                     firstPosition = getControllerPosition(player, 0);
@@ -47,8 +47,7 @@ public class VrRulerItem extends Item{
                     // 清除第一个位置
                     firstPosition = null;
                 }
-            }
-            if(!VRPluginVerify.clientInVR()||(VRPluginVerify.clientInVR() && !VRPlugin.API.apiActive((player)))){//NOT VR
+            } else {//NOT VR
                 // 获取玩家的朝向
                 Vec3d lookVec = player.getRotationVector();
                 double distance = 1d;

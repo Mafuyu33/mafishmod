@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.particle.custom;
 import net.blf02.vrapi.api.IVRAPI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.vr.VRPlugin;
@@ -54,6 +55,10 @@ public class CitrineParticle extends SpriteBillboardParticle {
                         this.markDead();
                         ParticleStorage.getOrCreateForWorld().removeParticleAtPosition(new Vec3d(this.x, this.y, this.z));
                     }
+                }
+                if(VrRubberItem.isErasing && player.getOffHandStack().getItem()== ModItems.RUBY){
+                    this.markDead();
+                    ParticleStorage.getOrCreateForWorld().clearAll();
                 }
             }
         }

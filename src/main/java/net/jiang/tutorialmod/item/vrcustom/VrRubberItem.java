@@ -1,12 +1,14 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
 import net.blf02.vrapi.api.IVRAPI;
+import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.mixinhelper.VrRubberItemHelper;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.vr.VRPlugin;
 import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.client.world.ClientWorld;
@@ -22,6 +24,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -46,7 +49,7 @@ public class VrRubberItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if(entity instanceof PlayerEntity player) {
-            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {
+            if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(player)) {//vr
                 if (VrRubberItem.isErasing) {
                     Vec3d pos = getControllerPosition(player, 0);
                     double size = (player.getOffHandStack().getCount())*0.025+0.05;
@@ -56,8 +59,7 @@ public class VrRubberItem extends Item {
                     );
                     collisionBoxRenderer(userbox,size);
                 }
-            }
-            if(!VRPluginVerify.clientInVR()||(VRPluginVerify.clientInVR() && !VRPlugin.API.apiActive((player)))) {
+            }else{//非vr
                 if (VrRubberItem.isErasing) {
                     Vec3d lookVec = player.getRotationVector();
                     double distance = 1d;
@@ -125,5 +127,11 @@ public class VrRubberItem extends Item {
             return vrApi.getVRPlayer(player).getController(controllerIndex).position();
         }
         return null;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.tutorialmod.vr_rubber.tooltip"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

@@ -5,21 +5,27 @@ import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.vr.VRPlugin;
 import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class VrCompassesItem extends Item{
     public VrCompassesItem(Settings settings) {
         super(settings);
     }
     private Vec3d firstPosition;
+    private Vec3d secondPosition;
     private double red = 1.0;
     private double green = 1.0;
     private double blue = 1.0;
@@ -28,23 +34,24 @@ public class VrCompassesItem extends Item{
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if(world.isClient) {
-            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {//VR
-                if (firstPosition == null) {
+            if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(player)) {//VR
+                if (firstPosition == null && secondPosition ==null) {
                     // 第一次使用直尺，记录第一个位置
                     firstPosition = getControllerPosition(player, 0);
-                } else {
+                } else if(secondPosition==null) {
                     // 第二次使用直尺，记录第二个位置
-                    Vec3d secondPosition = getControllerPosition(player, 0);
+                    secondPosition = getControllerPosition(player, 0);
+                }else {
+                    Vec3d thirdPosition = getControllerPosition(player, 0);
                     //获取颜色
                     setColor(player);
-                    // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
-                    generateParticlesInSphere(world, firstPosition, secondPosition,red,green,blue);
-
-                    // 清除第一个位置
+                    //生成圆
+                    generateParticlesOnCircle(world, firstPosition, secondPosition, thirdPosition,red,green,blue);
+                    // 清除位置
                     firstPosition = null;
+                    secondPosition= null;
                 }
-            }
-            if(!VRPluginVerify.clientInVR()||(VRPluginVerify.clientInVR() && !VRPlugin.API.apiActive((player)))){//NOT VR
+            } else{//NOT VR
                 // 获取玩家的朝向
                 Vec3d lookVec = player.getRotationVector();
                 double distance = 1d;
@@ -52,26 +59,73 @@ public class VrCompassesItem extends Item{
                 double offsetX = lookVec.x * distance;
                 double offsetY = lookVec.y * distance;
                 double offsetZ = lookVec.z * distance;
-                if (firstPosition == null) {
+                Vec3d pos = new Vec3d(player.getX()+offsetX, player.getY() + offsetY + 1.625, player.getZ()+offsetZ);
+
+                if (firstPosition == null && secondPosition ==null) {
                     // 第一次使用直尺，记录第一个位置
-                    firstPosition = new Vec3d(player.getX()+offsetX, player.getY() + offsetY + 1.625, player.getZ()+offsetZ);
-                    System.out.println(firstPosition);
-                } else {
+                    firstPosition = pos;
+                } else if(secondPosition==null) {
                     // 第二次使用直尺，记录第二个位置
-                    Vec3d secondPosition = new Vec3d(player.getX()+offsetX, player.getY() + offsetY + 1.625, player.getZ()+offsetZ);
-                    System.out.println(secondPosition);
+                    secondPosition = pos;
+                }else {
+                    Vec3d thirdPosition = pos;
                     //获取颜色
                     setColor(player);
-                    // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
-                    generateParticlesInSphere(world, firstPosition, secondPosition,red,green,blue);
-
-                    // 清除第一个位置
+                    //生成圆
+                    generateParticlesOnCircle(world, firstPosition, secondPosition, thirdPosition,red,green,blue);
+                    // 清除位置
                     firstPosition = null;
+                    secondPosition= null;
                 }
             }
         }
         return super.use(world,player,hand);
     }
+
+    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
+        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+        if (vrApi != null && vrApi.apiActive(player)) {
+            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+        }
+        return null;
+    }
+
+    private void generateParticlesOnCircle(World world, Vec3d center, Vec3d radiusPoint, Vec3d thirdPoint, double red, double green, double blue) {
+        // 计算半径
+        double radius = center.distanceTo(radiusPoint);
+        // 计算圆周上的点数量
+        int density = 40;
+        int numParticles = (int) (2 * Math.PI * radius * density);
+        System.out.println(numParticles);
+
+        // 计算法向量
+        Vec3d normal = radiusPoint.subtract(center).crossProduct(thirdPoint.subtract(center)).normalize();
+
+        // 找到两个与圆心向量垂直的向量
+        Vec3d v1 = radiusPoint.subtract(center).normalize(); // 从圆心指向第一个点，得到一个向量
+        Vec3d v2 = normal.crossProduct(v1).normalize(); // 使用法向量和v1的叉积得到一个与法向量和v1都垂直的向量
+
+
+        // 计算圆周上的点
+        for (int i = 0; i < numParticles; i++) {
+            double angle = 2 * Math.PI * i / numParticles;
+            double cosAngle = Math.cos(angle);
+            double sinAngle = Math.sin(angle);
+            // 使用两个向量和半径来计算圆周上的点
+            double x = center.x + radius * (cosAngle * v1.getX() + sinAngle * v2.getX());
+            double y = center.y + radius * (cosAngle * v1.getY() + sinAngle * v2.getY());
+            double z = center.z + radius * (cosAngle * v1.getZ() + sinAngle * v2.getZ());
+
+            // 在当前位置生成粒子
+            System.out.println(new Vec3d(x,y,z));
+            world.addParticle(ModParticles.CITRINE_PARTICLE, x, y, z, red, green, blue);
+            ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(x, y, z), red, green, blue);
+        }
+    }
+
+
+
+
 
     private void setColor(Entity entity) {
         if(entity.getHandItems()!=null && entity instanceof PlayerEntity) {
@@ -145,80 +199,17 @@ public class VrCompassesItem extends Item{
         }
     }
 
-    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
-        }
-        return null;
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.tutorialmod.vr_compasses.tooltip"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
-
-    private void generateParticlesBetweenTwoPositions(World world, Vec3d pos1, Vec3d pos2, double red, double green, double blue) {
-        // 计算圆心到半径的距离
-        double radius = pos1.distanceTo(pos2);
-
-        // 设置粒子数量与半径相关联
-        int numParticles = (int) (Math.PI * radius)*70; // 一个单位长度对应π个粒子
-        System.out.println(numParticles);
-
-        // 设置角度步长
-        double angleStep = Math.PI * 2 / numParticles;
-
-        // 从0到2PI遍历角度
-        for (double angle = 0; angle < Math.PI * 2; angle += angleStep) {
-            // 计算圆上点的坐标
-            double posX = pos1.x + Math.cos(angle) * radius;
-            double posY = pos1.y + (pos2.y - pos1.y) / 2; // 使y坐标在两点之间
-            double posZ = pos1.z + Math.sin(angle) * radius;
-
-            // 在当前位置生成粒子
-            world.addParticle(ModParticles.CITRINE_PARTICLE, posX, posY, posZ, red, green, blue);
-            ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(posX, posY, posZ), red, green, blue);
-        }
-    }
-
-    private void generateParticlesInSphere(World world, Vec3d pos1, Vec3d pos2, double red, double green, double blue) {
-        // 计算球体的半径
-        double radius = pos1.distanceTo(pos2) / 2;
-
-        // 计算球体的中心点
-        Vec3d center = new Vec3d(
-                (pos1.x + pos2.x) / 2,
-                (pos1.y + pos2.y) / 2,
-                (pos1.z + pos2.z) / 2
-        );
-
-        // 设置粒子密度，可以根据需要调整
-        int density = 8; // 每个单位长度的粒子数
-
-        // 计算立方体的边长
-        double sideLength = Math.ceil(radius) * 2;
-
-        // 计算立方体的起始位置
-        double startX = center.x - sideLength / 2;
-        double startY = center.y - sideLength / 2;
-        double startZ = center.z - sideLength / 2;
-
-        // 计算每个粒子的间距
-        double spacing = 1.0 / density;
-
-        // 遍历立方体中的每个位置
-        for (double x = startX; x < startX + sideLength; x += spacing) {
-            for (double y = startY; y < startY + sideLength; y += spacing) {
-                for (double z = startZ; z < startZ + sideLength; z += spacing) {
-                    // 如果当前位置到球心的距离接近于半径，则生成粒子
-                    Vec3d pos = new Vec3d(x, y, z);
-                    if (Math.abs(pos.distanceTo(center) - radius) < 0.5) { // 在此可以调整粒子生成的阈值
-                        // 在当前位置生成粒子
-                        world.addParticle(ModParticles.CITRINE_PARTICLE, x, y, z, red, green, blue);
-                        ParticleStorage.getOrCreateForWorld().addParticle(pos, red, green, blue);
-                    }
-                }
-            }
-        }
-    }
-
-
-
 
 }
+
+
+
+
+
+
+
