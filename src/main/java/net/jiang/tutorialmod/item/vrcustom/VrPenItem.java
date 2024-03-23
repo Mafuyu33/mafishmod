@@ -1,10 +1,9 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
-import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -63,10 +62,10 @@ public class VrPenItem extends Item{
                 }
 //                if (Items.ENCHANTED_BOOK)
                 if(count<=1) {//单画笔
-                    if (entity instanceof PlayerEntity user && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {//有MC-VR-API并且在VR中的时候
-//                        float test = getControllerRoll(((PlayerEntity) entity),0);
+                    if (entity instanceof PlayerEntity user && VRPlugin.canRetrieveData(user)) {//有MC-VR-API并且在VR中的时候
+//                        float test = VRDataHandler.getControllerRoll(user, 0);
 //                        System.out.println(test);
-                        Vec3d currentPosMainController = getControllerPosition((PlayerEntity) entity, 0);
+                        Vec3d currentPosMainController = VRDataHandler.getControllerPosition(user, 0);
                         Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
                         generateParticles(world, particlePosition, lastParticlePosition);
                         lastParticlePosition = particlePosition;
@@ -84,12 +83,12 @@ public class VrPenItem extends Item{
                     }
                 }else {//和count相关的正方形画笔
 
-                    if ((entity instanceof PlayerEntity user && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user))) {//VR
+                    if ((entity instanceof PlayerEntity user && VRPlugin.canRetrieveData(user))) {//VR
 
-                        Vec3d currentLookAngleMainController = getControllerLookAngle((PlayerEntity) entity, 0);
-                        Vec3d currentPosMainController = getControllerPosition((PlayerEntity) entity, 0);
+                        Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle(user, 0);
+                        Vec3d currentPosMainController = VRDataHandler.getControllerPosition(user, 0);
                         Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
-                        float controllerRoll = getControllerRoll(((PlayerEntity) entity),0);
+                        float controllerRoll = VRDataHandler.getControllerRoll(user, 0);
                         generateParticlesInSquareWithEdgesVR(world, particlePosition, currentLookAngleMainController,controllerRoll, count);
                     }else{//非VR
                         // 获取玩家的朝向
@@ -273,27 +272,7 @@ public class VrPenItem extends Item{
             ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, red, green, blue);
         }
     }
-    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
-        }
-        return null;
-    }
-    private static Vec3d getControllerLookAngle(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).getLookAngle();
-        }
-        return null;
-    }
-    private static float getControllerRoll(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).getRoll();
-        }
-        return 0;
-    }
+
     private Vec3d rotateVec3d(Vec3d vec, Matrix3f rotationMatrix) {
         return new Vec3d(
                 vec.x * rotationMatrix.m00 + vec.y * rotationMatrix.m01 + vec.z * rotationMatrix.m02,

@@ -1,12 +1,10 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
-import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.VRDataHandler;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.jiang.tutorialmod.VRPlugin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -15,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
@@ -48,7 +47,7 @@ public class VrMagicItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if (entity instanceof PlayerEntity player) {
-            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {
+            if (VRPlugin.canRetrieveData(player)) {
                 if (isUsingMagic) {
                     Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 0);
                     Vec3d currentLookAngleOffController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 1);
@@ -63,6 +62,8 @@ public class VrMagicItem extends Item {
                         generateParticlesInMagicWithEdgesVR(world, currentPosOffController, currentLookAngleOffController, offControllerRoll,red,0,0);
                     }
                 }
+            } else {
+                player.sendMessage(Text.literal("sorry, this item currently only working with VR Mode :("), false);
             }
         }
     }
@@ -142,6 +143,5 @@ public class VrMagicItem extends Item {
             world.addParticle(ModParticles.RUBBER_PARTICLE, true, particlePosition.x, particlePosition.y, particlePosition.z, 0, 0, 0);
         }
     }
-
 
 }
