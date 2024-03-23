@@ -1,8 +1,10 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
+import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
-import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,15 +34,15 @@ public class VrCompassesItem extends Item{
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if(world.isClient) {
-            if (VRPlugin.isPlayerInVR(player)) {//VR
+            if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(player)) {//VR
                 if (firstPosition == null && secondPosition ==null) {
                     // 第一次使用直尺，记录第一个位置
-                    firstPosition = VRPlugin.getControllerPosition(player, 0);
+                    firstPosition = getControllerPosition(player, 0);
                 } else if(secondPosition==null) {
                     // 第二次使用直尺，记录第二个位置
-                    secondPosition = VRPlugin.getControllerPosition(player, 0);
+                    secondPosition = getControllerPosition(player, 0);
                 }else {
-                    Vec3d thirdPosition = VRPlugin.getControllerPosition(player, 0);
+                    Vec3d thirdPosition = getControllerPosition(player, 0);
                     //获取颜色
                     setColor(player);
                     //生成圆
@@ -78,6 +80,14 @@ public class VrCompassesItem extends Item{
             }
         }
         return super.use(world,player,hand);
+    }
+
+    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
+        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+        if (vrApi != null && vrApi.apiActive(player)) {
+            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+        }
+        return null;
     }
 
     private void generateParticlesOnCircle(World world, Vec3d center, Vec3d radiusPoint, Vec3d thirdPoint, double red, double green, double blue) {

@@ -1,8 +1,10 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
+import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
-import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,13 +32,13 @@ public class VrRulerItem extends Item{
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if(world.isClient) {
-            if (VRPlugin.isPlayerInVR(player)) {//VR
+            if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(player)) {//VR
                 if (firstPosition == null) {
                     // 第一次使用直尺，记录第一个位置
-                    firstPosition = VRPlugin.getControllerPosition(player, 0);
+                    firstPosition = getControllerPosition(player, 0);
                 } else {
                     // 第二次使用直尺，记录第二个位置
-                    Vec3d secondPosition = VRPlugin.getControllerPosition(player, 0);
+                    Vec3d secondPosition = getControllerPosition(player, 0);
                     //获取颜色
                     setColor(player);
                     // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
@@ -144,6 +146,14 @@ public class VrRulerItem extends Item{
                 blue =1.0;
             }
         }
+    }
+
+    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
+        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+        if (vrApi != null && vrApi.apiActive(player)) {
+            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+        }
+        return null;
     }
 
     private void generateParticlesBetweenTwoPositions(World world, Vec3d pos1, Vec3d pos2,double red,double green,double blue) {
