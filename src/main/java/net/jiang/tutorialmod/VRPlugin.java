@@ -67,15 +67,16 @@ public class VRPlugin {
         return null;
     }
 
-    public static boolean isClientInVR(){
+    public static boolean canRetrieveData(PlayerEntity player){
         if (vrApi != null){
             return false;
         }
         PlayerEntity clientPlayer = MinecraftClient.getInstance().player;
-        if (clientPlayer == null){
-            return true; // so strange...
+        if (clientPlayer != null){
+            return isPlayerInVR(clientPlayer); // client side must play in VR to retrieve data
         }
-        return isPlayerInVR(clientPlayer);
+        // server side can always retrieve data
+        return true;
     }
 
     public static Vec3d getMainhandControllerPosition(PlayerEntity player){
@@ -93,6 +94,12 @@ public class VRPlugin {
     }
     public static float getControllerRoll(PlayerEntity player, int controllerIndex) {
         return getIfPlayerInVR(player, vrplayer -> vrplayer.getController(controllerIndex).getRoll());
+    }
+    public static float getControllerRoll(PlayerEntity player, int controllerIndex) {
+        Float value = getIfPlayerInVR(player, vrplayer -> vrplayer.getController(controllerIndex).getRoll());
+        if (value == null){
+            return 0;
+        }
     }
     public static Vec3d getHMDPosition(PlayerEntity player){
         return getIfPlayerInVR(player, vrplayer -> vrplayer.getHMD().position());
