@@ -33,6 +33,7 @@ public class VrPenItem extends Item{
     private double green = 1.0;
     private double blue = 1.0;
     private int count = 0;
+    private Item item;
     private Vec3d lastParticlePosition= null;
 
     @Override
@@ -56,14 +57,15 @@ public class VrPenItem extends Item{
         if(isDrawing){//画笔
             if(world.isClient) {
                 if(entity.getHandItems()!=null && entity instanceof PlayerEntity) {
-                    Item item = ((PlayerEntity) entity).getOffHandStack().getItem();
+                    item = ((PlayerEntity) entity).getOffHandStack().getItem();
                     count = ((PlayerEntity) entity).getOffHandStack().getCount();
                     setPenColor(item);
                 }
+//                if (Items.ENCHANTED_BOOK)
                 if(count<=1) {//单画笔
                     if (entity instanceof PlayerEntity user && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {//有MC-VR-API并且在VR中的时候
-                        float test = getControllerRoll(((PlayerEntity) entity),0);
-                        System.out.println(test);
+//                        float test = getControllerRoll(((PlayerEntity) entity),0);
+//                        System.out.println(test);
                         Vec3d currentPosMainController = getControllerPosition((PlayerEntity) entity, 0);
                         Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
                         generateParticles(world, particlePosition, lastParticlePosition);
@@ -226,6 +228,29 @@ public class VrPenItem extends Item{
         generateParticles(world, pos3, pos1);
         generateParticles(world, pos4, pos3);
     }
+    private void generateKnockBackParticles(World world, Vec3d particlePosition, Vec3d lastParticlePosition) {
+        if (lastParticlePosition != null) {
+            double distance = particlePosition.distanceTo(lastParticlePosition);
+            int density = 40; // 设置粒子密度，可以根据需要调整
+            int numParticles = (int) (density * distance);
+            if(numParticles<=0){
+                numParticles=1;
+            }
+            Vec3d direction = particlePosition.subtract(lastParticlePosition).normalize();
+            for (int i = 1; i <= numParticles; i++) {
+                double ratio = (double) i / numParticles;
+                double x = lastParticlePosition.x + ratio * distance * direction.x;
+                double y = lastParticlePosition.y + ratio * distance * direction.y;
+                double z = lastParticlePosition.z + ratio * distance * direction.z;
+                world.addParticle(ModParticles.KNOCK_BACK_PARTICLE, true, x, y, z, 1.0, 1.0, 0.0);
+                ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(x, y, z), 1.0, 1.0, 0.0);
+            }
+        } else {
+            world.addParticle(ModParticles.KNOCK_BACK_PARTICLE, true, particlePosition.x, particlePosition.y, particlePosition.z, red, green, blue);
+            ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, 1.0, 1.0, 0.0);
+        }
+    }
+
     private void generateParticles(World world, Vec3d particlePosition, Vec3d lastParticlePosition) {
         if (lastParticlePosition != null) {
             double distance = particlePosition.distanceTo(lastParticlePosition);
