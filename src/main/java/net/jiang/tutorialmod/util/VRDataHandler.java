@@ -1,7 +1,7 @@
 package net.jiang.tutorialmod.util;
 
 import net.blf02.vrapi.api.IVRAPI;
-import static net.jiang.tutorialmod.vr.VRPlugin.getVRAPI;
+import static net.jiang.tutorialmod.VRPlugin.getVRAPI;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
