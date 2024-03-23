@@ -1,8 +1,7 @@
 package net.jiang.tutorialmod.mixin;
 
-import net.blf02.vrapi.api.IVRAPI;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.jiang.tutorialmod.VRPlugin;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.Goal;
@@ -63,7 +62,7 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 
 			this.updateForLeashLength(f);
 			if(entity instanceof PlayerEntity user) {
-				if(VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {//VR状态下的拴绳
+				if(VRPlugin.isPlayerInVR(user)) {//VR状态下的拴绳
 					forceSimulate(f, entity, 15.0F);
 				} else {//非vr
 					forceSimulate(f, entity, 6.0F);
@@ -78,9 +77,9 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 		//VR lead modification section. VR拴绳改造部分
 		if(entity != null && entity.getWorld() == this.getWorld()
 				&& entity instanceof PlayerEntity user && !getWorld().isClient) { //The pulling effect of leading in VR state.VR状态下的拴绳拉扯效果，
-			if (VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {
-				Vec3d currentPosMainController = getControllerPosition(user);
-				Vec3d currentPos = getHMDPosition(user);
+			if (VRPlugin.isPlayerInVR(user)) {
+				Vec3d currentPosMainController = VRPlugin.getControllerPosition(user, 0);
+				Vec3d currentPos = VRPlugin.getHMDPosition(user);
 				if (currentPosMainController != null) {
 					double leashHandDistance = currentPosMainController.distanceTo(lastPosMainController); // Calculate the distance between the current position and the previous position of the leaded hand,计算拴绳手的当前位置和上一个位置之间的距离
 					double pullThreshold = 0.11; // 可以调整这个值来设置敏感度
@@ -142,21 +141,4 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 			this.getNavigation().startMovingTo(this.getX() + vec3d.x, this.getY() + vec3d.y, this.getZ() + vec3d.z, this.getFollowLeashSpeed());
 		}
 	}
-	@Unique
-	private static Vec3d getHMDPosition(PlayerEntity player) {
-		IVRAPI vrApi = VRPlugin.API;
-		if (vrApi != null && vrApi.apiActive(player)) {
-			return vrApi.getVRPlayer(player).getHMD().position();
-		}
-		return null;
-	}
-	@Unique
-	private static Vec3d getControllerPosition(PlayerEntity player) {
-		IVRAPI vrApi = VRPlugin.API;
-		if (vrApi != null && vrApi.apiActive(player)) {
-			return vrApi.getVRPlayer(player).getController(0).position();
-		}
-		return null;
-	}
-
 }

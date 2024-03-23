@@ -3,8 +3,7 @@ package net.jiang.tutorialmod.item.custom;
 import net.blf02.vrapi.common.VRAPI;
 import net.jiang.tutorialmod.mixinhelper.BlockEnchantmentHelper;
 import net.jiang.tutorialmod.particle.ParticleStorage;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.jiang.tutorialmod.VRPlugin;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -45,12 +44,10 @@ public class BreadSwordItem extends SwordItem {
     public ActionResult useOnBlock(ItemUsageContext context) {
         PlayerEntity user = context.getPlayer();
 
-//        if(VRPluginVerify.hasAPI){
-//            if (VRPlugin.API.playerInVR(user)) {
-//                user.sendMessage(Text.literal("在VR里"),false);
-//            } else {
-//                user.sendMessage(Text.literal("不在VR里"),false);
-//            }
+//        if (VRPlugin.isPlayerInVR(user)) {
+//            user.sendMessage(Text.literal("在VR里"),false);
+//        } else {
+//            user.sendMessage(Text.literal("不在VR里"),false);
 //        }
 
         BlockPos blockPos = context.getBlockPos();

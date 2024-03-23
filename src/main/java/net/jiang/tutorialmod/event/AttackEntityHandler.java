@@ -2,8 +2,6 @@ package net.jiang.tutorialmod.event;
 
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.jiang.tutorialmod.item.vrcustom.VrMagicItem;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;

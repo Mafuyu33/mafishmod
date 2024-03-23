@@ -1,12 +1,10 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
-import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.sound.ModSounds;
 import net.jiang.tutorialmod.util.VRDataHandler;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.jiang.tutorialmod.VRPlugin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -48,7 +46,7 @@ public class VrMagicItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if (entity instanceof PlayerEntity player) {
-            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {
+            if (VRPlugin.clientInVR() && VRPlugin.isApiActive(player)) {
                 if (isUsingMagic) {
                     Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 0);
                     Vec3d currentLookAngleOffController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 1);
@@ -142,6 +140,5 @@ public class VrMagicItem extends Item {
             world.addParticle(ModParticles.RUBBER_PARTICLE, true, particlePosition.x, particlePosition.y, particlePosition.z, 0, 0, 0);
         }
     }
-
 
 }

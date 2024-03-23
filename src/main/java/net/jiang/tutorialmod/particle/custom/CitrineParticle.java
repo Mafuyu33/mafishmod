@@ -1,6 +1,5 @@
 package net.jiang.tutorialmod.particle.custom;
 
-import net.blf02.vrapi.api.IVRAPI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -10,8 +9,6 @@ import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
 import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.networking.packet.ParticleColorC2SPacket;
 import net.jiang.tutorialmod.particle.ParticleStorage;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.util.math.MatrixStack;
