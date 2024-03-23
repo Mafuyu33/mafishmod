@@ -71,14 +71,17 @@ public class VRPlugin {
      * 判断指定的玩家是否可以获取VR相关数据，不抛出任何错误。
      */
     public static boolean canRetrieveData(PlayerEntity player){
-        if (vrApi != null){
+        if (vrApi == null){
             return false;
         }
+
         PlayerEntity clientPlayer = MinecraftClient.getInstance().player;
+        //客户端只能获取客户端玩家自身的数据
         if (clientPlayer != null){
-            return isPlayerInVR(clientPlayer); // client side must play in VR to retrieve data
+            return clientPlayer.equals(player) && isPlayerInVR(clientPlayer);
         }
-        // server side can always retrieve data
-        return true;
+
+        //服务端可以获取任何玩家的数据
+        return isPlayerInVR(player);
     }
 }
