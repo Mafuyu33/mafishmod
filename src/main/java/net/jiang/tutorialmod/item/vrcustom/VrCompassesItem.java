@@ -44,7 +44,7 @@ public class VrCompassesItem extends Item{
                 }else {
                     Vec3d thirdPosition = getControllerPosition(player, 0);
                     //获取颜色
-                    setColor(player);
+                    setPenColor(player);
                     //生成圆
                     generateParticlesOnCircle(world, firstPosition, secondPosition, thirdPosition,red,green,blue);
                     // 清除位置
@@ -70,7 +70,7 @@ public class VrCompassesItem extends Item{
                 }else {
                     Vec3d thirdPosition = pos;
                     //获取颜色
-                    setColor(player);
+                    setPenColor(player);
                     //生成圆
                     generateParticlesOnCircle(world, firstPosition, secondPosition, thirdPosition,red,green,blue);
                     // 清除位置
@@ -127,14 +127,14 @@ public class VrCompassesItem extends Item{
 
 
 
-    private void setColor(Entity entity) {
+    private void setPenColor(Entity entity) {
         if(entity.getHandItems()!=null && entity instanceof PlayerEntity) {
             Item item = ((PlayerEntity) entity).getOffHandStack().getItem();
             System.out.println(item);
-            if(item==Items.RED_DYE){
+            if(item==Items.WHITE_DYE){
                 red =1.0;
-                green =0.0;
-                blue =0.0;
+                green =1.0;
+                blue =1.0;
             }else if(item==Items.GREEN_DYE){
                 red =0.0;
                 green =1.0;
@@ -193,8 +193,8 @@ public class VrCompassesItem extends Item{
                 blue =0.5;
             } else {
                 red =1.0;
-                green =1.0;
-                blue =1.0;
+                green =0.0;
+                blue =0.0;
             }
         }
     }

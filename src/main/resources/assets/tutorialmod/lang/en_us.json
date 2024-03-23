@@ -6,8 +6,8 @@
   "tooltip.tutorialmod.vr_compasses.tooltip": "Draw a circle by selecting three points: the first point is the center of the circle, the second determines the radius, and the third establishes the plane.",
 
 
-  "item.tutorialmod.ruby": "RUBY",
-  "item.tutorialmod.raw_ruby": "RAW RUBY",
+  "item.tutorialmod.ruby": "Mafish",
+  "item.tutorialmod.raw_ruby": "Fired Mafish",
   "item.tutorialmod.cool_glass": "COOL GLASS",
   "item.tutorialmod.cool_glass2": "COOL GLASS2",
   "item.tutorialmod.metal_detector": "Metal Detector",

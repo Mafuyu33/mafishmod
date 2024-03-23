@@ -58,71 +58,7 @@ public class VrPenItem extends Item{
                 if(entity.getHandItems()!=null && entity instanceof PlayerEntity) {
                     Item item = ((PlayerEntity) entity).getOffHandStack().getItem();
                     count = ((PlayerEntity) entity).getOffHandStack().getCount();
-                    if(item==Items.RED_DYE){
-                        red =1.0;
-                        green =0.0;
-                        blue =0.0;
-                    }else if(item==Items.GREEN_DYE){
-                        red =0.0;
-                        green =1.0;
-                        blue =0.0;
-                    }else if(item==Items.BLUE_DYE){
-                        red =0.0;
-                        green =0.0;
-                        blue =1.0;
-                    }else if(item==Items.YELLOW_DYE){
-                        red =1.0;
-                        green =1.0;
-                        blue =0.0;
-                    }else if(item==Items.BLACK_DYE){
-                        red =0.0;
-                        green =0.0;
-                        blue =0.0;
-                    }else if(item==Items.BROWN_DYE){
-                        red =0.6;
-                        green =0.4;
-                        blue =0.2;
-                    }else if(item==Items.ORANGE_DYE){
-                        red =1.0;
-                        green =0.5;
-                        blue =0.0;
-                    }else if(item==Items.MAGENTA_DYE){
-                        red =1.0;
-                        green =0.0;
-                        blue =1.0;
-                    }else if(item==Items.LIGHT_BLUE_DYE){
-                        red =0.5;
-                        green =0.5;
-                        blue =1.0;
-                    }else if(item==Items.LIME_DYE){
-                        red =0.5;
-                        green =1.0;
-                        blue =0.2;
-                    }else if(item==Items.PINK_DYE){
-                        red =1.0;
-                        green =0.75;
-                        blue =0.8;
-                    }else if(item==Items.GRAY_DYE){
-                        red =0.5;
-                        green =0.5;
-                        blue =0.5;
-                    }else if(item==Items.LIGHT_GRAY_DYE){
-                        red =0.8;
-                        green =0.8;
-                        blue =0.8;
-                    }else if(item==Items.CYAN_DYE){
-                        red =0.0;
-                        green =1.0;
-                        blue =1.0;
-                    }else if(item==Items.PURPLE_DYE){
-                        red =0.5;
-                        green =0.0;
-                        blue =0.5;
-                    } else {
-                        red =1.0;
-                        green =1.0;
-                        blue =1.0;
-                    }
+                    setPenColor(item);
                 }
                 if(count<=1) {//单画笔
                     if (entity instanceof PlayerEntity user && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {//有MC-VR-API并且在VR中的时候
@@ -169,6 +105,75 @@ public class VrPenItem extends Item{
             }
         }
     }
+
+    private void setPenColor(Item item) {
+        if(item ==Items.WHITE_DYE){
+            red =1.0;
+            green =1.0;
+            blue =1.0;
+        }else if(item ==Items.GREEN_DYE){
+            red =0.0;
+            green =1.0;
+            blue =0.0;
+        }else if(item ==Items.BLUE_DYE){
+            red =0.0;
+            green =0.0;
+            blue =1.0;
+        }else if(item ==Items.YELLOW_DYE){
+            red =1.0;
+            green =1.0;
+            blue =0.0;
+        }else if(item ==Items.BLACK_DYE){
+            red =0.0;
+            green =0.0;
+            blue =0.0;
+        }else if(item ==Items.BROWN_DYE){
+            red =0.6;
+            green =0.4;
+            blue =0.2;
+        }else if(item ==Items.ORANGE_DYE){
+            red =1.0;
+            green =0.5;
+            blue =0.0;
+        }else if(item ==Items.MAGENTA_DYE){
+            red =1.0;
+            green =0.0;
+            blue =1.0;
+        }else if(item ==Items.LIGHT_BLUE_DYE){
+            red =0.5;
+            green =0.5;
+            blue =1.0;
+        }else if(item ==Items.LIME_DYE){
+            red =0.5;
+            green =1.0;
+            blue =0.2;
+        }else if(item ==Items.PINK_DYE){
+            red =1.0;
+            green =0.75;
+            blue =0.8;
+        }else if(item ==Items.GRAY_DYE){
+            red =0.5;
+            green =0.5;
+            blue =0.5;
+        }else if(item ==Items.LIGHT_GRAY_DYE){
+            red =0.8;
+            green =0.8;
+            blue =0.8;
+        }else if(item ==Items.CYAN_DYE){
+            red =0.0;
+            green =1.0;
+            blue =1.0;
+        }else if(item ==Items.PURPLE_DYE){
+            red =0.5;
+            green =0.0;
+            blue =0.5;
+        } else {
+            red =1.0;
+            green =0.0;
+            blue =0.0;
+        }
+    }
+
     private void generateParticlesInSquareWithEdges(World world, Vec3d particlePosition, Vec3d currentLookAngle, int count) {
         // 计算边长
         double sideLength = count / 80.0;
@@ -189,7 +194,6 @@ public class VrPenItem extends Item{
         generateParticles(world, pos4, pos3);
         generateParticles(world, pos3, pos1);
     }//vr
-    // 计算边长
     private void generateParticlesInSquareWithEdgesVR(World world, Vec3d particlePosition, Vec3d currentLookAngle, float controllerRoll, int count) {
         double sideLength = count / 80.0;
 
@@ -222,9 +226,6 @@ public class VrPenItem extends Item{
         generateParticles(world, pos3, pos1);
         generateParticles(world, pos4, pos3);
     }
-
-
-
     private void generateParticles(World world, Vec3d particlePosition, Vec3d lastParticlePosition) {
         if (lastParticlePosition != null) {
             double distance = particlePosition.distanceTo(lastParticlePosition);
@@ -247,7 +248,6 @@ public class VrPenItem extends Item{
             ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, red, green, blue);
         }
     }
-
     private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
         IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
         if (vrApi != null && vrApi.apiActive(player)) {
@@ -276,7 +276,6 @@ public class VrPenItem extends Item{
                 vec.x * rotationMatrix.m20 + vec.y * rotationMatrix.m21 + vec.z * rotationMatrix.m22
         );
     }
-
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.tutorialmod.vr_pen.tooltip"));

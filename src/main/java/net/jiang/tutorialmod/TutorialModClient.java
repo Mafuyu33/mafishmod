@@ -14,6 +14,7 @@ import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.particle.custom.CitrineParticle;
+import net.jiang.tutorialmod.particle.custom.KnockBackParticle;
 import net.jiang.tutorialmod.particle.custom.RubberParticle;
 import net.jiang.tutorialmod.screen.GemPolishingScreen;
 import net.jiang.tutorialmod.screen.ModScreenHandlers;
@@ -25,6 +26,7 @@ import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 public class TutorialModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        //投射物注册
         EntityRendererRegistry.register(ModEntities.TNT_PROJECTILE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.STONE_PROJECTILE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.FU_PROJECTILE, FlyingItemEntityRenderer::new);
@@ -43,14 +45,13 @@ public class TutorialModClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.CITRINE_PARTICLE, CitrineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.RUBBER_PARTICLE, RubberParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.KNOCK_BACK_PARTICLE, KnockBackParticle.Factory::new);
 
 //        ModModelPredicateProvider.registerModModels();
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {//客户端已经成功连接到服务器
                 // 调用您的方法
                 ParticleStorage.getOrCreateForWorld().spawnAllParticles(MinecraftClient.getInstance().world);
-                System.out.println("哈哈哈哈哈");
-
         });
     }
 }

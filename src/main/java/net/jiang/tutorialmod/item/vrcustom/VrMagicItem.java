@@ -2,6 +2,9 @@ package net.jiang.tutorialmod.item.vrcustom;
 
 import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
+import net.jiang.tutorialmod.particle.ParticleStorage;
+import net.jiang.tutorialmod.sound.ModSounds;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.jiang.tutorialmod.vr.VRPlugin;
 import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.MinecraftClient;
@@ -17,6 +20,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.joml.Matrix3f;
+import org.joml.Vector3f;
 
 public class VrMagicItem extends Item {
     public VrMagicItem(Settings settings) {
@@ -24,98 +29,119 @@ public class VrMagicItem extends Item {
     }
 
     public static boolean isUsingMagic = false;
-    public static Box userBox = null;
+    private final float red = 0.8f;
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient) {
             isUsingMagic = !isUsingMagic;
-            if (isUsingMagic) {
-                world.playSound(user, user.getBlockPos(), SoundEvents.MUSIC_DISC_FAR, SoundCategory.VOICE);
+        }
+        if(world.isClient){
+            if (!isUsingMagic) {
+                world.playSound(user, user.getBlockPos(), ModSounds.METAL_DETECTOR_FOUND_ORE, SoundCategory.PLAYERS);
             }
         }
         return super.use(world,user,hand);
     }
 
-//    @Override
-//    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-//        super.inventoryTick(stack, world, entity, slot, selected);
-//        if (entity instanceof PlayerEntity player) {
-//            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {
-//                if (VrMagicItem.isUsingMagic) {
-//                    Vec3d pos = getControllerPosition(player, 0);
-//                    double size = (player.getOffHandStack().getCount()) * 0.025 + 0.05;
-//                    userBox = new Box(
-//                            pos.x - size / 2.0, pos.y - size / 2.0, pos.z - size / 2.0,
-//                            pos.x + size / 2.0, pos.y + size / 2.0, pos.z + size / 2.0
-//                    );
-//                    renderMagicCircle(userBox, size);
-//                }
-//            }
-//        }
-//    }
-
-    private static void renderMagicCircle(Box userBox, double size) {
-        // 获取碰撞箱的中心点
-        Vec3d center = new Vec3d(
-                (userBox.minX + userBox.maxX) / 2.0,
-                (userBox.minY + userBox.maxY) / 2.0,
-                (userBox.minZ + userBox.maxZ) / 2.0
-        );
-
-        // 获取碰撞箱的尺寸
-        double width = userBox.getLengthX();
-        double height = userBox.getLengthY();
-        double depth = userBox.getLengthZ();
-
-        // 定义魔法阵的尺寸
-        double circleRadius = Math.min(Math.min(width, height), depth) / 2.0;
-        double lineThickness = size / 10.0; // 魔法阵线条的厚度
-
-        // 计算魔法阵的顶点
-        Vec3d[] circlePoints = new Vec3d[360];
-        for (int i = 0; i < 360; i++) {
-            double angle = Math.toRadians(i);
-            double x = center.x + circleRadius * Math.cos(angle);
-            double y = center.y;
-            double z = center.z + circleRadius * Math.sin(angle);
-            circlePoints[i] = new Vec3d(x, y, z);
-        }
-
-        // 渲染魔法阵的圆形部分
-        for (int i = 0; i < circlePoints.length - 1; i++) {
-            Vec3d start = circlePoints[i];
-            Vec3d end = circlePoints[i + 1];
-            renderMagicLine(start, end, lineThickness);
-        }
-        renderMagicLine(circlePoints[circlePoints.length - 1], circlePoints[0], lineThickness); // 连接最后一个点和第一个点，形成闭合圆形
-    }
-
-    private static void renderMagicLine(Vec3d start, Vec3d end, double thickness) {
-        ClientWorld world = MinecraftClient.getInstance().world;
-        if (world != null && world.isClient) {
-            Vec3d direction = end.subtract(start).normalize();
-            Vec3d perpendicular = new Vec3d(-direction.z, 0, direction.x).normalize().multiply(thickness / 2.0); // 计算与线段方向垂直的向量并乘以厚度的一半
-
-            // 计算线段的四个顶点
-            Vec3d vertex1 = start.add(perpendicular);
-            Vec3d vertex2 = start.subtract(perpendicular);
-            Vec3d vertex3 = end.add(perpendicular);
-            Vec3d vertex4 = end.subtract(perpendicular);
-
-            // 渲染线段的两个三角形
-            world.addParticle(ModParticles.RUBBER_PARTICLE, true, vertex1.x, vertex1.y, vertex1.z, 0, 1, 0);
-            world.addParticle(ModParticles.RUBBER_PARTICLE, true, vertex2.x, vertex2.y, vertex2.z, 0, 1, 0);
-            world.addParticle(ModParticles.RUBBER_PARTICLE, true, vertex3.x, vertex3.y, vertex3.z, 0, 1, 0);
-            world.addParticle(ModParticles.RUBBER_PARTICLE, true, vertex4.x, vertex4.y, vertex4.z, 0, 1, 0);
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
+        if (entity instanceof PlayerEntity player) {
+            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {
+                if (isUsingMagic) {
+                    Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 0);
+                    Vec3d currentLookAngleOffController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 1);
+                    Vec3d currentPosMainController = VRDataHandler.getControllerPosition((PlayerEntity) entity, 0);
+                    Vec3d currentPosOffController = VRDataHandler.getControllerPosition((PlayerEntity) entity, 1);
+                    float mainControllerRoll = VRDataHandler.getControllerRoll(((PlayerEntity) entity),0);
+                    float offControllerRoll = VRDataHandler.getControllerRoll(((PlayerEntity) entity),1);
+                    if(currentLookAngleMainController!=null) {
+                        generateParticlesInMagicWithEdgesVR(world, currentPosMainController, currentLookAngleMainController, mainControllerRoll,red,0,0);
+                    }
+                    if(currentLookAngleOffController!=null) {
+                        generateParticlesInMagicWithEdgesVR(world, currentPosOffController, currentLookAngleOffController, offControllerRoll,red,0,0);
+                    }
+                }
+            }
         }
     }
 
-    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API;
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+    private void generateParticlesInMagicWithEdgesVR(World world, Vec3d particlePosition, Vec3d currentLookAngle, float controllerRoll,float red,float green,float blue) {
+        int numVertices = 350; // 圆上的顶点数
+        double sideLength = 0.25;
+        double radius = sideLength * Math.sqrt(3)/1.5; // 外圆半径为正三角形边长的sqrt(3)/1.5
+        // 获取垂直于当前视线方向的向量
+        Vec3d perpendicular = new Vec3d(1, 0, 0); // 默认选择 x 轴上的单位向量
+        if (Math.abs(currentLookAngle.dotProduct(perpendicular)) > 0.9) {
+            perpendicular = new Vec3d(0, 1, 0); // 如果当前视线方向接近于 x 轴，则选择 y 轴上的单位向量
         }
-        return null;
+        Vec3d v1 = currentLookAngle.crossProduct(perpendicular).normalize();
+        Vec3d v2 = currentLookAngle.crossProduct(v1).normalize();
+
+        // 创建3x3的旋转矩阵，使用负的旋转角度
+        Matrix3f rotationMatrix3x3 = new Matrix3f();
+        rotationMatrix3x3.rotate(-(float) Math.toRadians(controllerRoll), new Vector3f((float) currentLookAngle.x, (float) currentLookAngle.y, (float) currentLookAngle.z));
+
+
+        // 旋转向量v1和v2
+        Vec3d rotatedV1 = VRDataHandler.rotateVec3d(v1, rotationMatrix3x3);
+        Vec3d rotatedV2 = VRDataHandler.rotateVec3d(v2, rotationMatrix3x3);
+
+
+
+        // 生成正三角形的三个顶点
+        Vec3d triangleVertex1 = particlePosition.add(rotatedV1.multiply(sideLength));
+        Vec3d triangleVertex2 = particlePosition.add(rotatedV1.multiply(-sideLength / 2)).subtract(rotatedV2.multiply(Math.sqrt(3) * sideLength / 2));
+        Vec3d triangleVertex3 = particlePosition.add(rotatedV1.multiply(-sideLength / 2)).add(rotatedV2.multiply(Math.sqrt(3) * sideLength / 2));
+
+        // 生成倒三角形的三个顶点
+        Vec3d invertedTriangleVertex1 = particlePosition.subtract(rotatedV1.multiply(sideLength));
+        Vec3d invertedTriangleVertex2 = particlePosition.subtract(rotatedV1.multiply(-sideLength / 2)).add(rotatedV2.multiply(Math.sqrt(3) * sideLength / 2));
+        Vec3d invertedTriangleVertex3 = particlePosition.subtract(rotatedV1.multiply(-sideLength / 2)).subtract(rotatedV2.multiply(Math.sqrt(3) * sideLength / 2));
+
+        // 生成圆形的顶点，并将它们转换到手柄位置和旋转的坐标系中
+        for (int i = 0; i < numVertices; i++) {
+            double angle = 2 * Math.PI * i / numVertices;
+            double x = Math.cos(angle) * radius;
+            double y = Math.sin(angle) * radius;
+
+            // 计算顶点在旋转后的坐标系中的位置
+            Vec3d rotatedVertex = particlePosition.add(rotatedV1.multiply(x)).add(rotatedV2.multiply(y));
+            // 在转换后的圆形的顶点生成粒子
+            world.addParticle(ModParticles.RUBBER_PARTICLE, true, rotatedVertex.x, rotatedVertex.y, rotatedVertex.z, red, green, blue);
+        }
+
+        // 生成三角形和倒三角形的边
+        generateParticles(world, triangleVertex1, triangleVertex2);
+        generateParticles(world, triangleVertex2, triangleVertex3);
+        generateParticles(world, triangleVertex3, triangleVertex1);
+        generateParticles(world, invertedTriangleVertex1, invertedTriangleVertex2);
+        generateParticles(world, invertedTriangleVertex2, invertedTriangleVertex3);
+        generateParticles(world, invertedTriangleVertex3, invertedTriangleVertex1);
     }
+
+
+    private void generateParticles(World world, Vec3d particlePosition, Vec3d lastParticlePosition) {
+        if (lastParticlePosition != null) {
+            double distance = particlePosition.distanceTo(lastParticlePosition);
+            int density = 200; // 设置粒子密度，可以根据需要调整
+            int numParticles = (int) (density * distance);
+            if(numParticles<=0){
+                numParticles=1;
+            }
+            Vec3d direction = particlePosition.subtract(lastParticlePosition).normalize();
+            for (int i = 1; i <= numParticles; i++) {
+                double ratio = (double) i / numParticles;
+                double x = lastParticlePosition.x + ratio * distance * direction.x;
+                double y = lastParticlePosition.y + ratio * distance * direction.y;
+                double z = lastParticlePosition.z + ratio * distance * direction.z;
+                world.addParticle(ModParticles.RUBBER_PARTICLE, true, x, y, z,  red, 0, 0);
+            }
+        } else {
+            world.addParticle(ModParticles.RUBBER_PARTICLE, true, particlePosition.x, particlePosition.y, particlePosition.z, 0, 0, 0);
+        }
+    }
+
+
 }

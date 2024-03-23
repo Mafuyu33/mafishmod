@@ -7,9 +7,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static net.jiang.tutorialmod.TutorialMod.LOGGER;
@@ -17,8 +16,9 @@ import static net.jiang.tutorialmod.TutorialMod.LOGGER;
 public class ParticleStorage {
 //    private static final Map<String, ParticleStorage> saveParticleStorageMap = new HashMap<>();
 private static final Map<String, ParticleStorage> saveParticleStorageMap = new HashMap<>();
-    private final Map<Vec3d, Integer> positionToIdMap = new HashMap<>();
-    private final Map<Integer, double[]> particleColor = new HashMap<>();
+    // 声明时使用ConcurrentHashMap
+    private final ConcurrentHashMap<Vec3d, Integer> positionToIdMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, double[]> particleColor = new ConcurrentHashMap<>();
     private final AtomicInteger nextId = new AtomicInteger();
 
     // 私有构造函数，确保只能通过静态方法获取实例
@@ -30,6 +30,9 @@ private static final Map<String, ParticleStorage> saveParticleStorageMap = new H
         String saveName = Objects.requireNonNull(MinecraftClient.getInstance().getServer()).getSaveProperties().getLevelName();
 //        printParticleStorageMapContents();
         return saveParticleStorageMap.computeIfAbsent(saveName, k -> new ParticleStorage());
+    }
+    public Integer getParticleIdAtPosition(Vec3d position) {
+        return positionToIdMap.get(position);
     }
 
     public static void printParticleStorageMapContents() {
@@ -82,7 +85,15 @@ private static final Map<String, ParticleStorage> saveParticleStorageMap = new H
             world.addParticle(ModParticles.CITRINE_PARTICLE, position.x, position.y, position.z, red, green, blue);
         });
     }
-
+    // 根据粒子的 ID 获取其位置
+    public Vec3d getPositionById(int id) {
+        for (Map.Entry<Vec3d, Integer> entry : positionToIdMap.entrySet()) {
+            if (entry.getValue() == id) {
+                return entry.getKey();
+            }
+        }
+        return null; // 如果找不到对应 ID 的粒子，则返回 null
+    }
     public Vec3d findCollidedParticlePosition(Box collisionBox) {
         for (Vec3d position : positionToIdMap.keySet()) {
             if (isParticleInsideBox(position, collisionBox)) {
@@ -91,6 +102,18 @@ private static final Map<String, ParticleStorage> saveParticleStorageMap = new H
         }
         return null; // 没有找到碰撞的粒子
     }
+//    public Vec3d[] findParticlesWithColor(double red, double green, double blue) {
+//        List<Vec3d> positions = new ArrayList<>();
+//        for (Map.Entry<Vec3d, Integer> entry : positionToIdMap.entrySet()) {
+//            Vec3d position = entry.getKey();
+//            Integer id = entry.getValue();
+//            double[] color = particleColor.get(id);
+//            if (color != null && color.length == 3 && color[0] == red && color[1] == green && color[2] == blue) {
+//                positions.add(position);
+//            }
+//        }
+//        return positions.toArray(new Vec3d[0]);
+//    }
 
     private boolean isParticleInsideBox(Vec3d position, Box collisionBox) {
         double posX = position.x;

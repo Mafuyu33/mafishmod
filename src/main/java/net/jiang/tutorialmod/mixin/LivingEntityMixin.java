@@ -10,6 +10,7 @@ import net.jiang.tutorialmod.mixinhelper.MathQuestionMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.ShieldDashMixinHelper;
 import net.jiang.tutorialmod.mixinhelper.WeaponEnchantmentMixinHelper;
 import net.jiang.tutorialmod.networking.ModMessages;
+import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.minecraft.entity.Attackable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -42,6 +43,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 
 @Mixin(LivingEntity.class)
@@ -56,16 +58,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
     @Shadow public abstract Hand getActiveHand();
 
     @Shadow public abstract boolean isBlocking();
-
-    @Shadow @Nullable public abstract DamageSource getRecentDamageSource();
-
-    @Shadow public Hand preferredHand;
-
-    @Shadow public abstract float getMovementSpeed();
-
-    @Shadow @Nullable public abstract StatusEffectInstance getStatusEffect(StatusEffect effect);
-
-    @Shadow public abstract Collection<StatusEffectInstance> getStatusEffects();
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
@@ -87,6 +79,18 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void init(CallbackInfo ci) {
+
+//        if(!getWorld().isClient) {//想办法让碰到粒子的生物（除了玩家被击退+受伤）
+//            Vec3d[] pos = ParticleStorage.getOrCreateForWorld().findParticlesWithColor(1.0, 1.0, 0.0);
+//            if (pos.length > 0) {
+//                double damage = 1.0; // 设置造成的伤害值
+//                for (Vec3d position : pos) {//For循环嵌套，每个pos都检测一边
+//                    System.out.println(position);
+//                    applyEffectsToNearbyEntities((LivingEntity) (Object) this, position, damage);
+//                }
+//            }
+//        }
+
         if(this.getType()==EntityType.VILLAGER) {//村民恭喜发财
             int entityId = this.getId();// 获取实体的ID
             int times = WeaponEnchantmentMixinHelper.getEntityValue(entityId);
@@ -289,6 +293,23 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
             double e = vec3d.dotProduct(vec3d2);
             return e > 1.0 - 0.025 / d ? player.canSee(this) : false;
     }
-
+//    @Unique
+//    private static void applyEffectsToNearbyEntities(LivingEntity entity, Vec3d pos, double damage) {
+//        if (pos == null || entity == null || entity.getWorld() == null) {
+//            return;
+//        }
+//        Box box = new Box(pos.x - 0.1, pos.y - 0.1, pos.z - 0.1, pos.x + 0.1, pos.y + 0.1, pos.z + 0.1);
+//        // 检查碰撞
+//            if (entity.getBoundingBox().intersects(box)) {
+//                System.out.println("碰撞!");
+//                // 碰到生物时，对其进行击退和受伤
+//                if (!entity.isPlayer()) {
+//                    System.out.println("造成伤害！");
+//                    Vec3d knockBackVec = new Vec3d(entity.getX() - pos.x, entity.getY() - pos.y, entity.getZ() - pos.z).normalize().multiply(-1.0); // 计算击退向量
+//                    entity.takeKnockback(1.0f, knockBackVec.x, knockBackVec.z); // 进行击退
+//                    entity.damage(entity.getWorld().getDamageSources().magic(), (float) damage); // 造成伤害
+//                }
+//            }
+//    }
 
 }

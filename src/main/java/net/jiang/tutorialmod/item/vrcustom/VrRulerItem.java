@@ -40,7 +40,7 @@ public class VrRulerItem extends Item{
                     // 第二次使用直尺，记录第二个位置
                     Vec3d secondPosition = getControllerPosition(player, 0);
                     //获取颜色
-                    setColor(player);
+                    setPenColor(player);
                     // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
                     generateParticlesBetweenTwoPositions(world, firstPosition, secondPosition,red,green,blue);
 
@@ -64,7 +64,7 @@ public class VrRulerItem extends Item{
                     Vec3d secondPosition = new Vec3d(player.getX()+offsetX, player.getY() + offsetY + 1.625, player.getZ()+offsetZ);
                     System.out.println(secondPosition);
                     //获取颜色
-                    setColor(player);
+                    setPenColor(player);
                     // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子
                     generateParticlesBetweenTwoPositions(world, firstPosition, secondPosition,red,green,blue);
 
@@ -76,14 +76,14 @@ public class VrRulerItem extends Item{
         return super.use(world,player,hand);
     }
 
-    private void setColor(Entity entity) {
+    private void setPenColor(Entity entity) {
         if(entity.getHandItems()!=null && entity instanceof PlayerEntity) {
             Item item = ((PlayerEntity) entity).getOffHandStack().getItem();
             System.out.println(item);
-            if(item==Items.RED_DYE){
+            if(item==Items.WHITE_DYE){
                 red =1.0;
-                green =0.0;
-                blue =0.0;
+                green =1.0;
+                blue =1.0;
             }else if(item==Items.GREEN_DYE){
                 red =0.0;
                 green =1.0;
@@ -142,8 +142,8 @@ public class VrRulerItem extends Item{
                 blue =0.5;
             } else {
                 red =1.0;
-                green =1.0;
-                blue =1.0;
+                green =0.0;
+                blue =0.0;
             }
         }
     }

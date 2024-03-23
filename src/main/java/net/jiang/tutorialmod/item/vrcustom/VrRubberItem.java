@@ -116,7 +116,7 @@ public class VrRubberItem extends Item {
             for (int i = 0; i < count; i++) {
                 double t = (double) i / (double) (count - 1);
                 Vec3d point = start.add(direction.multiply(t));
-                // 在计算出的点位置生成End Rod粒子
+                // 在计算出的点位置生成粒子
                 world.addParticle(ModParticles.RUBBER_PARTICLE,true, point.x, point.y, point.z, 0, 1, 0);
             }
         }
