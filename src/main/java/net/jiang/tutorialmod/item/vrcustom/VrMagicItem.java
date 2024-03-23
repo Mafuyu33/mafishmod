@@ -47,7 +47,7 @@ public class VrMagicItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if (entity instanceof PlayerEntity player) {
-            if (VRPlugin.canRetrieve(player)) {
+            if (VRPlugin.canRetrieveData(player)) {
                 if (isUsingMagic) {
                     Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 0);
                     Vec3d currentLookAngleOffController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 1);
