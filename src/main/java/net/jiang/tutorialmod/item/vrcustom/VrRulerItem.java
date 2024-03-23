@@ -2,6 +2,7 @@ package net.jiang.tutorialmod.item.vrcustom;
 
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.jiang.tutorialmod.VRPlugin;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -30,13 +31,13 @@ public class VrRulerItem extends Item{
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if(world.isClient) {
-            if (VRPlugin.isPlayerInVR(player)) {//VR
+            if (VRPlugin.canRetrieveData(player)) {//VR
                 if (firstPosition == null) {
                     // 第一次使用直尺，记录第一个位置
-                    firstPosition = VRPlugin.getControllerPosition(player, 0);
+                    firstPosition = VRDataHandler.getControllerPosition(player, 0);
                 } else {
                     // 第二次使用直尺，记录第二个位置
-                    Vec3d secondPosition = VRPlugin.getControllerPosition(player, 0);
+                    Vec3d secondPosition = VRDataHandler.getControllerPosition(player, 0);
                     //获取颜色
                     setPenColor(player);
                     // 在第一次和第二次点击之间执行你想要的操作，例如生成粒子

@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.item.custom;
 import dev.architectury.event.events.common.TickEvent;
 import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -27,9 +28,9 @@ public class BreadSwordHotItem extends SwordItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 //        ItemStack offhanditemStack = user.getOffHandStack();
 //        System.out.println(offhanditemStack.getOrCreateNbt());
-        if (world.isClient && VRPlugin.isPlayerInVR(user)) {   //有MC-VR-API并且在VR中的时候
-            Vec3d mainController = VRPlugin.getControllerPosition(user, 0);
-            Vec3d offController = VRPlugin.getControllerPosition(user, 1);
+        if (world.isClient && VRPlugin.canRetrieveData(user)) {   //有MC-VR-API并且在VR中的时候
+            Vec3d mainController = VRDataHandler.getControllerPosition(user, 0);
+            Vec3d offController = VRDataHandler.getControllerPosition(user, 1);
             user.sendMessage(Text.literal("mainController"+mainController),false);
             user.sendMessage(Text.literal("offController"+offController),false);
 

@@ -4,6 +4,7 @@ import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.mixinhelper.VrRubberItemHelper;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.jiang.tutorialmod.VRPlugin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -47,9 +48,9 @@ public class VrRubberItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if(entity instanceof PlayerEntity player) {
-            if (VRPlugin.isPlayerInVR(player)) {//vr
+            if (VRPlugin.canRetrieveData(player)) {//vr
                 if (VrRubberItem.isErasing) {
-                    Vec3d pos = VRPlugin.getControllerPosition(player, 0);
+                    Vec3d pos = VRDataHandler.getControllerPosition(player, 0);
                     double size = (player.getOffHandStack().getCount())*0.025+0.05;
                     userbox = new Box(
                             pos.x - size / 2.0, pos.y - size / 2.0, pos.z - size / 2.0, // 碰撞箱的最小顶点

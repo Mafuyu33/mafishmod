@@ -1,32 +1,41 @@
 package net.jiang.tutorialmod.util;
 
 import net.blf02.vrapi.api.IVRAPI;
-import net.jiang.tutorialmod.vr.VRPlugin;
+import static net.jiang.tutorialmod.vr.VRPlugin.getVRAPI;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
 
 public class VRDataHandler {
+    public static Vec3d getMainhandControllerPosition(PlayerEntity player){
+        return getControllerPosition(player, 0);
+    }
+    public static Vec3d getOffhandControllerPosition(PlayerEntity player){
+        return getControllerPosition(player, 1);
+    }
     public static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+        if (getVRAPI() != null){
+            return getVRAPI().getVRPlayer(player).getController(controllerIndex).position();
         }
         return null;
     }
     public static Vec3d getControllerLookAngle(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).getLookAngle();
+        if (getVRAPI() != null){
+            return getVRAPI().getVRPlayer(player).getController(controllerIndex).getLookAngle();
         }
         return null;
     }
     public static float getControllerRoll(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).getRoll();
+        if (getVRAPI() != null){
+            return getVRAPI().getVRPlayer(player).getController(controllerIndex).getRoll();
         }
         return 0;
+    }
+    public static Vec3d getHMDPosition(PlayerEntity player){
+        if (getVRAPI() != null){
+            return getVRAPI().getVRPlayer(player).getHMD().getLookAngle();
+        }
+        return null;
     }
     public static Vec3d rotateVec3d(Vec3d vec, Matrix3f rotationMatrix) {
         return new Vec3d(

@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.item.vrcustom;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,15 +33,15 @@ public class VrCompassesItem extends Item{
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         if(world.isClient) {
-            if (VRPlugin.isPlayerInVR(player)) {//VR
+            if (VRPlugin.canRetrieveData(player)) {//VR
                 if (firstPosition == null && secondPosition ==null) {
                     // 第一次使用直尺，记录第一个位置
-                    firstPosition = VRPlugin.getControllerPosition(player, 0);
+                    firstPosition = VRDataHandler.getControllerPosition(player, 0);
                 } else if(secondPosition==null) {
                     // 第二次使用直尺，记录第二个位置
-                    secondPosition = VRPlugin.getControllerPosition(player, 0);
+                    secondPosition = VRDataHandler.getControllerPosition(player, 0);
                 }else {
-                    Vec3d thirdPosition = VRPlugin.getControllerPosition(player, 0);
+                    Vec3d thirdPosition = VRDataHandler.getControllerPosition(player, 0);
                     //获取颜色
                     setPenColor(player);
                     //生成圆

@@ -3,6 +3,7 @@ package net.jiang.tutorialmod.item.vrcustom;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
 import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -61,10 +62,10 @@ public class VrPenItem extends Item{
                 }
 //                if (Items.ENCHANTED_BOOK)
                 if(count<=1) {//单画笔
-                    if (entity instanceof PlayerEntity user && VRPlugin.isPlayerInVR(user)) {//有MC-VR-API并且在VR中的时候
-//                        float test = VRPlugin.getControllerRoll(user, 0);
+                    if (entity instanceof PlayerEntity user && VRPlugin.canRetrieveData(user)) {//有MC-VR-API并且在VR中的时候
+//                        float test = VRDataHandler.getControllerRoll(user, 0);
 //                        System.out.println(test);
-                        Vec3d currentPosMainController = VRPlugin.getControllerPosition(user, 0);
+                        Vec3d currentPosMainController = VRDataHandler.getControllerPosition(user, 0);
                         Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
                         generateParticles(world, particlePosition, lastParticlePosition);
                         lastParticlePosition = particlePosition;
@@ -82,12 +83,12 @@ public class VrPenItem extends Item{
                     }
                 }else {//和count相关的正方形画笔
 
-                    if ((entity instanceof PlayerEntity user && VRPlugin.isPlayerInVR(user))) {//VR
+                    if ((entity instanceof PlayerEntity user && VRPlugin.canRetrieveData(user))) {//VR
 
-                        Vec3d currentLookAngleMainController = VRPlugin.getControllerLookAngle(user, 0);
-                        Vec3d currentPosMainController = VRPlugin.getControllerPosition(user, 0);
+                        Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle(user, 0);
+                        Vec3d currentPosMainController = VRDataHandler.getControllerPosition(user, 0);
                         Vec3d particlePosition = new Vec3d(currentPosMainController.getX(), currentPosMainController.getY(), currentPosMainController.getZ());
-                        float controllerRoll = VRPlugin.getControllerRoll(user, 0);
+                        float controllerRoll = VRDataHandler.getControllerRoll(user, 0);
                         generateParticlesInSquareWithEdgesVR(world, particlePosition, currentLookAngleMainController,controllerRoll, count);
                     }else{//非VR
                         // 获取玩家的朝向

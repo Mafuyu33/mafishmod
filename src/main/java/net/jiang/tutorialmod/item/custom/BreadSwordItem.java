@@ -44,7 +44,7 @@ public class BreadSwordItem extends SwordItem {
     public ActionResult useOnBlock(ItemUsageContext context) {
         PlayerEntity user = context.getPlayer();
 
-//        if (VRPlugin.isPlayerInVR(user)) {
+//        if (VRPlugin.canRetrieveData(user)) {
 //            user.sendMessage(Text.literal("在VR里"),false);
 //        } else {
 //            user.sendMessage(Text.literal("不在VR里"),false);

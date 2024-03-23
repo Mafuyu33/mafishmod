@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.util.VRDataHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -92,10 +93,10 @@ public class TimeStopItem extends Item {
         super.inventoryTick(stack, world, entity, slot, selected);
 
         if (startStop && entity instanceof PlayerEntity user && !world.isClient
-                && VRPlugin.isPlayerInVR(user)) {//有MC-VR-API并且在VR中的时候
-            Vec3d currentPosMainController = VRPlugin.getControllerPosition(user, 0);
-            Vec3d currentPosOffController = VRPlugin.getControllerPosition(user, 1);
-            Vec3d currentPosHMD = VRPlugin.getHMDPosition(user);
+                && VRPlugin.canRetrieveData(user)) {//有MC-VR-API并且在VR中的时候
+            Vec3d currentPosMainController = VRDataHandler.getControllerPosition(user, 0);
+            Vec3d currentPosOffController = VRDataHandler.getControllerPosition(user, 1);
+            Vec3d currentPosHMD = VRDataHandler.getHMDPosition(user);
 
             double mainControllerDistance = currentPosMainController.distanceTo(lastPosMainController); // 计算当前位置和上一个位置之间的距离
             double offControllerDistance = currentPosOffController.distanceTo(lastPosOffController);

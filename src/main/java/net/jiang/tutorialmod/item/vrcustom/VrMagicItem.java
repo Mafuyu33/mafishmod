@@ -46,7 +46,7 @@ public class VrMagicItem extends Item {
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
         if (entity instanceof PlayerEntity player) {
-            if (VRPlugin.clientInVR() && VRPlugin.isApiActive(player)) {
+            if (VRPlugin.canRetrieve(player)) {
                 if (isUsingMagic) {
                     Vec3d currentLookAngleMainController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 0);
                     Vec3d currentLookAngleOffController = VRDataHandler.getControllerLookAngle((PlayerEntity) entity, 1);
@@ -61,6 +61,8 @@ public class VrMagicItem extends Item {
                         generateParticlesInMagicWithEdgesVR(world, currentPosOffController, currentLookAngleOffController, offControllerRoll,red,0,0);
                     }
                 }
+            } else {
+                player.sendMessage("sorry, this item currently only working with VR Mode");
             }
         }
     }
