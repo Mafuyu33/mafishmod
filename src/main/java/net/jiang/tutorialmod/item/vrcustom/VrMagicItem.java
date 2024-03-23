@@ -1,9 +1,7 @@
 package net.jiang.tutorialmod.item.vrcustom;
 
-import net.blf02.vrapi.api.IVRAPI;
 import net.jiang.tutorialmod.particle.ModParticles;
-import net.jiang.tutorialmod.vr.VRPlugin;
-import net.jiang.tutorialmod.vr.VRPluginVerify;
+import net.jiang.tutorialmod.VRPlugin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -41,9 +39,9 @@ public class VrMagicItem extends Item {
 //    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
 //        super.inventoryTick(stack, world, entity, slot, selected);
 //        if (entity instanceof PlayerEntity player) {
-//            if (VRPluginVerify.clientInVR() && VRPlugin.API.apiActive((player))) {
+//            if (VRPlugin.isClientInVR() && VRPlugin.isPlayerInVR(player)) {
 //                if (VrMagicItem.isUsingMagic) {
-//                    Vec3d pos = getControllerPosition(player, 0);
+//                    Vec3d pos = VRPlugin.getControllerPosition(player, 0);
 //                    double size = (player.getOffHandStack().getCount()) * 0.025 + 0.05;
 //                    userBox = new Box(
 //                            pos.x - size / 2.0, pos.y - size / 2.0, pos.z - size / 2.0,
@@ -109,13 +107,5 @@ public class VrMagicItem extends Item {
             world.addParticle(ModParticles.RUBBER_PARTICLE, true, vertex3.x, vertex3.y, vertex3.z, 0, 1, 0);
             world.addParticle(ModParticles.RUBBER_PARTICLE, true, vertex4.x, vertex4.y, vertex4.z, 0, 1, 0);
         }
-    }
-
-    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
-        IVRAPI vrApi = VRPlugin.API;
-        if (vrApi != null && vrApi.apiActive(player)) {
-            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
-        }
-        return null;
     }
 }
