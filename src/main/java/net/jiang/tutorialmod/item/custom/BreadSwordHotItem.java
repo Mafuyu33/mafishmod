@@ -2,7 +2,8 @@ package net.jiang.tutorialmod.item.custom;
 
 import dev.architectury.event.events.common.TickEvent;
 import net.blf02.vrapi.api.IVRAPI;
-import net.jiang.tutorialmod.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -27,14 +28,22 @@ public class BreadSwordHotItem extends SwordItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 //        ItemStack offhanditemStack = user.getOffHandStack();
 //        System.out.println(offhanditemStack.getOrCreateNbt());
-        if (world.isClient && VRPlugin.isPlayerInVR(user)) {   //有MC-VR-API并且在VR中的时候
-            Vec3d mainController = VRPlugin.getControllerPosition(user, 0);
-            Vec3d offController = VRPlugin.getControllerPosition(user, 1);
+        if (world.isClient && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {   //有MC-VR-API并且在VR中的时候
+            Vec3d mainController = getControllerPosition(user,0);
+            Vec3d offController = getControllerPosition(user,1);
             user.sendMessage(Text.literal("mainController"+mainController),false);
             user.sendMessage(Text.literal("offController"+offController),false);
 
 
         }
         return TypedActionResult.success(this.getDefaultStack(), world.isClient());
+    }
+
+    public static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
+        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+        if (vrApi != null && vrApi.apiActive(player)) {
+            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+        }
+        return null;
     }
 }

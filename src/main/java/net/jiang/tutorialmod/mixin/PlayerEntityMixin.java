@@ -13,6 +13,8 @@ import net.jiang.tutorialmod.mixinhelper.TripwireBlockMixinHelper;
 import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.sound.ModSounds;
+import net.jiang.tutorialmod.vr.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;

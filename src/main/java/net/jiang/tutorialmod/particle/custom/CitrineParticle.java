@@ -1,10 +1,13 @@
 package net.jiang.tutorialmod.particle.custom;
 
+import net.blf02.vrapi.api.IVRAPI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
 import net.jiang.tutorialmod.particle.ParticleStorage;
+import net.jiang.tutorialmod.vr.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.util.math.MatrixStack;

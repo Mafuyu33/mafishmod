@@ -3,7 +3,9 @@ package net.jiang.tutorialmod.item.custom;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.jiang.tutorialmod.VRPlugin;
+import net.blf02.vrapi.api.IVRAPI;
+import net.jiang.tutorialmod.vr.VRPlugin;
+import net.jiang.tutorialmod.vr.VRPluginVerify;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -92,10 +94,10 @@ public class TimeStopItem extends Item {
         super.inventoryTick(stack, world, entity, slot, selected);
 
         if (startStop && entity instanceof PlayerEntity user && !world.isClient
-                && VRPlugin.isPlayerInVR(user)) {//有MC-VR-API并且在VR中的时候
-            Vec3d currentPosMainController = VRPlugin.getControllerPosition(user, 0);
-            Vec3d currentPosOffController = VRPlugin.getControllerPosition(user, 1);
-            Vec3d currentPosHMD = VRPlugin.getHMDPosition(user);
+                && VRPluginVerify.hasAPI && VRPlugin.API.playerInVR(user)) {//有MC-VR-API并且在VR中的时候
+            Vec3d currentPosMainController = getControllerPosition(user,0);
+            Vec3d currentPosOffController = getControllerPosition(user,1);
+            Vec3d currentPosHMD = getHMDPosition(user);
 
             double mainControllerDistance = currentPosMainController.distanceTo(lastPosMainController); // 计算当前位置和上一个位置之间的距离
             double offControllerDistance = currentPosOffController.distanceTo(lastPosOffController);
@@ -127,6 +129,21 @@ public class TimeStopItem extends Item {
 
             CommandProcessing(user,isMoving);
         }
+    }
+
+    private static Vec3d getHMDPosition(PlayerEntity player) {
+        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+        if (vrApi != null && vrApi.apiActive(player)) {
+            return vrApi.getVRPlayer(player).getHMD().position();
+        }
+        return null;
+    }
+    private static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
+        IVRAPI vrApi = VRPlugin.API; // 这里假设 VRPlugin 是你的 VR 插件类
+        if (vrApi != null && vrApi.apiActive(player)) {
+            return vrApi.getVRPlayer(player).getController(controllerIndex).position();
+        }
+        return null;
     }
     private static void CommandProcessing(PlayerEntity user,boolean isMoving){
         if (isMoving) {
