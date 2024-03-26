@@ -2,33 +2,15 @@ package net.jiang.tutorialmod.particle.custom;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
-import net.jiang.tutorialmod.networking.ModMessages;
-import net.jiang.tutorialmod.networking.packet.ParticleColorC2SPacket;
 import net.jiang.tutorialmod.particle.ParticleStorage;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.EntityList;
-
-import java.awt.*;
-import java.util.List;
 
 public class CitrineParticle extends SpriteBillboardParticle {
     protected CitrineParticle(ClientWorld level, double xCoord, double yCoord, double zCoord,
@@ -63,7 +45,7 @@ public class CitrineParticle extends SpriteBillboardParticle {
                 if (VrRubberItem.isErasing && VrRubberItem.userbox!=null) {// 检查粒子是否在笔刷碰撞箱内
                     if (isParticleInsideBox(new Vec3d(this.x, this.y, this.z), VrRubberItem.userbox)) {
                         this.markDead();
-                        ParticleStorage.getOrCreateForWorld().removeParticleAtPosition(new Vec3d(this.x, this.y, this.z));
+                        ParticleStorage.getOrCreateForWorld().removeParticleByPosition(new Vec3d(this.x, this.y, this.z));
                     }
                 }
                 if(VrRubberItem.isErasing && player.getOffHandStack().getItem()== ModItems.RUBY){//大范围清屏

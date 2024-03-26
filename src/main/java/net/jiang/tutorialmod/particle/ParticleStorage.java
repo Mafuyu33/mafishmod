@@ -1,11 +1,17 @@
 package net.jiang.tutorialmod.particle;
 
+import net.jiang.tutorialmod.TutorialMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.PersistentState;
+import net.minecraft.world.PersistentStateManager;
+import net.minecraft.world.World;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,13 +19,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static net.jiang.tutorialmod.TutorialMod.LOGGER;
 
-public class ParticleStorage {
+public class ParticleStorage{
 //    private static final Map<String, ParticleStorage> saveParticleStorageMap = new HashMap<>();
 private static final Map<String, ParticleStorage> saveParticleStorageMap = new HashMap<>();
-    // 声明时使用ConcurrentHashMap
-    private final ConcurrentHashMap<Vec3d, Integer> positionToIdMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Integer, double[]> particleColor = new ConcurrentHashMap<>();
-    private final AtomicInteger nextId = new AtomicInteger();
+    // 使用UUID作为粒子标识符
+    private final ConcurrentHashMap<Vec3d, UUID> positionMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<UUID, double[]> particleColor = new ConcurrentHashMap<>();
 
     // 私有构造函数，确保只能通过静态方法获取实例
     private ParticleStorage() {
@@ -31,77 +36,64 @@ private static final Map<String, ParticleStorage> saveParticleStorageMap = new H
 //        printParticleStorageMapContents();
         return saveParticleStorageMap.computeIfAbsent(saveName, k -> new ParticleStorage());
     }
-    public Integer getParticleIdAtPosition(Vec3d position) {
-        return positionToIdMap.get(position);
-    }
 
-    public static void printParticleStorageMapContents() {
-        System.out.println("Contents of saveParticleStorageMap:");
-        for (Map.Entry<String, ParticleStorage> entry : saveParticleStorageMap.entrySet()) {
-            String saveName = entry.getKey();
-            ParticleStorage particleStorage = entry.getValue();
-            System.out.println("Save Name: " + saveName + ", ParticleStorage: " + particleStorage.toString());
-            // 如果你希望打印 ParticleStorage 的更多信息，可以添加相应的打印语句
-        }
-    }
+//    public static void printParticleStorageMapContents() {
+//        System.out.println("Contents of saveParticleStorageMap:");
+//        for (Map.Entry<String, ParticleStorage> entry : saveParticleStorageMap.entrySet()) {
+//            String saveName = entry.getKey();
+//            ParticleStorage particleStorage = entry.getValue();
+//            System.out.println("Save Name: " + saveName + ", ParticleStorage: " + particleStorage.toString());
+//            // 如果你希望打印 ParticleStorage 的更多信息，可以添加相应的打印语句
+//        }
+//    }
 
-    public void printPositionToIdMapContents() {
-        System.out.println("Contents of positionToIdMap:");
-        for (Map.Entry<Vec3d, Integer> entry : positionToIdMap.entrySet()) {
-            Vec3d position = entry.getKey();
-            Integer id = entry.getValue();
-            System.out.println("Position: " + position.toString() + ", Id: " + id);
-        }
-    }
+//    public void printPositionToIdMapContents() {
+//        System.out.println("Contents of positionToIdMap:");
+//        for (Map.Entry<Vec3d, Integer> entry : positionToIdMap.entrySet()) {
+//            Vec3d position = entry.getKey();
+//            Integer id = entry.getValue();
+//            System.out.println("Position: " + position.toString() + ", Id: " + id);
+//        }
+//    }
     public void addParticle(Vec3d position, double red, double green, double blue) {
-        int id = nextId.getAndIncrement();
-        positionToIdMap.put(position, id);
+        UUID id = UUID.randomUUID();
+        positionMap.put(position,id);
         particleColor.put(id, new double[]{red, green, blue});
     }
 
-    public void removeParticleAtPosition(Vec3d position) {
-        Integer particleId = positionToIdMap.remove(position);
-        if (particleId != null) {
-            particleColor.remove(particleId);
-        }
+    public void removeParticleByPosition(Vec3d position) {
+        positionMap.remove(position);
+        particleColor.remove(getUUIDByPosition(position));
     }
 
     public boolean hasParticleAtPosition(Vec3d position) {
-        return positionToIdMap.containsKey(position);
+        return positionMap.containsKey(position);
     }
 
     public void clearAll() {
-        positionToIdMap.clear();
+        positionMap.clear();
         particleColor.clear();
     }
 
     public void spawnAllParticles(ClientWorld world) {
-//        printPositionToIdMapContents();
-        positionToIdMap.forEach((position, id) -> {
+        positionMap.forEach((position,id) -> {
             double[] color = particleColor.get(id);
-            double red = color[0];
-            double green = color[1];
-            double blue = color[2];
-            world.addParticle(ModParticles.CITRINE_PARTICLE, position.x, position.y, position.z, red, green, blue);
+            world.addParticle(ModParticles.CITRINE_PARTICLE, position.x, position.y, position.z, color[0], color[1], color[2]);
         });
     }
     // 根据粒子的 ID 获取其位置
-    public Vec3d getPositionById(int id) {
-        for (Map.Entry<Vec3d, Integer> entry : positionToIdMap.entrySet()) {
-            if (entry.getValue() == id) {
-                return entry.getKey();
-            }
-        }
-        return null; // 如果找不到对应 ID 的粒子，则返回 null
+    public UUID getUUIDByPosition(Vec3d position) {
+        // 直接使用UUID作为键来获取位置
+        return positionMap.get(position);
     }
-    public Vec3d findCollidedParticlePosition(Box collisionBox) {
-        for (Vec3d position : positionToIdMap.keySet()) {
-            if (isParticleInsideBox(position, collisionBox)) {
-                return position;
-            }
-        }
-        return null; // 没有找到碰撞的粒子
-    }
+//    public Vec3d findCollidedParticlePosition(Box collisionBox) {
+//        for (Vec3d position : positionToIdMap.keySet()) {
+//            if (isParticleInsideBox(position, collisionBox)) {
+//                return position;
+//            }
+//        }
+//        return null; // 没有找到碰撞的粒子
+//    }
 //    public Vec3d[] findParticlesWithColor(double red, double green, double blue) {
 //        List<Vec3d> positions = new ArrayList<>();
 //        for (Map.Entry<Vec3d, Integer> entry : positionToIdMap.entrySet()) {
@@ -131,87 +123,3 @@ private static final Map<String, ParticleStorage> saveParticleStorageMap = new H
                 && posZ >= boxMinZ && posZ <= boxMaxZ;
     }
 }
-
-
-
-
-
-
-
-
-//package net.jiang.tutorialmod.particle;
-//
-//import net.minecraft.client.world.ClientWorld;
-//import net.minecraft.util.math.Box;
-//import net.minecraft.util.math.Vec3d;
-//
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.concurrent.atomic.AtomicInteger;
-//
-//public class ParticleStorage {
-//    private static final Map<Vec3d, Integer> positionToIdMap = new HashMap<>();
-//    private static final Map<Integer, double[]> particleColor = new HashMap<>();
-//    private final AtomicInteger nextId = new AtomicInteger();
-//
-//    public void addParticle(Vec3d position, double red, double green, double blue) {
-//        int id = nextId.getAndIncrement();
-//        positionToIdMap.put(position,id);
-//        particleColor.put(id, new double[]{red, green, blue});
-//
-//    }
-//
-//    public static void removeParticleAtPosition(Vec3d position) {
-//        Integer particleId = positionToIdMap.remove(position);
-//        if (particleId != null) {
-//            particleColor.remove(particleId);
-//        }
-//    }
-//    public static boolean hasParticleAtPosition(Vec3d position) {
-//        return positionToIdMap.containsKey(position);
-//    }
-//
-//    public void clearAll() {
-//        positionToIdMap.clear();
-//        particleColor.clear();
-//    }
-//
-//    public static void spawnAllParticles(ClientWorld world) {
-//        positionToIdMap.forEach((position, id) -> {
-//            double[] color = particleColor.get(id);
-//            double red = color[0];
-//            double green = color[1];
-//            double blue = color[2];
-//            world.addParticle(ModParticles.CITRINE_PARTICLE, position.x, position.y, position.z, red, green, blue);
-//        });
-//    }
-//    // 寻找与给定碰撞箱相交的粒子，并返回其位置
-//    public static Vec3d findCollidedParticlePosition(Box collisionBox) {
-//        for (Vec3d position : positionToIdMap.keySet()) {
-//            if (isParticleInsideBox(position, collisionBox)) {
-////                System.out.println(position);
-//                return position;
-//            }
-//        }
-//        return null; // 没有找到碰撞的粒子
-//    }
-//
-//    // 检查给定位置的粒子是否在碰撞箱内
-//    private static boolean isParticleInsideBox(Vec3d position, Box collisionBox) {
-//        double posX = position.x;
-//        double posY = position.y;
-//        double posZ = position.z;
-//        double boxMinX = collisionBox.minX;
-//        double boxMinY = collisionBox.minY;
-//        double boxMinZ = collisionBox.minZ;
-//        double boxMaxX = collisionBox.maxX;
-//        double boxMaxY = collisionBox.maxY;
-//        double boxMaxZ = collisionBox.maxZ;
-//
-//        return posX >= boxMinX && posX <= boxMaxX
-//                && posY >= boxMinY && posY <= boxMaxY
-//                && posZ >= boxMinZ && posZ <= boxMaxZ;
-//    }
-//}
-//
-//
