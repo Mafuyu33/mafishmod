@@ -1,5 +1,8 @@
+MafishMod © 2024 by Mafuyu33 is licensed under CC BY-NC 4.0.  
+To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/  
+  
 这是马夫鱼基于Kaupenjoe mod教程写的一些mod物品（用于学习我的世界模组和视频制作）  
-版本：1.20.1 Fabric with Mixin  
+版本：1.20.4 Fabric with Mixin  
 目前的内容包括：  
 1.能吃的面包剑  
 2.在雪球里面加入石头（甚至是TNT）  
