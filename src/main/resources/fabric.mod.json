@@ -12,21 +12,21 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "MIT",
-	"icon": "assets/tutorialmod/icon.png",
+	"icon": "assets/mafishmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.jiang.tutorialmod.TutorialMod"
+			"net.mafuyu33.mafishmod.TutorialMod"
 		],
 		"client": [
-			"net.jiang.tutorialmod.TutorialModClient"
+			"net.mafuyu33.mafishmod.TutorialModClient"
 		],
 		"fabric-datagen": [
-			"net.jiang.tutorialmod.TutorialModDataGenerator"
+			"net.mafuyu33.mafishmod.TutorialModDataGenerator"
 		]
 	},
 	"mixins": [
-		"tutorialmod.mixins.json"
+		"mafishmod.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.15.1",

@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "tutorialmod:ruby_block",
-    "tutorialmod:raw_ruby_block",
-    "tutorialmod:white_cat_block",
-    "tutorialmod:gold_melon"
+    "mafishmod:ruby_block",
+    "mafishmod:raw_ruby_block",
+    "mafishmod:white_cat_block",
+    "mafishmod:gold_melon"
   ]
 }

@@ -1,0 +1,6 @@
+{
+    "parent": "mafishmod:item/zhuge",
+    "textures": {
+        "layer0": "mafishmod:item/zhuge_pulling_2"
+    }
+}

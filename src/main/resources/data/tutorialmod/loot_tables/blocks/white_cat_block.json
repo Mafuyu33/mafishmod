@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:white_cat_block"
+          "name": "mafishmod:white_cat_block"
         }
       ],
       "rolls": 1.0

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:gold_melon"
+          "name": "mafishmod:gold_melon"
         }
       ],
       "rolls": 1.0

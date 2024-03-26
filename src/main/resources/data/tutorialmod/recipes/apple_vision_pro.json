@@ -9,10 +9,10 @@
       "item": "minecraft:spyglass"
     },
     {
-      "item": "tutorialmod:cool_glass"
+      "item": "mafishmod:cool_glass"
     }
   ],
   "result": {
-    "item": "tutorialmod:apple_vision_pro"
+    "item": "mafishmod:apple_vision_pro"
   }
 }

@@ -8,13 +8,13 @@
   ],
   "key": {
     "#": {
-      "item":"tutorialmod:ruby"
+      "item":"mafishmod:ruby"
     },
     "$": {
-      "item":"tutorialmod:white_cat_block"
+      "item":"mafishmod:white_cat_block"
     }
   },
   "result": {
-    "item": "tutorialmod:ruby_block"
+    "item": "mafishmod:ruby_block"
   }
 }

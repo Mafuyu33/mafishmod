@@ -8,13 +8,13 @@
   ],
   "key": {
     "#": {
-      "item":"tutorialmod:ruby"
+      "item":"mafishmod:ruby"
     },
     "$": {
       "item":"minecraft:stick"
     }
   },
   "result": {
-    "item": "tutorialmod:ruby_pickaxe"
+    "item": "mafishmod:ruby_pickaxe"
   }
 }

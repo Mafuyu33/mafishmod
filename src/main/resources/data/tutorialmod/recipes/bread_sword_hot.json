@@ -4,7 +4,7 @@
   "cookingtime": 100,
   "experience": 0.35,
   "ingredient": {
-    "item": "tutorialmod:bread_sword"
+    "item": "mafishmod:bread_sword"
   },
-  "result": "tutorialmod:bread_sword_hot"
+  "result": "mafishmod:bread_sword_hot"
 }

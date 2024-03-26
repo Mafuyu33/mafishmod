@@ -1,0 +1,8 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "bottom": "mafishmod:block/potato_tnt",
+    "side": "mafishmod:block/potato_tnt",
+    "top": "mafishmod:block/potato_tnt"
+  }
+}

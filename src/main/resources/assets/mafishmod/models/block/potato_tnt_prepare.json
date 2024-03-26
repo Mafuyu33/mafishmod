@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "mafishmod:block/potato_tnt_prepare"
+  }
+}

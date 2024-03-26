@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tutorialmod:raw_ruby_block",
+    "mafishmod:raw_ruby_block",
     "#minecraft:gold_ores",
     "#minecraft:emerald_ores",
     "#minecraft:redstone_ores",

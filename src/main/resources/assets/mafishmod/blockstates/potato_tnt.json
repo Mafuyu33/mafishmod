@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mafishmod:block/potato_tnt"
+    },
+    "type=double": {
+      "model": "mafishmod:block/potato_tnt"
+    },
+    "type=top": {
+      "model": "mafishmod:block/potato_tnt"
+    }
+  }
+}

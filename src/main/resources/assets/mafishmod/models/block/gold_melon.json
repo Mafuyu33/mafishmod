@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "mafishmod:block/gold_melon_top",
+    "side": "mafishmod:block/gold_melon_side"
+  }
+}

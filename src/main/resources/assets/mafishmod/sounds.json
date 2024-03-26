@@ -1,0 +1,44 @@
+{
+  "metal_detector_found_ore": {
+    "subtitle": "sounds.mafishmod.metal_detector_found_ore",
+    "sounds": [
+      "mafishmod:metal_detector_found_ore"
+    ]
+  },
+  "sound_block_break": {
+    "subtitle": "mafishmod.sound_block_break",
+    "sounds": [
+      "mafishmod:sound_block_break"
+    ]
+  },
+  "sound_block_step": {
+    "subtitle": "mafishmod.sound_block_step",
+    "sounds": [
+      "mafishmod:sound_block_step"
+    ]
+  },
+  "sound_block_place": {
+    "subtitle": "mafishmod.sound_block_place",
+    "sounds": [
+      "mafishmod:sound_block_place"
+    ]
+  },
+  "sound_block_hit": {
+    "subtitle": "mafishmod.sound_block_hit",
+    "sounds": [
+      "mafishmod:sound_block_hit"
+    ]
+  },
+  "sound_block_fall": {
+    "subtitle": "mafishmod.sound_block_fall",
+    "sounds": [
+      "mafishmod:sound_block_fall"
+    ]
+  },
+  "dash_sound": {
+    "subtitle": "sounds.mafishmod.dash_sound",
+    "sounds": [
+      "mafishmod:dash_sound"
+    ]
+  }
+}

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "tutorialmod:ruby_block"
+          "name": "mafishmod:ruby_block"
         }
       ],
       "rolls": 1.0

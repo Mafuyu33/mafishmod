@@ -6,7 +6,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "tutorialmod:iron_fake"
+      "item": "mafishmod:iron_fake"
     }
   },
   "pattern": [
@@ -15,7 +15,7 @@
     " #"
   ],
   "result": {
-    "item": "tutorialmod:fu"
+    "item": "mafishmod:fu"
   },
   "show_notification": true
 }

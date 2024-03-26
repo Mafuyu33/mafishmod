@@ -1,6 +1,0 @@
-{
-    "parent": "tutorialmod:item/zhuge",
-    "textures": {
-        "layer0": "tutorialmod:item/zhuge_pulling_1"
-    }
-}

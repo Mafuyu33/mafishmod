@@ -1,0 +1,50 @@
+{
+  "required": true,
+  "package": "net.mafuyu33.mafishmod.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AbstractFurnaceBlockEntityMixin",
+    "AbstractFurnaceBlockMixin",
+    "AlwaysEnchantableMixin",
+    "ArmorEnchantmentMixin",
+    "BadLuckOfSeaItemEntityMixin",
+    "BeeRideableMixin",
+    "BellBlockEntityMixin",
+    "BlockMixin",
+    "ExampleMixin",
+    "FireworkRocketEntityMixin",
+    "FireworkRocketHitOnEntityMixin",
+    "FireworkRocketItemMixin",
+    "FishingBobberEntityMixin",
+    "FishingRodItemMixin",
+    "HandledScreenMixin",
+    "HopperBlockEntityMixin",
+    "HopperBlockMixin",
+    "HorseSaddleEnchantmentMixin",
+    "InfiniteBucketMixin$InFiniteBucketMixin",
+    "InfiniteFoodMixin$InFiniteFoodMixin",
+    "InfiniteUndyingMixin",
+    "KaoFishMixin",
+    "LeadItemMixin",
+    "LeadItemMovementMixin",
+    "LightningRodMixin",
+    "LivingEntityMixin",
+    "MobEntityMixin",
+    "PickaxeInfiniteMixin",
+    "PlayerEntityMixin",
+    "ThrowableDiamondMixin",
+    "TntBlockMixin",
+    "TripwireBlockMixin",
+    "WeaponEnchantmentMixin"
+  ],
+  "client": [
+    "InventoryScreenMixin",
+    "ItemRendererAccessor",
+    "ItemRendererMixin",
+    "ModelLoaderMixin",
+    "ParticleManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

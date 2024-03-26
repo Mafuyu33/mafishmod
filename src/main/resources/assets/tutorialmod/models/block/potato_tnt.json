@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "tutorialmod:block/potato_tnt",
-    "side": "tutorialmod:block/potato_tnt",
-    "top": "tutorialmod:block/potato_tnt"
-  }
-}

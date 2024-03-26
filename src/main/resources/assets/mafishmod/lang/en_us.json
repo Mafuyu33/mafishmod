@@ -1,0 +1,104 @@
+{
+  "tooltip.mafishmod.metal_detector.tooltip": "Find valuables underground",
+  "tooltip.mafishmod.ruby_stuff.tooltip": "§e",
+  "tooltip.mafishmod.vr_pen.tooltip": "Holding dye in the off-hand changes the color, and the quantity of the item in the off-hand determines the size of the square brush",
+  "tooltip.mafishmod.vr_rubber.tooltip": "The quantity of the item in the off-hand determines the size of the eraser, and holding a ruby in the off-hand clears a large area.",
+  "tooltip.mafishmod.vr_compasses.tooltip": "Draw a circle by selecting three points: the first point is the center of the circle, the second determines the radius, and the third establishes the plane.",
+
+
+  "item.mafishmod.ruby": "Mafish",
+  "item.mafishmod.raw_ruby": "Fired Mafish",
+  "item.mafishmod.cool_glass": "COOL GLASS",
+  "item.mafishmod.cool_glass2": "COOL GLASS2",
+  "item.mafishmod.metal_detector": "Metal Detector",
+  "item.mafishmod.tomato": "Tomato",
+  "item.mafishmod.coal_briquette": "Coal Briquette",
+
+  "item.mafishmod.ruby_staff": "§eMagic stuff",
+
+  "item.mafishmod.ruby_pickaxe": "RUBY PICKAXE",
+
+  "item.mafishmod.ruby_helmet": "Ruby Helmet",
+  "item.mafishmod.ruby_chestplate": "Ruby Chestplate",
+  "item.mafishmod.ruby_leggings": "Ruby Leggings",
+  "item.mafishmod.ruby_boots": "Ruby Boots",
+
+  "block.mafishmod.ruby_block": "RUBY_BLOCK",
+  "block.mafishmod.raw_ruby_block": "RAW RUBY BLOCK",
+  "block.mafishmod.white_cat_block": "WHITE CAT BLOCK",
+  "block.mafishmod.gold_melon": "gold_melon",
+  "block.mafishmod.potato_tnt_prepare": "potato_tnt_prepare",
+  "block.mafishmod.potato_tnt": "potato_tnt",
+  "block.mafishmod.gem_polishing_station": "Gem Polishing Station",
+
+  "tooltip.mafishmod.fire_happy": "Fire Happy",
+
+
+
+
+
+  "entity.minecraft.villager.sound_master": "Soundmaster",
+
+  "itemgroup.ruby": "Ruby Tutorial Group",
+
+  "item.mafishmod.bread_sword": "bread_sword",
+  "item.mafishmod.bread_sword_hot": "bread_sword_hot",
+  "item.mafishmod.bread_sword_very_hot": "bread_sword_very_hot",
+  "item.mafishmod.tnt_ball": "TNT Ball",
+  "item.mafishmod.stone_ball": "Stone Ball",
+  "item.mafishmod.apple_vision_pro": "Apple Vision Pro",
+  "item.mafishmod.fu": "FU",
+  "item.mafishmod.iron_fake": "Tieding",
+  "item.mafishmod.zhuge": "zhuge",
+  "item.mafishmod.poison_sword": "poison_sword",
+  "item.mafishmod.firework_arrow": "firework_arrow",
+  "item.mafishmod.stargazy_pie": "stargazy_pie",
+  "item.mafishmod.time_stop": "time_stop",
+  "item.mafishmod.math_sword": "math_sword",
+  "item.mafishmod.colliable": "colliable",
+  "item.mafishmod.lightning_ball": "lightning_ball",
+  "item.mafishmod.milk_flesh": "milk_flesh",
+
+  "item.mafishmod.vr_pen": "vr_pen",
+  "item.mafishmod.vr_rubber": "vr_rubber",
+  "item.mafishmod.vr_ruler": "vr_ruler",
+  "item.mafishmod.vr_compasses": "vr_compasses",
+  "item.mafishmod.vr_magic": "vr_magic",
+
+
+  "enchantment.mafishmod.bad_luck_of_sea": "bad_luck_of_sea",
+  "enchantment.mafishmod.eight_gods_pass_sea": "eight_gods_pass_sea",
+  "enchantment.mafishmod.kill_chicken_get_egg": "kill_chicken_get_egg",
+  "enchantment.mafishmod.go_to_sky": "go_to_sky",
+  "enchantment.mafishmod.gong_xi_fa_cai": "gong_xi_fa_cai",
+  "enchantment.mafishmod.mercy": "mercy",
+  "enchantment.mafishmod.kill_my_horse": "kill_my_horse",
+  "enchantment.mafishmod.kill_my_horse_plus": "kill_my_horse_plus",
+  "enchantment.mafishmod.hot_potato": "hot_potato",
+  "enchantment.mafishmod.very_easy": "very_easy",
+  "enchantment.mafishmod.reverse": "reverse",
+  "enchantment.mafishmod.pay_to_play": "pay_to_play",
+  "enchantment.mafishmod.fear": "fear",
+  "enchantment.mafishmod.mute": "mute",
+  "enchantment.mafishmod.slippery": "slippery",
+
+
+
+  "key.category.mafishmod.tutorial": "Mafish Mod",
+  "key.mafishmod.throw_item": "throw_item",
+
+  "effect.mafishmod.ironman": "Link Start",
+  "effect.mafishmod.flower_effect": "flower_effect",
+  "effect.mafishmod.teleport_effect": "teleport_effect",
+
+  "item.minecraft.potion.effect.flower_potion": "flower_potion",
+  "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
+  "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion",
+  "item.minecraft.tipped_arrow.effect.flower_potion": "flower_potion",
+
+
+  "item.minecraft.potion.effect.teleport_potion": "teleport_potion",
+  "item.minecraft.splash_potion.effect.teleport_potion": "Splash teleport_potion",
+  "item.minecraft.lingering_potion.effect.teleport_potion": "Lingering teleport_potion",
+  "item.minecraft.tipped_arrow.effect.teleport_potion": "teleport_potion"
+}
