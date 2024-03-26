@@ -25,6 +25,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin extends ProjectileEntity {
@@ -108,8 +109,6 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
 			entity.setVelocity(entity.getVelocity().add(vec3d));
 		}
 	}
-	@Shadow private int hookCountdown;
-	@Shadow private int fishTravelCountdown;
     @Shadow private FishingBobberEntity.State state;
 
 
@@ -142,10 +141,9 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
 				}
 			}
 		}
-//		if(this.state == FishingBobberEntity.State.BOBBING &playerEntity!=null){
-//			playerEntity.sendMessage(Text.literal((String.valueOf(123))),false);
-//		};//进漂浮状态的测试
 	}
-
-
+	@Inject(at = @At("HEAD"), method = "use")
+	private void init3(ItemStack usedItem, CallbackInfoReturnable<Integer> cir){
+		PlayerEntity playerEntity = getEntityWorld().getClosestPlayer(this,40);
+	}
 }

@@ -8,6 +8,7 @@
     "AlwaysEnchantableMixin",
     "ArmorEnchantmentMixin",
     "BadLuckOfSeaItemEntityMixin",
+    "BeeRideableMixin",
     "BellBlockEntityMixin",
     "BlockMixin",
     "ExampleMixin",
