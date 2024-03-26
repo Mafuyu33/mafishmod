@@ -13,6 +13,7 @@ import net.jiang.tutorialmod.event.KeyInputHandler;
 import net.jiang.tutorialmod.networking.ModMessages;
 import net.jiang.tutorialmod.particle.ModParticles;
 import net.jiang.tutorialmod.particle.ParticleStorage;
+import net.jiang.tutorialmod.particle.StateSaverAndLoader;
 import net.jiang.tutorialmod.particle.custom.CitrineParticle;
 import net.jiang.tutorialmod.particle.custom.KnockBackParticle;
 import net.jiang.tutorialmod.particle.custom.RubberParticle;
@@ -51,7 +52,7 @@ public class TutorialModClient implements ClientModInitializer {
 
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {//客户端已经成功连接到服务器
                 // 调用您的方法
-                ParticleStorage.getOrCreateForWorld().spawnAllParticles(MinecraftClient.getInstance().world);
+                StateSaverAndLoader.getServerState(client.getServer()).spawnAllParticles(client.world,client.getServer());
         });
     }
 }

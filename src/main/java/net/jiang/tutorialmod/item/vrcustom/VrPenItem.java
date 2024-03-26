@@ -242,11 +242,11 @@ public class VrPenItem extends Item{
                 double y = lastParticlePosition.y + ratio * distance * direction.y;
                 double z = lastParticlePosition.z + ratio * distance * direction.z;
                 world.addParticle(ModParticles.KNOCK_BACK_PARTICLE, true, x, y, z, 1.0, 1.0, 0.0);
-                ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(x, y, z), 1.0, 1.0, 0.0);
+                ParticleStorage.addParticle(new Vec3d(x, y, z), 1.0, 1.0, 0.0);
             }
         } else {
             world.addParticle(ModParticles.KNOCK_BACK_PARTICLE, true, particlePosition.x, particlePosition.y, particlePosition.z, red, green, blue);
-            ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, 1.0, 1.0, 0.0);
+            ParticleStorage.addParticle(particlePosition, 1.0, 1.0, 0.0);
         }
     }
 
@@ -265,11 +265,11 @@ public class VrPenItem extends Item{
                 double y = lastParticlePosition.y + ratio * distance * direction.y;
                 double z = lastParticlePosition.z + ratio * distance * direction.z;
                 world.addParticle(ModParticles.CITRINE_PARTICLE, true, x, y, z, red, green, blue);
-                ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(x, y, z), red, green, blue);
+                ParticleStorage.addParticle(new Vec3d(x, y, z), red, green, blue);
             }
         } else {
             world.addParticle(ModParticles.CITRINE_PARTICLE, true, particlePosition.x, particlePosition.y, particlePosition.z, red, green, blue);
-            ParticleStorage.getOrCreateForWorld().addParticle(particlePosition, red, green, blue);
+            ParticleStorage.addParticle(particlePosition, red, green, blue);
         }
     }
 

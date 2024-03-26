@@ -110,7 +110,7 @@ public class VrCompassesItem extends Item{
             // 在当前位置生成粒子
             System.out.println(new Vec3d(x,y,z));
             world.addParticle(ModParticles.CITRINE_PARTICLE, x, y, z, red, green, blue);
-            ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(x, y, z), red, green, blue);
+            ParticleStorage.addParticle(new Vec3d(x, y, z), red, green, blue);
         }
     }
 

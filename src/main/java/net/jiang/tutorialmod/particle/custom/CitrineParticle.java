@@ -1,16 +1,24 @@
 package net.jiang.tutorialmod.particle.custom;
 
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.jiang.tutorialmod.item.ModItems;
 import net.jiang.tutorialmod.item.vrcustom.VrRubberItem;
+import net.jiang.tutorialmod.networking.ModMessages;
+import net.jiang.tutorialmod.networking.packet.ParticleDataC2SPacket;
 import net.jiang.tutorialmod.particle.ParticleStorage;
+import net.jiang.tutorialmod.particle.StateSaverAndLoader;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import org.apache.logging.log4j.core.jmx.Server;
 
 public class CitrineParticle extends SpriteBillboardParticle {
     protected CitrineParticle(ClientWorld level, double xCoord, double yCoord, double zCoord,
@@ -45,12 +53,12 @@ public class CitrineParticle extends SpriteBillboardParticle {
                 if (VrRubberItem.isErasing && VrRubberItem.userbox!=null) {// 检查粒子是否在笔刷碰撞箱内
                     if (isParticleInsideBox(new Vec3d(this.x, this.y, this.z), VrRubberItem.userbox)) {
                         this.markDead();
-                        ParticleStorage.getOrCreateForWorld().removeParticleByPosition(new Vec3d(this.x, this.y, this.z));
+                        ParticleStorage.removeParticleData(new Vec3d(this.x, this.y, this.z));
                     }
                 }
                 if(VrRubberItem.isErasing && player.getOffHandStack().getItem()== ModItems.RUBY){//大范围清屏
                     this.markDead();
-                    ParticleStorage.getOrCreateForWorld().clearAll();
+                    ParticleStorage.removeParticleData(new Vec3d(this.x, this.y, this.z));
                 }
             }
         }

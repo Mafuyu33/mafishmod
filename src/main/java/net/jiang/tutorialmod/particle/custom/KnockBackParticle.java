@@ -51,12 +51,10 @@ public class KnockBackParticle extends SpriteBillboardParticle {
                 if (VrRubberItem.isErasing && VrRubberItem.userbox!=null) {// 检查粒子是否在笔刷碰撞箱内
                     if (isParticleInsideBox(new Vec3d(this.x, this.y, this.z), VrRubberItem.userbox)) {
                         this.markDead();
-                        ParticleStorage.getOrCreateForWorld().removeParticleByPosition(new Vec3d(this.x, this.y, this.z));
                     }
                 }
                 if(VrRubberItem.isErasing && player.getOffHandStack().getItem()== ModItems.RUBY){//大范围清屏
                     this.markDead();
-                    ParticleStorage.getOrCreateForWorld().clearAll();
                 }
 //                if (this.red == 1.0 && this.green == 1.0 && this.blue == 0.0){//当是黄色画笔的时候
 //                    UUID id = ParticleStorage.getOrCreateForWorld().getUUIDByPosition(new Vec3d(x,y,z));

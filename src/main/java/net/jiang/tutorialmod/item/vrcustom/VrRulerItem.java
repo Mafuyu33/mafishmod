@@ -175,7 +175,7 @@ public class VrRulerItem extends Item{
             // 在当前位置生成粒子
             // 这里仅作为示例，你需要根据你的粒子效果来调整生成粒子的方法
             world.addParticle(ModParticles.CITRINE_PARTICLE, posX, posY, posZ, red, green, blue);
-            ParticleStorage.getOrCreateForWorld().addParticle(new Vec3d(posX, posY, posZ), red, green, blue);
+            ParticleStorage.addParticle(new Vec3d(posX, posY, posZ), red, green, blue);
         }
     }
 }
