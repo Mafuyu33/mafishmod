@@ -10,7 +10,7 @@
     "BadLuckOfSeaItemEntityMixin",
     "BeeRideableMixin",
     "BellBlockEntityMixin",
-    "BlockMixin",
+    "BlockItemMixin",
     "ExampleMixin",
     "FireworkRocketEntityMixin",
     "FireworkRocketHitOnEntityMixin",
