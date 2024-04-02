@@ -3,6 +3,7 @@
   "package": "net.mafuyu33.mafishmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractBlockMixin",
     "AbstractFurnaceBlockEntityMixin",
     "AbstractFurnaceBlockMixin",
     "AlwaysEnchantableMixin",
@@ -11,6 +12,8 @@
     "BeeRideableMixin",
     "BellBlockEntityMixin",
     "BlockItemMixin",
+    "BlockMixin",
+    "ChestBlockMixin",
     "ExampleMixin",
     "FireworkRocketEntityMixin",
     "FireworkRocketHitOnEntityMixin",

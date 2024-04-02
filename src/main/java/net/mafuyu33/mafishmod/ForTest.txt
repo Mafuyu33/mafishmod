@@ -35,7 +35,7 @@ if (!world.isClient) {
 
 对某个实体造成伤害
 this.damage(getDamageSources().playerAttack(closestPlayer), 10f+level*2);
-
+entity.damage(entity.getDamageSources().cactus(),1f);
 
 Mixin Helper
 // 创建一个静态Map来存储实体ID和值
@@ -103,15 +103,19 @@ if (user instanceof ServerPlayerEntity) {
 
 
 计时器
-private void startDelayedOperation(World world) {
-    java.util.Timer timer = new Timer(); // 创建一个新的计时器
-    timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-
+    private void startDelayedOperation(PlayerEntity player, BlockPos pos) {
+        if (ServerManager.getServerInstance() != null) {
+            ServerManager.getServerInstance().execute(() -> {
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        //执行的东西
+                    }
+                }, 200); // 延迟0.2秒执行，单位为毫秒
+            });
         }
-    }, 5000); // 延迟5秒执行，单位为毫秒
-}
+    }
 
 生成动物
 EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnReason.TRIGGERED);

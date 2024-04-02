@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin;
 
-import net.mafuyu33.mafishmod.mixinhelper.BlockEnchantmentHelper;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LightningRodBlock;
 import net.minecraft.enchantment.Enchantments;
@@ -25,7 +25,7 @@ public abstract class LightningRodMixin {
     @Inject(method = "updateNeighbors", at = @At("HEAD"))
     private void init(BlockState state, World world, BlockPos pos, CallbackInfo ci) {
         PlayerEntity user = world.getClosestPlayer(pos.getX(),pos.getY(),pos.getZ(),10f,true);
-        int k = BlockEnchantmentHelper.getLevel(Enchantments.CHANNELING, pos);
+        int k = BlockEnchantmentStorage.getLevel(Enchantments.CHANNELING, pos);
         if (k > 0) {
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
             if (lightningEntity != null) {

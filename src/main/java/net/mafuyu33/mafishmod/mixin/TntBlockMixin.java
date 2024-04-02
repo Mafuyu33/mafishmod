@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin;
 
-import net.mafuyu33.mafishmod.mixinhelper.BlockEnchantmentHelper;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -44,7 +44,7 @@ public abstract class TntBlockMixin extends Block {
 	 */
 	@Overwrite
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		int k = BlockEnchantmentHelper.getLevel(Enchantments.INFINITY,pos);
+		int k = BlockEnchantmentStorage.getLevel(Enchantments.INFINITY,pos);
 		ItemStack itemStack = player.getStackInHand(hand);
 		if (!itemStack.isOf(Items.FLINT_AND_STEEL) && !itemStack.isOf(Items.FIRE_CHARGE)) {
 			return super.onUse(state, world, pos, player, hand, hit);
@@ -79,10 +79,10 @@ public abstract class TntBlockMixin extends Block {
 	@Overwrite
 	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
 		if (!world.isClient) {
-			int k = BlockEnchantmentHelper.getLevel(Enchantments.INFINITY,pos);
+			int k = BlockEnchantmentStorage.getLevel(Enchantments.INFINITY,pos);
 			if(k>0){
-				NbtList enchantments = BlockEnchantmentHelper.getEnchantment(pos); // 获取物品栈上的附魔信息列表
-				BlockEnchantmentHelper.storeEnchantment(pos,enchantments);// 将附魔信息列表存储
+				NbtList enchantments = BlockEnchantmentStorage.getEnchantmentsAtPosition(pos); // 获取物品栈上的附魔信息列表
+				BlockEnchantmentStorage.addBlockEnchantment(pos,enchantments);// 将附魔信息列表存储
 				world.setBlockState(pos, Blocks.TNT.getDefaultState(), 16);//添加TNT
 			}
 			TntEntity tntEntity = new TntEntity(world, (double)pos.getX() + 0.5, (double)pos.getY(), (double)pos.getZ() + 0.5, explosion.getCausingEntity());
@@ -102,7 +102,7 @@ public abstract class TntBlockMixin extends Block {
 	public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
 		if (!world.isClient) {
 			BlockPos blockPos = hit.getBlockPos();
-			int k = BlockEnchantmentHelper.getLevel(Enchantments.INFINITY,blockPos);
+			int k = BlockEnchantmentStorage.getLevel(Enchantments.INFINITY,blockPos);
 			Entity entity = projectile.getOwner();
 			if (projectile.isOnFire() && projectile.canModifyAt(world, blockPos)) {
 				primeTnt(world, blockPos, entity instanceof LivingEntity ? (LivingEntity)entity : null);

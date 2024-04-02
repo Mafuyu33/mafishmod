@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin;
 
-import net.mafuyu33.mafishmod.mixinhelper.BlockEnchantmentHelper;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HopperBlock;
 import net.minecraft.entity.LivingEntity;
@@ -24,7 +24,7 @@ public abstract class HopperBlockMixin {
 			if (!Objects.equals(itemStack.getEnchantments(), new NbtList())) {
 //				System.out.println("添加");
 				NbtList enchantments = itemStack.getEnchantments(); // 获取物品栈上的附魔信息列表
-				BlockEnchantmentHelper.storeEnchantment(pos,enchantments);// 将附魔信息列表存储
+				BlockEnchantmentStorage.addBlockEnchantment(pos,enchantments);// 将附魔信息列表存储
 			}
 		}
 	}

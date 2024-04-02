@@ -45,7 +45,7 @@ public class BlockBreakHandler implements PlayerBlockBreakEvents.After {
         ItemStack itemStack = player.getStackInHand(hand);
         int i = EnchantmentHelper.getLevel(ModEnchantments.NEVER_GONNA,itemStack);//如果手上的物品有被附魔 “你被骗了”
         if(i>0 && (state.isIn(BlockTags.DIAMOND_ORES))){
-            PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
+            PacketByteBuf buf = PacketByteBufs.create();//传输到client端
             ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.NEVER_GONNA_ID, buf);
             //检测pos边上是不是有钻石掉落物，有的话替换成煤炭
             startDelayedOperation(world,player,pos);

@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin;
 
-import net.mafuyu33.mafishmod.mixinhelper.BlockEnchantmentHelper;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BellBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -30,8 +30,8 @@ public abstract class BellBlockEntityMixin extends BlockEntity {
 
 	@Inject(at = @At("TAIL"), method = "notifyMemoriesOfBell")
 	private void init1(CallbackInfo ci) {
-		int k = BlockEnchantmentHelper.getLevel(Enchantments.IMPALING,pos);
-		int j = BlockEnchantmentHelper.getLevel(Enchantments.KNOCKBACK,pos);
+		int k = BlockEnchantmentStorage.getLevel(Enchantments.IMPALING,pos);
+		int j = BlockEnchantmentStorage.getLevel(Enchantments.KNOCKBACK,pos);
 		GameOptions gameOptions = MinecraftClient.getInstance().options;
 		float blockVolume = gameOptions.getSoundVolume(SoundCategory.BLOCKS);
 		float masterVolume = gameOptions.getSoundVolume(SoundCategory.MASTER);

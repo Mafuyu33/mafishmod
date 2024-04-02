@@ -32,7 +32,7 @@ public abstract class PickaxeItemMixin extends Item {
         LivingEntity user = ((LivingEntity) context.getPlayer());
 
         int k = EnchantmentHelper.getLevel(Enchantments.INFINITY, itemStack);
-        if (k > 0) {
+        if (k > 0 && !world.isClient) {
             world.breakBlock(blockPos, true);
             world.setBlockState(blockPos, (blockState.getBlock()).getDefaultState(), 3);
             EquipmentSlot equipmentSlot = itemStack.equals(playerEntity.getEquippedStack(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;

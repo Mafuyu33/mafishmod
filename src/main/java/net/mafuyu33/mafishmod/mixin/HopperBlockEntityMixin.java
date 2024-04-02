@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin;
 
-import net.mafuyu33.mafishmod.mixinhelper.BlockEnchantmentHelper;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.enchantment.Enchantments;
@@ -18,7 +18,7 @@ import java.util.function.BooleanSupplier;
 public abstract class HopperBlockEntityMixin {
 	@Inject(at = @At("RETURN"), method = "insertAndExtract")
 	private static void init1(World world, BlockPos pos, BlockState state, HopperBlockEntity blockEntity, BooleanSupplier booleanSupplier, CallbackInfoReturnable<Boolean> cir) {
-		int k = BlockEnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE,pos);//漏斗的快速装填
+		int k = BlockEnchantmentStorage.getLevel(Enchantments.QUICK_CHARGE,pos);//漏斗的快速装填
 //		System.out.println("传递一次");
 		if(k>0){
 //			System.out.println("设置冷却");
@@ -28,7 +28,7 @@ public abstract class HopperBlockEntityMixin {
 
 	@Inject(at = @At("HEAD"), method = "insert",cancellable = true)
 	private static void init2(World world, BlockPos pos, BlockState state, Inventory inventory, CallbackInfoReturnable<Boolean> cir){
-		int k = BlockEnchantmentHelper.getLevel(Enchantments.BINDING_CURSE,pos);//漏斗的绑定诅咒
+		int k = BlockEnchantmentStorage.getLevel(Enchantments.BINDING_CURSE,pos);//漏斗的绑定诅咒
 		if(k>0){
 			System.out.println("取消传递！");
 			cir.cancel();

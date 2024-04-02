@@ -2,6 +2,7 @@ package net.mafuyu33.mafishmod;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -10,6 +11,7 @@ import net.mafuyu33.mafishmod.effect.ModStatusEffects;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.mafuyu33.mafishmod.event.AttackEntityHandler;
 import net.mafuyu33.mafishmod.event.BlockBreakHandler;
+import net.mafuyu33.mafishmod.event.ExplosionHandler;
 import net.mafuyu33.mafishmod.item.ModItemGroups;
 import net.mafuyu33.mafishmod.item.ModItems;
 import net.mafuyu33.mafishmod.block.ModBlocks;
@@ -30,7 +32,7 @@ public class TutorialMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 //		ClientTickEvents.START_CLIENT_TICK.register(this::onClientTick);
-
+		//添加东西
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
 		ModBlocks.registerModBlocks();
@@ -44,12 +46,20 @@ public class TutorialMod implements ModInitializer {
 		ModCustomTrades.registerCustomTrades();
 		ModEnchantments.registerModEnchantments();
 		ModPotions.registerBrewingRecipes();
-		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
-		PlayerBlockBreakEvents.AFTER.register(new BlockBreakHandler());
 		ModMessages.registerC2SPackets();
 		ModParticles.registerParticles();
-		
+
+		//获取服务器实例
+		ServerLifecycleEvents.SERVER_STARTING.register(ServerManager::setServerInstance);
+
+		//事件注册
+		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
+		PlayerBlockBreakEvents.AFTER.register(new BlockBreakHandler());
+		ExplosionHandler.init();
+
+		//VR
 		VRPlugin.init();
+
 	}
 
 

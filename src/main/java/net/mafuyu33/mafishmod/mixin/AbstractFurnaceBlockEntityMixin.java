@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin;
 
-import net.mafuyu33.mafishmod.mixinhelper.BlockEnchantmentHelper;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
@@ -28,7 +28,7 @@ public abstract class AbstractFurnaceBlockEntityMixin extends LockableContainerB
 	}
 	@Inject(at = @At("HEAD"), method = "getFuelTime",cancellable = true)
 	private void init1(ItemStack fuel, CallbackInfoReturnable<Integer> cir) {
-		int k = BlockEnchantmentHelper.getLevel(Enchantments.FIRE_ASPECT,pos);
+		int k = BlockEnchantmentStorage.getLevel(Enchantments.FIRE_ASPECT,pos);
 		if(k>0){//火焰附加
 			BlockPos firePos =pos;
 			firePos = firePos.add(0,1,0);
