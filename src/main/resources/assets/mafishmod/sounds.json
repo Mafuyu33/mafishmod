@@ -40,5 +40,66 @@
     "sounds": [
       "mafishmod:dash_sound"
     ]
+  },
+  "never1": {
+    "subtitle": "sounds.mafishmod.never1",
+    "sounds": [
+      "mafishmod:never1"
+    ]
+  },
+  "never2": {
+    "subtitle": "sounds.mafishmod.never2",
+    "sounds": [
+      "mafishmod:never2"
+    ]
+  },
+  "never3": {
+    "subtitle": "sounds.mafishmod.never3",
+    "sounds": [
+      "mafishmod:never3"
+    ]
+  },
+  "never4": {
+    "subtitle": "sounds.mafishmod.never4",
+    "sounds": [
+      "mafishmod:never4"
+    ]
+  },
+  "never5": {
+    "subtitle": "sounds.mafishmod.never5",
+    "sounds": [
+      "mafishmod:never5"
+    ]
+  },
+  "never6": {
+    "subtitle": "sounds.mafishmod.never6",
+    "sounds": [
+      "mafishmod:never6"
+    ]
+  },
+  "never7": {
+    "subtitle": "sounds.mafishmod.never7",
+    "sounds": [
+      "mafishmod:never7"
+    ]
+  },
+  "never8": {
+    "subtitle": "sounds.mafishmod.never8",
+    "sounds": [
+      "mafishmod:never8"
+    ]
+  },
+  "never9": {
+    "subtitle": "sounds.mafishmod.never9",
+    "sounds": [
+      "mafishmod:never9"
+    ]
+  },
+  "never10": {
+    "subtitle": "sounds.mafishmod.never10",
+    "sounds": [
+      "mafishmod:never10"
+    ]
   }
+
 }

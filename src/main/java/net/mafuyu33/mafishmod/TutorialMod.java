@@ -3,11 +3,13 @@ package net.mafuyu33.mafishmod;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.mafuyu33.mafishmod.block.entity.ModBlockEntities;
 import net.mafuyu33.mafishmod.effect.ModStatusEffects;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.mafuyu33.mafishmod.event.AttackEntityHandler;
+import net.mafuyu33.mafishmod.event.BlockBreakHandler;
 import net.mafuyu33.mafishmod.item.ModItemGroups;
 import net.mafuyu33.mafishmod.item.ModItems;
 import net.mafuyu33.mafishmod.block.ModBlocks;
@@ -43,6 +45,7 @@ public class TutorialMod implements ModInitializer {
 		ModEnchantments.registerModEnchantments();
 		ModPotions.registerBrewingRecipes();
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
+		PlayerBlockBreakEvents.AFTER.register(new BlockBreakHandler());
 		ModMessages.registerC2SPackets();
 		ModParticles.registerParticles();
 		

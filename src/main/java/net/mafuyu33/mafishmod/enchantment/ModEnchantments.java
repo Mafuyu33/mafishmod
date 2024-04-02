@@ -45,6 +45,8 @@ public class ModEnchantments {
             new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD}));
     public static Enchantment SLIPPERY = register("slippery",
             new CursedTreasureLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
+    public static Enchantment NEVER_GONNA = register("never_gonna",
+            new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.DIGGER,new EquipmentSlot[]{}));
 
 
 

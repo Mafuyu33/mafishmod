@@ -15,6 +15,16 @@ public class ModSounds {
     public static final SoundEvent SOUND_BLOCK_HIT = registerSoundEvent("sound_block_hit");
     public static final SoundEvent SOUND_BLOCK_FALL = registerSoundEvent("sound_block_fall");
     public static final SoundEvent DASH_SOUND = registerSoundEvent("dash_sound");
+    public static final SoundEvent NEVER1 = registerSoundEvent("never1");
+    public static final SoundEvent NEVER2 = registerSoundEvent("never2");
+    public static final SoundEvent NEVER3 = registerSoundEvent("never3");
+    public static final SoundEvent NEVER4 = registerSoundEvent("never4");
+    public static final SoundEvent NEVER5 = registerSoundEvent("never5");
+    public static final SoundEvent NEVER6 = registerSoundEvent("never6");
+    public static final SoundEvent NEVER7 = registerSoundEvent("never7");
+    public static final SoundEvent NEVER8 = registerSoundEvent("never8");
+    public static final SoundEvent NEVER9 = registerSoundEvent("never9");
+    public static final SoundEvent NEVER10 = registerSoundEvent("never10");
 
 
     public static final BlockSoundGroup SOUND_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,

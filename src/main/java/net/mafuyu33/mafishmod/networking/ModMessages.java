@@ -1,5 +1,6 @@
 package net.mafuyu33.mafishmod.networking;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.mafuyu33.mafishmod.TutorialMod;
 import net.mafuyu33.mafishmod.networking.packet.*;
@@ -11,6 +12,7 @@ public class ModMessages {
     public static final Identifier Shield_Dash_ID = new Identifier(TutorialMod.MOD_ID, "shield_dash");
     public static final Identifier Bow_Dash_ID = new Identifier(TutorialMod.MOD_ID, "bow_dash");
     public static final Identifier PARTICLE_DATA_ID = new Identifier(TutorialMod.MOD_ID, "particle_data");
+    public static final Identifier NEVER_GONNA_ID = new Identifier(TutorialMod.MOD_ID, "never_gonna");
 
 //    public static final Identifier Particle_Color_ID = new Identifier(TutorialMod.MOD_ID, "particle_color");
     public static void registerC2SPackets() {
@@ -22,6 +24,7 @@ public class ModMessages {
     }
 
     public static void registerS2CPackets() {
-        ServerPlayNetworking.registerGlobalReceiver(EXAMPLE_ID, ExampleS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(EXAMPLE_ID, ExampleS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(NEVER_GONNA_ID, NeverGonnaS2CPacket::receive);
     }
 }

@@ -10,6 +10,9 @@ System.out.println(123);
 发送信息给玩家
 player.sendMessage(Text.literal((String.valueOf(123))),false);
 
+播放音乐
+world.playSound(user, user.getBlockPos(), ModSounds.METAL_DETECTOR_FOUND_ORE, SoundCategory.PLAYERS);
+
 
 附魔查看
 int k = EnchantmentHelper.getLevel(Enchantments, itemStack);
@@ -115,10 +118,6 @@ EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnRe
 
 Mixin中强制转换this为原类
 PlayerEntity user = (PlayerEntity) (Object) this;
-
-播放声音
-getWorld().playSound(closestPlayer,closestPlayer.getBlockPos(),
-        SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, SoundCategory.PLAYERS,1f,1f);
 
 网络传输
 PacketByteBuf buf = PacketByteBufs.create();//传输到服务端

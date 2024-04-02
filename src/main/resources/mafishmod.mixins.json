@@ -30,7 +30,7 @@
     "LightningRodMixin",
     "LivingEntityMixin",
     "MobEntityMixin",
-    "PickaxeInfiniteMixin",
+    "PickaxeItemMixin",
     "PlayerEntityMixin",
     "ThrowableDiamondMixin",
     "TntBlockMixin",
