@@ -29,8 +29,9 @@ import java.util.Objects;
 public abstract class AbstractBlockMixin implements ToggleableFeature {
     @Inject(at = @At("HEAD"), method = "onEntityCollision")//荆棘附魔，踩上去受伤
     private void init3(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (!world.isClient() && BlockEnchantmentStorage.getLevel(Enchantments.THORNS,pos)>0) {//如果有荆棘附魔
-            entity.damage(entity.getDamageSources().cactus(),1f);
+        int k = BlockEnchantmentStorage.getLevel(Enchantments.THORNS,pos);
+        if (!world.isClient() && k > 0) {//如果有荆棘附魔
+            entity.damage(entity.getDamageSources().cactus(),(float) k);
         }
     }
 
