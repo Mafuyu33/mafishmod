@@ -2,10 +2,6 @@ package net.mafuyu33.mafishmod.mixinhelper;
 
 
 import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.math.BlockPos;
@@ -14,7 +10,7 @@ import net.minecraft.world.World;
 
 import java.util.Objects;
 
-public class BlockEnchantmentInjectHelper {
+public class InjectHelper {
 
     public static void onPlacedInject(World world, ItemStack itemStack, BlockPos pos) {
         if (!world.isClient) {//只在服务端运行

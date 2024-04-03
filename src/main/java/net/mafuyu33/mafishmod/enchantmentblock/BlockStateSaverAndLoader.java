@@ -10,9 +10,11 @@ import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class BlockStateSaverAndLoader extends PersistentState {
-    public List<BlockEnchantInfo> blockEnchantments = new ArrayList<>();
+    public static List<BlockStateSaverAndLoader.BlockEnchantInfo> blockEnchantments = new CopyOnWriteArrayList<>();
+
 
     public static class BlockEnchantInfo {
         public BlockPos blockPos;
