@@ -37,6 +37,7 @@
     "TntBlockMixin",
     "TripwireBlockMixin",
     "WeaponEnchantmentMixin",
+    "canclimb.LivingEntityMixin",
     "enchantmentblockmixin.main.AbstractBlockMixin",
     "enchantmentblockmixin.main.BlockMixin",
     "enchantmentblockmixin.sigleinject.AbstractBannerBlockMixin",
