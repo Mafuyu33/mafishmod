@@ -17,9 +17,9 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "isClimbing", cancellable = true)
     private void init(CallbackInfoReturnable<Boolean> cir) {
-        if(this.horizontalCollision) {
-            cir.setReturnValue(true);
-        }
+//        if(this.horizontalCollision) {
+//            cir.setReturnValue(true);
+//        }
     }
 }
 
