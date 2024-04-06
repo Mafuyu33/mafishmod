@@ -80,7 +80,8 @@ public class ModItems {
     public static final Item LIGHTNING_BALL = registerItem("lightning_ball", new LightningBallItem(new FabricItemSettings()));
     public static final Item MILK_FLESH = registerItem("milk_flesh",new MilkFleshItem(new FabricItemSettings().food(ModFoodComponents.MILK_FLESH)));
 
-
+    public static final Item CHEESE_BERGER = registerItem("cheese_berger",
+            new CheeseBergerItem(new FabricItemSettings().food(ModFoodComponents.CHEESE_BERGER)));
     public static final Item VR_PEN = registerItem("vr_pen", new VrPenItem(new FabricItemSettings().maxCount(1)));
     public static final Item VR_RUBBER = registerItem("vr_rubber", new VrRubberItem(new FabricItemSettings().maxCount(1)));
     public static final Item VR_RULER = registerItem("vr_ruler", new VrRulerItem(new FabricItemSettings().maxCount(1)));

@@ -1,31 +1,34 @@
-//package net.mafuyu33.mafishmod.mixin.canclimb;
-//
-//import net.mafuyu33.mafishmod.util.WallAttackGoal;
-//import net.minecraft.entity.EntityType;
-//import net.minecraft.entity.LivingEntity;
-//import net.minecraft.entity.Targeter;
-//import net.minecraft.entity.ai.goal.*;
-//import net.minecraft.entity.effect.StatusEffects;
-//import net.minecraft.entity.mob.MobEntity;
-//import net.minecraft.entity.mob.PathAwareEntity;
-//import net.minecraft.entity.player.PlayerEntity;
-//import net.minecraft.world.World;
-//import org.spongepowered.asm.mixin.*;
-//import org.spongepowered.asm.mixin.injection.At;
-//import org.spongepowered.asm.mixin.injection.Inject;
-//import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//
-//import java.util.function.Predicate;
-//
-//@Mixin(MobEntity.class)
-//public abstract class MobEntityMixin extends LivingEntity implements Targeter {
-//    @Shadow @Final protected GoalSelector goalSelector;
-//    protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
-//        super(entityType, world);
-//    }
-//
+package net.mafuyu33.mafishmod.mixin.canclimb;
+
+import net.mafuyu33.mafishmod.effect.ModStatusEffects;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Targeter;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.EntityNavigation;
+import net.minecraft.entity.ai.pathing.SpiderNavigation;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(MobEntity.class)
+public abstract class MobEntityMixin extends LivingEntity implements Targeter {
+    @Shadow @Final protected GoalSelector goalSelector;
+    protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
+    @Inject(at = @At("HEAD"), method = "createNavigation",cancellable = true)
+    private void init1(World world, CallbackInfoReturnable<EntityNavigation> cir) {//让其他生物获得蜘蛛的寻路
+            cir.setReturnValue(new SpiderNavigation((MobEntity) (Object) this, world));
+    }
 //    @Inject(at = @At("HEAD"), method = "tick")
-//    private void init(CallbackInfo ci) {
+//    private void init2(CallbackInfo ci) {
 //        if (!this.getWorld().isClient) {
 //            // 检查是否存在药水效果
 //            boolean hasPotionEffect = this.hasStatusEffect(StatusEffects.SPEED);
@@ -41,7 +44,6 @@
 //            }
 //        }
 //    }
-//
 //    @Unique
 //    private Goal wallAttackGoalGoal;
 //    // 添加行为目标
@@ -54,9 +56,6 @@
 //            wallAttackGoalGoal = new PounceAtTargetGoal((PathAwareEntity) (Object)this,0.4f);
 ////            wallAttackGoalGoal = new WallAttackGoal((PathAwareEntity) (Object) this, 1.0F, true);
 //            this.goalSelector.add(3, wallAttackGoalGoal);
-//            this.goalSelector.add(5, new WanderAroundFarGoal((PathAwareEntity) (Object)this, 0.8));
-//            this.goalSelector.add(6, new LookAtEntityGoal((PathAwareEntity) (Object)this, PlayerEntity.class, 8.0f));
-//            this.goalSelector.add(6, new LookAroundGoal((PathAwareEntity) (Object)this));
 //        }
 //    }
 //
@@ -78,4 +77,4 @@
 //        }
 //        return false;
 //    }
-//}
+}

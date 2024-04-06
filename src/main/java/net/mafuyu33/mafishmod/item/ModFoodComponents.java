@@ -21,4 +21,6 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(StatusEffects.NAUSEA,400),1f).alwaysEdible().build();
     public static final FoodComponent MILK_FLESH=
             new FoodComponent.Builder().hunger(3).saturationModifier(0.25f).alwaysEdible().build();
+    public static final FoodComponent CHEESE_BERGER=new FoodComponent.Builder().hunger(10).saturationModifier(0.5f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,200),0.5f).build();
 }

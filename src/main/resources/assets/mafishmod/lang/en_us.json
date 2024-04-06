@@ -58,6 +58,7 @@
   "item.mafishmod.colliable": "colliable",
   "item.mafishmod.lightning_ball": "lightning_ball",
   "item.mafishmod.milk_flesh": "milk_flesh",
+  "item.mafishmod.cheese_berger": "cheese_berger",
 
   "item.mafishmod.vr_pen": "vr_pen",
   "item.mafishmod.vr_rubber": "vr_rubber",
@@ -91,15 +92,20 @@
   "effect.mafishmod.ironman": "Link Start",
   "effect.mafishmod.flower_effect": "flower_effect",
   "effect.mafishmod.teleport_effect": "teleport_effect",
+  "effect.mafishmod.spider_effect": "spider_effect",
 
   "item.minecraft.potion.effect.flower_potion": "flower_potion",
   "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
   "item.minecraft.lingering_potion.effect.flower_potion": "Lingering flower_potion",
   "item.minecraft.tipped_arrow.effect.flower_potion": "flower_potion",
 
-
   "item.minecraft.potion.effect.teleport_potion": "teleport_potion",
   "item.minecraft.splash_potion.effect.teleport_potion": "Splash teleport_potion",
   "item.minecraft.lingering_potion.effect.teleport_potion": "Lingering teleport_potion",
-  "item.minecraft.tipped_arrow.effect.teleport_potion": "teleport_potion"
+  "item.minecraft.tipped_arrow.effect.teleport_potion": "teleport_potion",
+
+  "item.minecraft.potion.effect.spider_potion": "spider_potion",
+  "item.minecraft.splash_potion.effect.spider_potion": "Splash spider_potion",
+  "item.minecraft.lingering_potion.effect.spider_potion": "Lingering spider_potion",
+  "item.minecraft.tipped_arrow.effect.spider_potion": "spider_potion"
 }

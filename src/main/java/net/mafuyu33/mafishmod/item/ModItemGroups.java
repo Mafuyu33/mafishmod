@@ -65,6 +65,8 @@ public class ModItemGroups {
                         entries.add(ModItems.VR_RULER);
                         entries.add(ModItems.VR_COMPASSES);
                         entries.add(ModItems.VR_MAGIC);
+
+                        entries.add(ModItems.CHEESE_BERGER);
                     }).build());
 
 

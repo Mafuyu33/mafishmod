@@ -100,6 +100,18 @@
     "sounds": [
       "mafishmod:never10"
     ]
+  },
+  "cheese_berger_cat": {
+    "subtitle": "sounds.mafishmod.cheese_berger_cat",
+    "sounds": [
+      "mafishmod:cheese_berger_cat"
+    ]
+  },
+  "cheese_berger_man": {
+    "subtitle": "sounds.mafishmod.cheese_berger_man",
+    "sounds": [
+      "mafishmod:cheese_berger_man"
+    ]
   }
 
 }

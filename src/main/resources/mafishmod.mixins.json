@@ -38,6 +38,8 @@
     "TripwireBlockMixin",
     "WeaponEnchantmentMixin",
     "canclimb.LivingEntityMixin",
+    "canclimb.MobEntityMixin",
+    "cheesebergerforcat.CatEntityMixin",
     "enchantmentblockmixin.main.AbstractBlockMixin",
     "enchantmentblockmixin.main.BlockMixin",
     "enchantmentblockmixin.sigleinject.AbstractBannerBlockMixin",

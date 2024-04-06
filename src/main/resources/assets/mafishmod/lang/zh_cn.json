@@ -48,6 +48,7 @@
   "item.mafishmod.colliable": "开启生物碰撞",
   "item.mafishmod.lightning_ball": "球状闪电",
   "item.mafishmod.milk_flesh": "牛奶味辣条",
+  "item.mafishmod.cheese_berger": "芝士汉堡儿",
 
   "item.mafishmod.vr_pen": "VR画笔",
   "item.mafishmod.vr_rubber": "VR橡皮",
@@ -83,6 +84,7 @@
   "effect.mafishmod.ironman": "Link Start!",
   "effect.mafishmod.flower_effect": "变出花田的魔法",
   "effect.mafishmod.teleport_effect": "传送",
+  "effect.mafishmod.spider_effect": "蜘蛛",
 
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
@@ -92,5 +94,10 @@
   "item.minecraft.potion.effect.teleport_potion": "传送基质",
   "item.minecraft.splash_potion.effect.teleport_potion": "传送基质（喷溅）",
   "item.minecraft.lingering_potion.effect.teleport_potion": "传送基质（滞留）",
-  "item.minecraft.tipped_arrow.effect.teleport_potion": "传送箭"
+  "item.minecraft.tipped_arrow.effect.teleport_potion": "传送箭",
+
+  "item.minecraft.potion.effect.spider_potion": "蜘蛛药水",
+  "item.minecraft.splash_potion.effect.spider_potion": "蜘蛛药水（喷溅）",
+  "item.minecraft.lingering_potion.effect.spider_potion": "蜘蛛药水（滞留）",
+  "item.minecraft.tipped_arrow.effect.spider_potion": "蜘蛛箭"
 }
