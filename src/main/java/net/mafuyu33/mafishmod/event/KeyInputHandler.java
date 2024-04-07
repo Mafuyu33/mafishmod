@@ -1,5 +1,7 @@
 package net.mafuyu33.mafishmod.event;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -12,8 +14,7 @@ import net.minecraft.world.World;
 import org.lwjgl.glfw.GLFW;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
-
-
+@Environment(EnvType.CLIENT)
 public class KeyInputHandler {
     public static final String KEY_CATEGORY_TUTORIAL = "key.category.mafishmod.tutorial";
     public static final String KEY_THROW_ITEM = "key.mafishmod.throw_item";
@@ -101,79 +102,79 @@ public class KeyInputHandler {
 
 
     //没用的方法，don't look
-    private static void throwItemWithPower(ClientPlayerEntity player, float power, World world) {
-        if (power > 0.0f) {
-
-//            ItemStack itemStackToThrow = player.getMainHandStack(); // 获取玩家手持物品
+//    private static void throwItemWithPower(ClientPlayerEntity player, float power, World world) {
+//        if (power > 0.0f) {
 //
-//            ItemEntity itemEntity = new ItemEntity(world, player.getX(), player.getEyeY(), player.getZ(), itemStackToThrow);
+////            ItemStack itemStackToThrow = player.getMainHandStack(); // 获取玩家手持物品
+////
+////            ItemEntity itemEntity = new ItemEntity(world, player.getX(), player.getEyeY(), player.getZ(), itemStackToThrow);
+////
+////            world.spawnEntity(itemEntity);
 //
-//            world.spawnEntity(itemEntity);
-
-            Hand hand = player.getActiveHand();
-            Vec3d direction = player.getRotationVector(); // 获取玩家面朝方向
-            // 获取玩家手上的选定物品堆栈
-            ItemStack itemStackToThrow = player.getStackInHand(Hand.MAIN_HAND);
-            if(itemStackToThrow.getItem() instanceof Item)
-                itemStackToThrow.getItem().use(world,player,hand);
-
-
-
-//            // 在这里可以操作刚刚丢出的物品实体 (itemEntity)
-//            if (itemEntity != null) {
+//            Hand hand = player.getActiveHand();
+//            Vec3d direction = player.getRotationVector(); // 获取玩家面朝方向
+//            // 获取玩家手上的选定物品堆栈
+//            ItemStack itemStackToThrow = player.getStackInHand(Hand.MAIN_HAND);
+//            if(itemStackToThrow.getItem() instanceof Item)
+//                itemStackToThrow.getItem().use(world,player,hand);
 //
-//                itemEntity.addVelocity(direction.multiply(power)); // 根据力度设置速度向量
-//                player.sendMessage(Text.literal((String.valueOf(itemEntity))),false);
-//            } else {
-//                player.sendMessage(Text.literal((String.valueOf(123))),false);
-//                // 物品实体未生成，处理错误或等待更长时间
-//            }
 //
-
-
-//            // 发送丢弃物品的操作
-//            player.dropSelectedItem(false);
 //
-//            // 获取丢出的物品实体
-//            Vec3d playerPos = player.getPos();
-//            Entity itemEntity = null;
+////            // 在这里可以操作刚刚丢出的物品实体 (itemEntity)
+////            if (itemEntity != null) {
+////
+////                itemEntity.addVelocity(direction.multiply(power)); // 根据力度设置速度向量
+////                player.sendMessage(Text.literal((String.valueOf(itemEntity))),false);
+////            } else {
+////                player.sendMessage(Text.literal((String.valueOf(123))),false);
+////                // 物品实体未生成，处理错误或等待更长时间
+////            }
+////
 //
-//            // 定义一个用于检测的区域，以玩家为中心
-//            Box detectionBox = new Box(player.getBlockPos().add(-5, -5, -5), player.getBlockPos().add(5, 5, 5));
 //
-//            // 获取玩家周围的实体（排除玩家自己）
-//            List<Entity> nearbyEntities = world.getOtherEntities(player, detectionBox);
-
-//            for (Entity entity : nearbyEntities) {
-//                if (entity instanceof LivingEntity) {
-//                    LivingEntity possibleItemEntity = (LivingEntity) entity;
-//                    Vec3d entityPos = possibleItemEntity.getPos();
-//                    itemEntity = possibleItemEntity;
-////                    // 检查是否是刚刚丢出的物品实体
-////                    if (entityPos.distanceTo(playerPos) < 1.0) {
-////                        itemEntity = possibleItemEntity;
-////                        break;
-////                    }
-//                }
-//            }
-
-
-
-            // 恢复初始物品堆栈
-//            player.setStackInHand(Hand.MAIN_HAND, itemStackToThrow);
-
-
-//            if (itemEntity2 != null) {
-//                itemEntity2.addVelocity(direction.multiply(power)); // 根据力度设置速度向量
-//            }
+////            // 发送丢弃物品的操作
+////            player.dropSelectedItem(false);
+////
+////            // 获取丢出的物品实体
+////            Vec3d playerPos = player.getPos();
+////            Entity itemEntity = null;
+////
+////            // 定义一个用于检测的区域，以玩家为中心
+////            Box detectionBox = new Box(player.getBlockPos().add(-5, -5, -5), player.getBlockPos().add(5, 5, 5));
+////
+////            // 获取玩家周围的实体（排除玩家自己）
+////            List<Entity> nearbyEntities = world.getOtherEntities(player, detectionBox);
 //
-//            player.sendMessage(Text.literal((String.valueOf(itemEntity2))),false);
-
-//            itemStackToThrow.decrement(1);
-
-
-            // 重置蓄力力度
-            throwPower = 0.0f;
-        }
-    }
+////            for (Entity entity : nearbyEntities) {
+////                if (entity instanceof LivingEntity) {
+////                    LivingEntity possibleItemEntity = (LivingEntity) entity;
+////                    Vec3d entityPos = possibleItemEntity.getPos();
+////                    itemEntity = possibleItemEntity;
+//////                    // 检查是否是刚刚丢出的物品实体
+//////                    if (entityPos.distanceTo(playerPos) < 1.0) {
+//////                        itemEntity = possibleItemEntity;
+//////                        break;
+//////                    }
+////                }
+////            }
+//
+//
+//
+//            // 恢复初始物品堆栈
+////            player.setStackInHand(Hand.MAIN_HAND, itemStackToThrow);
+//
+//
+////            if (itemEntity2 != null) {
+////                itemEntity2.addVelocity(direction.multiply(power)); // 根据力度设置速度向量
+////            }
+////
+////            player.sendMessage(Text.literal((String.valueOf(itemEntity2))),false);
+//
+////            itemStackToThrow.decrement(1);
+//
+//
+//            // 重置蓄力力度
+//            throwPower = 0.0f;
+//        }
+//    }
 }

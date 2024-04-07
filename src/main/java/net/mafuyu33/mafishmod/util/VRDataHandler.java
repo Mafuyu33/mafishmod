@@ -1,10 +1,12 @@
 package net.mafuyu33.mafishmod.util;
 
 import static net.mafuyu33.mafishmod.VRPlugin.getVRAPI;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix3f;
-
 public class VRDataHandler {
     public static Vec3d getMainhandControllerPosition(PlayerEntity player){
         return getControllerPosition(player, 0);

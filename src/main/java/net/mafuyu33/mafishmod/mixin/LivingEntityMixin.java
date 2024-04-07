@@ -1,5 +1,7 @@
 package net.mafuyu33.mafishmod.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.mafuyu33.mafishmod.effect.ModStatusEffects;
@@ -156,9 +158,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
             shieldDashCoolDown--;
 //            System.out.println(shieldDashCoolDown);
 
-            PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
-            buf.writeInt(shieldDashCoolDown);
-            ClientPlayNetworking.send(ModMessages.Shield_Dash_ID, buf);
+            sentC2S();
         }
         if(this.isPlayer() && isBlocking()) {//盾牌猛击造成伤害和击退部分
             if(checkPlayerCollisions((PlayerEntity) (Object) this) != null) {
@@ -192,6 +192,13 @@ public abstract class LivingEntityMixin extends Entity implements Attackable {
 
     }
 
+    @Unique
+    @Environment(EnvType.CLIENT)
+    private void sentC2S(){
+        PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
+        buf.writeInt(shieldDashCoolDown);
+        ClientPlayNetworking.send(ModMessages.Shield_Dash_ID, buf);
+    }
 
     @Unique
     private void randomTeleport(World world, LivingEntity user) {

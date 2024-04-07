@@ -3,6 +3,7 @@ package net.mafuyu33.mafishmod;
 import net.blf02.vrapi.api.data.IVRPlayer;
 import net.blf02.vrapi.api.IVRAPI;
 
+import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
 

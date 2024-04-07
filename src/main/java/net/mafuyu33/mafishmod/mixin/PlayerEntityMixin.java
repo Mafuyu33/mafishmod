@@ -4,6 +4,8 @@ package net.mafuyu33.mafishmod.mixin;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.mafuyu33.mafishmod.mixinhelper.BowDashMixinHelper;
@@ -66,9 +68,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             float amp = 2;
             this.addVelocity(amp*horizontalMotion.x,0.14,amp*horizontalMotion.z);
 
-            PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
-            buf.writeInt(BowDashCoolDown);
-            ClientPlayNetworking.send(ModMessages.Bow_Dash_ID, buf);
+            sendC2S();
 
             System.out.println("突进");
 
@@ -80,10 +80,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if(getWorld().isClient && BowDashCoolDown>0){//弓箭手突击内置冷却部分，传递数据包到服务端
             BowDashCoolDown--;
 //            System.out.println(BowDashCoolDown);
-
-            PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
-            buf.writeInt(BowDashCoolDown);
-            ClientPlayNetworking.send(ModMessages.Bow_Dash_ID, buf);
+            sendC2S();
         }
 
 
@@ -183,5 +180,12 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 }
             }
         }
+    }
+    @Unique
+    @Environment(EnvType.CLIENT)
+    private void sendC2S(){
+        PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
+        buf.writeInt(BowDashCoolDown);
+        ClientPlayNetworking.send(ModMessages.Bow_Dash_ID, buf);
     }
 }

@@ -1,5 +1,7 @@
 package net.mafuyu33.mafishmod.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -207,16 +209,22 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 
 				}
 			}
-			if (armorItem.getItem() instanceof ArmorItem && ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.HELMET) {//帽子
+			if (getWorld().isClient && armorItem.getItem() instanceof ArmorItem
+					&& ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.HELMET) {//帽子
 				int o = EnchantmentHelper.getLevel(ModEnchantments.MUTE, armorItem);//静音
 				if (o > 0 && this.isPlayer()) {
-					GameOptions gameOptions = MinecraftClient.getInstance().options;
-					gameOptions.getSoundVolumeOption(SoundCategory.MASTER).setValue((double) 0);
+					mute();
 				}
 			}
 		}
 	}
 
+	@Unique
+	@Environment(EnvType.CLIENT)
+	private void mute(){
+		GameOptions gameOptions = MinecraftClient.getInstance().options;
+		gameOptions.getSoundVolumeOption(SoundCategory.MASTER).setValue((double) 0);
+	}
 	@Unique
 	private static void freezeWater(ArmorEnchantmentMixin entity, World world, BlockPos blockPos, int level) {
 		if (entity.isOnGround()) {
