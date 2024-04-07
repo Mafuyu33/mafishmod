@@ -1,7 +1,8 @@
 MafishMod © 2024 by Mafuyu33 is licensed under CC BY-NC 4.0.  
 To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/4.0/  
   
-这是马夫鱼基于Kaupenjoe mod教程写的一些mod物品（用于学习我的世界模组和视频制作）  
+这是马夫鱼基于Kaupenjoe mod教程写的mod（用于学习我的世界模组和视频制作）  
+特别鸣谢Silvigarabis进行的格式和VR插件修订  
 版本：1.20.4 Fabric with Mixin  
 目前的内容包括：  
 1.能吃的面包剑  
@@ -19,7 +20,9 @@ To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/
 ......  
 欢迎关注我的b站账号“马夫鱼33”，视频展示过详细用法。  
   
-This is some strange stuff that Ma Fu Yu built while learning Minecraft mod development, based on the example mod by kuapenjoe. The current contents include:  
+This is some strange stuff that Ma Fu Yu built while learning Minecraft mod development, based on the example mod by kuapenjoe.   
+Special thanks to Silvigarabis for the formatting and VR plugin revisions！  
+The current contents include:  
   
 1.An edible bread sword.  
 2.Snowballs with stones inside (even TNT).  
