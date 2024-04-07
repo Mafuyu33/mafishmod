@@ -1,6 +1,7 @@
 package net.mafuyu33.mafishmod.util;
 
 import static net.mafuyu33.mafishmod.VRPlugin.getVRAPI;
+import static net.mafuyu33.mafishmod.VRPlugin.hasVRAPI;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,25 +16,25 @@ public class VRDataHandler {
         return getControllerPosition(player, 1);
     }
     public static Vec3d getControllerPosition(PlayerEntity player, int controllerIndex) {
-        if (getVRAPI() != null){
+        if (hasVRAPI()){
             return getVRAPI().getVRPlayer(player).getController(controllerIndex).position();
         }
         return null;
     }
     public static Vec3d getControllerLookAngle(PlayerEntity player, int controllerIndex) {
-        if (getVRAPI() != null){
+        if (hasVRAPI()){
             return getVRAPI().getVRPlayer(player).getController(controllerIndex).getLookAngle();
         }
         return null;
     }
     public static float getControllerRoll(PlayerEntity player, int controllerIndex) {
-        if (getVRAPI() != null){
+        if (hasVRAPI()){
             return getVRAPI().getVRPlayer(player).getController(controllerIndex).getRoll();
         }
         return 0;
     }
     public static Vec3d getHMDPosition(PlayerEntity player){
-        if (getVRAPI() != null){
+        if (hasVRAPI()){
             return getVRAPI().getVRPlayer(player).getHMD().getLookAngle();
         }
         return null;
