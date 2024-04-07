@@ -36,7 +36,7 @@ public class VRPlugin {
         int[] versionArray;
         try {
             versionArray = api.getVersionArray();
-            if (versionArray == null || versionArray.length() != 3) {
+            if (versionArray == null || versionArray.length != 3) {
                 TutorialMod.LOGGER.warn("invalid version array return from vrapi!");
                 return false;
             }
