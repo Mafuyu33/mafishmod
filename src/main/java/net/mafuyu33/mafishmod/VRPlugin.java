@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 import java.util.List;
 
 public class VRPlugin {
-    private static final int[] COMPATIBLE_VRAPI_VERSION = [3, 0, 3];
+    private static final int[] COMPATIBLE_VRAPI_VERSION = {3, 0, 3};
     private static final String COMPATIBLE_VRAPI_VERSION_STRING = "3.0.3";
 
     private static Object vrApi = null;
