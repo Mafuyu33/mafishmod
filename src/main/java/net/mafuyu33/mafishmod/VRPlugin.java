@@ -95,6 +95,7 @@ public class VRPlugin {
             providedVrApi = entrypointList.get(0).getEntrypoint();
 
         if (providedVrApi != null && checkVRAPIVersion(providedVrApi)){
+            TutorialMod.LOGGER.info("compatible version of vrapi found, VR features will be enabled if player has VR");
             vrApi = providedVrApi;
         } else {
             TutorialMod.LOGGER.info("no compatible version of vrapi found, VR features will not work");
