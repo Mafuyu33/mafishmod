@@ -148,11 +148,7 @@ public class VRPlugin {
         }
 
         if(player.getWorld().isClient) {
-            PlayerEntity clientPlayer = MinecraftClient.getInstance().player;
-            //客户端只能获取客户端玩家自身的数据
-            if (clientPlayer != null) {
-                return clientPlayer.equals(player) && isPlayerInVR(clientPlayer);
-            }
+                return player == MinecraftClient.getInstance().player;
         }
 
         //服务端可以获取任何玩家的数据
