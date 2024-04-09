@@ -124,8 +124,12 @@ Mixin中强制转换this为原类
 PlayerEntity user = (PlayerEntity) (Object) this;
 
 网络传输
-PacketByteBuf buf = PacketByteBufs.create();//传输到服务端
-buf.writeInt(shieldDashCoolDown);
-ClientPlayNetworking.send(ModMessages.Shield_Dash_ID, buf);
+buf.writeInt(*);
+ClientPlayNetworking.send(ModMessages.*, buf);
+
+PacketByteBuf buf = PacketByteBufs.create();//传输到客户端
+buf.writeInt(*);
+ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.*, buf);
+
 
 *玩家添加速度在客户端，其他生物添加速度在服务端*
