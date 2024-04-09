@@ -148,7 +148,7 @@ public class VRPlugin {
         }
 
         if(player.getWorld().isClient) {
-                return player == MinecraftClient.getInstance().player;
+                return player == MinecraftClient.getInstance().player && isPlayerInVR(player);
         }
 
         //服务端可以获取任何玩家的数据
