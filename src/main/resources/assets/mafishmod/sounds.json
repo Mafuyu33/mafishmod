@@ -112,6 +112,11 @@
     "sounds": [
       "mafishmod:cheese_berger_man"
     ]
+  },
+  "pin": {
+    "subtitle": "sounds.mafishmod.pin",
+    "sounds": [
+      "mafishmod:pin"
+    ]
   }
-
 }

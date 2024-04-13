@@ -64,7 +64,9 @@
     "enchantmentblockmixin.sigleinject.SmallDripleafBlockMixin",
     "enchantmentblockmixin.sigleinject.StructureBlockMixin",
     "enchantmentblockmixin.sigleinject.TallPlantBlockMixin",
-    "enchantmentblockmixin.sigleinject.TripwireHookBlockMixin"
+    "enchantmentblockmixin.sigleinject.TripwireHookBlockMixin",
+    "spyglass.SpyglassMixin",
+    "unpickupable.ItemEntityMixin"
   ],
   "client": [
     "InventoryScreenMixin",

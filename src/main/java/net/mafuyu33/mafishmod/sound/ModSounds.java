@@ -27,6 +27,7 @@ public class ModSounds {
     public static final SoundEvent NEVER10 = registerSoundEvent("never10");
     public static final SoundEvent CHEESE_BERGER_MAN = registerSoundEvent("cheese_berger_man");
     public static final SoundEvent CHEESE_BERGER_CAT = registerSoundEvent("cheese_berger_cat");
+    public static final SoundEvent PIN = registerSoundEvent("pin");
 
 
     public static final BlockSoundGroup SOUND_BLOCK_SOUNDS = new BlockSoundGroup(1f, 1f,
