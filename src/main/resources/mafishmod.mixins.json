@@ -40,6 +40,7 @@
     "canclimb.LivingEntityMixin",
     "canclimb.MobEntityMixin",
     "cheesebergerforcat.CatEntityMixin",
+    "enchantmentblockmixin.BellResonance.BellBlockEntityMixin",
     "enchantmentblockmixin.main.AbstractBlockMixin",
     "enchantmentblockmixin.main.BlockMixin",
     "enchantmentblockmixin.sigleinject.AbstractBannerBlockMixin",
@@ -66,7 +67,8 @@
     "enchantmentblockmixin.sigleinject.TallPlantBlockMixin",
     "enchantmentblockmixin.sigleinject.TripwireHookBlockMixin",
     "spyglass.SpyglassMixin",
-    "unpickupable.ItemEntityMixin"
+    "unpickupable.ItemEntityMixin",
+    "worldtick.ServerTickMixin"
   ],
   "client": [
     "InventoryScreenMixin",

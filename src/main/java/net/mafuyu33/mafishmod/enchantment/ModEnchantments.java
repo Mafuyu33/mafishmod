@@ -47,7 +47,8 @@ public class ModEnchantments {
             new CursedTreasureLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
     public static Enchantment NEVER_GONNA = register("never_gonna",
             new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.DIGGER,new EquipmentSlot[]{}));
-
+    public static Enchantment RESONANCE = register("resonance",
+            new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
 
 
 

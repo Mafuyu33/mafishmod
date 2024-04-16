@@ -15,6 +15,7 @@ public class ModMessages {
     public static final Identifier NEVER_GONNA_ID = new Identifier(TutorialMod.MOD_ID, "never_gonna");
     public static final Identifier GAME_OPTIONS_ID = new Identifier(TutorialMod.MOD_ID, "game_option");
     public static final Identifier THROW_POWER_ID = new Identifier(TutorialMod.MOD_ID, "throw_power");
+    public static final Identifier BELL_SOUND_ID = new Identifier(TutorialMod.MOD_ID, "bell_sound");
 
 //    public static final Identifier Particle_Color_ID = new Identifier(TutorialMod.MOD_ID, "particle_color");
     public static void registerC2SPackets() {
@@ -30,5 +31,6 @@ public class ModMessages {
     public static void registerS2CPackets() {
         ClientPlayNetworking.registerGlobalReceiver(EXAMPLE_ID, ExampleS2CPacket::receive);
         ClientPlayNetworking.registerGlobalReceiver(NEVER_GONNA_ID, NeverGonnaS2CPacket::receive);
+        ClientPlayNetworking.registerGlobalReceiver(BELL_SOUND_ID, BellSoundS2CPacket::receive);
     }
 }

@@ -124,10 +124,11 @@ Mixin中强制转换this为原类
 PlayerEntity user = (PlayerEntity) (Object) this;
 
 网络传输
+PacketByteBuf buf = PacketByteBufs.create();//C2S
 buf.writeInt(*);
 ClientPlayNetworking.send(ModMessages.*, buf);
 
-PacketByteBuf buf = PacketByteBufs.create();//传输到客户端
+PacketByteBuf buf = PacketByteBufs.create();//S2C
 buf.writeInt(*);
 ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.*, buf);
 
