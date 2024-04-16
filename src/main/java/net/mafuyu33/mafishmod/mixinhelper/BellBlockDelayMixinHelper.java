@@ -6,11 +6,12 @@ import net.minecraft.util.math.Direction;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BellBlockDelayMixinHelper {
 
     // 创建一个静态Map来存储实体ID和值
-    public static final Map<BlockPos, Integer> HitCoolDownMap = new HashMap<>();
+    public static final Map<BlockPos, Integer> HitCoolDownMap = new ConcurrentHashMap<>();
 
     // 在适当的时候将实体ID和值添加到Map中
     public static void storeHitCoolDown(BlockPos blockPos, int value) {
@@ -22,7 +23,7 @@ public class BellBlockDelayMixinHelper {
     }
 
     // 创建一个静态Map来存储实体ID和值
-    public static final Map<BlockPos, Direction> DirectionMap = new HashMap<>();
+    public static final Map<BlockPos, Direction> DirectionMap = new ConcurrentHashMap<>();
 
     // 在适当的时候将实体ID和值添加到Map中
     public static void storeDirection(BlockPos blockPos, Direction value) {
@@ -34,7 +35,7 @@ public class BellBlockDelayMixinHelper {
     }
 
     // 创建一个静态Map来存储实体ID和值
-    public static final Map<BlockPos, BellBlockEntity> BellBlockEntityMap = new HashMap<>();
+    public static final Map<BlockPos, BellBlockEntity> BellBlockEntityMap = new ConcurrentHashMap<>();
 
     // 在适当的时候将实体ID和值添加到Map中
     public static void storeBellBlockEntity(BlockPos blockPos, BellBlockEntity value) {

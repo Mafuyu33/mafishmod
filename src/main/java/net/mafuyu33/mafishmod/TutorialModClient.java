@@ -10,6 +10,7 @@ import net.mafuyu33.mafishmod.entity.ModEntities;
 import net.mafuyu33.mafishmod.event.AttackKeyCheckHandler;
 import net.mafuyu33.mafishmod.event.ChatMessageHandler;
 import net.mafuyu33.mafishmod.event.KeyInputHandler;
+import net.mafuyu33.mafishmod.mixinhelper.BellBlockDelayMixinHelper;
 import net.mafuyu33.mafishmod.networking.ModMessages;
 import net.mafuyu33.mafishmod.particle.ModParticles;
 import net.mafuyu33.mafishmod.particle.StateSaverAndLoader;
@@ -51,6 +52,12 @@ public class TutorialModClient implements ClientModInitializer {
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {//客户端已经成功连接到服务器
                 // 调用您的方法
                 StateSaverAndLoader.getServerState(client.getServer()).spawnAllParticles(client.world,client.getServer());
+        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler,client) -> {//客户端已经成功连接到服务器
+            // 清空hashmap
+            BellBlockDelayMixinHelper.BellBlockEntityMap.clear();
+            BellBlockDelayMixinHelper.HitCoolDownMap.clear();
+            BellBlockDelayMixinHelper.DirectionMap.clear();
         });
     }
 }

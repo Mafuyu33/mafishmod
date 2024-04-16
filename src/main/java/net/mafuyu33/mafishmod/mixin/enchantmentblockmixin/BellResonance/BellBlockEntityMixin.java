@@ -76,7 +76,6 @@ public abstract class BellBlockEntityMixin extends BlockEntity {
                                 BellBlockDelayMixinHelper.storeBellBlockEntity(pos,bellBlockEntity);
                                 BellBlockDelayMixinHelper.storeDirection(pos,direction);
                                 BellBlockDelayMixinHelper.storeHitCoolDown(pos,0);
-
 //                                // 将找到的钟的位置添加到Map中，准备延迟激活
 //                                storeValue(nearbyPos, direction);
 //                                System.out.println("将找到的钟的位置添加到Map中，准备延迟激活" + delayedActivationPositions);
