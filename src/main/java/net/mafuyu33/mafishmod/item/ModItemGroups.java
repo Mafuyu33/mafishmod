@@ -67,6 +67,7 @@ public class ModItemGroups {
                         entries.add(ModItems.VR_MAGIC);
 
                         entries.add(ModItems.CHEESE_BERGER);
+                        entries.add(ModItems.RTX4090);
                     }).build());
 
 

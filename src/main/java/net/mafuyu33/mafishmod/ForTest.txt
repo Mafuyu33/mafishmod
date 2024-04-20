@@ -19,7 +19,7 @@ int k = EnchantmentHelper.getLevel(Enchantments, itemStack);
 if (k > 0) {
 }
 方块附魔查看
-int k = BlockEnchantmentHelper.getLevel(Enchantments.INFINITY,pos);
+int k = BlockEnchantmentStorage.getLevel(Enchantments.INFINITY,pos);
 if(k>0){
 }
 

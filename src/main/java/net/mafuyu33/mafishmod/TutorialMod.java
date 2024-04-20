@@ -10,7 +10,8 @@ import net.mafuyu33.mafishmod.block.entity.ModBlockEntities;
 import net.mafuyu33.mafishmod.effect.ModStatusEffects;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.mafuyu33.mafishmod.event.AttackEntityHandler;
-import net.mafuyu33.mafishmod.event.BlockBreakHandler;
+import net.mafuyu33.mafishmod.event.AfterBlockBreakHandler;
+import net.mafuyu33.mafishmod.event.BeforeBlockBreakHandler;
 import net.mafuyu33.mafishmod.event.ExplosionHandler;
 import net.mafuyu33.mafishmod.item.ModItemGroups;
 import net.mafuyu33.mafishmod.item.ModItems;
@@ -54,7 +55,8 @@ public class TutorialMod implements ModInitializer {
 
 		//事件注册
 		AttackEntityCallback.EVENT.register(new AttackEntityHandler());
-		PlayerBlockBreakEvents.AFTER.register(new BlockBreakHandler());
+		PlayerBlockBreakEvents.AFTER.register(new AfterBlockBreakHandler());
+		PlayerBlockBreakEvents.BEFORE.register(new BeforeBlockBreakHandler());
 		ExplosionHandler.init();
 
 		//VR
