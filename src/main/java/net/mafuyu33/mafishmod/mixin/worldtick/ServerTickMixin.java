@@ -28,7 +28,7 @@ public abstract class ServerTickMixin {
 
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void init(CallbackInfo info) {
-		// 获取存储BellBlockEntity的所有键的集合
+		//获取存储BellBlockEntity的所有键的集合
 		Set<BlockPos> bellBlockEntityKeys = BellBlockDelayMixinHelper.BellBlockEntityMap.keySet();
 		// 遍历集合并执行操作
 		for (BlockPos blockPos : bellBlockEntityKeys) {
