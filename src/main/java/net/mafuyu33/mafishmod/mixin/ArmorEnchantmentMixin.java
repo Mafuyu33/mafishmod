@@ -233,7 +233,6 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 				int p = EnchantmentHelper.getLevel(ModEnchantments.NO_BLAST_PROTECTION, armorItem);//爆炸不保护
 				if (p > 0 && this.getRecentDamageSource()!= null){
 					if(this.getRecentDamageSource().getName().contains("explosion")) {
-						System.out.println("p > 0 && this.getRecentDamageSource() == getDamageSources().explosion(null)");
 						this.kill();
 					}
 				}
