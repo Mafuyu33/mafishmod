@@ -49,7 +49,8 @@ public class ModEnchantments {
             new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.DIGGER,new EquipmentSlot[]{}));
     public static Enchantment RESONANCE = register("resonance",
             new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
-
+    public static Enchantment NO_BLAST_PROTECTION = register("no_blast_protection",
+            new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR,new EquipmentSlot[]{}));
 
 
 

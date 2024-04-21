@@ -12,6 +12,8 @@ import net.minecraft.client.option.GameOptions;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
@@ -25,6 +27,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -35,10 +39,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 @Mixin(LivingEntity.class)
 public abstract class ArmorEnchantmentMixin extends Entity implements Attackable {
 	@Shadow public abstract Iterable<ItemStack> getArmorItems();
+
+	@Shadow public abstract boolean hurtByWater();
+
+	@Shadow public abstract void onDamaged(DamageSource damageSource);
+
+	@Shadow @Nullable public abstract DamageSource getRecentDamageSource();
+
+	@Shadow public abstract void kill();
 
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
@@ -214,6 +227,15 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 				int o = EnchantmentHelper.getLevel(ModEnchantments.MUTE, armorItem);//静音
 				if (o > 0 && this.isPlayer()) {
 					mute();
+				}
+			}
+			if (armorItem.getItem() instanceof ArmorItem) {//随便什么装甲
+				int p = EnchantmentHelper.getLevel(ModEnchantments.NO_BLAST_PROTECTION, armorItem);//爆炸不保护
+				if (p > 0 && this.getRecentDamageSource()!= null){
+					if(this.getRecentDamageSource().getName().contains("explosion")) {
+						System.out.println("p > 0 && this.getRecentDamageSource() == getDamageSources().explosion(null)");
+						this.kill();
+					}
 				}
 			}
 		}
