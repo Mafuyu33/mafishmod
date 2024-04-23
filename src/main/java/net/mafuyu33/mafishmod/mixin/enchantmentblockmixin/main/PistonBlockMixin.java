@@ -38,7 +38,6 @@ public abstract class PistonBlockMixin {
 			if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(blockPos3), new NbtList())) {
 				BlockEnchantmentStorage.removeBlockEnchantment(blockPos3.toImmutable());//删除信息
 			}
-			//上面只有普通活塞推，粘性活塞拉没有，而且没有删除原来位置
 		}
 	}
 //	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"
