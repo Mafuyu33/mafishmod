@@ -6,6 +6,7 @@ import net.mafuyu33.mafishmod.mixinhelper.InjectHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -42,30 +43,15 @@ public abstract class BlockMixin extends AbstractBlock implements ItemConvertibl
             if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(pos), new NbtList())) {
                 BlockEnchantmentStorage.removeBlockEnchantment(pos.toImmutable());//删除信息
 
-                //需要添加的：给掉落的方块附魔
+                //给掉落的方块附魔
+//                BlockEntity blockEntity = state.hasBlockEntity() ? world.getBlockEntity(pos) : null;
+//                Block.dropStacks(state, (World) world, pos, blockEntity, null, ItemStack.EMPTY);
             }
-        }
-    }
-    @Inject(at = @At("HEAD"), method = "onSteppedOn")//删除方块的附魔
-    private void init3(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
-        int k = BlockEnchantmentStorage.getLevel(Enchantments.THORNS,pos);
-        if (!world.isClient() && k > 0) {//如果有荆棘附魔
-            entity.damage(entity.getDamageSources().cactus(),(float) k);
         }
     }
     @Inject(at = @At("TAIL"), method = "onDestroyedByExplosion")//删除方块的附魔
     private void init4(World world, BlockPos pos, Explosion explosion, CallbackInfo ci){
         if (!world.isClient()) {
-//            // 还原受到爆炸保护的方块状态
-//            BlockState blockState = protectedBlockStates.get(pos);
-//            if (blockState != null) {
-//                // 还原受到爆炸保护的方块状态
-//                System.out.println("还原受到爆炸保护的方块状态");
-//
-//                world.setBlockState(pos, blockState, Block.FORCE_STATE);
-//                // 移除对应位置的状态信息
-//                protectedBlockStates.remove(pos);
-//            }
             if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(pos), new NbtList())) {
                 BlockEnchantmentStorage.removeBlockEnchantment(pos.toImmutable());//删除信息
             }
