@@ -13,6 +13,7 @@
     "enchantmentblockmixin.custom.furnace.AbstractFurnaceBlockEntityMixin",
     "enchantmentblockmixin.custom.thorns.BlockMixin",
     "enchantmentblockmixin.custom.tnt.TntBlockMixin",
+    "enchantmentblockmixin.custom.underwater.FlowableFluidMixin",
     "enchantmentblockmixin.main.AbstractBlockMixin",
     "enchantmentblockmixin.main.BlockMixin",
     "enchantmentblockmixin.main.PistonBlockMixin",
