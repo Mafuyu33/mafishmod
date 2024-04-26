@@ -134,5 +134,7 @@ PacketByteBuf buf = PacketByteBufs.create();//S2C
 buf.writeInt(*);
 ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.*, buf);
 
+获取ClientWorld实例
+MinecraftClient.getInstance().world
 
 *玩家添加速度在客户端，其他生物添加速度在服务端*

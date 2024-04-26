@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.mafuyu33.mafishmod.block.ModBlocks;
 import net.mafuyu33.mafishmod.entity.ModEntities;
 //import net.mafuyu33.mafishmod.util.ModModelPredicateProvider;
@@ -17,10 +18,11 @@ import net.mafuyu33.mafishmod.particle.StateSaverAndLoader;
 import net.mafuyu33.mafishmod.particle.custom.CitrineParticle;
 import net.mafuyu33.mafishmod.particle.custom.KnockBackParticle;
 import net.mafuyu33.mafishmod.particle.custom.RubberParticle;
+import net.mafuyu33.mafishmod.render.ALeaf;
 import net.mafuyu33.mafishmod.screen.GemPolishingScreen;
 import net.mafuyu33.mafishmod.screen.ModScreenHandlers;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 
 public class TutorialModClient implements ClientModInitializer {
@@ -39,6 +41,7 @@ public class TutorialModClient implements ClientModInitializer {
         KeyInputHandler.register();
         ChatMessageHandler.register();
         AttackKeyCheckHandler.registerAttackKeyListener();
+        HudRenderCallback.EVENT.register(new ALeaf());
 
         HandledScreens.register(ModScreenHandlers.GEM_POLISHING_SCREEN_HANDLER, GemPolishingScreen::new);
         ModMessages.registerS2CPackets();
@@ -46,6 +49,8 @@ public class TutorialModClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.CITRINE_PARTICLE, CitrineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.RUBBER_PARTICLE, RubberParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.KNOCK_BACK_PARTICLE, KnockBackParticle.Factory::new);
+
+//        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> 0x3495eb, Blocks.CHEST);
 
 //        ModModelPredicateProvider.registerModModels();
 

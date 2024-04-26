@@ -51,7 +51,8 @@ public class ModEnchantments {
             new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
     public static Enchantment NO_BLAST_PROTECTION = register("no_blast_protection",
             new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR,new EquipmentSlot[]{}));
-
+    public static Enchantment A_LEAF = register("a_leaf",
+            new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD,new EquipmentSlot[]{}));
 
 
 
