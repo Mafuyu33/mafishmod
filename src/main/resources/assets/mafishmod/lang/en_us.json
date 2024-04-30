@@ -59,13 +59,14 @@
   "item.mafishmod.lightning_ball": "lightning_ball",
   "item.mafishmod.milk_flesh": "milk_flesh",
   "item.mafishmod.cheese_berger": "cheese_berger",
+  "item.mafishmod.rtx4090": "RTX4090",
 
   "item.mafishmod.vr_pen": "vr_pen",
   "item.mafishmod.vr_rubber": "vr_rubber",
   "item.mafishmod.vr_ruler": "vr_ruler",
   "item.mafishmod.vr_compasses": "vr_compasses",
   "item.mafishmod.vr_magic": "vr_magic",
-  "item.mafishmod.rtx4090": "RTX4090",
+  "item.mafishmod.vr_getting_over_it": "vr_getting_over_it",
 
 
   "enchantment.mafishmod.bad_luck_of_sea": "bad_luck_of_sea",

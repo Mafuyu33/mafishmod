@@ -137,4 +137,7 @@ ServerPlayNetworking.send((ServerPlayerEntity) player, ModMessages.*, buf);
 获取ClientWorld实例
 MinecraftClient.getInstance().world
 
+有MC-VR-API并且在VR中的时候
+if (entity instanceof PlayerEntity user && VRPlugin.canRetrieveData(user)) {
+
 *玩家添加速度在客户端，其他生物添加速度在服务端*
