@@ -33,9 +33,15 @@ public class VRDataHandler {
         }
         return 0;
     }
-    public static Vec3d getHMDPosition(PlayerEntity player){
+    public static Vec3d getHMDLookAngle(PlayerEntity player){
         if (hasVRAPI()){
             return getVRAPI().getVRPlayer(player).getHMD().getLookAngle();
+        }
+        return null;
+    }
+    public static Vec3d getHMDPosition(PlayerEntity player){
+        if (hasVRAPI()){
+            return getVRAPI().getVRPlayer(player).getHMD().position();
         }
         return null;
     }
