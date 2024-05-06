@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.mafuyu33.mafishmod.networking.ModMessages;
-import net.mafuyu33.mafishmod.networking.packet.GameOptionsC2SPacket;
+import net.mafuyu33.mafishmod.networking.packet.C2S.GameOptionsC2SPacket;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BellBlockEntity;
 import net.minecraft.block.entity.BlockEntity;

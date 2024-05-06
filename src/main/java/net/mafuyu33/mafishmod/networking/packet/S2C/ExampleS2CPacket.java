@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.networking.packet;
+package net.mafuyu33.mafishmod.networking.packet.S2C;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;

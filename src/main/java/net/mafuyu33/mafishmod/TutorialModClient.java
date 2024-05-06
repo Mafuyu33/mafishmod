@@ -23,7 +23,9 @@ import net.mafuyu33.mafishmod.screen.GemPolishingScreen;
 import net.mafuyu33.mafishmod.screen.ModScreenHandlers;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.*;
+import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.TridentEntityRenderer;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override

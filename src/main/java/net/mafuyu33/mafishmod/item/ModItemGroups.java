@@ -65,10 +65,10 @@ public class ModItemGroups {
                         entries.add(ModItems.VR_RULER);
                         entries.add(ModItems.VR_COMPASSES);
                         entries.add(ModItems.VR_MAGIC);
-                        entries.add(ModItems.VR_GETTING_OVER_IT);
+//                        entries.add(ModItems.VR_GETTING_OVER_IT);
 
                         entries.add(ModItems.CHEESE_BERGER);
-                        entries.add(ModItems.RTX4090);
+//                        entries.add(ModItems.RTX4090);
                     }).build());
 
 

@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.mafuyu33.mafishmod.entity.DiamondProjectileEntity;
 import net.mafuyu33.mafishmod.event.KeyInputHandler;
 import net.mafuyu33.mafishmod.networking.ModMessages;
-import net.mafuyu33.mafishmod.networking.packet.ThrowPowerC2SPacket;
+import net.mafuyu33.mafishmod.networking.packet.C2S.ThrowPowerC2SPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.networking.packet;
+package net.mafuyu33.mafishmod.networking.packet.C2S;
 
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.mafuyu33.mafishmod.mixinhelper.ShieldDashMixinHelper;

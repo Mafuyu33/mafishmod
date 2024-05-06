@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.networking.packet;
+package net.mafuyu33.mafishmod.networking.packet.C2S;
 
 import net.mafuyu33.mafishmod.particle.StateSaverAndLoader;
 import net.minecraft.network.PacketByteBuf;

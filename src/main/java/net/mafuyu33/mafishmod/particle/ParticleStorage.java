@@ -3,7 +3,7 @@ package net.mafuyu33.mafishmod.particle;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.mafuyu33.mafishmod.networking.ModMessages;
-import net.mafuyu33.mafishmod.networking.packet.ParticleDataC2SPacket;
+import net.mafuyu33.mafishmod.networking.packet.C2S.ParticleDataC2SPacket;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.math.Vec3d;
 

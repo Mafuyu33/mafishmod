@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.mixin.itemmixin.SwimmingTripwire;
+package net.mafuyu33.mafishmod.mixin.itemmixin.swimmingtripwire;
 
 import net.mafuyu33.mafishmod.mixinhelper.TripwireBlockMixinHelper;
 import net.minecraft.block.Block;
