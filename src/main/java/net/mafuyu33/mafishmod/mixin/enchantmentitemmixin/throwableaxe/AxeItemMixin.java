@@ -1,15 +1,13 @@
-package net.mafuyu33.mafishmod.mixin.itemmixin.throwableaxe;
+package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin.throwableaxe;
 
 import net.mafuyu33.mafishmod.entity.FuProjectileEntity;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -17,7 +15,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(AxeItem.class)
 public abstract class AxeItemMixin extends MiningToolItem {

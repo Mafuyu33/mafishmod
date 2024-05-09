@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.mixin.itemmixin.throwableaxe;
+package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin.throwableaxe;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,12 +13,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.Ownable;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -50,8 +47,9 @@ public abstract class ItemEntityMixin extends Entity implements Ownable {
 		super(type, world);
 	}
 
+
 	@Inject(at = @At("TAIL"), method = "tick")
-	private void init(CallbackInfo info) {
+	private void init1(CallbackInfo info) {
 		int i = EnchantmentHelper.getLevel(Enchantments.LOYALTY,this.getStack());
 		ItemStack itemStack = this.getStack();
 
@@ -71,8 +69,8 @@ public abstract class ItemEntityMixin extends Entity implements Ownable {
 //				BlockState blockState = getBlockStateAtPos();
 				Vec3d fuMasterPos = fuMaster.getPos();
 				if(this.isOnGround()) {//如果在地上
-					System.out.println(fuMaster);
-					System.out.println(fuMasterPos);
+//					System.out.println(fuMaster);
+//					System.out.println(fuMasterPos);
 					// 计算从实体到玩家的方向向量
 					Vec3d direction = fuMasterPos.subtract(this.getPos()).normalize();
 					// 设置水平速度

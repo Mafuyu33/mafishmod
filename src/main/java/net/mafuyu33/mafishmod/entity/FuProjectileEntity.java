@@ -93,7 +93,7 @@ public class FuProjectileEntity extends ThrownItemEntity {
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
             Entity entity2 = this.getOwner();
-            entity.damage(this.getDamageSources().thrown(this, entity2), 25F);
+            entity.damage(this.getDamageSources().thrown(this, entity2), 4F);
             if (entity2 instanceof LivingEntity) {
                 this.applyDamageEffects((LivingEntity) entity2, entity);
             }

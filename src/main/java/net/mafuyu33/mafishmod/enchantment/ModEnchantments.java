@@ -55,6 +55,8 @@ public class ModEnchantments {
             new CursedLv1(Enchantment.Rarity.UNCOMMON, EnchantmentTarget.ARMOR_HEAD,new EquipmentSlot[]{}));
     public static Enchantment BUTTERFLY = register("butterfly",
             new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR_CHEST,new EquipmentSlot[]{}));
+    public static Enchantment FANGSHENG = register("fangsheng",
+            new NormalLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.DIGGER,new EquipmentSlot[]{}));
 
 
     private static Enchantment register(String name, Enchantment enchantment) {
