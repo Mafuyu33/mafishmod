@@ -12,6 +12,11 @@ System.out.println(123);
 发送信息给玩家
 player.sendMessage(Text.literal((String.valueOf(123))),false);
 
+配置文件
+boolean * = ConfigHelper.*;
+    if(*) {
+
+
 播放音乐
 world.playSound(user, user.getBlockPos(), ModSounds.METAL_DETECTOR_FOUND_ORE, SoundCategory.PLAYERS);
 
@@ -141,3 +146,5 @@ MinecraftClient.getInstance().world
 if (entity instanceof PlayerEntity user && VRPlugin.canRetrieveData(user)) {
 
 *玩家添加速度在客户端，其他生物添加速度在服务端*
+
+shadow带有final字段的，需要把原来的final换成@Final

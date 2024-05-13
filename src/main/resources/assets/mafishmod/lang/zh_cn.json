@@ -1,4 +1,14 @@
 {
+  "text.autoconfig.mafishmod.option.title": "马夫鱼の奇怪mod",
+
+  "text.autoconfig.mafishmod.option.isAlwaysEnchantable": "所有物品可附魔",
+  "text.autoconfig.mafishmod.option.isFireworkCanUseOnEntity": "烟花火箭可以对生物使用&可以穿鞘翅点地面助推",
+  "text.autoconfig.mafishmod.option.isFireworkCanHitOnEntity": "烟花火箭击中生物会飞天（不稳定）",
+  "text.autoconfig.mafishmod.option.isFuThrowable": "让斧子可以丢出去",
+  "text.autoconfig.mafishmod.option.toggleA": "按钮A",
+  "text.autoconfig.mafishmod.option.toggleB": "按钮B",
+  "text.autoconfig.mafishmod.option.stuff": "stuff",
+
   "tooltip.mafishmod.ruby_stuff.tooltip": "§m试试就逝世",
   "tooltip.mafishmod.vr_pen.tooltip": "副手拿染料改变颜色，副手的物品数量是正方形笔刷的大小",
   "tooltip.mafishmod.vr_rubber.tooltip": "副手的物品数量是橡皮擦大小，副手拿马夫鱼是大范围清空",

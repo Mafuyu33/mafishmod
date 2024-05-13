@@ -1,5 +1,7 @@
 package net.mafuyu33.mafishmod;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -7,6 +9,7 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.mafuyu33.mafishmod.block.entity.ModBlockEntities;
+import net.mafuyu33.mafishmod.config.ModConfig;
 import net.mafuyu33.mafishmod.effect.ModStatusEffects;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.mafuyu33.mafishmod.event.AttackEntityHandler;
@@ -32,7 +35,8 @@ public class TutorialMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-//		ClientTickEvents.START_CLIENT_TICK.register(this::onClientTick);
+		//模组菜单注册
+		AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
 		//添加东西
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();
@@ -62,6 +66,7 @@ public class TutorialMod implements ModInitializer {
 		//VR
 		VRPlugin.init();
 
+//		ClientTickEvents.START_CLIENT_TICK.register(this::onClientTick);
 	}
 
 

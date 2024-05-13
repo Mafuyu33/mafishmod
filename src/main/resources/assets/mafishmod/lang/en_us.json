@@ -1,4 +1,15 @@
 {
+  "text.autoconfig.mafishmod.option.title": "mafishmod",
+
+  "text.autoconfig.mafishmod.option.isAlwaysEnchantable": "isAlwaysEnchantable",
+  "text.autoconfig.mafishmod.option.isFireworkCanUseOnEntity": "isFireworkCanUseOnEntity",
+  "text.autoconfig.mafishmod.option.isFireworkCanHitOnEntity": "isFireworkCanHitOnEntity",
+  "text.autoconfig.mafishmod.option.isFuThrowable": "isFuThrowable",
+  "text.autoconfig.mafishmod.option.toggleA": "toggleA",
+  "text.autoconfig.mafishmod.option.toggleB": "toggleB",
+  "text.autoconfig.mafishmod.option.stuff": "stuff",
+
+
   "tooltip.mafishmod.metal_detector.tooltip": "Find valuables underground",
   "tooltip.mafishmod.ruby_stuff.tooltip": "§e",
   "tooltip.mafishmod.vr_pen.tooltip": "Holding dye in the off-hand changes the color, and the quantity of the item in the off-hand determines the size of the square brush",

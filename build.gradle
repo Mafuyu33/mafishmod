@@ -18,6 +18,8 @@ repositories {
 	maven {
 		url = "https://cursemaven.com"
 	}
+	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com/releases/" }
 //	maven {
 //		name = "Modrinth"
 //		url = "https://api.modrinth.com/maven"
@@ -39,9 +41,9 @@ fabricApi {
 	configureDataGeneration()
 }
 
-loom {
-	accessWidenerPath = file("src/main/resources/name.accesswidener")
-}
+//loom {
+//	accessWidenerPath = file("src/main/resources/name.accesswidener")
+//}
 
 
 
@@ -64,6 +66,11 @@ dependencies {
 	modImplementation "curse.maven:architectury-api-419699:5084475"
 	modImplementation "curse.maven:mc-vr-api-591092:5249667"
 
+	modApi("me.shedaniel.cloth:cloth-config-fabric:13.0.121") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+
+	modApi "com.terraformersmc:modmenu:9.2.0-beta.2"
 
 //	modImplementation "maven.modrinth:modmenu:9.0.0"
 //	modImplementation "curse.maven:vivecraft-667903:4941634"

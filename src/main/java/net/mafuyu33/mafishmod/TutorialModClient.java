@@ -1,4 +1,6 @@
 package net.mafuyu33.mafishmod;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
@@ -6,6 +8,7 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.mafuyu33.mafishmod.block.ModBlocks;
+import net.mafuyu33.mafishmod.config.ModConfig;
 import net.mafuyu33.mafishmod.entity.ModEntities;
 //import net.mafuyu33.mafishmod.util.ModModelPredicateProvider;
 import net.mafuyu33.mafishmod.event.AttackKeyCheckHandler;

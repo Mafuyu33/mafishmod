@@ -1,5 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.mobmixin;
 
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,31 +23,36 @@ import net.minecraft.util.math.Vec3d;
  */
 @Mixin(BeeEntity.class)
 public abstract class BeeRideableMixin extends AnimalEntity {
+
    @Unique
    private static final Logger LOGGER = LoggerFactory.getLogger("SIL YONI");
 
    @Override
    public ActionResult interactMob(PlayerEntity player, Hand hand){
-      var itemStack = player.getStackInHand(hand);
-      if (!itemStack.isEmpty()){
-         return super.interactMob(player, hand);
-      }
-      if (this.getFirstPassenger() != null){
-         return super.interactMob(player, hand);
-      }
+      boolean isEnable = ConfigHelper.isToggleA();
+      if(isEnable) {
+         var itemStack = player.getStackInHand(hand);
+         if (!itemStack.isEmpty()) {
+            return super.interactMob(player, hand);
+         }
+         if (this.getFirstPassenger() != null) {
+            return super.interactMob(player, hand);
+         }
 
-      BeeEntity entity = (BeeEntity)(Object)this;
+         BeeEntity entity = (BeeEntity) (Object) this;
 
-      var isServerSide = !entity.getWorld().isClient();
-      if (isServerSide){
-         LOGGER.info("some one just interacting a bee");
-         player.sendMessage(Text.literal("riding bee!"), false);
-         player.setYaw(entity.getYaw());
-         player.setPitch(entity.getPitch());
-         player.startRiding(entity);
+         var isServerSide = !entity.getWorld().isClient();
+         if (isServerSide) {
+            LOGGER.info("some one just interacting a bee");
+            player.sendMessage(Text.literal("riding bee!"), false);
+            player.setYaw(entity.getYaw());
+            player.setPitch(entity.getPitch());
+            player.startRiding(entity);
+         }
+         return ActionResult.success(isServerSide);
+      }else {
+         return ActionResult.PASS;
       }
-
-      return ActionResult.success(isServerSide);
    }
 
    @Override

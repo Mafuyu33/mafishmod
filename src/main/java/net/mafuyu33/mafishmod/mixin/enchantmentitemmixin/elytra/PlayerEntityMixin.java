@@ -1,6 +1,5 @@
-package net.mafuyu33.mafishmod.mixin.itemmixin.elytra;
+package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin.elytra;
 
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.mafuyu33.mafishmod.VRPlugin;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.mafuyu33.mafishmod.mixinhelper.ElytraJumpMixinHelper;
@@ -10,16 +9,11 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

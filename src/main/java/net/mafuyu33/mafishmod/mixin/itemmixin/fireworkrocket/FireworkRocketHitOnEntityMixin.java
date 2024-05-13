@@ -1,6 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.fireworkrocket;
 
 import net.mafuyu33.mafishmod.mixinhelper.FireworkRocketEntityMixinHelper;
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -98,40 +99,45 @@ public abstract class FireworkRocketHitOnEntityMixin extends Entity implements A
 	}
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void init(CallbackInfo ci) {
-		Vec3d Pos=null;
-		int entityId = this.getId();// 获取实体的ID
-		Entity entity = getWorld().getEntityById(entityId);
-		int times = FireworkRocketEntityMixinHelper.getEntityValue(entityId);// 获取与实体ID关联的值
-		if(entity != null) {
-			Pos = entity.getPos();
-		}
-		if (times > 0) {
-			applyContinuousForce(this);
-			FireworkRocketEntityMixinHelper.storeEntityValue(entityId, times - 1);
-		}
-		if (times == 1) {
-			ParticleLifes=30;
-			triggerDelayedAction();
-		}
+		boolean isFireworkCanHitOnEntity = ConfigHelper.isFireworkCanHitOnEntity();
+		if(isFireworkCanHitOnEntity) {
+
+			Vec3d Pos = null;
+			int entityId = this.getId();// 获取实体的ID
+			Entity entity = getWorld().getEntityById(entityId);
+			int times = FireworkRocketEntityMixinHelper.getEntityValue(entityId);// 获取与实体ID关联的值
+			if (entity != null) {
+				Pos = entity.getPos();
+			}
+			if (times > 0) {
+				applyContinuousForce(this);
+				FireworkRocketEntityMixinHelper.storeEntityValue(entityId, times - 1);
+			}
+			if (times == 1) {
+				ParticleLifes = 30;
+				triggerDelayedAction();
+			}
 
 
-		if(ParticleLifes>0 & entity !=null){
-			addParticles();
-			ParticleLifes--;
-		}
+			if (ParticleLifes > 0 & entity != null) {
+				addParticles();
+				ParticleLifes--;
+			}
 
-		if (this.delayCounter > 0 && entity != null) {
-			this.delayCounter--;
-			if (this.delayCounter == 0) {
-				if(entity instanceof PlayerEntity){
-					entity.kill();
-					explode();
-				}else {
-					((LivingEntity) entity).dead = true;
-					explode();
-					entity.discard();
+			if (this.delayCounter > 0 && entity != null) {
+				this.delayCounter--;
+				if (this.delayCounter == 0) {
+					if (entity instanceof PlayerEntity) {
+						entity.kill();
+						explode();
+					} else {
+						((LivingEntity) entity).dead = true;
+						explode();
+						entity.discard();
+					}
 				}
 			}
+
 		}
 	}
 }
