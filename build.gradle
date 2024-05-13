@@ -66,7 +66,9 @@ dependencies {
 	modImplementation "curse.maven:architectury-api-419699:5084475"
 	modImplementation "curse.maven:mc-vr-api-591092:5249667"
 
-	modApi("me.shedaniel.cloth:cloth-config-fabric:13.0.121") {
+
+
+	modApi(include("me.shedaniel.cloth:cloth-config-fabric:13.0.121")) {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
@@ -82,6 +84,22 @@ dependencies {
 //	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-macos")
 //	implementation("org.lwjgl:lwjgl-openvr:3.3.1:natives-windows")
 }
+
+//remapJar {
+//	// 指定输入文件，通常是你项目的主JAR
+//	inputFile = file("${buildDir}/devlibs/${project.archivesBaseName}-${project.version}-dev.jar")
+//
+//	// 设置源命名空间和目标命名空间
+//	sourceNamespace = "named"
+//	targetNamespace = "intermediary"
+//
+//	// 添加要作为嵌套JAR包括的JAR
+//	nestedJars.from file(".gradle/loom-cache/remapped_mods/net_fabricmc_yarn_1_20_4_1_20_4_build_3_v2/me/shedaniel/cloth/cloth-config-fabric/13.0.121/cloth-config-fabric-13.0.121-fabric.jar")
+//
+//	// 确保嵌套的JAR在输出文件中被包括
+//	addNestedDependencies = true
+//}
+
 
 processResources {
 	inputs.property "version", project.version
@@ -106,9 +124,16 @@ java {
 }
 
 jar {
+//	duplicatesStrategy = DuplicatesStrategy.INHERIT
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+//	// 包含所有运行时类路径依赖到最终的Jar
+//	from {
+//		configurations.runtimeClasspath.findAll {
+//			it.name.startsWith("cloth-config-fabric")
+//		}.collect { it.isDirectory() ? it : zipTree(it) }
+//	}
 }
 
 // configure the maven publication

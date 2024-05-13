@@ -1,6 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.lead;
 
 import net.mafuyu33.mafishmod.VRPlugin;
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.mafuyu33.mafishmod.util.VRDataHandler;
 
 import net.minecraft.entity.Entity;
@@ -33,7 +34,7 @@ public abstract class LeadItemMovementMixin extends MobEntity {
 		return 1.0;
 	};
 	@Unique
-	Float breakForce = 100000.0F;
+	Float breakForce = ConfigHelper.breakDistance();
 	@Unique
 	private static Vec3d lastPosMainController= new Vec3d(0, 0, 0);
 	@Unique

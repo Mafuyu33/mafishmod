@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.mafuyu33.mafishmod.item.custom.ColliableItem;
 import net.mafuyu33.mafishmod.mixinhelper.ShieldDashMixinHelper;
 import net.mafuyu33.mafishmod.networking.ModMessages;
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.entity.Attackable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -52,46 +53,48 @@ public abstract class ShieldDashMixin extends Entity implements Attackable {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void init(CallbackInfo ci) {
+        boolean isShieldDashable = ConfigHelper.isShieldDashable();
+        if (isShieldDashable){
+            if (getWorld().isClient && this.isBlocking()
+                    && ShieldDashMixinHelper.isAttackKeyPressed() && shieldDashCoolDown <= 0) {//盾牌猛击冲刺部分
+                // 获取玩家当前面朝的方向
+                Vec3d playerLookDirection = this.getRotationVector().normalize();
 
-        if(getWorld().isClient && this.isBlocking()
-                && ShieldDashMixinHelper.isAttackKeyPressed() && shieldDashCoolDown<=0){//盾牌猛击冲刺部分
-            // 获取玩家当前面朝的方向
-            Vec3d playerLookDirection = this.getRotationVector().normalize();
-
-            if (playerLookDirection.y < 0) {// 如果玩家面朝的是 y 轴负方向，则将 y 分量设为零
-                playerLookDirection = new Vec3d(playerLookDirection.x, 0.0, playerLookDirection.z).normalize();
-            }else {// 如果玩家面朝的是 y 轴正方向，则将 y 分量减小
-                playerLookDirection = new Vec3d(playerLookDirection.x, playerLookDirection.y*0.3, playerLookDirection.z).normalize();
+                if (playerLookDirection.y < 0) {// 如果玩家面朝的是 y 轴负方向，则将 y 分量设为零
+                    playerLookDirection = new Vec3d(playerLookDirection.x, 0.0, playerLookDirection.z).normalize();
+                } else {// 如果玩家面朝的是 y 轴正方向，则将 y 分量减小
+                    playerLookDirection = new Vec3d(playerLookDirection.x, playerLookDirection.y * 0.3, playerLookDirection.z).normalize();
+                }
+                // 设置速度大小，例如 0.1 表示速度的大小为 0.1 个单位
+                double speed = 2;
+                // 乘以速度系数
+                playerLookDirection = playerLookDirection.multiply(speed);
+                // 给玩家应用速度
+                this.addVelocity(playerLookDirection);
+                getWorld().playSound(this, this.getBlockPos(),
+                        SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1f, 1f);
+                shieldDashCoolDown = 20;
             }
-            // 设置速度大小，例如 0.1 表示速度的大小为 0.1 个单位
-            double speed = 2;
-            // 乘以速度系数
-            playerLookDirection = playerLookDirection.multiply(speed);
-            // 给玩家应用速度
-            this.addVelocity(playerLookDirection);
-            getWorld().playSound(this,this.getBlockPos(),
-                    SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS,1f,1f);
-            shieldDashCoolDown=20;
-        }
-        if(getWorld().isClient && shieldDashCoolDown>0){//盾牌猛击内置冷却部分，传递数据包到服务端
-            shieldDashCoolDown--;
+            if (getWorld().isClient && shieldDashCoolDown > 0) {//盾牌猛击内置冷却部分，传递数据包到服务端
+                shieldDashCoolDown--;
 //            System.out.println(shieldDashCoolDown);
 
-            sentC2S();
-        }
-        if(this.isPlayer() && isBlocking()) {//盾牌猛击造成伤害和击退部分
-            if(checkPlayerCollisions((PlayerEntity) (Object) this) != null) {
-                Entity entity = checkPlayerCollisions((PlayerEntity) (Object) this);
+                sentC2S();
+            }
+            if (this.isPlayer() && isBlocking()) {//盾牌猛击造成伤害和击退部分
+                if (checkPlayerCollisions((PlayerEntity) (Object) this) != null) {
+                    Entity entity = checkPlayerCollisions((PlayerEntity) (Object) this);
 //                System.out.println(ShieldDashMixinHelper.getHitCoolDown(this.getId()));
-                if(ShieldDashMixinHelper.getHitCoolDown(this.getId())>=15) {//盾牌冲刺中
-                    Vec3d playerLookDirection = this.getRotationVector().normalize();
-                    playerLookDirection = new Vec3d(playerLookDirection.x, 0, playerLookDirection.z).normalize();
-                    double speed = 0.5;
-                    // 乘以速度系数
-                    Vec3d upVector = new Vec3d(0, 0.1, 0);
-                    playerLookDirection = playerLookDirection.multiply(speed).add(upVector);
-                    entity.damage(getDamageSources().playerAttack((PlayerEntity) (Object) this),5f);
-                    entity.addVelocity(playerLookDirection);
+                    if (ShieldDashMixinHelper.getHitCoolDown(this.getId()) >= 15) {//盾牌冲刺中
+                        Vec3d playerLookDirection = this.getRotationVector().normalize();
+                        playerLookDirection = new Vec3d(playerLookDirection.x, 0, playerLookDirection.z).normalize();
+                        double speed = 0.5;
+                        // 乘以速度系数
+                        Vec3d upVector = new Vec3d(0, 0.1, 0);
+                        playerLookDirection = playerLookDirection.multiply(speed).add(upVector);
+                        entity.damage(getDamageSources().playerAttack((PlayerEntity) (Object) this), 5f);
+                        entity.addVelocity(playerLookDirection);
+                    }
                 }
             }
         }

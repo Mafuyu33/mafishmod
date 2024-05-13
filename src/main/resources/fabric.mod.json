@@ -2,14 +2,15 @@
 	"schemaVersion": 1,
 	"id": "mafishmod",
 	"version": "${version}",
-	"name": "马夫鱼の奇怪模组",
-	"description": "这是马夫鱼学习我的世界模组开发的时候构建的一些奇怪玩意，模组基于kuapenjoe的实例模组。",
+	"name": "mafishmod",
+	"description": "These are some strange things that Mafuyu33 built while learning Minecraft mod development.",
 	"authors": [
-		"马夫鱼33"
+		"Mafuyu33"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/mod/mafish-learning",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://space.bilibili.com/5616993",
+		"issues": "https://github.com/Mafuyu33/mafishmod/issues",
+		"sources": "https://github.com/Mafuyu33/mafishmod"
 	},
 	"license": "CC BY-NC 4.0",
 	"icon": "assets/mafishmod/icon.png",
@@ -33,7 +34,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.15.1",
-		"minecraft": "~1.20.1",
+		"minecraft": "~1.20.4",
 		"java": ">=17",
 		"fabric-api": "*"
 	},

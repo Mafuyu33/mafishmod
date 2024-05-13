@@ -1,6 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.swimmingtripwire;
 
 import net.mafuyu33.mafishmod.mixinhelper.TripwireBlockMixinHelper;
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TripwireBlock;
@@ -23,22 +24,25 @@ public abstract class TripwireBlockMixin extends Block{
 
 	@Inject(at = @At("HEAD"), method = "onEntityCollision")
 	private void init(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo info) {
-		if (!world.isClient && entity.getPose()!=DYING && !entity.isPlayer()) {//绊倒生物
-			world.sendEntityStatus(entity, (byte)3);
-			entity.setPose(DYING);
-		}
+		boolean isSwimTripwire = ConfigHelper.isSwimTripwire();
+		if (isSwimTripwire){
+			if (!world.isClient && entity.getPose() != DYING && !entity.isPlayer()) {//绊倒生物
+				world.sendEntityStatus(entity, (byte) 3);
+				entity.setPose(DYING);
+			}
 
-		if(entity.getPose()!=SWIMMING && entity.isPlayer()
-				&& TripwireBlockMixinHelper.getEntityValue(entity.getId())<=0){//绊倒玩家
-			if(!world.isClient) {
-				Vec3d velocity = entity.getVelocity(); // 获取实体的速度向量
-				System.out.println(velocity);
-				if (Math.abs(velocity.y) > 0.07) {
+			if (entity.getPose() != SWIMMING && entity.isPlayer()
+					&& TripwireBlockMixinHelper.getEntityValue(entity.getId()) <= 0) {//绊倒玩家
+				if (!world.isClient) {
+					Vec3d velocity = entity.getVelocity(); // 获取实体的速度向量
+					System.out.println(velocity);
+					if (Math.abs(velocity.y) > 0.07) {
 //					world.sendEntityStatus(entity, (byte) 3);
-					TripwireBlockMixinHelper.storeEntityValue(entity.getId(), 50);
+						TripwireBlockMixinHelper.storeEntityValue(entity.getId(), 50);
+					}
+				} else {
+					entity.addVelocity(0, 0.3, 0);
 				}
-			}else {
-				entity.addVelocity(0, 0.3, 0);
 			}
 		}
 	}

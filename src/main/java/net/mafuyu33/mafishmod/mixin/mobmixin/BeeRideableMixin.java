@@ -29,8 +29,8 @@ public abstract class BeeRideableMixin extends AnimalEntity {
 
    @Override
    public ActionResult interactMob(PlayerEntity player, Hand hand){
-      boolean isEnable = ConfigHelper.isToggleA();
-      if(isEnable) {
+      boolean isBeeRideable = ConfigHelper.isBeeRideable();
+      if(isBeeRideable) {
          var itemStack = player.getStackInHand(hand);
          if (!itemStack.isEmpty()) {
             return super.interactMob(player, hand);

@@ -1,6 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.lead;
 
 import net.mafuyu33.mafishmod.mixinhelper.FearMixinHelper;
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +11,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.GoalSelector;
 import net.minecraft.entity.ai.goal.PrioritizedGoal;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -51,28 +53,36 @@ public abstract class MobEntityMixin extends LivingEntity implements Targeter {
      * Make every mob can be leashed
      */
     @Overwrite public boolean canBeLeashedBy(PlayerEntity player){
-        return !this.isLeashed();
+        boolean isLeadCanLinkEveryMob = ConfigHelper.isLeadCanLinkEveryMob();
+        if(isLeadCanLinkEveryMob){
+            return !this.isLeashed();
+        }else {
+            return !this.isLeashed() && !(this instanceof Monster);
+        }
     }
 
 
 
     @Inject(at = @At("HEAD"), method = "interactWithItem", cancellable = true)
     private void init(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {//拴绳增强
-        ItemStack itemStack =player.getStackInHand(hand);
-        // 检测范围为玩家周围 50 格的立方体
-        Box collisionBox = player.getBoundingBox().expand(50.0);
-        for (Entity entity : getWorld().getOtherEntities(player, collisionBox)) {
-            if (entity instanceof LivingEntity livingEntity) {
-                if (!itemStack.isOf(Items.LEAD) && ((MobEntity) livingEntity).getHoldingEntity() != null
-                        && ((MobEntity) livingEntity).getHoldingEntity() == player) {
-                    // 玩家手中牵着实体并且点击一个没有被拴着的实体，就让两个实体互相连接.
-                    if(!getWorld().isClient) {
-                        ((MobEntity) entity).attachLeash(this, true);
-                    }
+        boolean isLeadCanLinkTogether = ConfigHelper.isLeadCanLinkTogether();
+        if(isLeadCanLinkTogether){
+            ItemStack itemStack = player.getStackInHand(hand);
+            // 检测范围为玩家周围 50 格的立方体
+            Box collisionBox = player.getBoundingBox().expand(50.0);
+            for (Entity entity : getWorld().getOtherEntities(player, collisionBox)) {
+                if (entity instanceof LivingEntity livingEntity) {
+                    if (!itemStack.isOf(Items.LEAD) && ((MobEntity) livingEntity).getHoldingEntity() != null
+                            && ((MobEntity) livingEntity).getHoldingEntity() == player) {
+                        // 玩家手中牵着实体并且点击一个没有被拴着的实体，就让两个实体互相连接.
+                        if (!getWorld().isClient) {
+                            ((MobEntity) entity).attachLeash(this, true);
+                        }
 //                    if(!getWorld().isClient) {
 //                        this.detachLeashWithoutClearNbt(true, false);
 //                    }
-                    cir.setReturnValue(ActionResult.success(this.getWorld().isClient));
+                        cir.setReturnValue(ActionResult.success(this.getWorld().isClient));
+                    }
                 }
             }
         }

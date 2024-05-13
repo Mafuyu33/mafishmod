@@ -1,5 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.lead;
 
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.LeashKnotEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -25,9 +26,12 @@ public class LeadItemMixin extends Item {
 
 	@Override
 	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-		if (entity instanceof MobEntity) {
-			MobEntity target = (MobEntity) entity;
-			return attachHeldMobsToMob(user, target);
+		boolean isLeadCanLinkTogether = ConfigHelper.isLeadCanLinkTogether();
+		if(isLeadCanLinkTogether){
+			if (entity instanceof MobEntity) {
+				MobEntity target = (MobEntity) entity;
+				return attachHeldMobsToMob(user, target);
+			}
 		}
 		return ActionResult.PASS;
 	}

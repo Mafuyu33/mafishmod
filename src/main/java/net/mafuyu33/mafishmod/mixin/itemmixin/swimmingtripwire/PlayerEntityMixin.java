@@ -2,6 +2,7 @@ package net.mafuyu33.mafishmod.mixin.itemmixin.swimmingtripwire;
 
 
 import net.mafuyu33.mafishmod.mixinhelper.TripwireBlockMixinHelper;
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,10 +22,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
     @Inject(at = @At("RETURN"), method = "updatePose")
     private void init(CallbackInfo ci) {
-        if(TripwireBlockMixinHelper.getEntityValue(this.getId())>0){
-            EntityPose entityPose3 = EntityPose.SWIMMING;
-            this.setPose(entityPose3);
-            TripwireBlockMixinHelper.storeEntityValue(this.getId(),TripwireBlockMixinHelper.getEntityValue(this.getId())-1);
+        boolean isSwimTripwire = ConfigHelper.isSwimTripwire();
+        if (isSwimTripwire) {
+            if (TripwireBlockMixinHelper.getEntityValue(this.getId()) > 0) {
+                EntityPose entityPose3 = EntityPose.SWIMMING;
+                this.setPose(entityPose3);
+                TripwireBlockMixinHelper.storeEntityValue(this.getId(), TripwireBlockMixinHelper.getEntityValue(this.getId()) - 1);
+            }
         }
     }
 }

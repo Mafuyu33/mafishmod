@@ -1,6 +1,8 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin;
 
+import net.mafuyu33.mafishmod.util.ConfigHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Final;
@@ -29,7 +31,12 @@ public abstract class NestedBoxMixin extends Item {
      */
     @Overwrite
     public boolean canBeNested() {
+        boolean isNestedBoxInfinite = ConfigHelper.isNestedBoxInfinite();
+        if(isNestedBoxInfinite){
             return true;
+        }else{
+            return !(this.block instanceof ShulkerBoxBlock);
+        }
     }
 
 }

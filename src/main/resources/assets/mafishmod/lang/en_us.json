@@ -1,6 +1,16 @@
 {
-  "text.autoconfig.mafishmod.option.title": "mafishmod",
+  "text.autoconfig.mafishmod.title": "Link Start!",
 
+  "text.autoconfig.mafishmod.option.isBeeRideable": "isBeeRideable",
+  "text.autoconfig.mafishmod.option.isNestedBoxInfinite": "isNestedBoxInfinite",
+  "text.autoconfig.mafishmod.option.isShieldDashable": "isShieldDashable",
+  "text.autoconfig.mafishmod.option.isBowDashable": "isBowDashable",
+  "text.autoconfig.mafishmod.option.isSwimTripwire": "isSwimTripwire",
+  "text.autoconfig.mafishmod.option.isSpyglassCanPin": "isSpyglassCanPin",
+  "text.autoconfig.mafishmod.option.lead": "lead",
+  "text.autoconfig.mafishmod.option.lead.isLeadCanLinkEveryMob": "isLeadCanLinkEveryMob",
+  "text.autoconfig.mafishmod.option.lead.isLeadCanLinkTogether": "isLeadCanLinkTogether",
+  "text.autoconfig.mafishmod.option.lead.breakDistance": "breakDistance",
   "text.autoconfig.mafishmod.option.isAlwaysEnchantable": "isAlwaysEnchantable",
   "text.autoconfig.mafishmod.option.isFireworkCanUseOnEntity": "isFireworkCanUseOnEntity",
   "text.autoconfig.mafishmod.option.isFireworkCanHitOnEntity": "isFireworkCanHitOnEntity",
