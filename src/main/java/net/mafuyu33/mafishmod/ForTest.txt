@@ -1,4 +1,4 @@
-jvm参数加 -Dmixin.debug.export=true 可以输出mixin的注入后的结果
+jvm参数加 -Dmixin.debug.export=true 可以输出mixin的注入后的结果.
 
 重置gradle
 ./gradlew clean
