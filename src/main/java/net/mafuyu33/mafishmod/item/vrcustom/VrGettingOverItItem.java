@@ -26,6 +26,10 @@ public class VrGettingOverItItem extends Item {
         if(entity instanceof PlayerEntity player){
             if(player.isHolding(stack.getItem())){
                 if (VRPlugin.canRetrieveData(player)) {//vr
+                    //禁止玩家使用方向键移动
+
+
+                    //生成锤头的位置
                     Vec3d mainPos = VRDataHandler.getMainhandControllerPosition(player);
                     Vec3d offPos = VRDataHandler.getOffhandControllerPosition(player);
                     // 获取玩家当前活跃的手
@@ -40,6 +44,14 @@ public class VrGettingOverItItem extends Item {
                         extendPosition = extendPosition(mainPos, offPos, 2.0);
                     }
                     world.addParticle(ParticleTypes.BUBBLE,extendPosition.x,extendPosition.y,extendPosition.z,0,0,0);
+
+                   /*
+                    物理碰撞部分，当锤头在方块内部的时候，判定为卡住（攀爬爪代码），并且把他的位置限制在方块的最外面（可以用掉落物被推出方块的代码）
+                    此时以锤头的位置作为基准，与玩家两个手柄的位置的变化来进行计算，来改变玩家的位置（而且要有惯性，所以不能单纯
+                    地通过改变坐标位置来实现，而要给玩家施加速度的方式，所以还要储存上一次的位置来计算双手的速度）。
+
+                    还要有一个锤头能拿出来的判定，通过检测两只手的变化，如果判定到锤头往方块外面的方向移动了就切换状态，判定为没卡住，让锤头可以自由移动。
+                    */
                     if(isInsideSolidBlock(world,extendPosition)){
                         player.sendMessage(Text.literal("Inside Block!"), true);
                     }
