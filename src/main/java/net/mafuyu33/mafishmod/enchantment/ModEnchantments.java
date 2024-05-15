@@ -57,6 +57,8 @@ public class ModEnchantments {
             new TreasureLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR_CHEST,new EquipmentSlot[]{}));
     public static Enchantment FANGSHENG = register("fangsheng",
             new NormalLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.DIGGER,new EquipmentSlot[]{}));
+    public static Enchantment NEVER_STOP = register("never_stop",
+            new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR_FEET,new EquipmentSlot[]{}));
 
 
     private static Enchantment register(String name, Enchantment enchantment) {

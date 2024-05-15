@@ -3,6 +3,7 @@ package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
+import net.mafuyu33.mafishmod.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FrostedIceBlock;
@@ -13,6 +14,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
@@ -49,6 +51,12 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 	@Shadow @Nullable public abstract DamageSource getRecentDamageSource();
 
 	@Shadow public abstract void kill();
+
+	@Shadow public abstract boolean damage(DamageSource source, float amount);
+	@Unique
+	private static Vec3d lastPos= new Vec3d(0, 0, 0);
+
+	@Shadow public abstract boolean isDead();
 
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
@@ -214,10 +222,19 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 					BlockPos blockPos = this.getBlockPos();
 					checkAndReplaceWaterBlocks(world, blockPos);
 				}
-//				int n = EnchantmentHelper.getLevel(ModEnchantments.SLIPPERY, armorItem);//肥皂
-//				if (n > 0) {
-//
-//				}
+				int n = EnchantmentHelper.getLevel(ModEnchantments.NEVER_STOP, armorItem);//不要停下来啊
+				if (n > 0) {
+					if (!this.getWorld().isClient) {
+						Vec3d currentPos = this.getPos();
+						double distance = currentPos.distanceTo(lastPos); // 计算当前位置和上一个位置之间的距离
+						boolean isMoving = distance > 0.0784000015258790; // 设置一个小于的阈值，比如0.1
+						lastPos = currentPos;
+						if (!isMoving) {
+							this.damage(getDamageSources().magic(), 1f);
+						}
+					}
+				}
+
 			}
 			if (getWorld().isClient && armorItem.getItem() instanceof ArmorItem
 					&& ((ArmorItem) armorItem.getItem()).getType() == ArmorItem.Type.HELMET) {//帽子
