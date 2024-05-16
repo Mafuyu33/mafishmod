@@ -5,6 +5,9 @@
   "mixins": [
     "ExampleMixin",
     "effectmixin.TeleportEffectMixin",
+    "effectmixin.canclimb.LivingEntityMixin",
+    "effectmixin.canclimb.MobEntityMixin",
+    "effectmixin.sheep.LivingEntityMixin",
     "enchantmentblockmixin.custom.bellknockbackandhurt.BellBlockEntityMixin",
     "enchantmentblockmixin.custom.bellresonance.BellBlockEntityMixin",
     "enchantmentblockmixin.custom.blastprotection.ExplosionBehaviorMixin",
@@ -87,12 +90,11 @@
     "itemmixin.swimmingtripwire.PlayerEntityMixin",
     "itemmixin.swimmingtripwire.TripwireBlockMixin",
     "mobmixin.BeeRideableMixin",
-    "mobmixin.canclimb.LivingEntityMixin",
-    "mobmixin.canclimb.MobEntityMixin",
     "worldtick.ServerTickMixin"
   ],
   "client": [
     "ParticleManagerMixin",
+    "effectmixin.sheep.PlayerEntityRendererMixin",
     "enchantmentitemmixin.slippery.InventoryScreenMixin",
     "itemmixin.rubystuffrenderer.ItemRendererAccessor",
     "itemmixin.rubystuffrenderer.ItemRendererMixin",

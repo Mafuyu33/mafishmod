@@ -17,6 +17,7 @@ public class ModPotions {
     public static Potion FLOWER_POTION;
     public static Potion TELEPORT_POTION;
     public static Potion SPIDER_POTION;
+    public static Potion SHEEP_POTION;
 
     public static Potion registerPotion(String name, int duration, int amplifier, StatusEffect statusEffects) {
         return Registry.register(Registries.POTION, new Identifier(TutorialMod.MOD_ID, name),
@@ -28,6 +29,7 @@ public class ModPotions {
         FLOWER_POTION = registerPotion("flower_potion",3600,5,ModStatusEffects.FLOWER_EFFECT);
         TELEPORT_POTION = registerPotion("teleport_potion",100,0,ModStatusEffects.TELEPORT_EFFECT);
         SPIDER_POTION = registerPotion("spider_potion",3600,0,ModStatusEffects.SPIDER_EFFECT);
+        SHEEP_POTION = registerPotion("sheep_potion",2000,0,ModStatusEffects.SHEEP_EFFECT);
     }
 
     public static void registerBrewingRecipes() {
@@ -38,5 +40,8 @@ public class ModPotions {
         //蜘蛛药水
         FabricBrewingRecipeRegistry.registerPotionRecipe(Potions.AWKWARD,
                 Ingredient.ofItems(Items.FERMENTED_SPIDER_EYE), ModPotions.SPIDER_POTION);
+        //变形魔药
+        FabricBrewingRecipeRegistry.registerPotionRecipe(Potions.AWKWARD,
+                Ingredient.ofItems(Items.GOAT_HORN), ModPotions.SHEEP_POTION);
     }
 }

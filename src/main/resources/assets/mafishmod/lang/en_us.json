@@ -122,6 +122,7 @@
   "effect.mafishmod.flower_effect": "flower_effect",
   "effect.mafishmod.teleport_effect": "teleport_effect",
   "effect.mafishmod.spider_effect": "spider_effect",
+  "effect.mafishmod.sheep_effect": "sheep_effect",
 
   "item.minecraft.potion.effect.flower_potion": "flower_potion",
   "item.minecraft.splash_potion.effect.flower_potion": "Splash flower_potion",
@@ -136,5 +137,10 @@
   "item.minecraft.potion.effect.spider_potion": "spider_potion",
   "item.minecraft.splash_potion.effect.spider_potion": "Splash spider_potion",
   "item.minecraft.lingering_potion.effect.spider_potion": "Lingering spider_potion",
-  "item.minecraft.tipped_arrow.effect.spider_potion": "spider_potion"
+  "item.minecraft.tipped_arrow.effect.spider_potion": "spider_potion",
+
+  "item.minecraft.potion.effect.sheep_potion": "sheep_potion",
+  "item.minecraft.splash_potion.effect.sheep_potion": "Splash sheep_potion",
+  "item.minecraft.lingering_potion.effect.sheep_potion": "Lingering sheep_potion",
+  "item.minecraft.tipped_arrow.effect.sheep_potion": "sheep_potion"
 }

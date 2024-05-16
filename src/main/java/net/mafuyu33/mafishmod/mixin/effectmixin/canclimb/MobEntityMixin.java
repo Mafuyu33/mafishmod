@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.mixin.mobmixin.canclimb;
+package net.mafuyu33.mafishmod.mixin.effectmixin.canclimb;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
