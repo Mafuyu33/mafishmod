@@ -46,45 +46,9 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
 		if(player.hasStatusEffect(ModStatusEffects.SHEEP_EFFECT)) {
 			EntityRenderer sheepRenderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(sheep);
 
-			// Sync biped information for stuff like bow drawing animation
-//			if(sheepRenderer instanceof BipedEntityRenderer) {
-//				identity_setBipedIdentityModelPose((AbstractClientPlayerEntity) player, sheep, (BipedEntityRenderer) sheepRenderer);
-//			}
-
 			sheepRenderer.render(sheep, f, g, matrixStack, vertexConsumerProvider, i);
 		} else {
 			super.render((AbstractClientPlayerEntity) player, f, g, matrixStack, vertexConsumerProvider, i);
 		}
 	}
-
-	@Unique
-	private void identity_setBipedIdentityModelPose(AbstractClientPlayerEntity player, LivingEntity identity, LivingEntityRenderer sheepRenderer) {
-		BipedEntityModel<?> identityBipedModel = (BipedEntityModel) sheepRenderer.getModel();
-
-		if (identity.isSpectator()) {
-			identityBipedModel.setVisible(false);
-			identityBipedModel.head.visible = true;
-			identityBipedModel.hat.visible = true;
-		} else {
-			identityBipedModel.setVisible(true);
-			identityBipedModel.hat.visible = player.isPartVisible(PlayerModelPart.HAT);
-			identityBipedModel.sneaking = identity.isInSneakingPose();
-
-			BipedEntityModel.ArmPose mainHandPose = getArmPose(player, Hand.MAIN_HAND);
-			BipedEntityModel.ArmPose offHandPose = getArmPose(player, Hand.OFF_HAND);
-
-			if (mainHandPose.isTwoHanded()) {
-				offHandPose = identity.getOffHandStack().isEmpty() ? BipedEntityModel.ArmPose.EMPTY : BipedEntityModel.ArmPose.ITEM;
-			}
-
-			if (identity.getMainArm() == Arm.RIGHT) {
-				identityBipedModel.rightArmPose = mainHandPose;
-				identityBipedModel.leftArmPose = offHandPose;
-			} else {
-				identityBipedModel.rightArmPose = offHandPose;
-				identityBipedModel.leftArmPose = mainHandPose;
-			}
-		}
-	}
-
 }
