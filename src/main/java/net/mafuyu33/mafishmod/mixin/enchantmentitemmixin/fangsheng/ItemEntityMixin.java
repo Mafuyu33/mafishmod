@@ -62,13 +62,13 @@ public abstract class ItemEntityMixin extends Entity implements Ownable {
 
 
 
-	@Override
-	protected void onBlockCollision(BlockState state) {
-		super.onBlockCollision(state);
-		if(state.isIn(BlockTags.PICKAXE_MINEABLE)){
-			dropStack(state.getBlock().asItem().getDefaultStack());
-		}
-	}
+//	@Override
+//	protected void onBlockCollision(BlockState state) {
+//		super.onBlockCollision(state);
+//		if(state.isIn(BlockTags.PICKAXE_MINEABLE)){
+//			dropStack(state.getBlock().asItem().getDefaultStack());
+//		}
+//	}
 	@Inject(at = @At("TAIL"), method = "setThrower")
 	private void init(CallbackInfo info) {
 		int i = EnchantmentHelper.getLevel(ModEnchantments.FANGSHENG,this.getStack());
