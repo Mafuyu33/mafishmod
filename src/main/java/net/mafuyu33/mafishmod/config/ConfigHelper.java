@@ -1,4 +1,4 @@
-package net.mafuyu33.mafishmod.util;
+package net.mafuyu33.mafishmod.config;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import net.mafuyu33.mafishmod.config.ModConfig;
@@ -47,6 +47,12 @@ public class ConfigHelper {
     public static boolean isFuThrowable() {
         return config.isFuThrowable;
     }
+    public static boolean isAlwaysEatable() {
+        return config.isAlwaysEatable;
+    }
+
+
+
 //    public static boolean isToggleA() {
 //        return config.toggleA;
 //    }

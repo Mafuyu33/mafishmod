@@ -1,7 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.fireworkrocket;
 
 
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;

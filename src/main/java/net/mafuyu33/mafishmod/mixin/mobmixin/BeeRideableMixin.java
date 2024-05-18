@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.mobmixin;
 
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.lead;
 
 import net.mafuyu33.mafishmod.VRPlugin;
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.mafuyu33.mafishmod.util.VRDataHandler;
 
 import net.minecraft.entity.Entity;

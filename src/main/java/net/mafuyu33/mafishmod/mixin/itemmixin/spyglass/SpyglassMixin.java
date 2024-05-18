@@ -2,7 +2,7 @@ package net.mafuyu33.mafishmod.mixin.itemmixin.spyglass;
 
 import net.mafuyu33.mafishmod.mixinhelper.BowDashMixinHelper;
 import net.mafuyu33.mafishmod.sound.ModSounds;
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

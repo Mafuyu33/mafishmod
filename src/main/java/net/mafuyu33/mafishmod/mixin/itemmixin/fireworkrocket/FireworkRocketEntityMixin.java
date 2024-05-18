@@ -2,7 +2,7 @@ package net.mafuyu33.mafishmod.mixin.itemmixin.fireworkrocket;
 
 
 import net.mafuyu33.mafishmod.mixinhelper.FireworkRocketEntityMixinHelper;
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.util.hit.EntityHitResult;

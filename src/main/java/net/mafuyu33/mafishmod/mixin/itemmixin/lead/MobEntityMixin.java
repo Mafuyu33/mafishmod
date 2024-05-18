@@ -1,7 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.lead;
 
 import net.mafuyu33.mafishmod.mixinhelper.FearMixinHelper;
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

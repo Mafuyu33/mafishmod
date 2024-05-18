@@ -13,6 +13,7 @@ public class AttackKeyCheckHandler {
 //    private static final KeyBinding attackKeyBinding = client.options.attackKey;
     private static boolean wasKeyPressedLastFrame = false;
     private static boolean wasJumpKeyPressedLastFrame = false;
+    private static boolean wasShiftKeyPressedLastFrame = false;
     // 在初始化阶段注册攻击键的按下事件监听器
     public static void registerAttackKeyListener() {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
@@ -43,6 +44,26 @@ public class AttackKeyCheckHandler {
 
 
             boolean isJumpKeyPressed = client.options.jumpKey.isPressed();
+            // 如果攻击键在上一帧被按下而在当前帧没有被按下，表示松开了按键
+            if (wasJumpKeyPressedLastFrame && !isJumpKeyPressed) {
+                // 当攻击键被松开时执行操作
+//                System.out.println("Attack key released!");
+                ElytraJumpMixinHelper.setIsJumpKeyPressed(false);
+                // 在这里执行您的操作
+            }
+
+            // 更新攻击键上一帧的按下状态
+            wasJumpKeyPressedLastFrame = isJumpKeyPressed;
+
+            // 检查攻击键是否在当前帧被按下
+            if (isJumpKeyPressed) {
+                // 当攻击键被按下时执行操作
+//                System.out.println("Attack key pressed!");
+                ElytraJumpMixinHelper.setIsJumpKeyPressed(true);
+                // 在这里执行您的操作
+            }
+
+            boolean isShiftKeyPressed = client.options.sneakKey.isPressed();
             // 如果攻击键在上一帧被按下而在当前帧没有被按下，表示松开了按键
             if (wasJumpKeyPressedLastFrame && !isJumpKeyPressed) {
                 // 当攻击键被松开时执行操作

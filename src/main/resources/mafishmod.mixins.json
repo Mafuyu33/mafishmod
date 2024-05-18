@@ -7,6 +7,8 @@
     "effectmixin.TeleportEffectMixin",
     "effectmixin.canclimb.LivingEntityMixin",
     "effectmixin.canclimb.MobEntityMixin",
+    "effectmixin.sheep.PlayerEntityMixin",
+    "effectmixin.sheep.LimbAnimatorAccessor",
     "effectmixin.sheep.LivingEntityMixin",
     "enchantmentblockmixin.custom.bellknockbackandhurt.BellBlockEntityMixin",
     "enchantmentblockmixin.custom.bellresonance.BellBlockEntityMixin",

@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin;
 
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.item.BlockItem;

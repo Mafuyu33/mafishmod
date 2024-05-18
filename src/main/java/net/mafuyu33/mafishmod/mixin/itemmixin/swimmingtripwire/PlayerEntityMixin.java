@@ -2,7 +2,7 @@ package net.mafuyu33.mafishmod.mixin.itemmixin.swimmingtripwire;
 
 
 import net.mafuyu33.mafishmod.mixinhelper.TripwireBlockMixinHelper;
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

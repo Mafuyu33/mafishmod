@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin;
 
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.item.ItemStack;

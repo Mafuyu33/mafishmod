@@ -13,6 +13,7 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Arm;
@@ -45,6 +46,30 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
 
 		if(player.hasStatusEffect(ModStatusEffects.SHEEP_EFFECT)) {
 			EntityRenderer sheepRenderer = MinecraftClient.getInstance().getEntityRenderDispatcher().getRenderer(sheep);
+
+			LimbAnimatorAccessor target = (LimbAnimatorAccessor) sheep.limbAnimator;
+			LimbAnimatorAccessor source = (LimbAnimatorAccessor) player.limbAnimator;
+			target.setPrevSpeed(source.getPrevSpeed());
+			target.setSpeed(source.getSpeed());
+			target.setPos(source.getPos());
+			sheep.handSwinging = player.handSwinging;
+			sheep.handSwingTicks = player.handSwingTicks;
+			sheep.lastHandSwingProgress = player.lastHandSwingProgress;
+			sheep.handSwingProgress = player.handSwingProgress;
+			sheep.bodyYaw = player.bodyYaw;
+			sheep.prevBodyYaw = player.prevBodyYaw;
+			sheep.headYaw = player.headYaw;
+			sheep.prevHeadYaw = player.prevHeadYaw;
+			sheep.age = player.age;
+			sheep.preferredHand = player.preferredHand;
+			sheep.setOnGround(player.isOnGround());
+			sheep.setVelocity(player.getVelocity());
+
+			sheep.setPose(player.getPose());
+			// 将俯仰角度设置为玩家的俯仰角度
+			// 将前一帧俯仰角度设置为玩家的前一帧俯仰角度
+			sheep.setPitch(player.getPitch());
+			sheep.prevPitch = player.prevPitch;
 
 			sheepRenderer.render(sheep, f, g, matrixStack, vertexConsumerProvider, i);
 		} else {

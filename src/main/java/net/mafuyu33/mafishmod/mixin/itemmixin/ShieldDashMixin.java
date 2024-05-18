@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.mafuyu33.mafishmod.item.custom.ColliableItem;
 import net.mafuyu33.mafishmod.mixinhelper.ShieldDashMixinHelper;
 import net.mafuyu33.mafishmod.networking.ModMessages;
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.Attackable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

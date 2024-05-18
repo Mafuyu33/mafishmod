@@ -1,6 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.itemmixin.lead;
 
-import net.mafuyu33.mafishmod.util.ConfigHelper;
+import net.mafuyu33.mafishmod.config.ConfigHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.decoration.LeashKnotEntity;
 import net.minecraft.entity.mob.MobEntity;

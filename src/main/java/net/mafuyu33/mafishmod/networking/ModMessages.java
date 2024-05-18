@@ -20,6 +20,7 @@ public class ModMessages {
     public static final Identifier THROW_POWER_ID = new Identifier(TutorialMod.MOD_ID, "throw_power");
     public static final Identifier BELL_SOUND_ID = new Identifier(TutorialMod.MOD_ID, "bell_sound");
     public static final Identifier FU_ID = new Identifier(TutorialMod.MOD_ID, "fu");
+    public static final Identifier SHEEP_BREEDING_ID = new Identifier(TutorialMod.MOD_ID, "sheep_breeding");
 
 //    public static final Identifier Particle_Color_ID = new Identifier(TutorialMod.MOD_ID, "particle_color");
     public static void registerC2SPackets() {
@@ -30,6 +31,7 @@ public class ModMessages {
         ServerPlayNetworking.registerGlobalReceiver(GAME_OPTIONS_ID, GameOptionsC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(THROW_POWER_ID, ThrowPowerC2SPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(FU_ID, FuC2SPacket::receive);
+        ServerPlayNetworking.registerGlobalReceiver(SHEEP_BREEDING_ID, SheepBreedingC2SPacket::receive);
 //        ServerPlayNetworking.registerGlobalReceiver(Particle_Color_ID, ParticleColorC2SPacket::receive);
     }
 
