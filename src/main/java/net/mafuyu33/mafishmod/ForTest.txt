@@ -124,6 +124,26 @@ if (user instanceof ServerPlayerEntity) {
         }
     }
 
+检测玩家周围的实体
+// 获取玩家当前位置
+Vec3d playerPos = this.getPos();
+// 定义搜索范围（玩家周围的范围）
+Box searchBox = new Box(
+        playerPos.x - distance, playerPos.y - distance, playerPos.z - distance,
+        playerPos.x + distance, playerPos.y + distance, playerPos.z + distance
+);
+// 搜索范围内的所有羊实体
+List<SheepEntity> entities = world.getEntitiesByClass(SheepEntity.class, searchBox, entity -> true);
+// 检查是否找到准备繁殖的羊实体
+for (SheepEntity entity : entities) {
+    System.out.println("Found Sheep: " + entity);
+    if (entity.isInLove()) { // 如果有准备繁殖的羊
+        System.out.println("Sheep ready to breed: " + entity);
+        return entity;
+    }
+}
+
+
 生成动物
 EntityType.COW.spawn(((ServerWorld) user.getWorld()),user.getBlockPos(), SpawnReason.TRIGGERED);
 
