@@ -59,6 +59,8 @@ public class ModEnchantments {
             new NormalLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.DIGGER,new EquipmentSlot[]{}));
     public static Enchantment NEVER_STOP = register("never_stop",
             new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR_FEET,new EquipmentSlot[]{}));
+    public static Enchantment BOW_LEFT = register("bow_left",
+            new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BOW,new EquipmentSlot[]{}));
 
 
     private static Enchantment register(String name, Enchantment enchantment) {
