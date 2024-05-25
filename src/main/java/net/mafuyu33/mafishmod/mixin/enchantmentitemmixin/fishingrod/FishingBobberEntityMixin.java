@@ -1,5 +1,6 @@
 package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin.fishingrod;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -10,8 +11,15 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -26,6 +34,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
 
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin extends ProjectileEntity {
@@ -141,9 +155,5 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
 				}
 			}
 		}
-	}
-	@Inject(at = @At("HEAD"), method = "use")
-	private void init3(ItemStack usedItem, CallbackInfoReturnable<Integer> cir){
-		PlayerEntity playerEntity = getEntityWorld().getClosestPlayer(this,40);
 	}
 }
