@@ -47,8 +47,14 @@ public class ConfigHelper {
     public static boolean isFuThrowable() {
         return config.isFuThrowable;
     }
-    public static boolean isAlwaysEatable() {
-        return config.isAlwaysEatable;
+//    public static boolean isAlwaysEatable() {
+//        return config.isAlwaysEatable;
+//    }
+    public static boolean isGoatDashForever() {
+        return config.isGoatDashForever;
+    }
+    public static boolean isGoatDashTogether() {
+        return config.isGoatDashTogether;
     }
 
 

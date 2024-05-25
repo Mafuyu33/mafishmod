@@ -94,6 +94,7 @@
     "itemmixin.swimmingtripwire.PlayerEntityMixin",
     "itemmixin.swimmingtripwire.TripwireBlockMixin",
     "mobmixin.BeeRideableMixin",
+    "mobmixin.goatdashforever.GoatBrainMixin",
     "worldtick.ServerTickMixin"
   ],
   "client": [

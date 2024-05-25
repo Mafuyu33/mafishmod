@@ -1,6 +1,8 @@
 {
   "text.autoconfig.mafishmod.title": "风灵月影，启动!",
 
+  "text.autoconfig.mafishmod.option.isGoatDashTogether": "山羊会互相冲撞",
+  "text.autoconfig.mafishmod.option.isGoatDashForever": "山羊无限冲撞",
   "text.autoconfig.mafishmod.option.isBeeRideable": "蜜蜂可以骑",
   "text.autoconfig.mafishmod.option.isNestedBoxInfinite": "潜影盒可以无限嵌套",
   "text.autoconfig.mafishmod.option.isShieldDashable": "持盾的时候点击左键可以冲刺",

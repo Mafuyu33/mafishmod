@@ -1,6 +1,8 @@
 {
   "text.autoconfig.mafishmod.title": "Link Start!",
 
+  "text.autoconfig.mafishmod.option.isGoatDashTogether": "isGoatDashTogether",
+  "text.autoconfig.mafishmod.option.isGoatDashForever": "isGoatDashForever",
   "text.autoconfig.mafishmod.option.isBeeRideable": "isBeeRideable",
   "text.autoconfig.mafishmod.option.isNestedBoxInfinite": "isNestedBoxInfinite",
   "text.autoconfig.mafishmod.option.isShieldDashable": "isShieldDashable",
