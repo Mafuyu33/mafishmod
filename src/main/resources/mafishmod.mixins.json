@@ -66,6 +66,7 @@
     "enchantmentitemmixin.InfiniteUndyingMixin",
     "enchantmentitemmixin.ReverseMixin",
     "enchantmentitemmixin.WeaponEnchantmentMixin",
+    "enchantmentitemmixin.bowleft.AbstractSkeletonEntityMixin",
     "enchantmentitemmixin.bowleft.BowItemMixin",
     "enchantmentitemmixin.elytra.PlayerEntityMixin",
     "enchantmentitemmixin.fangsheng.ItemEntityMixin",
