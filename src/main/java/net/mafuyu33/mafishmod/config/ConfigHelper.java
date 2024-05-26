@@ -56,6 +56,9 @@ public class ConfigHelper {
     public static boolean isGoatDashTogether() {
         return config.isGoatDashTogether;
     }
+    public static boolean isLlamaSpitForever() {
+        return config.isLlamaSpitForever;
+    }
 
 
 

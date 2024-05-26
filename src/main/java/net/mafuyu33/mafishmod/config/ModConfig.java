@@ -26,9 +26,9 @@ public class ModConfig implements ConfigData {
 //    public boolean isAlwaysEatable = true;
     @ConfigEntry.Gui.Excluded
     public boolean isBeeRideable = true;
-
-    public boolean isGoatDashForever = true;
-    public boolean isGoatDashTogether = true;
+    public boolean isGoatDashForever = false;
+    public boolean isGoatDashTogether = false;
+    public boolean isLlamaSpitForever = false;
 //    public boolean toggleA = true;
 //    public boolean toggleB = true;
 

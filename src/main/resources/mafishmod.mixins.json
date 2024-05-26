@@ -95,6 +95,8 @@
     "itemmixin.swimmingtripwire.TripwireBlockMixin",
     "mobmixin.BeeRideableMixin",
     "mobmixin.goatdashforever.GoatBrainMixin",
+    "mobmixin.llamaspitforever.LlamaEntity_SpitRevengeGoalMixin",
+    "mobmixin.llamaspitforever.LlamaEntityMixin",
     "worldtick.ServerTickMixin"
   ],
   "client": [

@@ -5,3 +5,5 @@ accessible method net/minecraft/block/entity/HopperBlockEntity setTransferCooldo
 accessible method net/minecraft/client/gui/screen/ingame/HandledScreen getSlotAt (DD)Lnet/minecraft/screen/slot/Slot;
 accessible class net/minecraft/entity/passive/CatEntity$TemptGoal
 accessible class net/minecraft/block/entity/BellBlockEntity$Effect
+accessible class net/minecraft/entity/passive/LlamaEntity$SpitRevengeGoal
+accessible field net/minecraft/entity/mob/MobEntity goalSelector Lnet/minecraft/entity/ai/goal/GoalSelector;
