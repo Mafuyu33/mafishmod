@@ -1,4 +1,9 @@
-jvm参数加 -Dmixin.debug.export=true 可以输出mixin的注入后的结果.
+jvm参数加 -Dmixin.debug.export=true 可以输出mixin的注入后的结果.右上角edit，选择Add VM Option，加在最后面。
+
+jar in jar打包，在build.gradle里面写include，转译会导致中文不行：
+modApi(include("me.shedaniel.cloth:cloth-config-fabric:13.0.121")) {
+    exclude(group: "net.fabricmc.fabric-api")
+}
 
 重置gradle
 ./gradlew clean

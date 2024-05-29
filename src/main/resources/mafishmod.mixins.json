@@ -5,6 +5,7 @@
   "mixins": [
     "ExampleMixin",
     "effectmixin.TeleportEffectMixin",
+    "effectmixin.antidote.LivingEntityMixin",
     "effectmixin.canclimb.LivingEntityMixin",
     "effectmixin.canclimb.MobEntityMixin",
     "effectmixin.sheep.LimbAnimatorAccessor",

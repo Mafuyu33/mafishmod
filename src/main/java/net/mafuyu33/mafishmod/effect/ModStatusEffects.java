@@ -19,6 +19,7 @@ public class ModStatusEffects {
     public static final StatusEffect TELEPORT_EFFECT = new NormalEffect(StatusEffectCategory.BENEFICIAL, 0x00FFFF);
     public static final StatusEffect SPIDER_EFFECT = new NormalEffect(StatusEffectCategory.BENEFICIAL, 0x800000);
     public static final StatusEffect SHEEP_EFFECT = new NormalEffect(StatusEffectCategory.NEUTRAL, 0x80F18BEB);
+    public static final StatusEffect ANTIDOTE_EFFECT = new NormalEffect(StatusEffectCategory.NEUTRAL, 0x80FFFFFF);
 
     private static void ironAttributeModifiers(EntityAttributeInstance instance) {
         // 可以在这里添加自定义效果对实体属性的修改
@@ -30,6 +31,7 @@ public class ModStatusEffects {
     Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "teleport_effect"), ModStatusEffects.TELEPORT_EFFECT);
     Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "spider_effect"), ModStatusEffects.SPIDER_EFFECT);
     Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "sheep_effect"), ModStatusEffects.SHEEP_EFFECT);
+    Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, "antidote_effect"), ModStatusEffects.ANTIDOTE_EFFECT);
     }
 
 }

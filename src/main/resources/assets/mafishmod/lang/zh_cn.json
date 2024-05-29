@@ -115,6 +115,7 @@
   "effect.mafishmod.teleport_effect": "传送",
   "effect.mafishmod.spider_effect": "蜘蛛",
   "effect.mafishmod.sheep_effect": "变羊",
+  "effect.mafishmod.antidote_effect": "百毒不侵",
 
   "item.minecraft.potion.effect.flower_potion": "变出花田的魔法",
   "item.minecraft.splash_potion.effect.flower_potion": "变出花田的魔法（喷溅）",
@@ -134,5 +135,10 @@
   "item.minecraft.potion.effect.sheep_potion": "变形魔药",
   "item.minecraft.splash_potion.effect.sheep_potion": "变形魔药（喷溅）",
   "item.minecraft.lingering_potion.effect.sheep_potion": "变形魔药（滞留）",
-  "item.minecraft.tipped_arrow.effect.sheep_potion": "变形箭"
+  "item.minecraft.tipped_arrow.effect.sheep_potion": "变形箭",
+
+  "item.minecraft.potion.effect.antidote_potion": "酸奶",
+  "item.minecraft.splash_potion.effect.antidote_potion": "酸奶（喷溅）",
+  "item.minecraft.lingering_potion.effect.antidote_potion": "酸奶（滞留）",
+  "item.minecraft.tipped_arrow.effect.antidote_potion": "酸奶箭"
 }
