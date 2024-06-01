@@ -46,12 +46,32 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
 	@Shadow @Nullable public abstract PlayerEntity getPlayerOwner();
 	@Shadow
 	protected abstract void tickFishingLogic(BlockPos pos);
+	@Shadow
+	public abstract int use(ItemStack usedItem);
 
 	public FishingBobberEntityMixin(EntityType<? extends ProjectileEntity> entityType, World world) {
 		super(entityType, world);
 	}
 	@Unique
 	private int delayTimer = 0;
+
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/data/DataTracker;set(Lnet/minecraft/entity/data/TrackedData;Ljava/lang/Object;)V",ordinal = 1), method = "tickFishingLogic")
+	private void init0(CallbackInfo info) {//自动钓鱼
+		// 添加自动收回鱼漂逻辑
+		PlayerEntity playerEntity = getPlayerOwner();
+		if (playerEntity!=null) {
+			ItemStack mainHandStack = playerEntity.getMainHandStack();
+			ItemStack offHandStack = playerEntity.getOffHandStack();
+			if (mainHandStack.getItem() == Items.FISHING_ROD || offHandStack.getItem()==Items.FISHING_ROD) {
+				ItemStack itemStack = mainHandStack.getItem() == Items.FISHING_ROD ? mainHandStack : offHandStack;
+				int k =EnchantmentHelper.getLevel(Enchantments.LOYALTY, itemStack);
+				if (k > 0) {
+					System.out.println("use");
+					this.use(playerEntity.getMainHandStack());
+				}
+			}
+		}
+	}
 
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void init(CallbackInfo info) {//冰霜行者
