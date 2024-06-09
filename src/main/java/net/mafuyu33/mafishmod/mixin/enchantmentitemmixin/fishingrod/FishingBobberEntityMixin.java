@@ -25,6 +25,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -52,114 +53,208 @@ public abstract class FishingBobberEntityMixin extends ProjectileEntity {
 		super(entityType, world);
 	}
 	@Unique
+	List<EntityType<? extends Entity>> possibleEntities = Arrays.asList(
+			EntityType.ALLAY,
+			EntityType.AREA_EFFECT_CLOUD,
+			EntityType.ARMOR_STAND,
+			EntityType.ARROW,
+			EntityType.AXOLOTL,
+			EntityType.BAT,
+			EntityType.BEE,
+			EntityType.BLAZE,
+			EntityType.BLOCK_DISPLAY,
+			EntityType.BOAT,
+			EntityType.BREEZE,
+			EntityType.CAMEL,
+			EntityType.CAT,
+			EntityType.CAVE_SPIDER,
+			EntityType.CHEST_BOAT,
+			EntityType.CHEST_MINECART,
+			EntityType.CHICKEN,
+			EntityType.COD,
+			EntityType.COMMAND_BLOCK_MINECART,
+			EntityType.COW,
+			EntityType.CREEPER,
+			EntityType.DOLPHIN,
+			EntityType.DONKEY,
+			EntityType.DRAGON_FIREBALL,
+			EntityType.DROWNED,
+			EntityType.EGG,
+			EntityType.ELDER_GUARDIAN,
+			EntityType.END_CRYSTAL,
+			EntityType.ENDER_DRAGON,
+			EntityType.ENDER_PEARL,
+			EntityType.ENDERMAN,
+			EntityType.ENDERMITE,
+			EntityType.EVOKER,
+			EntityType.EVOKER_FANGS,
+			EntityType.EXPERIENCE_BOTTLE,
+			EntityType.EXPERIENCE_ORB,
+			EntityType.EYE_OF_ENDER,
+			EntityType.FALLING_BLOCK,
+			EntityType.FIREWORK_ROCKET,
+			EntityType.FOX,
+			EntityType.FROG,
+			EntityType.FURNACE_MINECART,
+			EntityType.GHAST,
+			EntityType.GIANT,
+			EntityType.GLOW_ITEM_FRAME,
+			EntityType.GLOW_SQUID,
+			EntityType.GOAT,
+			EntityType.GUARDIAN,
+			EntityType.HOGLIN,
+			EntityType.HOPPER_MINECART,
+			EntityType.HORSE,
+			EntityType.HUSK,
+			EntityType.ILLUSIONER,
+			EntityType.INTERACTION,
+			EntityType.IRON_GOLEM,
+			EntityType.ITEM,
+			EntityType.ITEM_DISPLAY,
+			EntityType.ITEM_FRAME,
+			EntityType.FIREBALL,
+			EntityType.LEASH_KNOT,
+			EntityType.LIGHTNING_BOLT,
+			EntityType.LLAMA,
+			EntityType.LLAMA_SPIT,
+			EntityType.MAGMA_CUBE,
+			EntityType.MARKER,
+			EntityType.MINECART,
+			EntityType.MOOSHROOM,
+			EntityType.MULE,
+			EntityType.OCELOT,
+			EntityType.PAINTING,
+			EntityType.PANDA,
+			EntityType.PARROT,
+			EntityType.PHANTOM,
+			EntityType.PIG,
+			EntityType.PIGLIN,
+			EntityType.PIGLIN_BRUTE,
+			EntityType.PILLAGER,
+			EntityType.POLAR_BEAR,
+			EntityType.POTION,
+			EntityType.PUFFERFISH,
+			EntityType.RABBIT,
+			EntityType.RAVAGER,
+			EntityType.SALMON,
+			EntityType.SHEEP,
+			EntityType.SHULKER,
+			EntityType.SHULKER_BULLET,
+			EntityType.SILVERFISH,
+			EntityType.SKELETON,
+			EntityType.SKELETON_HORSE,
+			EntityType.SLIME,
+			EntityType.SMALL_FIREBALL,
+			EntityType.SNIFFER,
+			EntityType.SNOW_GOLEM,
+			EntityType.SNOWBALL,
+			EntityType.SPAWNER_MINECART,
+			EntityType.SPECTRAL_ARROW,
+			EntityType.SPIDER,
+			EntityType.SQUID,
+			EntityType.STRAY,
+			EntityType.STRIDER,
+			EntityType.TADPOLE,
+			EntityType.TEXT_DISPLAY,
+			EntityType.TNT,
+			EntityType.TNT_MINECART,
+			EntityType.TRADER_LLAMA,
+			EntityType.TRIDENT,
+			EntityType.TROPICAL_FISH,
+			EntityType.TURTLE,
+			EntityType.VEX,
+			EntityType.VILLAGER,
+			EntityType.VINDICATOR,
+			EntityType.WANDERING_TRADER,
+			EntityType.WARDEN,
+			EntityType.WIND_CHARGE,
+			EntityType.WITCH,
+			EntityType.WITHER,
+			EntityType.WITHER_SKELETON,
+			EntityType.WITHER_SKULL,
+			EntityType.WOLF,
+			EntityType.ZOGLIN,
+			EntityType.ZOMBIE,
+			EntityType.ZOMBIE_HORSE,
+			EntityType.ZOMBIE_VILLAGER,
+			EntityType.ZOMBIFIED_PIGLIN
+	);
+	@Unique
 	private int delayTimer = 0;
+	@Shadow
+	private int waitCountdown;
+	@Shadow
+	private int fishTravelCountdown;
+	@Inject(at = @At(value = "TAIL") , method = "tickFishingLogic")
+	private void init5(BlockPos pos, CallbackInfo ci) {//效率钓鱼
+		PlayerEntity playerEntity = getPlayerOwner();
+		if (playerEntity != null) {
+			ItemStack mainHandStack = playerEntity.getMainHandStack();
+			ItemStack offHandStack = playerEntity.getOffHandStack();
+			if (mainHandStack.getItem() == Items.FISHING_ROD || offHandStack.getItem() == Items.FISHING_ROD) {
+				ItemStack itemStack = mainHandStack.getItem() == Items.FISHING_ROD ? mainHandStack : offHandStack;
+				int k = EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, itemStack);
+				if (k > 0) {
+					if(waitCountdown == 0) {
+						fishTravelCountdown = 1;
+					}
+				}
+			}
+		}
+	}
+	@Inject(at = @At(value = "INVOKE", target ="Lnet/minecraft/util/math/random/Random;nextFloat()F",ordinal = 5) , method = "tickFishingLogic")
+	private void init4(BlockPos pos, CallbackInfo ci) {//效率钓鱼
+		PlayerEntity playerEntity = getPlayerOwner();
+		if (playerEntity != null) {
+			ItemStack mainHandStack = playerEntity.getMainHandStack();
+			ItemStack offHandStack = playerEntity.getOffHandStack();
+			if (mainHandStack.getItem() == Items.FISHING_ROD || offHandStack.getItem() == Items.FISHING_ROD) {
+				ItemStack itemStack = mainHandStack.getItem() == Items.FISHING_ROD ? mainHandStack : offHandStack;
+				int k = EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, itemStack);
+				if (k > 0) {
+					waitCountdown = 0;
+				}
+			}
+		}
+	}
 
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z",ordinal = 0) , method = "use")
 	private void init3(ItemStack usedItem, CallbackInfoReturnable<Integer> cir, @Local(ordinal = 0) double d, @Local(ordinal = 1) double e, @Local(ordinal = 2) double f, @Local ItemEntity itemEntity) {//钓上生物
-//		int k = EnchantmentHelper.getLevel(Enchantments.SMITE, usedItem);
-//		float amp = 2f;
-//		if (k > 0) {
-//			LivingEntity livingEntity = EntityType.DROWNED.create(this.getWorld());
-//			if (livingEntity != null) {
-//				livingEntity.setPosition(this.getX(), this.getY(), this.getZ());
-//				livingEntity.setVelocity(d * 0.1*amp, (e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08)*amp, f * 0.1*amp);
-//				this.getWorld().spawnEntity(livingEntity);
-//				itemEntity.remove(RemovalReason.DISCARDED);
-//			}
-//		}
 
 		int i = EnchantmentHelper.getLevel(Enchantments.DEPTH_STRIDER, usedItem);
-		float amp2 = 2f;
 		if (i > 0) {
-			// 定义可能生成的生物类型列表
-			List<EntityType<? extends Entity>> possibleEntities = Arrays.asList(
-					EntityType.ZOMBIE,
-					EntityType.SKELETON,
-					EntityType.SPIDER,
-					EntityType.CREEPER,
-					EntityType.ENDERMAN,
-					EntityType.WITCH,
-					EntityType.SLIME,
-					EntityType.DROWNED,
-					EntityType.HUSK,
-					EntityType.TNT,
-					EntityType.ARROW,
-					EntityType.BAT,
-					EntityType.BEE,
-					EntityType.BLAZE,
-					EntityType.BOAT,
-					EntityType.CAVE_SPIDER,
-					EntityType.CHICKEN,
-					EntityType.COW,
-					EntityType.DOLPHIN,
-					EntityType.DONKEY,
-					EntityType.DRAGON_FIREBALL,
-					EntityType.EGG,
-					EntityType.ENDER_DRAGON,
-					EntityType.ENDER_PEARL,
-					EntityType.ENDERMITE,
-					EntityType.EVOKER,
-					EntityType.EVOKER_FANGS,
-					EntityType.EXPERIENCE_ORB,
-					EntityType.FIREWORK_ROCKET,
-					EntityType.FOX,
-					EntityType.GHAST,
-					EntityType.GOAT,
-					EntityType.GUARDIAN,
-					EntityType.HORSE,
-					EntityType.IRON_GOLEM,
-					EntityType.ITEM,
-					EntityType.LLAMA,
-					EntityType.MAGMA_CUBE,
-					EntityType.MINECART,
-					EntityType.MOOSHROOM,
-					EntityType.MULE,
-					EntityType.OCELOT,
-					EntityType.PANDA,
-					EntityType.PARROT,
-					EntityType.PHANTOM,
-					EntityType.PIG,
-					EntityType.PIGLIN,
-					EntityType.PILLAGER,
-					EntityType.PLAYER,
-					EntityType.POLAR_BEAR,
-					EntityType.RABBIT,
-					EntityType.SHEEP,
-					EntityType.SHULKER,
-					EntityType.SILVERFISH,
-					EntityType.SKELETON_HORSE,
-					EntityType.SLIME,
-					EntityType.SNOW_GOLEM,
-					EntityType.SPIDER,
-					EntityType.SQUID,
-					EntityType.STRAY,
-					EntityType.TNT,
-					EntityType.TNT_MINECART,
-					EntityType.TRADER_LLAMA,
-					EntityType.TROPICAL_FISH,
-					EntityType.TURTLE,
-					EntityType.VILLAGER,
-					EntityType.WITCH,
-					EntityType.WITHER,
-					EntityType.WITHER_SKELETON,
-					EntityType.WOLF,
-					EntityType.ZOMBIE,
-					EntityType.ZOMBIE_VILLAGER,
-					EntityType.ZOMBIFIED_PIGLIN
-					// Add other entities as needed
-			);
 
-			// 从列表中随机选择一个生物类型
-			Random random = new Random();
+			float amp2 = 2f;
+			Random itemOrEntity = new Random();
+			if(itemOrEntity.nextBoolean()){//生成随机物品
+				List<Item> allItems = Registries.ITEM.stream().toList();
+				Random random = new Random();
+				// 从列表中随机选择一个物品
+				Item randomItemType = allItems.get(random.nextInt(allItems.size()));
+				// 创建物品堆
+				ItemStack randomItem = new ItemStack(randomItemType);
 
-			EntityType<? extends Entity> randomEntityType = possibleEntities.get(random.nextInt(possibleEntities.size()));
-
-			Entity livingEntity =  randomEntityType.create(this.getWorld());
-			if (livingEntity != null) {
-				livingEntity.setPosition(this.getX(), this.getY(), this.getZ());
-				livingEntity.setVelocity(d * 0.1*amp2, (e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08)*amp2, f * 0.1*amp2);
-				this.getWorld().spawnEntity(livingEntity);
+				// 创建物品实体并设置位置
+				ItemEntity newitemEntity = new ItemEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), randomItem);
+				newitemEntity.setPosition(this.getX(), this.getY(), this.getZ());
+				newitemEntity.setVelocity(d * 0.1, e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08, f * 0.1);
+				// 将物品实体添加到世界中
+				this.getWorld().spawnEntity(newitemEntity);
 				itemEntity.remove(RemovalReason.DISCARDED);
+
+			}else{//生成随机实体
+				// 从列表中随机选择一个生物类型
+				Random random = new Random();
+
+				EntityType<? extends Entity> randomEntityType = possibleEntities.get(random.nextInt(possibleEntities.size()));
+
+				Entity livingEntity =  randomEntityType.create(this.getWorld());
+				if (livingEntity != null) {
+					livingEntity.setPosition(this.getX(), this.getY(), this.getZ());
+					livingEntity.setVelocity(d * 0.1*amp2, (e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08)*amp2, f * 0.1*amp2);
+					this.getWorld().spawnEntity(livingEntity);
+					itemEntity.remove(RemovalReason.DISCARDED);
+				}
 			}
 		}
 	}
