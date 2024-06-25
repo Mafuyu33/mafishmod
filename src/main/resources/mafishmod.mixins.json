@@ -69,6 +69,8 @@
     "enchantmentitemmixin.WeaponEnchantmentMixin",
     "enchantmentitemmixin.bowleft.AbstractSkeletonEntityMixin",
     "enchantmentitemmixin.bowleft.BowItemMixin",
+    "enchantmentitemmixin.bowloyalty.BowItemMixin",
+    "enchantmentitemmixin.bowloyalty.PersistentProjectileEntityMixin",
     "enchantmentitemmixin.elytra.PlayerEntityMixin",
     "enchantmentitemmixin.fangsheng.ItemEntityMixin",
     "enchantmentitemmixin.fishingrod.FishingBobberEntityMixin",
