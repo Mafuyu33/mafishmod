@@ -106,6 +106,7 @@
     "ParticleManagerMixin",
     "effectmixin.sheep.PlayerEntityRendererMixin",
     "enchantmentitemmixin.slippery.InventoryScreenMixin",
+    "itemmixin.llamaitemrenderer.ItemRendererMixin",
     "itemmixin.rubystuffrenderer.ItemRendererAccessor",
     "itemmixin.rubystuffrenderer.ItemRendererMixin",
     "itemmixin.rubystuffrenderer.ModelLoaderMixin"

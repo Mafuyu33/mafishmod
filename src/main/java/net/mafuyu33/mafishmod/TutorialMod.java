@@ -7,15 +7,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.mafuyu33.mafishmod.block.entity.ModBlockEntities;
 import net.mafuyu33.mafishmod.config.ModConfig;
 import net.mafuyu33.mafishmod.effect.ModStatusEffects;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
-import net.mafuyu33.mafishmod.event.AttackEntityHandler;
-import net.mafuyu33.mafishmod.event.AfterBlockBreakHandler;
-import net.mafuyu33.mafishmod.event.BeforeBlockBreakHandler;
-import net.mafuyu33.mafishmod.event.ExplosionHandler;
+import net.mafuyu33.mafishmod.event.*;
 import net.mafuyu33.mafishmod.item.ModItemGroups;
 import net.mafuyu33.mafishmod.item.ModItems;
 import net.mafuyu33.mafishmod.block.ModBlocks;
@@ -62,6 +60,7 @@ public class TutorialMod implements ModInitializer {
 		PlayerBlockBreakEvents.AFTER.register(new AfterBlockBreakHandler());
 		PlayerBlockBreakEvents.BEFORE.register(new BeforeBlockBreakHandler());
 		ExplosionHandler.init();
+		UseEntityCallback.EVENT.register(new UseEntityHandler());
 
 		//VR
 		VRPlugin.init();

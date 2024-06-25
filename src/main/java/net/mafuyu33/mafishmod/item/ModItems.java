@@ -89,6 +89,7 @@ public class ModItems {
     public static final Item VR_MAGIC = registerItem("vr_magic", new VrMagicItem(new FabricItemSettings().maxCount(1)));
     public static final Item RTX4090 = registerItem("rtx4090",new RTX4090Item(ToolMaterials.NETHERITE,2,2f, new FabricItemSettings()));
     public static final Item VR_GETTING_OVER_IT = registerItem("vr_getting_over_it", new VrGettingOverItItem(new FabricItemSettings().maxCount(1)));
+    public static final Item LLAMA_ITEM = registerItem("llama_item",new LlamaItem(new FabricItemSettings()));
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){

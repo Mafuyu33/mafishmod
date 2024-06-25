@@ -59,6 +59,9 @@ public class ConfigHelper {
     public static boolean isLlamaSpitForever() {
         return config.isLlamaSpitForever;
     }
+    public static boolean isQinNa() {
+        return config.isQinNa;
+    }
 
 
 
