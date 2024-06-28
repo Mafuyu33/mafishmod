@@ -1,6 +1,5 @@
-package net.mafuyu33.mafishmod.mixin.itemmixin.llamaitemrenderer;
+package net.mafuyu33.mafishmod.mixin.itemmixin.entityitemrenderer.llamaitemrenderer;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.mafuyu33.mafishmod.TutorialMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -10,7 +9,6 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.LlamaEntity;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;

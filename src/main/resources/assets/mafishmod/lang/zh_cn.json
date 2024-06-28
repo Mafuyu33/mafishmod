@@ -1,6 +1,7 @@
 {
   "text.autoconfig.mafishmod.title": "风灵月影，启动!",
 
+  "text.autoconfig.mafishmod.option.isQinNa": "习得擒拿术",
   "text.autoconfig.mafishmod.option.isLlamaSpitForever": "羊驼攻击无cd",
   "text.autoconfig.mafishmod.option.isGoatDashTogether": "山羊会互相冲撞",
   "text.autoconfig.mafishmod.option.isGoatDashForever": "山羊冲撞无cd",
@@ -22,6 +23,7 @@
   "text.autoconfig.mafishmod.option.toggleB": "按钮B",
   "text.autoconfig.mafishmod.option.stuff": "stuff",
 
+  "tooltip.mafishmod.villager_item.tooltip": "非常的美味",
   "tooltip.mafishmod.ruby_stuff.tooltip": "§m试试就逝世",
   "tooltip.mafishmod.vr_pen.tooltip": "副手拿染料改变颜色，副手的物品数量是正方形笔刷的大小",
   "tooltip.mafishmod.vr_rubber.tooltip": "副手的物品数量是橡皮擦大小，副手拿马夫鱼是大范围清空",
@@ -74,6 +76,8 @@
   "item.mafishmod.cheese_berger": "芝士汉堡儿",
   "item.mafishmod.rtx4090": "RTX4090",
   "item.mafishmod.llama_item": "草泥马",
+  "item.mafishmod.villager_item": "村民",
+  "item.mafishmod.iron_golem_item": "铁傀儡",
 
   "item.mafishmod.vr_pen": "VR画笔",
   "item.mafishmod.vr_rubber": "VR橡皮",

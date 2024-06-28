@@ -90,12 +90,19 @@ public class ModItems {
     public static final Item RTX4090 = registerItem("rtx4090",new RTX4090Item(ToolMaterials.NETHERITE,2,2f, new FabricItemSettings()));
     public static final Item VR_GETTING_OVER_IT = registerItem("vr_getting_over_it", new VrGettingOverItItem(new FabricItemSettings().maxCount(1)));
     public static final Item LLAMA_ITEM = registerItem("llama_item",new LlamaItem(new FabricItemSettings()));
+    public static final Item VILLAGER_ITEM = registerItem("villager_item",new VillagerItem(new FabricItemSettings().food(ModFoodComponents.VILLAGER_ITEM).maxCount(1)));
+    public static final Item IRON_GOLEM_ITEM = registerItem("iron_golem_item",new Item(new FabricItemSettings().food(ModFoodComponents.IRON_GOLEM_ITEM).maxCount(1)));
+
+
 
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
         //放到材料表里
         entries.add(RUBY);
         entries.add(RAW_RUBY);
+        entries.add(ModItems.LLAMA_ITEM);
+        entries.add(ModItems.VILLAGER_ITEM);
+        entries.add(ModItems.IRON_GOLEM_ITEM);
     }
 
     public static Item registerItem(String name,Item item){

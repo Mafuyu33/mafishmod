@@ -1,6 +1,7 @@
 {
   "text.autoconfig.mafishmod.title": "Link Start!",
 
+  "text.autoconfig.mafishmod.option.isQinNa": "isQinNa",
   "text.autoconfig.mafishmod.option.isLlamaSpitForever": "isLlamaSpitForever",
   "text.autoconfig.mafishmod.option.isGoatDashTogether": "isGoatDashTogether",
   "text.autoconfig.mafishmod.option.isGoatDashForever": "isGoatDashForever",
@@ -24,6 +25,7 @@
 
 
   "tooltip.mafishmod.metal_detector.tooltip": "Find valuables underground",
+  "tooltip.mafishmod.villager_item.tooltip": "Delicious",
   "tooltip.mafishmod.ruby_stuff.tooltip": "§e",
   "tooltip.mafishmod.vr_pen.tooltip": "Holding dye in the off-hand changes the color, and the quantity of the item in the off-hand determines the size of the square brush",
   "tooltip.mafishmod.vr_rubber.tooltip": "The quantity of the item in the off-hand determines the size of the eraser, and holding a ruby in the off-hand clears a large area.",
@@ -85,6 +87,8 @@
   "item.mafishmod.cheese_berger": "cheese_berger",
   "item.mafishmod.rtx4090": "RTX4090",
   "item.mafishmod.llama_item": "llama_item",
+  "item.mafishmod.villager_item": "villager_item",
+  "item.mafishmod.iron_golem_item": "iron_golem_item",
 
   "item.mafishmod.vr_pen": "vr_pen",
   "item.mafishmod.vr_rubber": "vr_rubber",
