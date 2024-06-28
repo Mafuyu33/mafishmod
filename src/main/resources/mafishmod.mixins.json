@@ -24,6 +24,7 @@
     "enchantmentblockmixin.custom.knockback.LivingEntityMixin",
     "enchantmentblockmixin.custom.knockback.NetherPortalBlockMixin",
     "enchantmentblockmixin.custom.knockback.TripwireBlockMixin",
+    "enchantmentblockmixin.custom.punchtrapdoor.TrapdoorBlockMixin",
     "enchantmentblockmixin.custom.respiration.FlowableFluidMixin",
     "enchantmentblockmixin.custom.thorns.AbstractBlockMixin",
     "enchantmentblockmixin.custom.thorns.BlockMixin",
