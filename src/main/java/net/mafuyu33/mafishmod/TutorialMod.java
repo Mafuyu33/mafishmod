@@ -7,6 +7,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.mafuyu33.mafishmod.block.entity.ModBlockEntities;
@@ -61,6 +62,7 @@ public class TutorialMod implements ModInitializer {
 		PlayerBlockBreakEvents.BEFORE.register(new BeforeBlockBreakHandler());
 		ExplosionHandler.init();
 		UseEntityCallback.EVENT.register(new UseEntityHandler());
+		UseBlockCallback.EVENT.register(new UseBlockHandler());
 
 		//VR
 		VRPlugin.init();

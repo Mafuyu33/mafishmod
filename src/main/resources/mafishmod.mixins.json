@@ -14,6 +14,7 @@
     "enchantmentblockmixin.custom.bellknockbackandhurt.BellBlockEntityMixin",
     "enchantmentblockmixin.custom.bellresonance.BellBlockEntityMixin",
     "enchantmentblockmixin.custom.blastprotection.ExplosionBehaviorMixin",
+    "enchantmentblockmixin.custom.buttonrandom.PlayerEntityMixin",
     "enchantmentblockmixin.custom.fallprotection.BlockMixin",
     "enchantmentblockmixin.custom.fasthopper.HopperBlockEntityMixin",
     "enchantmentblockmixin.custom.furnace.AbstractFurnaceBlockEntityMixin",
