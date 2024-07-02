@@ -5,7 +5,6 @@ import net.mafuyu33.mafishmod.config.ModConfig;
 
 public class ConfigHelper {
     public static ModConfig config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
-
     public static boolean isBeeRideable() {
         return config.isBeeRideable;
     }

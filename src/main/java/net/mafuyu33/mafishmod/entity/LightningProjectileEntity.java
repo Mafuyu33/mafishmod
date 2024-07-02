@@ -29,7 +29,7 @@ public class LightningProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.LIGHTNING_BALL;
+        return ModItems.LIGHTNING_ITEM;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class LightningProjectileEntity extends ThrownItemEntity {
         return new EntitySpawnS2CPacket(this);
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-        BlockPos blockPos = this.getBlockPos();
-        lightning(blockPos);
-    }
+//    @Override
+//    public void tick() {
+//        super.tick();
+//        BlockPos blockPos = this.getBlockPos();
+//        lightning(blockPos);
+//    }
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {

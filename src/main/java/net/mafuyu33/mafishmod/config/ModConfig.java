@@ -30,6 +30,7 @@ public class ModConfig implements ConfigData {
     public boolean isGoatDashTogether = false;
     public boolean isLlamaSpitForever = false;
     public boolean isQinNa = true;
+
 //    public boolean toggleA = true;
 //    public boolean toggleB = true;
 

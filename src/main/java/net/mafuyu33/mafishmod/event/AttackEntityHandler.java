@@ -1,6 +1,7 @@
 package net.mafuyu33.mafishmod.event;
 
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.mafuyu33.mafishmod.item.ModItems;
 import net.mafuyu33.mafishmod.item.vrcustom.VrMagicItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -23,6 +24,17 @@ public class AttackEntityHandler implements AttackEntityCallback {
     private static boolean hasAttacked = false; // 添加一个变量来标记是否已经攻击过鸡
     @Override
     public ActionResult interact(PlayerEntity player, World world, Hand hand, Entity entity, @Nullable EntityHitResult hitResult) {
+        if(player.isHolding(ModItems.LIGHTNING_ITEM) && !world.isClient()){
+            BlockPos blockPos = entity.getBlockPos();
+            LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(entity.getWorld());
+            if (lightningEntity != null) {
+                lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockPos));
+                lightningEntity.setChanneler(player instanceof ServerPlayerEntity ? (ServerPlayerEntity) player : null);
+                entity.getWorld().spawnEntity(lightningEntity);
+                SoundEvent soundEvent = SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT;
+                entity.playSound(soundEvent, 5, 1.0F);
+            }
+        }
         if(entity instanceof ChickenEntity && !world.isClient()){
             player.sendMessage(Text.literal("哎呦你干嘛"));
             hasAttacked = true;

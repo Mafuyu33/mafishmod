@@ -109,6 +109,7 @@
     "effectmixin.sheep.PlayerEntityRendererMixin",
     "enchantmentitemmixin.slippery.InventoryScreenMixin",
     "itemmixin.entityitemrenderer.irongolemitemrenderer.ItemRendererMixin",
+    "itemmixin.entityitemrenderer.lightningitemrenderer.ItemRendererMixin",
     "itemmixin.entityitemrenderer.llamaitemrenderer.ItemRendererMixin",
     "itemmixin.entityitemrenderer.villageritemrenderer.ItemRendererMixin",
     "itemmixin.rubystuffrenderer.ItemRendererAccessor",

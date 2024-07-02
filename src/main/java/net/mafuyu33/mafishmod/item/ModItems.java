@@ -92,6 +92,10 @@ public class ModItems {
     public static final Item LLAMA_ITEM = registerItem("llama_item",new LlamaItem(new FabricItemSettings()));
     public static final Item VILLAGER_ITEM = registerItem("villager_item",new VillagerItem(new FabricItemSettings().food(ModFoodComponents.VILLAGER_ITEM).maxCount(1)));
     public static final Item IRON_GOLEM_ITEM = registerItem("iron_golem_item",new Item(new FabricItemSettings().food(ModFoodComponents.IRON_GOLEM_ITEM).maxCount(1)));
+    public static final Item LIGHTNING_ITEM = registerItem("lightning_item",
+            new LightningItem(ToolMaterials.NETHERITE, 10, -2.4f,
+                    new FabricItemSettings().fireproof().maxCount(1)));
+
 
 
 
