@@ -27,7 +27,6 @@ public abstract class TargetBlockMixin {
 
 		int k = BlockEnchantmentStorage.getLevel(Enchantments.PROJECTILE_PROTECTION,hit.getBlockPos());
 		if(k>0 && !world.isClient){
-			System.out.println(1);
 			Entity entity = projectile.getOwner();
 			if(entity instanceof LivingEntity livingEntity) {
 				double d = livingEntity.getX() - projectile.getX();
