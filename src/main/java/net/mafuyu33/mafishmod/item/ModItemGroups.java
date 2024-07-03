@@ -70,6 +70,7 @@ public class ModItemGroups {
                         entries.add(ModItems.CHEESE_BERGER);
 //                        entries.add(ModItems.RTX4090);
                         entries.add(ModItems.LIGHTNING_ITEM);
+                        entries.add(ModItems.SWITCH);
                     }).build());
 
 

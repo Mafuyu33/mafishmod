@@ -27,4 +27,6 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(StatusEffects.HUNGER,200),1f).alwaysEdible().build();
     public static final FoodComponent IRON_GOLEM_ITEM = new FoodComponent.Builder().hunger(3).saturationModifier(0.5f)
             .statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE,20),1f).alwaysEdible().build();
+    public static final FoodComponent SWITCH =new FoodComponent.Builder().hunger(3).saturationModifier(0.5f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE,20),1f).alwaysEdible().build();
 }

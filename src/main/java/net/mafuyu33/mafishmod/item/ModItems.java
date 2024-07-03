@@ -95,6 +95,7 @@ public class ModItems {
     public static final Item LIGHTNING_ITEM = registerItem("lightning_item",
             new LightningItem(ToolMaterials.NETHERITE, 10, -2.4f,
                     new FabricItemSettings().fireproof().maxCount(1)));
+    public static final Item SWITCH = registerItem("switch",new SwitchItem(new FabricItemSettings().food(ModFoodComponents.SWITCH)));
 
 
 

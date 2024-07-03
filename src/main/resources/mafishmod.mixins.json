@@ -103,6 +103,7 @@
     "mobmixin.goatdashforever.GoatBrainMixin",
     "mobmixin.llamaspitforever.LlamaEntity_SpitRevengeGoalMixin",
     "mobmixin.llamaspitforever.LlamaEntityMixin",
+    "mobmixin.pandaeatswitch.PandaEntityMixin",
     "worldtick.ServerTickMixin"
   ],
   "client": [

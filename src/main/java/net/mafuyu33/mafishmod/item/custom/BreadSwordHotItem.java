@@ -18,18 +18,18 @@ public class BreadSwordHotItem extends SwordItem {
         super(toolMaterial, attackDamage, attackSpeed, settings);
     }
 
-    @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        ItemStack offhanditemStack = user.getOffHandStack();
-//        System.out.println(offhanditemStack.getOrCreateNbt());
-        if (world.isClient && VRPlugin.canRetrieveData(user)) {   //有MC-VR-API并且在VR中的时候
-            Vec3d mainController = VRDataHandler.getControllerPosition(user, 0);
-            Vec3d offController = VRDataHandler.getControllerPosition(user, 1);
-            user.sendMessage(Text.literal("mainController"+mainController),false);
-            user.sendMessage(Text.literal("offController"+offController),false);
-
-
-        }
-        return TypedActionResult.success(this.getDefaultStack(), world.isClient());
-    }
+//    @Override
+//    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+////        ItemStack offhanditemStack = user.getOffHandStack();
+////        System.out.println(offhanditemStack.getOrCreateNbt());
+//        if (world.isClient && VRPlugin.canRetrieveData(user)) {   //有MC-VR-API并且在VR中的时候
+//            Vec3d mainController = VRDataHandler.getControllerPosition(user, 0);
+//            Vec3d offController = VRDataHandler.getControllerPosition(user, 1);
+//            user.sendMessage(Text.literal("mainController"+mainController),false);
+//            user.sendMessage(Text.literal("offController"+offController),false);
+//
+//
+//        }
+//        return TypedActionResult.success(this.getDefaultStack(), world.isClient());
+//    }
 }
