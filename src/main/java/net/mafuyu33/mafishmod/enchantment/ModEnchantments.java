@@ -61,6 +61,8 @@ public class ModEnchantments {
             new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR_FEET,new EquipmentSlot[]{}));
     public static Enchantment BOW_LEFT = register("bow_left",
             new CursedLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BOW,new EquipmentSlot[]{}));
+    public static Enchantment SUPER_PROJECTILE_PROTECTION = register("super_projectile_protection",
+            new NormalLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR,new EquipmentSlot[]{}));
 
 
     private static Enchantment register(String name, Enchantment enchantment) {

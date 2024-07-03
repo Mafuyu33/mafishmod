@@ -27,6 +27,7 @@
     "enchantmentblockmixin.custom.knockback.TripwireBlockMixin",
     "enchantmentblockmixin.custom.punchtrapdoor.TrapdoorBlockMixin",
     "enchantmentblockmixin.custom.respiration.FlowableFluidMixin",
+    "enchantmentblockmixin.custom.targetblock.TargetBlockMixin",
     "enchantmentblockmixin.custom.thorns.AbstractBlockMixin",
     "enchantmentblockmixin.custom.thorns.BlockMixin",
     "enchantmentblockmixin.custom.tnt.TntBlockMixin",

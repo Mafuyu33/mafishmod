@@ -3,7 +3,6 @@ package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mafuyu33.mafishmod.enchantment.ModEnchantments;
-import net.mafuyu33.mafishmod.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FrostedIceBlock;
@@ -14,11 +13,16 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -34,7 +38,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -56,8 +62,6 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 	@Unique
 	private static Vec3d lastPos= new Vec3d(0, 0, 0);
 
-	@Shadow public abstract boolean isDead();
-
 	protected ArmorEnchantmentMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
 	}
@@ -65,6 +69,53 @@ public abstract class ArmorEnchantmentMixin extends Entity implements Attackable
 	@Unique
 	private Random getRandom() {
 		return this.random;
+	}
+
+	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/damage/DamageSource;isIn(Lnet/minecraft/registry/tag/TagKey;)Z",ordinal = 2), method = "damage",cancellable = true)
+	private void init2(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+		Iterable<ItemStack> armorItems = this.getArmorItems();
+		for (ItemStack armorItem : armorItems) {
+			if (armorItem.getItem() instanceof ArmorItem) {
+				int p = EnchantmentHelper.getLevel(ModEnchantments.SUPER_PROJECTILE_PROTECTION, armorItem);//超级投射物保护
+				if(p > 0 && source.isIn(DamageTypeTags.IS_PROJECTILE)){
+					Entity entity = source.getAttacker();
+					Entity projectile = source.getSource();
+					if(projectile!=null && !getWorld().isClient) {
+						if (entity instanceof LivingEntity livingEntity) {
+							// 创建物品实体并设置位置
+							double d = this.getX() - livingEntity.getX();
+							double e = this.getY() - livingEntity.getY();
+							double f = this.getZ() - livingEntity.getZ();
+							ProjectileEntity newProjectileEntity = new ArrowEntity(this.getWorld(),(LivingEntity) (Object)this, new ItemStack(Items.ARROW));
+							newProjectileEntity.setPosition(this.getX(), this.getY() + 1, this.getZ());
+							newProjectileEntity.setVelocity(-d * 0.1 * 1.3, -e * 0.1 + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08 * 1.3, -f * 0.1 * 1.3);
+							// 将物品实体添加到世界中
+							projectile.discard();
+							this.getWorld().spawnEntity(newProjectileEntity);
+							cir.setReturnValue(false);
+							break;
+						} else {
+							double offset = 0.0; // 调整的偏移量，可以根据需要调整
+							Vec3d lookVec = this.getRotationVec(1.0F);// 获取玩家朝向向量
+							double speedMultiplier = 2.0;
+							ProjectileEntity newProjectileEntity = new ArrowEntity(this.getWorld(), (LivingEntity) (Object)this, new ItemStack(Items.ARROW));
+							newProjectileEntity.setPosition(this.getX()+ lookVec.x * offset, this.getY() + 1.65, this.getZ() + lookVec.z * offset);
+							// 将物品实体速度设置为玩家朝向方向
+							newProjectileEntity.setVelocity(
+									lookVec.x * speedMultiplier,
+									lookVec.y * speedMultiplier,
+									lookVec.z * speedMultiplier
+							);
+							projectile.discard();
+							// 将物品实体添加到世界中
+							this.getWorld().spawnEntity(newProjectileEntity);
+							cir.setReturnValue(false);
+							break;
+						}
+					}
+				}
+			}
+		}
 	}
 
 
