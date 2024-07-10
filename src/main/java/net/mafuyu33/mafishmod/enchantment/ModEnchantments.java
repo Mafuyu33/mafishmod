@@ -64,6 +64,9 @@ public class ModEnchantments {
     public static Enchantment SUPER_PROJECTILE_PROTECTION = register("super_projectile_protection",
             new NormalLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.ARMOR,new EquipmentSlot[]{}));
 
+    public static Enchantment STICKY = register("sticky",
+            new NormalLv1(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BREAKABLE,new EquipmentSlot[]{}));
+
 
     private static Enchantment register(String name, Enchantment enchantment) {
         return Registry.register(Registries.ENCHANTMENT, new Identifier(TutorialMod.MOD_ID, name), enchantment);

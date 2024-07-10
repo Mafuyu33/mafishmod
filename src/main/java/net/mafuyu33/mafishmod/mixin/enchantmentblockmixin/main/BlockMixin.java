@@ -57,4 +57,12 @@ public abstract class BlockMixin extends AbstractBlock implements ItemConvertibl
             }
         }
     }
+    @Inject(at = @At("TAIL"), method = "dropStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;)V")//删除方块的附魔
+    private static void init5(BlockState state, WorldAccess world, BlockPos pos, BlockEntity blockEntity, CallbackInfo ci){
+        if (!world.isClient()) {
+            if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(pos), new NbtList())) {
+                BlockEnchantmentStorage.removeBlockEnchantment(pos.toImmutable());//删除信息
+            }
+        }
+    }
 }
