@@ -79,6 +79,8 @@
     "enchantmentitemmixin.fangsheng.ItemEntityMixin",
     "enchantmentitemmixin.fishingrod.FishingBobberEntityMixin",
     "enchantmentitemmixin.fishingrod.FishingRodItemMixin",
+    "enchantmentitemmixin.luoyangshovel.FallingBlockEntityMixin",
+    "enchantmentitemmixin.luoyangshovel.ShovelItemMixin",
     "enchantmentitemmixin.slimefeet.BlockMixin",
     "enchantmentitemmixin.slippery.HandledScreenMixin",
     "enchantmentitemmixin.slippery.UnPickUpAbleItemMixin",

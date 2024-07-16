@@ -7,3 +7,6 @@ accessible class net/minecraft/entity/passive/CatEntity$TemptGoal
 accessible class net/minecraft/block/entity/BellBlockEntity$Effect
 accessible class net/minecraft/entity/passive/LlamaEntity$SpitRevengeGoal
 accessible field net/minecraft/entity/mob/MobEntity goalSelector Lnet/minecraft/entity/ai/goal/GoalSelector;
+accessible field net/minecraft/entity/FallingBlockEntity block Lnet/minecraft/block/BlockState;
+accessible method net/minecraft/block/entity/BlockEntity writeNbt (Lnet/minecraft/nbt/NbtCompound;)V
+accessible field net/minecraft/entity/FallingBlockEntity fallHurtAmount F
