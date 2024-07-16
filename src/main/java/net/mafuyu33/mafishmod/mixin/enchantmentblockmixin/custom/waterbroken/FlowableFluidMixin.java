@@ -1,7 +1,6 @@
-package net.mafuyu33.mafishmod.mixin.enchantmentblockmixin.custom.aqua_affinity;
+package net.mafuyu33.mafishmod.mixin.enchantmentblockmixin.custom.waterbroken;
 
 import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.fluid.FlowableFluid;
@@ -37,18 +36,4 @@ public abstract class FlowableFluidMixin {
 			cir.setReturnValue(true);
 		}
 	}
-//	@Inject(at = @At("HEAD"), method = "canFlowThrough", cancellable = true)
-//	private void init2(BlockView world, Fluid fluid, BlockPos pos, BlockState state, Direction face, BlockPos fromPos, BlockState fromState, FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
-//		if(BlockEnchantmentStorage.getLevel(Enchantments.AQUA_AFFINITY,pos)>0){
-//			System.out.println("canFlowThrough");
-//			cir.setReturnValue(true);
-//		}
-//	}
-//	@Inject(at = @At("HEAD"), method = "canFill", cancellable = true)
-//	private void init3(BlockView world, BlockPos pos, BlockState state, Fluid fluid, CallbackInfoReturnable<Boolean> cir) {
-//		if(BlockEnchantmentStorage.getLevel(Enchantments.AQUA_AFFINITY,pos)>0){
-//			System.out.println("canFill");
-//			cir.setReturnValue(true);
-//		}
-//	}
 }
