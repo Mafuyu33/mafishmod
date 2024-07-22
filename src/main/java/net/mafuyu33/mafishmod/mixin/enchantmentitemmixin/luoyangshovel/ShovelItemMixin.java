@@ -1,5 +1,7 @@
 package net.mafuyu33.mafishmod.mixin.enchantmentitemmixin.luoyangshovel;
 
+import net.mafuyu33.mafishmod.TutorialMod;
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,6 +17,7 @@ import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
@@ -27,6 +30,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 @Mixin(ShovelItem.class)
 public abstract class ShovelItemMixin extends MiningToolItem {
@@ -45,36 +50,43 @@ public abstract class ShovelItemMixin extends MiningToolItem {
 
 	@Unique
 	private void mafishmod$generateFallingBlock(BlockPos targetPos ,BlockState blockState, World world ,int power, PlayerEntity user) {
+		if(!world.isClient()) {
+			BlockEntity blockEntity = world.getBlockEntity(targetPos);
 
-		BlockEntity blockEntity = world.getBlockEntity(targetPos);
+			FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK, world);
 
-		world.setBlockState(targetPos, Blocks.AIR.getDefaultState(), 3);
+			fallingBlockEntity.block = blockState;
+			fallingBlockEntity.timeFalling = 1;
+			fallingBlockEntity.setNoGravity(false);
+			fallingBlockEntity.intersectionChecked = true;
+			fallingBlockEntity.setPosition(targetPos.getX() + 0.5, targetPos.getY() + 1.2, targetPos.getZ() + 0.5);
+			fallingBlockEntity.setVelocity(Vec3d.ZERO);
+			fallingBlockEntity.prevX = targetPos.getX() + 0.5;
+			fallingBlockEntity.prevY = targetPos.getY() + 1.2;
+			fallingBlockEntity.prevZ = targetPos.getZ() + 0.5;
+			fallingBlockEntity.setFallingBlockPos(targetPos);
+			//设置速度
+			mafishmod$launchBlock(targetPos, power, user, fallingBlockEntity);
+			//设置伤害
+			if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(targetPos), new NbtList())) {//附魔海之嫌弃
+//				TutorialMod.LOGGER.info(String.valueOf("附魔海之嫌弃"));
+				fallingBlockEntity.setHurtEntities(0, -1);
+				BlockEnchantmentStorage.removeBlockEnchantment(targetPos.toImmutable());//删除信息
+			} else {
+//				TutorialMod.LOGGER.info(String.valueOf("没附魔海之嫌弃"));
+				fallingBlockEntity.setHurtEntities(50, power * 2);
+			}
+			// 如果方块有附加的 BlockEntity 数据，可以设置 blockEntityData 字段
+			if (blockEntity != null) {
+				NbtCompound blockEntityData = new NbtCompound();
+				blockEntity.writeNbt(blockEntityData);
+				fallingBlockEntity.blockEntityData = blockEntityData;
+			}
 
-		FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK , world);
+			world.setBlockState(targetPos, Blocks.AIR.getDefaultState(), 3);
 
-		fallingBlockEntity.block = blockState;
-		fallingBlockEntity.timeFalling = 1;
-		fallingBlockEntity.setNoGravity(false);
-		fallingBlockEntity.intersectionChecked = true;
-		fallingBlockEntity.setPosition(targetPos.getX() + 0.5, targetPos.getY()+1.2, targetPos.getZ() + 0.5);
-		fallingBlockEntity.setVelocity(Vec3d.ZERO);
-		fallingBlockEntity.prevX = targetPos.getX() + 0.5;
-		fallingBlockEntity.prevY = targetPos.getY() + 1.2;
-		fallingBlockEntity.prevZ = targetPos.getZ() + 0.5;
-		fallingBlockEntity.setFallingBlockPos(targetPos);
-		//设置速度
-		mafishmod$launchBlock(targetPos, power, user, fallingBlockEntity);
-		//设置伤害
-		fallingBlockEntity.setHurtEntities(99999,power*2);
-
-		// 如果方块有附加的 BlockEntity 数据，可以设置 blockEntityData 字段
-		if (blockEntity != null) {
-			NbtCompound blockEntityData = new NbtCompound();
-			blockEntity.writeNbt(blockEntityData);
-			fallingBlockEntity.blockEntityData = blockEntityData;
+			world.spawnEntity(fallingBlockEntity);
 		}
-
-		world.spawnEntity(fallingBlockEntity);
 
 	}
 
