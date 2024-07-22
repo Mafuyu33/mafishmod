@@ -103,7 +103,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 						true
 				);
 			}
-			if (UseBlockHandler.isButtonUsed) {
+			if (UseBlockHandler.isButtonUsed && BlockEnchantmentStorage.getLevel(Enchantments.INFINITY,blockHitResult.getBlockPos())>0) {
 				this.sendMessage(Text.literal("实现了..."),true);
 				if(buttonCount==0) {//只有第一次会触发
 					// 触发好事件
