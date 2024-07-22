@@ -95,6 +95,7 @@
     "itemmixin.ShieldDashMixin",
     "itemmixin.ThrowableDiamondMixin",
     "itemmixin.cheesebergerforcat.CatEntityMixin",
+    "itemmixin.colliableitem.EntityMixin",
     "itemmixin.fireworkrocket.FireworkRocketEntityMixin",
     "itemmixin.fireworkrocket.FireworkRocketHitOnEntityMixin",
     "itemmixin.fireworkrocket.FireworkRocketItemMixin",
