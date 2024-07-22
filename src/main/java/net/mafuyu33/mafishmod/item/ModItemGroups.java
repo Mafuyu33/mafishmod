@@ -16,6 +16,7 @@ public class ModItemGroups {
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.ruby"))
                     .icon(()->new ItemStack(ModItems.RUBY)).entries((displayContext,entries)->{
                         //在这里添加新的东西
+                        entries.add(ModItems.LIGHTNING_ITEM);
                         entries.add(ModItems.RUBY);
                         entries.add(ModItems.RAW_RUBY);
                         entries.add(ModItems.METAL_DETECTOR);
@@ -69,7 +70,6 @@ public class ModItemGroups {
 
                         entries.add(ModItems.CHEESE_BERGER);
 //                        entries.add(ModItems.RTX4090);
-                        entries.add(ModItems.LIGHTNING_ITEM);
                         entries.add(ModItems.SWITCH);
                     }).build());
 
