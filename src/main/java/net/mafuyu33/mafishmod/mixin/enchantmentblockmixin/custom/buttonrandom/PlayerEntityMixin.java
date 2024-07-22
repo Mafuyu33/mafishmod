@@ -1,7 +1,9 @@
 package net.mafuyu33.mafishmod.mixin.enchantmentblockmixin.custom.buttonrandom;
 
+import net.mafuyu33.mafishmod.enchantmentblock.BlockEnchantmentStorage;
 import net.mafuyu33.mafishmod.event.UseBlockHandler;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -88,7 +90,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 			BlockHitResult blockHitResult = getWorld().raycast(new RaycastContext(playerPos, rayEnd, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.NONE, this));
 
 			// 检查是否击中按钮方块
-			if (getWorld().getBlockState(blockHitResult.getBlockPos()).isIn(BlockTags.BUTTONS) && !UseBlockHandler.isButtonUsed) {
+			if (getWorld().getBlockState(blockHitResult.getBlockPos()).isIn(BlockTags.BUTTONS)
+					&& !UseBlockHandler.isButtonUsed && BlockEnchantmentStorage.getLevel(Enchantments.INFINITY,blockHitResult.getBlockPos())>0) {
 				//如果击中，持续向玩家输送文字
 				this.sendMessage(
 						Text.literal("获得 ")

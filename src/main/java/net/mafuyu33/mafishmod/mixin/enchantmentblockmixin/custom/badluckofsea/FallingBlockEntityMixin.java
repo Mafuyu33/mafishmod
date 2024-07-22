@@ -80,17 +80,17 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"), method = "tick")
 	private void init1(CallbackInfo info, @Local BlockPos blockPos) {
-		Enchantment enchantment = ModEnchantments.BAD_LUCK_OF_SEA;
-		NbtList enchantmentNbtList = new NbtList();
-		// 将 Enchantment 对象转换为 NBT 形式
-		NbtCompound enchantmentNbt = new NbtCompound();
-		enchantmentNbt.putString("id", String.valueOf(Registries.ENCHANTMENT.getId(enchantment)));
-		enchantmentNbt.putInt("lvl", 3);
+		if(this.fallHurtMax==-1) {
+			Enchantment enchantment = ModEnchantments.BAD_LUCK_OF_SEA;
+			NbtList enchantmentNbtList = new NbtList();
+			// 将 Enchantment 对象转换为 NBT 形式
+			NbtCompound enchantmentNbt = new NbtCompound();
+			enchantmentNbt.putString("id", String.valueOf(Registries.ENCHANTMENT.getId(enchantment)));
+			enchantmentNbt.putInt("lvl", 3);
 
-		TutorialMod.LOGGER.info(String.valueOf(enchantmentNbt));
-
-		// 将 NBT 数据添加到 NbtList
-		enchantmentNbtList.add(enchantmentNbt);
-		BlockEnchantmentStorage.addBlockEnchantment(blockPos.toImmutable(),enchantmentNbtList);//储存信息
+			// 将 NBT 数据添加到 NbtList
+			enchantmentNbtList.add(enchantmentNbt);
+			BlockEnchantmentStorage.addBlockEnchantment(blockPos.toImmutable(), enchantmentNbtList);//储存信息
+		}
 	}
 }

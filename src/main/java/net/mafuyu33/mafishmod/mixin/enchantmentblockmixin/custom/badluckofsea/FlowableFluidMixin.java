@@ -42,40 +42,40 @@ public abstract class FlowableFluidMixin {
 
 	@Unique
 	private void mafishmod$generateFallingBlock(BlockPos targetPos ,BlockState blockState, World world) {
+		if(!world.isClient()) {
+			BlockEntity blockEntity = world.getBlockEntity(targetPos);
 
-		BlockEntity blockEntity = world.getBlockEntity(targetPos);
+			if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(targetPos), new NbtList())) {
+				BlockEnchantmentStorage.removeBlockEnchantment(targetPos.toImmutable());//删除信息
+			}
 
-		world.setBlockState(targetPos, Blocks.AIR.getDefaultState(), 3);
+			FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK, world);
 
-		if (!Objects.equals(BlockEnchantmentStorage.getEnchantmentsAtPosition(targetPos), new NbtList())) {
-			BlockEnchantmentStorage.removeBlockEnchantment(targetPos.toImmutable());//删除信息
+			fallingBlockEntity.block = blockState;
+			fallingBlockEntity.timeFalling = 1;
+			fallingBlockEntity.setNoGravity(false);
+			fallingBlockEntity.intersectionChecked = true;
+			fallingBlockEntity.setPosition(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5);
+			fallingBlockEntity.setVelocity(0, 0.2, 0);
+			fallingBlockEntity.prevX = targetPos.getX() + 0.5;
+			fallingBlockEntity.prevY = targetPos.getY();
+			fallingBlockEntity.prevZ = targetPos.getZ() + 0.5;
+			fallingBlockEntity.setFallingBlockPos(targetPos);
+			//设置附魔
+			//设置伤害
+			fallingBlockEntity.setHurtEntities(0, -1);
+
+			// 如果方块有附加的 BlockEntity 数据，可以设置 blockEntityData 字段
+			if (blockEntity != null) {
+				NbtCompound blockEntityData = new NbtCompound();
+				blockEntity.writeNbt(blockEntityData);
+				fallingBlockEntity.blockEntityData = blockEntityData;
+			}
+
+			world.setBlockState(targetPos, Blocks.AIR.getDefaultState(), 3);
+
+			world.spawnEntity(fallingBlockEntity);
 		}
-
-		FallingBlockEntity fallingBlockEntity = new FallingBlockEntity(EntityType.FALLING_BLOCK , world);
-
-		fallingBlockEntity.block = blockState;
-		fallingBlockEntity.timeFalling = 1;
-		fallingBlockEntity.setNoGravity(false);
-		fallingBlockEntity.intersectionChecked = true;
-		fallingBlockEntity.setPosition(targetPos.getX() + 0.5, targetPos.getY(), targetPos.getZ() + 0.5);
-		fallingBlockEntity.setVelocity(0,0.2,0);
-		fallingBlockEntity.prevX = targetPos.getX() + 0.5;
-		fallingBlockEntity.prevY = targetPos.getY();
-		fallingBlockEntity.prevZ = targetPos.getZ() + 0.5;
-		fallingBlockEntity.setFallingBlockPos(targetPos);
-		//设置附魔
-		//设置伤害
-		fallingBlockEntity.setHurtEntities(-1,-1);
-
-		// 如果方块有附加的 BlockEntity 数据，可以设置 blockEntityData 字段
-		if (blockEntity != null) {
-			NbtCompound blockEntityData = new NbtCompound();
-			blockEntity.writeNbt(blockEntityData);
-			fallingBlockEntity.blockEntityData = blockEntityData;
-		}
-
-		world.spawnEntity(fallingBlockEntity);
-
 	}
 
 

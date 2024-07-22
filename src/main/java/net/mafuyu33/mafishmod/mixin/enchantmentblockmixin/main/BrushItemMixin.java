@@ -28,6 +28,11 @@ public abstract class BrushItemMixin extends Item {
 		super(settings);
 	}
 
+	@Override
+	public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		return super.postHit(stack, target, attacker);
+	}
+
 	@Inject(at = @At("HEAD"), method = "useOnBlock")
 	private void init(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
 		if (!context.getWorld().isClient) {//只在服务端运行
@@ -50,7 +55,6 @@ public abstract class BrushItemMixin extends Item {
 				BlockEnchantmentStorage.removeBlockEnchantment(context.getBlockPos().toImmutable());//删除信息
 			}
 		}
-
 	}
 	// 合并两个 NBT 列表
 	@Unique
