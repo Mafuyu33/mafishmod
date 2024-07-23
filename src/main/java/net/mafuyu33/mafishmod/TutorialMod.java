@@ -22,8 +22,13 @@ import net.mafuyu33.mafishmod.sound.ModSounds;
 import net.mafuyu33.mafishmod.util.ModCustomTrades;
 import net.mafuyu33.mafishmod.util.ModLootTableModifiers;
 import net.mafuyu33.mafishmod.villager.ModVillagers;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Field;
 
 public class TutorialMod implements ModInitializer {
 	public static final String MOD_ID="mafishmod";
