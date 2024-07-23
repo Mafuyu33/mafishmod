@@ -22,7 +22,7 @@ public abstract class TridentItemMixin {
 	private void init(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci) {
 		int k = EnchantmentHelper.getLevel(Enchantments.MULTISHOT,stack);
 		if(k>0){
-			for(int i = 0; i < k + 2; i++){//抛出m+2个鱼钩，存放在1至m中
+			for(int i = 0; i < k + 1; i++){//抛出m+2个鱼钩，存放在1至m中
 				// 生成随机偏移速度
 				double offsetX = world.random.nextGaussian() * 0.1;
 				double offsetY = world.random.nextGaussian() * 0.1;
