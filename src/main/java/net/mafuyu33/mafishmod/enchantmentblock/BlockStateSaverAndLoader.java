@@ -10,45 +10,20 @@ import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
 
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BlockStateSaverAndLoader extends PersistentState {
-    public static List<BlockStateSaverAndLoader.BlockEnchantInfo> blockEnchantments = new CopyOnWriteArrayList<>();
-
-
-    public static class BlockEnchantInfo {
-        public BlockPos blockPos;
-        public NbtList enchantments;
-
-        public BlockEnchantInfo(BlockPos blockPos, NbtList enchantments) {
-            this.blockPos = blockPos;
-            this.enchantments = enchantments;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            BlockEnchantInfo that = (BlockEnchantInfo) o;
-            return Objects.equals(blockPos, that.blockPos) &&
-                    Objects.equals(enchantments, that.enchantments);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(blockPos, enchantments);
-        }
-    }
-
+    public ConcurrentHashMap<BlockPos, NbtList> blockEnchantments = new ConcurrentHashMap<>();
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         // 保存方块附魔信息到NBT
         NbtList blockEnchantmentsList = new NbtList();
-        for (BlockEnchantInfo blockEnchantment : blockEnchantments) {
+        for (Map.Entry<BlockPos, NbtList> blockEnchantment : blockEnchantments.entrySet()) {
             NbtCompound blockEnchantmentNbt = new NbtCompound();
-            blockEnchantmentNbt.putIntArray("BlockPos", new int[]{blockEnchantment.blockPos.getX(), blockEnchantment.blockPos.getY(), blockEnchantment.blockPos.getZ()});
-            blockEnchantmentNbt.put("Enchantments", blockEnchantment.enchantments);
+            BlockPos pos = blockEnchantment.getKey();
+            blockEnchantmentNbt.putIntArray("BlockPos", new int[]{pos.getX(), pos.getY(), pos.getZ()});
+            blockEnchantmentNbt.put("Enchantments", blockEnchantment.getValue());
             blockEnchantmentsList.add(blockEnchantmentNbt);
         }
         nbt.put("BlockEnchantments", blockEnchantmentsList);
@@ -67,7 +42,7 @@ public class BlockStateSaverAndLoader extends PersistentState {
             BlockPos blockPos = new BlockPos(posArray[0], posArray[1], posArray[2]);
             NbtList enchantments = blockEnchantmentNbt.getList("Enchantments", 10);
             // 将读取的方块附魔信息添加到列表中
-            state.blockEnchantments.add(new BlockEnchantInfo(blockPos, enchantments));
+            state.blockEnchantments.put(blockPos, enchantments);
         }
 
         return state;
@@ -96,10 +71,5 @@ public class BlockStateSaverAndLoader extends PersistentState {
             return state;
         }
         return null;
-    }
-
-    public void removeBlockEnchantment(BlockPos targetBlockPos) {
-        // 移除这个元素
-        blockEnchantments.removeIf(blockEnchantment -> blockEnchantment.blockPos.equals(targetBlockPos));
     }
 }
