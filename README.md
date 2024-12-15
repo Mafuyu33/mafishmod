@@ -1,3 +1,5 @@
+# 【重要信息】此项目已移植到neoforge版本，fabric版本停止更新：https://github.com/Mafuyu33/neomafishmod
+
 # Mafish-Learning（马夫鱼学习模组）
 
 ## 中文介绍
